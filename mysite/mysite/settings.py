@@ -136,8 +136,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'syriarama377@gmail.com' #needs converting to gradEmail
-EMAIL_HOST_PASSWORD = 'acmnbsakjavsygzf'
+EMAIL_HOST_USER = "m"#needs converting to gradEmail
+EMAIL_HOST_PASSWORD = 1
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
