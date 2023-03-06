@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User
+from studentModel.models import *
 import secrets
 from django.core.mail import send_mail
 from django.conf import settings
@@ -57,6 +58,9 @@ class UserSerializer(serializers.ModelSerializer):
         code = secrets.token_urlsafe(6)
         self.send_verification_code_email(validated_data['email'], code)
         instance.verification_code = code
-        instance.is_verified = False
+        instance.is_verified = True # temp just not to need verification every time
         instance.save()
+        student = StudentProfile()
+        student.user_id = instance.id
+        student.save()
         return instance

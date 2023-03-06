@@ -1,9 +1,12 @@
 from rest_framework.views import APIView
 from .serializers import UserSerializer
+from studentModel.serializers import *
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from .models import User
+from studentModel.models import *
+
 import jwt, datetime
 
 
@@ -15,7 +18,10 @@ class RegisterView(APIView):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-
+        # response = {
+        #     'message': 'SUCCESS',
+        #     'data': serializer.data
+        # }
         return Response(serializer.data)
 
 
@@ -36,7 +42,7 @@ class LoginView(APIView):
 
         payload = {
             'id': user.id,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(days=60),
             'iat': datetime.datetime.utcnow()
         }
 
@@ -48,6 +54,18 @@ class LoginView(APIView):
             'jwt': token
         }
         return response
+
+
+def userId(request):
+    token = request.COOKIES.get('jwt')
+
+    if not token:
+        raise AuthenticationFailed('Unauthenticated!')
+    try:
+        payload = jwt.decode(token, 'secret', algorithms=['HS256'])
+        return payload['id']
+    except jwt.ExpiredSignatureError:
+        raise AuthenticationFailed('Unauthenticated!')
 
 
 class UserView(APIView):
@@ -62,11 +80,15 @@ class UserView(APIView):
             raise AuthenticationFailed('Unauthenticated!')
         user = User.objects.filter(id=payload['id']).first()
         serializer = UserSerializer(user)
-        return Response(serializer.data)
+        response = {
+            'message': 'SUCCESS',
+            'data' : serializer.data
+        }
+        return Response(response)
 
 
 class LogoutView(APIView):
-    def post(self, request):
+    def post(self):
         response = Response()
         response.delete_cookie('jwt')
         response.data = {

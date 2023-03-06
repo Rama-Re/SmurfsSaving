@@ -12,7 +12,7 @@ class StudentProfile(models.Model):
     studentKnowledge = models.ManyToManyField(TheoreticalData)
 
 class PersonalitiesNames(models.Model):
-    personalityName = models.CharField(max_length=255)
+    personalityName = models.CharField(primary_key=True, max_length=255)
     # architect = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
     # logician = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
     # commander = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
@@ -52,6 +52,7 @@ class PersonalitiesLetters(models.Model):
     # personalityName = models.ForeignKey(apps.get_model('domainModel','PersonalitiesNames'), on_delete=models.CASCADE, null=True)
     personalityName = models.ForeignKey(PersonalitiesNames, on_delete=models.CASCADE, null=True)
     studentProfile = models.OneToOneField(StudentProfile, on_delete=models.CASCADE)
+
 
 class StudentProject(models.Model):
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)

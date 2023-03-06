@@ -30,13 +30,15 @@ class Project(models.Model):
 
 class Operator(models.Model):
     name = models.CharField(max_length=2)  # this is "required"
+    subConcepts = models.ManyToManyField(SubConcept,  related_name='operators')
 
 
 class Keyword(models.Model):
     name = models.CharField(primary_key=True, max_length=50)  # this is "required"
+    subConcepts = models.ManyToManyField(SubConcept,  related_name='keywords')
 
-
-class SubConceptFeatures(models.Model):
-    subConcept = models.ForeignKey(SubConcept, on_delete=models.CASCADE)
-    keyword = models.ForeignKey(Keyword, on_delete=models.CASCADE)
-    operator = models.ForeignKey(Operator, on_delete=models.CASCADE)
+#
+# class SubConceptFeatures(models.Model):
+#     subConcept = models.ForeignKey(SubConcept, on_delete=models.CASCADE)
+#     keyword = models.ForeignKey(Keyword, on_delete=models.CASCADE)
+#     operator = models.ForeignKey(Operator, on_delete=models.CASCADE)
