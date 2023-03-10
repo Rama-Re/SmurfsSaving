@@ -29,7 +29,7 @@ class Project(models.Model):
 
 
 class Operator(models.Model):
-    name = models.CharField(max_length=2)  # this is "required"
+    name = models.CharField(primary_key=True, max_length=6)  # this is "required"
     subConcepts = models.ManyToManyField(SubConcept,  related_name='operators')
 
 
