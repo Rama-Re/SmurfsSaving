@@ -56,7 +56,7 @@ class UserSerializer(serializers.ModelSerializer):
         instance.gender = gender.to_internal_value(validated_data.pop('gender'))
         instance.shown_name = shown_name.to_internal_value(validated_data.pop('shown_name'))
         code = secrets.token_urlsafe(6)
-        self.send_verification_code_email(validated_data['email'], code)
+        # self.send_verification_code_email(validated_data['email'], code)
         instance.verification_code = code
         instance.is_verified = True # temp just not to need verification every time
         instance.save()

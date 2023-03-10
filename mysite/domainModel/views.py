@@ -6,7 +6,7 @@ import re
 import jwt, datetime
 
 # from .serializers import UserSerializer
-from .serializers import GeneralConceptSerializer, SubConceptSerializer, TheoreticalDataSerializer
+from .serializers import *
 
 
 class GeneralConcepts(APIView):
@@ -80,16 +80,11 @@ def line_filter(keyword, operator, line):
     comments_and_strings_pattern = re.compile(r'(//.*|/\*.*?\*/|".*?")')
     # Remove comments and strings from the code line
     code_line_without_comments_and_strings = comments_and_strings_pattern.sub('', line)
-    # Define the regular expression to match the word
-
     if operator is None:
         word_pattern = re.compile(fr'(\b(?:{keyword})\b)')
 
     if keyword is None:
         word_pattern = re.compile(fr'(?:[{operator}])')
-        # word_pattern = re.compile(fr"(?<!\S)({operator})(?!\S)(?!\S*\1)")
-
-    # Search for the word in the code line without comments and strings
     match = word_pattern.search(code_line_without_comments_and_strings)
 
     return bool(match)
@@ -113,28 +108,91 @@ def subConceptsInCode(code):
 
 def patternLevel(level, keywords, operators):
     if level == 1 and operators is None:
-        # return re.compile(fr'(?:[{op}]|\d)')
         return re.compile(fr'(\b(?:{"|".join(re.escape(k) for k in keywords)})\b)')
     if level == 1 and keywords is None:
         return re.compile(fr'(?:[{"|".join(re.escape(op) for op in operators)}])')
-
     elif level == 2:
         return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|(?:[{"|".join(re.escape(op) for op in operators)}])|\d)')
     else:
         return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|(?:[{"|".join(re.escape(op) for op in operators)}])|\d|[a-zA-Z])')
 
+def getCommentsAndStrings(input_string):
+    # Define regular expressions for comments and strings
+    comment_pattern = r'(\/\/.*$|\/\*[\s\S]*?\*\/)'
+    string_pattern = r'(\".*?\"|\'.*?\')'
+    comments = {
+        "start": [],
+        "end": [],
+        "comment": []
+    }
+    strings = {
+        "start": [],
+        "end": [],
+        "string": []
+    }
+    # Find all comments and strings in the input string and print their start and end positions
+    for match in re.finditer(comment_pattern + '|' + string_pattern, input_string, re.MULTILINE):
+        if match.group().startswith('//') or match.group().startswith('/*'):
+            comments["start"].append(match.start())
+            comments["end"].append(match.end())
+            comments["comment"].append(match.group())
+        else:
+            strings["start"].append(match.start())
+            strings["end"].append(match.end())
+            strings["string"].append(match.group())
+    return comments, strings
 
 class CodeDump(APIView):
     def get(self, request):
         profile_id = profileId(request)
-        student_profile = StudentProfile.objects.filter(id=profile_id).first()
-        # Get the subconcepts related to the student's theoretical data
-        subconcepts = SubConcept.objects.filter(theoreticaldata__studentprofiles=student_profile).distinct()
-        return subconcepts
-        # subConcepts = TheoreticalData.objects.filter(title_id=request.data['subConcept'])
-        # serializer = TheoreticalDataSerializer(subConcepts, many=True)
-        # response = {
-        #     'message' : 'SUCCESS',
-        #     'data' : serializer.data
-        # }
-        # return Response(response)
+        student_profile = StudentProfile.objects.get(id=profile_id)
+        # get concepts student know them
+        theoretical_data_objects = student_profile.studentKnowledge.all()
+        subconcepts = SubConcept.objects.filter(theoreticaldata__in=theoretical_data_objects).distinct()
+        code = Project.objects.get(id=request.data['project_id'])
+        code = code.correctAnswerSample
+        level = request.data['level']
+        print(code)
+        keywords = set()
+        operators = set()
+        for subconcept in subconcepts:
+            concept_keywords = conceptKeywords(subconcept.name)
+            concept_operators = conceptOperators(subconcept.name)
+            keywords.update(set([obj.name for obj in concept_keywords]))
+            operators.update(set([obj.name for obj in concept_operators]))
+        comments, strings = getCommentsAndStrings(code)
+        lines = code.split('\n')
+        result = ''
+
+        for line in lines:
+            if line_filter("|".join(keywords), None, line):
+                pattern = patternLevel(level, keywords, operators)
+                line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
+            if line_filter(None, "|".join(operators), line):
+                pattern = patternLevel(level, keywords, operators)
+                line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
+
+            result += line + '\n'
+
+        endResult = result
+
+        # restore strings and comments
+        for i in range(len(comments["start"])):
+            before = endResult[:comments["start"][i]]
+            after = endResult[comments["end"][i]:]
+            endResult = before + comments["comment"][i] + after
+
+        for i in range(len(strings["start"])):
+            before = endResult[:strings["start"][i]]
+            after = endResult[strings["end"][i]:]
+            endResult = before + strings["string"][i] + after
+        # serializer = KeywordSerializer(subconcepts, many=True)
+        print(endResult)
+        response = {
+            'message': 'SUCCESS',
+            'data': {
+                "keywords": keywords,
+                "result" : endResult
+            }
+        }
+        return Response(response)
