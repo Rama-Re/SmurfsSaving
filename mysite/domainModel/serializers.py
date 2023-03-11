@@ -26,7 +26,7 @@ class TheoreticalDataSerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ['question', 'correctAnswerSample', 'output', 'explanation', 'hint', 'difficulty','img_src']
+        fields = ['id','question', 'correctAnswerSample', 'output', 'explanation', 'hint', 'difficulty','img_src']
         extra_kwargs = {
             'correctAnswerSample': {
                 'write_only': True

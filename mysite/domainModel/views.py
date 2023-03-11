@@ -166,6 +166,19 @@ def getCommentsAndStrings(input_string):
     return comments, strings
 
 
+class GetProjectsByIds(APIView):
+    def post(self, request):
+        id_list = request.data['project_ids']
+        projects = Project.objects.filter(id__in=id_list)
+        serializer = ProjectSerializer(projects, many=True)
+        response = {
+            'message': 'SUCCESS',
+            'data': {
+                "projects": serializer.data
+            }
+        }
+        return Response(response)
+
 class GetProject(APIView):
     def post(self, request):
         project = Project.objects.get(id=request.data['project_id'])
@@ -197,7 +210,6 @@ class GetProjectSubConcepts(APIView):
             subConcepts_set = set()
             subConcepts_set.update(
                 Project.objects.filter(id=project_id).values_list('subConcepts', flat=True).order_by('subConcepts'))
-            print(any(subConcepts_set == obj['subConcepts'] for obj in my_set))
             index = next((i for i, obj in enumerate(my_set) if obj['subConcepts'] == subConcepts_set), None)
             if index is not None:
 
@@ -229,7 +241,6 @@ class GetProjectGeneralConcepts(APIView):
             subConcepts_set.update(
                 Project.objects.filter(id=project_id).values_list('subConcepts', flat=True).order_by('subConcepts'))
             generalConcepts = getGeneralConcpts(subConcepts_set)
-            print(any(generalConcepts == obj['generalConcepts'] for obj in my_set))
             index = next((i for i, obj in enumerate(my_set) if obj['generalConcepts'] == generalConcepts), None)
             if index is not None:
                 # subconcepts set already exists in my_set, add project_id to its related projects_ids
