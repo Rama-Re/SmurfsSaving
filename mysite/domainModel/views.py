@@ -142,6 +142,22 @@ def getCommentsAndStrings(input_string):
             strings["string"].append(match.group())
     return comments, strings
 
+
+class GetProject(APIView):
+    def get(self, request):
+        project = Project.objects.get(id=request.data['project_id'])
+        serializer = ProjectSerializer(project)
+        response = {
+            'message': 'SUCCESS',
+            'data': {
+                "project": serializer.data
+            }
+        }
+        return Response(response)
+
+
+
+
 class CodeDump(APIView):
     def get(self, request):
         profile_id = profileId(request)

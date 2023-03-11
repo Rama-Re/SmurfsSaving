@@ -23,11 +23,15 @@ class TheoreticalDataSerializer(serializers.ModelSerializer):
         fields = ['subheading', 'explanation', 'code', 'output', 'codeExplanation', 'title_id']
 
 
-class TheoreticalDataSerializer(serializers.ModelSerializer):
+class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TheoreticalData
-        fields = ['subheading', 'explanation', 'code', 'output', 'codeExplanation', 'title_id']
-
+        model = Project
+        fields = ['question', 'correctAnswerSample', 'output', 'explanation', 'hint', 'difficulty']
+        extra_kwargs = {
+            'correctAnswerSample': {
+                'write_only': True
+            }
+        }
 
 class KeywordSerializer(serializers.ModelSerializer):
     class Meta:
