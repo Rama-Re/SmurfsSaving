@@ -2,6 +2,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import *
 from studentModel.views import *
+from django.contrib.postgres.aggregates import ArrayAgg
+from django.db.models import Count
 import re
 import jwt, datetime
 
@@ -81,12 +83,12 @@ def line_filter(keyword, operator, line):
     # Remove comments and strings from the code line
     code_line_without_comments_and_strings = comments_and_strings_pattern.sub('', line)
     if operator is None:
-        word_pattern = re.compile(fr'(\b(?:{keyword})\b)')
+        word_pattern = re.compile(fr'(\b({"|".join(re.escape(k) for k in keyword)})\b)')
 
     if keyword is None:
-        word_pattern = re.compile(fr'(?:[{operator}])')
-    match = word_pattern.search(code_line_without_comments_and_strings)
+        word_pattern = re.compile(fr'(?:[{"|".join(re.escape(k) for k in operator)}])')
 
+    match = word_pattern.search(code_line_without_comments_and_strings)
     return bool(match)
 
 
@@ -94,16 +96,34 @@ def subConceptsInCode(code):
     subConcepts = set()
     keywords = allKeywords()
     operators = allOperators()
-    for line in code:
+    lines = code.split('\n')
+    for line in lines:
         for keyword in keywords:
-            if line_filter(keyword.name, None, line):
+            if line_filter([keyword.name], None, line):
                 for subConcept in subConceptOfKeyword(keyword):
                     subConcepts.add(subConcept)
         for operator in operators:
-            if line_filter(None, operator.name, line):
+            if line_filter(None, [operator.name], line):
                 for subConcept in subConceptOfOperator(operator):
                     subConcepts.add(subConcept)
     return subConcepts
+
+
+# class GetProject(APIView):
+#     def post(self,request):
+#     subConcepts = set()
+#     keywords = allKeywords()
+#     operators = allOperators()
+#     for line in code:
+#         for keyword in keywords:
+#             if line_filter(keyword.name, None, line):
+#                 for subConcept in subConceptOfKeyword(keyword):
+#                     subConcepts.add(subConcept)
+#         for operator in operators:
+#             if line_filter(None, operator.name, line):
+#                 for subConcept in subConceptOfOperator(operator):
+#                     subConcepts.add(subConcept)
+#     return subConcepts
 
 
 def patternLevel(level, keywords, operators):
@@ -112,9 +132,12 @@ def patternLevel(level, keywords, operators):
     if level == 1 and keywords is None:
         return re.compile(fr'(?:[{"|".join(re.escape(op) for op in operators)}])')
     elif level == 2:
-        return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|(?:[{"|".join(re.escape(op) for op in operators)}])|\d)')
+        return re.compile(
+            fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|(?:[{"|".join(re.escape(op) for op in operators)}])|\d)')
     else:
-        return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|(?:[{"|".join(re.escape(op) for op in operators)}])|\d|[a-zA-Z])')
+        return re.compile(
+            fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|(?:[{"|".join(re.escape(op) for op in operators)}])|\d|[a-zA-Z])')
+
 
 def getCommentsAndStrings(input_string):
     # Define regular expressions for comments and strings
@@ -144,7 +167,7 @@ def getCommentsAndStrings(input_string):
 
 
 class GetProject(APIView):
-    def get(self, request):
+    def post(self, request):
         project = Project.objects.get(id=request.data['project_id'])
         serializer = ProjectSerializer(project)
         response = {
@@ -156,10 +179,80 @@ class GetProject(APIView):
         return Response(response)
 
 
+def getGeneralConcpts(subConcepts):
+    generalConcepts = set()
+    for concept in subConcepts:
+        print(concept)
+        subConcept = SubConcept.objects.filter(name=concept).first()
+        print(subConcept.generalConcept)
+        generalConcepts.add(subConcept.generalConcept.name)
+    return generalConcepts
+
+
+class GetProjectSubConcepts(APIView):
+    def get(self, request):
+        projects_ids = Project.objects.values_list('id', flat=True)
+        my_set = []
+        for project_id in projects_ids:
+            subConcepts_set = set()
+            subConcepts_set.update(
+                Project.objects.filter(id=project_id).values_list('subConcepts', flat=True).order_by('subConcepts'))
+            print(any(subConcepts_set == obj['subConcepts'] for obj in my_set))
+            index = next((i for i, obj in enumerate(my_set) if obj['subConcepts'] == subConcepts_set), None)
+            if index is not None:
+
+                # subconcepts set already exists in my_set, add project_id to its related projects_ids
+                my_set[index]['project_ids'].append(project_id)
+            else:
+                # subconcepts set does not exist in my_set, add it and its related project_id
+                my_set.append({
+                    'subConcepts': subConcepts_set,
+                    'project_ids': [project_id],
+                })
+
+        response = {
+            'message': 'SUCCESS',
+            'data': {
+                # "projectConcepts": serializer.data
+                "projectConcepts": my_set
+            }
+        }
+        return Response(response)
+
+
+class GetProjectGeneralConcepts(APIView):
+    def get(self, request):
+        projects_ids = Project.objects.values_list('id', flat=True)
+        my_set = []
+        for project_id in projects_ids:
+            subConcepts_set = set()
+            subConcepts_set.update(
+                Project.objects.filter(id=project_id).values_list('subConcepts', flat=True).order_by('subConcepts'))
+            generalConcepts = getGeneralConcpts(subConcepts_set)
+            print(any(generalConcepts == obj['generalConcepts'] for obj in my_set))
+            index = next((i for i, obj in enumerate(my_set) if obj['generalConcepts'] == generalConcepts), None)
+            if index is not None:
+                # subconcepts set already exists in my_set, add project_id to its related projects_ids
+                my_set[index]['project_ids'].append(project_id)
+            else:
+                # subconcepts set does not exist in my_set, add it and its related project_id
+                my_set.append({
+                    'generalConcepts': generalConcepts,
+                    'project_ids': [project_id],
+                })
+
+        response = {
+            'message': 'SUCCESS',
+            'data': {
+                # "projectConcepts": serializer.data
+                "projectConcepts": my_set
+            }
+        }
+        return Response(response)
 
 
 class CodeDump(APIView):
-    def get(self, request):
+    def post(self, request):
         profile_id = profileId(request)
         student_profile = StudentProfile.objects.get(id=profile_id)
         # get concepts student know them
@@ -181,10 +274,12 @@ class CodeDump(APIView):
         result = ''
 
         for line in lines:
-            if line_filter("|".join(keywords), None, line):
+            if line_filter("main", None, line):
+                continue
+            if line_filter(keywords, None, line):
                 pattern = patternLevel(level, keywords, operators)
                 line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
-            if line_filter(None, "|".join(operators), line):
+            if line_filter(None, operators, line):
                 pattern = patternLevel(level, keywords, operators)
                 line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
 
@@ -208,7 +303,7 @@ class CodeDump(APIView):
             'message': 'SUCCESS',
             'data': {
                 "keywords": keywords,
-                "result" : endResult
+                "result": endResult
             }
         }
         return Response(response)

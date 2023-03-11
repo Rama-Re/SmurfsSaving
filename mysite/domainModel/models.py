@@ -25,6 +25,7 @@ class Project(models.Model):
     explanation = models.TextField()
     hint = models.TextField(null=True)
     difficulty = models.DecimalField(max_digits=6, decimal_places=3)
+    img_src = models.TextField(null=True)
     subConcepts = models.ManyToManyField(SubConcept)
 
 

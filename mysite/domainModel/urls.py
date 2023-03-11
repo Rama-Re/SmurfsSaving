@@ -9,4 +9,6 @@ urlpatterns = [
     path('public/theoreticalData', GetTheoreticalData.as_view()),
     path('public/codeDump', CodeDump.as_view()),
     path('public/getProject', GetProject.as_view()),
+    path('public/getProjectSubConcepts', GetProjectSubConcepts.as_view()),
+    path('public/getProjectGeneralConcepts', GetProjectGeneralConcepts.as_view()),
 ]

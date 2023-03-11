@@ -27,7 +27,7 @@
 الشروط,الجملة switch,default
 الحلقات,الحلقة for,for
 الحلقات,الحلقة while,while
-الحلقات,الحلقة do while,do while
+الحلقات,الحلقة do while,do
 الحلقات,جملة التحكم continue,continue
 التعامل مع الأعداد,مفهوم التعامل مع الأعداد في C++,cmath
 التعامل مع الأعداد,دوال الملف cmath في C++,abs
