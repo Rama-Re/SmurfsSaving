@@ -84,11 +84,10 @@ def line_filter(keyword, operator, line):
     code_line_without_comments_and_strings = comments_and_strings_pattern.sub('', line)
     if operator is None:
         word_pattern = re.compile(fr'(\b({"|".join(re.escape(k) for k in keyword)})\b)')
-        print("line", line)
-        print("word_pattern", word_pattern)
 
     if keyword is None:
         word_pattern = re.compile(fr'(?:[{"|".join(re.escape(k) for k in operator)}])')
+
     match = word_pattern.search(code_line_without_comments_and_strings)
 
     return bool(match)
@@ -111,23 +110,6 @@ def subConceptsInCode(code):
     return subConcepts
 
 
-# class GetProject(APIView):
-#     def post(self,request):
-#     subConcepts = set()
-#     keywords = allKeywords()
-#     operators = allOperators()
-#     for line in code:
-#         for keyword in keywords:
-#             if line_filter(keyword.name, None, line):
-#                 for subConcept in subConceptOfKeyword(keyword):
-#                     subConcepts.add(subConcept)
-#         for operator in operators:
-#             if line_filter(None, operator.name, line):
-#                 for subConcept in subConceptOfOperator(operator):
-#                     subConcepts.add(subConcept)
-#     return subConcepts
-
-
 def patternLevel(level, keywords, operators):
     if level == 1 and operators is None:
         return re.compile(fr'(\b(?:{"|".join(re.escape(k) for k in keywords)})\b)')
@@ -135,14 +117,17 @@ def patternLevel(level, keywords, operators):
         return re.compile(fr'(?:[{"|".join(re.escape(op) for op in operators)}])')
     elif level == 2:
         if operators is None:
+            print("|".join(re.escape(k) for k in keywords))
             return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|\d)')
-        else:
-            return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|(?:[{"|".join(re.escape(op) for op in operators)}])|\d)')
+        elif keywords is None:
+            print("|".join(re.escape(op) for op in operators))
+            return re.compile(fr'((?:[{"|".join(re.escape(op) for op in operators)}])|\d)')
     else:
         if operators is None:
             return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|\d|[a-zA-Z])')
-        else:
-            return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|(?:[{"|".join(re.escape(op) for op in operators)}])|\d|[a-zA-Z])')
+        elif keywords is None:
+            print(re.compile(fr'((?:[{"|".join(re.escape(op) for op in operators)}])|\d|[a-zA-Z])'))
+            return re.compile(fr'((?:[{"|".join(re.escape(op) for op in operators)}])|\d|[a-zA-Z])')
 
 
 def getCommentsAndStrings(input_string):
@@ -278,6 +263,7 @@ class CodeDump(APIView):
         level = request.data['level']
         keywords = set()
         operators = set()
+        print(subconcepts)
         for subconcept in subconcepts:
             concept_keywords = conceptKeywords(subconcept.name)
             concept_operators = conceptOperators(subconcept.name)
@@ -286,6 +272,9 @@ class CodeDump(APIView):
         comments, strings = getCommentsAndStrings(code)
         lines = code.split('\n')
         result = ''
+        print(keywords)
+        print(operators)
+        # operators = []
         for line in lines:
             if line_filter(["main"], None, line):
                 continue
@@ -299,6 +288,7 @@ class CodeDump(APIView):
                     line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
             elif len(operators) > 0 and len(keywords) > 0:
                 if line_filter(None, operators, line):
+                    print(operators)
                     pattern = patternLevel(level, None, operators)
                     line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
                 if line_filter(keywords, None, line):
