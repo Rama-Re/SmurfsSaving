@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'users',
     'domainModel',
     'studentModel',
-    'django_seed'
+    'django_seed',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [

@@ -87,8 +87,9 @@ def line_filter(keyword, operator, line):
 
     if keyword is None:
         word_pattern = re.compile(fr'(?:[{"|".join(re.escape(k) for k in operator)}])')
-
+        print(word_pattern)
     match = word_pattern.search(code_line_without_comments_and_strings)
+
     return bool(match)
 
 
@@ -195,9 +196,7 @@ class GetProject(APIView):
 def getGeneralConcpts(subConcepts):
     generalConcepts = set()
     for concept in subConcepts:
-        print(concept)
         subConcept = SubConcept.objects.filter(name=concept).first()
-        print(subConcept.generalConcept)
         generalConcepts.add(subConcept.generalConcept.name)
     return generalConcepts
 
@@ -272,9 +271,9 @@ class CodeDump(APIView):
         code = Project.objects.get(id=request.data['project_id'])
         code = code.correctAnswerSample
         level = request.data['level']
-        print(code)
         keywords = set()
         operators = set()
+        print(subconcepts)
         for subconcept in subconcepts:
             concept_keywords = conceptKeywords(subconcept.name)
             concept_operators = conceptOperators(subconcept.name)
@@ -283,17 +282,26 @@ class CodeDump(APIView):
         comments, strings = getCommentsAndStrings(code)
         lines = code.split('\n')
         result = ''
-
+        print(keywords)
+        print(operators)
         for line in lines:
             if line_filter("main", None, line):
                 continue
-            if line_filter(keywords, None, line):
-                pattern = patternLevel(level, keywords, operators)
-                line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
-            if line_filter(None, operators, line):
-                pattern = patternLevel(level, keywords, operators)
-                line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
-
+            if len(operators) is 0 and len(keywords) > 0:
+                if line_filter(keywords, None, line):
+                    pattern = patternLevel(level, keywords, None)
+                    line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
+            elif len(operators) > 0 and len(keywords) is 0:
+                if line_filter(None, operators, line):
+                    pattern = patternLevel(level, None, operators)
+                    line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
+            elif len(operators) > 0 and len(keywords) > 0:
+                if line_filter(None, operators, line):
+                    pattern = patternLevel(level, None, operators)
+                    line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
+                if line_filter(keywords, None, line):
+                    pattern = patternLevel(level, keywords, None)
+                    line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
             result += line + '\n'
 
         endResult = result
