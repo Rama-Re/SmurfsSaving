@@ -9,7 +9,7 @@ from domainModel.models import *
 class StudentProfile(models.Model):
     # user = models.OneToOneField(apps.get_model('users','User'), on_delete=models.CASCADE)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    studentKnowledge = models.ManyToManyField(TheoreticalData)
+    studentKnowledge = models.ManyToManyField(ParagraphData)
 
 class PersonalitiesNames(models.Model):
     personalityName = models.CharField(primary_key=True, max_length=255)

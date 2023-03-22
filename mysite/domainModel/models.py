@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class GeneralConcept(models.Model):
     name = models.CharField(primary_key=True, max_length=255)
 
@@ -9,13 +10,31 @@ class SubConcept(models.Model):
     generalConcept = models.ForeignKey(GeneralConcept, on_delete=models.CASCADE)
 
 
-class TheoreticalData(models.Model):
-    title = models.ForeignKey(SubConcept, on_delete=models.CASCADE)
-    subheading = models.CharField(max_length=255)  # this is "section" in the csv file
+class Lesson(models.Model):
+    name = models.CharField(primary_key=True, max_length=255)
+    subConcept = models.ForeignKey(SubConcept, on_delete=models.CASCADE)
+
+
+class ParagraphData(models.Model):
+    title = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    subheading = models.CharField(max_length=255)  # this is "subLesson" in the csv file
     explanation = models.TextField()
-    code = models.TextField()  # try to find another way to represent it
+    nb = models.TextField(null=True)
+    img_src = models.TextField(null=True)
+
+
+class CodeData(models.Model):
+    paragraph = models.ForeignKey(ParagraphData, on_delete=models.CASCADE)
+    prefix_text = models.TextField()
+    code = models.TextField()
     output = models.TextField()
     codeExplanation = models.TextField()
+
+
+class ExampleData(models.Model):
+    paragraph = models.ForeignKey(ParagraphData, on_delete=models.CASCADE)
+    prefix_text = models.TextField()
+    example = models.TextField()
 
 
 class Project(models.Model):
@@ -31,12 +50,12 @@ class Project(models.Model):
 
 class Operator(models.Model):
     name = models.CharField(primary_key=True, max_length=6)  # this is "required"
-    subConcepts = models.ManyToManyField(SubConcept,  related_name='operators')
+    subConcepts = models.ManyToManyField(SubConcept, related_name='operators')
 
 
 class Keyword(models.Model):
     name = models.CharField(primary_key=True, max_length=50)  # this is "required"
-    subConcepts = models.ManyToManyField(SubConcept,  related_name='keywords')
+    subConcepts = models.ManyToManyField(SubConcept, related_name='keywords')
 
 #
 # class SubConceptFeatures(models.Model):

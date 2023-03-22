@@ -17,21 +17,40 @@ class SubConceptSerializer(serializers.ModelSerializer):
         fields = ['name', 'generalConcept_id']
 
 
-class TheoreticalDataSerializer(serializers.ModelSerializer):
+class LessonSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TheoreticalData
-        fields = ['subheading', 'explanation', 'code', 'output', 'codeExplanation', 'title_id']
+        model = Lesson
+        fields = ['name', 'subConcept_id']
+
+
+class ParagraphDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ParagraphData
+        fields = ['subheading', 'explanation', 'nb', 'img_src', 'title_id']
+
+
+class CodeDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CodeData
+        fields = ['prefix_text', 'code', 'output', 'codeExplanation', 'paragraph_id']
+
+
+class ExampleDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ExampleData
+        fields = ['prefix_text', 'example', 'paragraph_id']
 
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ['id','question', 'correctAnswerSample', 'output', 'explanation', 'hint', 'difficulty','img_src']
+        fields = ['id', 'question', 'correctAnswerSample', 'output', 'explanation', 'hint', 'difficulty', 'img_src']
         extra_kwargs = {
             'correctAnswerSample': {
                 'write_only': True
             }
         }
+
 
 class KeywordSerializer(serializers.ModelSerializer):
     class Meta:

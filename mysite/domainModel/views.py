@@ -180,7 +180,7 @@ class GetProject(APIView):
                 "project": serializer.data
             }
         }
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')
 
 
 def getGeneralConcpts(subConcepts):
@@ -248,7 +248,7 @@ class GetProjectGeneralConcepts(APIView):
                 "projectConcepts": my_set
             }
         }
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')
 
 
 class CodeDump(APIView):
@@ -317,4 +317,4 @@ class CodeDump(APIView):
                 "result": endResult
             }
         }
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')

@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
             name='StudentProfile',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('studentKnowledge', models.ManyToManyField(to='domainModel.theoreticaldata')),
+                ('studentKnowledge', models.ManyToManyField(to='domainModel.paragraphdata')),
             ],
         ),
         migrations.CreateModel(

@@ -26,15 +26,42 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='TheoreticalData',
+            name='Lesson',
+            fields=[
+                ('name', models.CharField(max_length=255, primary_key=True, serialize=False)),
+                ('subConcept',
+                 models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='domainModel.subconcept')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='ParagraphData',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('subheading', models.CharField(max_length=255)),
                 ('explanation', models.TextField()),
+                ('nb', models.TextField(null=True)),
+                ('img_src', models.TextField(null=True)),
+                ('title', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='domainModel.lesson')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='CodeData',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('prefix_text', models.TextField()),
                 ('code', models.TextField()),
                 ('output', models.TextField()),
                 ('codeExplanation', models.TextField()),
-                ('title', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='domainModel.subconcept')),
+                ('paragraph', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='domainModel.paragraphdata')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='ExampleData',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('prefix_text', models.TextField()),
+                ('example', models.TextField()),
+                ('paragraph', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='domainModel.paragraphdata')),
             ],
         ),
         migrations.CreateModel(
