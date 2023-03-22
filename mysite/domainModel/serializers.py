@@ -58,6 +58,20 @@ class TheoreticalDataSerializer(serializers.ModelSerializer):
         return data
 
 
+class QuizzesAnswersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = QuizzesAnswers
+        fields = ['answer']
+
+
+class QuizzesQuestionSerializer(serializers.ModelSerializer):
+    answers = QuizzesAnswersSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = QuizzesQuestion
+        fields = ['generalConcept_id', 'question', 'correctAnswer', 'answers']
+
+
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project

@@ -37,6 +37,17 @@ class ExampleData(models.Model):
     example = models.TextField()
 
 
+class QuizzesQuestion(models.Model):
+    generalConcept = models.ForeignKey(GeneralConcept, on_delete=models.CASCADE)
+    question = models.TextField()
+    correctAnswer = models.TextField()
+
+
+class QuizzesAnswers(models.Model):
+    question = models.ForeignKey(QuizzesQuestion, on_delete=models.CASCADE)
+    answer = models.TextField()
+
+
 class Project(models.Model):
     question = models.TextField()  # this is "required" in the csv file
     correctAnswerSample = models.TextField()  # this is "code" in the csv file

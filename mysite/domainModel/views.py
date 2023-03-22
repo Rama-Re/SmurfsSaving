@@ -36,7 +36,8 @@ class SubConcepts(APIView):
 class GetTheoreticalData(APIView):
     def post(self, request):
         titles = Lesson.objects.filter(subConcept_id=request.data['subConcept'])
-        paragraph_data_list = ParagraphData.objects.filter(title_id__in=titles).prefetch_related('code_data', 'example_data')
+        paragraph_data_list = ParagraphData.objects.filter(title_id__in=titles).prefetch_related('code_data',
+                                                                                                 'example_data')
         serialized_data = TheoreticalDataSerializer(paragraph_data_list, many=True).data
         # data = []
         # for paragraph_data in paragraph_data_list:
@@ -55,6 +56,17 @@ class GetTheoreticalData(APIView):
             'data': serialized_data
         }
         return Response(response, content_type='application/json; charset=utf-8')
+
+
+class GetQuiz(APIView):
+    def post(self, request):
+        quiz = QuizzesQuestion.objects.filter(generalConcept_id=request.data['generalConcept'])
+        serializer = QuizzesQuestionSerializer(quiz, many=True)
+        response = {
+            'message': 'SUCCESS',
+            'data': serializer.data
+        }
+        return Response(response)
 
 
 def conceptKeywords(subConceptName):

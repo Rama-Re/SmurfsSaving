@@ -12,4 +12,5 @@ urlpatterns = [
     path('public/getProjectSubConcepts', GetProjectSubConcepts.as_view()),
     path('public/getProjectGeneralConcepts', GetProjectGeneralConcepts.as_view()),
     path('public/getProjectsByIds', GetProjectsByIds.as_view()),
+    path('public/getQuiz', GetQuiz.as_view()),
 ]

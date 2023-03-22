@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                 ('code', models.TextField()),
                 ('output', models.TextField()),
                 ('codeExplanation', models.TextField()),
-                ('paragraph', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='domainModel.paragraphdata')),
+                ('paragraph', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='code_data', to='domainModel.paragraphdata')),
             ],
         ),
         migrations.CreateModel(
@@ -61,7 +61,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('prefix_text', models.TextField()),
                 ('example', models.TextField()),
-                ('paragraph', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='domainModel.paragraphdata')),
+                ('paragraph', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='example_data', to='domainModel.paragraphdata')),
             ],
         ),
         migrations.CreateModel(
