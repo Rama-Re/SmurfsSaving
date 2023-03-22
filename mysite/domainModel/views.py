@@ -23,7 +23,7 @@ class GeneralConcepts(APIView):
 
 
 class SubConcepts(APIView):
-    def get(self, request):
+    def post(self, request):
         subConcepts = SubConcept.objects.filter(generalConcept_id=request.data['generalConcept'])
         serializer = SubConceptSerializer(subConcepts, many=True)
         response = {
@@ -34,14 +34,27 @@ class SubConcepts(APIView):
 
 
 class GetTheoreticalData(APIView):
-    def get(self, request):
-        subConcepts = TheoreticalData.objects.filter(title_id=request.data['subConcept'])
-        serializer = TheoreticalDataSerializer(subConcepts, many=True)
+    def post(self, request):
+        titles = Lesson.objects.filter(subConcept_id=request.data['subConcept'])
+        paragraph_data_list = ParagraphData.objects.filter(title_id__in=titles).prefetch_related('code_data', 'example_data')
+        serialized_data = TheoreticalDataSerializer(paragraph_data_list, many=True).data
+        # data = []
+        # for paragraph_data in paragraph_data_list:
+        #     code_data_list = []
+        #     for code_data in paragraph_data.code_data.filter(code__isnull=False).exclude(code__exact=''):
+        #         code_data_list.append(CodeDataSerializer(code_data).data)
+        #     example_data_list = []
+        #     for example_data in paragraph_data.example_data.filter(example__isnull=False).exclude(example__exact=''):
+        #         example_data_list.append(ExampleDataSerializer(example_data).data)
+        #     paragraph_data_dict = ParagraphDataSerializer(paragraph_data).data
+        #     paragraph_data_dict['code_data'] = code_data_list
+        #     paragraph_data_dict['example_data'] = example_data_list
+        #     data.append(paragraph_data_dict)
         response = {
             'message': 'SUCCESS',
-            'data': serializer.data
+            'data': serialized_data
         }
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')
 
 
 def conceptKeywords(subConceptName):
@@ -169,6 +182,7 @@ class GetProjectsByIds(APIView):
             }
         }
         return Response(response)
+
 
 class GetProject(APIView):
     def post(self, request):

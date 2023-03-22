@@ -24,7 +24,7 @@ class ParagraphData(models.Model):
 
 
 class CodeData(models.Model):
-    paragraph = models.ForeignKey(ParagraphData, on_delete=models.CASCADE)
+    paragraph = models.ForeignKey(ParagraphData, on_delete=models.CASCADE, related_name='code_data')
     prefix_text = models.TextField()
     code = models.TextField()
     output = models.TextField()
@@ -32,7 +32,7 @@ class CodeData(models.Model):
 
 
 class ExampleData(models.Model):
-    paragraph = models.ForeignKey(ParagraphData, on_delete=models.CASCADE)
+    paragraph = models.ForeignKey(ParagraphData, on_delete=models.CASCADE, related_name='example_data')
     prefix_text = models.TextField()
     example = models.TextField()
 

@@ -41,6 +41,23 @@ class ExampleDataSerializer(serializers.ModelSerializer):
         fields = ['prefix_text', 'example', 'paragraph_id']
 
 
+class TheoreticalDataSerializer(serializers.ModelSerializer):
+    code_data = CodeDataSerializer(many=True, read_only=True)
+    example_data = ExampleDataSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = ParagraphData
+        fields = ['subheading', 'explanation', 'nb', 'img_src', 'title_id', 'code_data', 'example_data']
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        if instance.code_data.filter(code='').exists():
+            data['code_data'] = []
+        if instance.example_data.filter(example='').exists():
+            data['example_data'] = []
+        return data
+
+
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
