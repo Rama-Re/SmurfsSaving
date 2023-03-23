@@ -60,7 +60,7 @@ class GetTheoreticalData(APIView):
 
 class GetQuiz(APIView):
     def post(self, request):
-        quiz = QuizzesQuestion.objects.filter(generalConcept_id=request.data['generalConcept'])
+        quiz = QuizzesQuestion.objects.prefetch_related('quizzesanswers_set').filter(generalConcept_id=request.data['generalConcept'])
         serializer = QuizzesQuestionSerializer(quiz, many=True)
         response = {
             'message': 'SUCCESS',

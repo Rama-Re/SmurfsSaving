@@ -65,7 +65,7 @@ class QuizzesAnswersSerializer(serializers.ModelSerializer):
 
 
 class QuizzesQuestionSerializer(serializers.ModelSerializer):
-    answers = QuizzesAnswersSerializer(many=True, read_only=True)
+    answers = QuizzesAnswersSerializer(many=True, source='quizzesanswers_set')
 
     class Meta:
         model = QuizzesQuestion
