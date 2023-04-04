@@ -60,7 +60,8 @@ class GetTheoreticalData(APIView):
 
 class GetQuiz(APIView):
     def post(self, request):
-        quiz = QuizzesQuestion.objects.prefetch_related('quizzesanswers_set').filter(generalConcept_id=request.data['generalConcept'])
+        quiz = QuizzesQuestion.objects.prefetch_related('quizzesanswers_set').filter(
+            generalConcept_id=request.data['generalConcept'])
         serializer = QuizzesQuestionSerializer(quiz, many=True)
         response = {
             'message': 'SUCCESS',
@@ -69,89 +70,84 @@ class GetQuiz(APIView):
         return Response(response)
 
 
-def conceptKeywords(subConceptName):
-    subConcept = SubConcept.objects.get(name=subConceptName)
-    keywords = subConcept.keywords.all()
+def conceptKeywords(generalConceptName):
+    concept = GeneralConcept.objects.get(name=generalConceptName)
+    keywords = concept.keywords.all()
     return keywords
 
 
-def conceptOperators(subConceptName):
-    subConcept = SubConcept.objects.get(name=subConceptName)
-    operators = subConcept.operators.all()
+def conceptOperators(generalConceptName):
+    concept = GeneralConcept.objects.get(name=generalConceptName)
+    operators = concept.operators.all()
     return operators
 
 
-def subConceptOfOperator(operator):
+def conceptOfOperator(operator):
     operators = Operator.objects.get(name=operator.name)
-    sub_concepts_with_operator = operators.subConcepts.all()
-    return sub_concepts_with_operator
+    general_concepts_with_operator = operators.generalConcepts.all()
+    return general_concepts_with_operator
 
 
-def subConceptOfKeyword(keyword):
+def conceptOfKeyword(keyword):
     keywords = Keyword.objects.get(name=keyword.name)
-    sub_concepts_with_keyword = keywords.subConcepts.all()
-    return sub_concepts_with_keyword
-
-
-def allKeywords():
-    keywords = Keyword.objects.all()
-    return keywords
-
-
-def allOperators():
-    operators = Operator.objects.all()
-    return operators
+    general_concepts_with_keyword = keywords.generalConcepts.all()
+    return general_concepts_with_keyword
 
 
 def line_filter(keyword, operator, line):
     comments_and_strings_pattern = re.compile(r'(//.*|/\*.*?\*/|".*?")')
     # Remove comments and strings from the code line
     code_line_without_comments_and_strings = comments_and_strings_pattern.sub('', line)
-    if operator is None:
+    if operator is None and keyword is None:
+        return False
+    elif operator is None:
         word_pattern = re.compile(fr'(\b({"|".join(re.escape(k) for k in keyword)})\b)')
-
-    if keyword is None:
+    elif keyword is None:
         word_pattern = re.compile(fr'(?:[{"|".join(re.escape(k) for k in operator)}])')
-
+    else: word_pattern = re.compile(fr'(?:[{"|".join(re.escape(k) for k in operator)}])|(\b({"|".join(re.escape(k) for k in keyword)})\b)')
     match = word_pattern.search(code_line_without_comments_and_strings)
 
     return bool(match)
 
 
-def subConceptsInCode(code):
-    subConcepts = set()
-    keywords = allKeywords()
-    operators = allOperators()
+def conceptsInCode(code):
+    generalConcepts = set()
+    keywords = Keyword.objects.all()
+    operators = Operator.objects.all()
     lines = code.split('\n')
     for line in lines:
         for keyword in keywords:
             if line_filter([keyword.name], None, line):
-                for subConcept in subConceptOfKeyword(keyword):
-                    subConcepts.add(subConcept)
+                for generalConcept in conceptOfKeyword(keyword):
+                    generalConcepts.add(generalConcept)
         for operator in operators:
             if line_filter(None, [operator.name], line):
-                for subConcept in subConceptOfOperator(operator):
-                    subConcepts.add(subConcept)
-    return subConcepts
+                for generalConcept in conceptOfOperator(operator):
+                    generalConcepts.add(generalConcept)
+    return generalConcepts
 
 
 def patternLevel(level, keywords, operators):
-    if level == 1 and operators is None:
-        return re.compile(fr'(\b(?:{"|".join(re.escape(k) for k in keywords)})\b)')
-    if level == 1 and keywords is None:
-        return re.compile(fr'(?:[{"|".join(re.escape(op) for op in operators)}])')
-    elif level == 2:
-        if operators is None:
-            print("|".join(re.escape(k) for k in keywords))
-            return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|\d)')
-        elif keywords is None:
-            print("|".join(re.escape(op) for op in operators))
-            return re.compile(fr'((?:[{"|".join(re.escape(op) for op in operators)}])|\d)')
+    if keywords is not None:
+        if level == 1:
+            return re.compile(fr'(\b(?:{"|".join(re.escape(k) for k in keywords)})\b)')
+        elif level == 2:
+            if operators is not None:
+                return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|(?:[{"|".join(re.escape(op) for op in operators)}])|\d)')
+            else:
+                return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|\d)')
+        else:
+            if operators is not None:
+                return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|(?:[{"|".join(re.escape(op) for op in operators)}])|\d|[a-zA-Z])')
+            else:
+                return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|\d|[a-zA-Z])')
+
     else:
-        if operators is None:
-            return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|\d|[a-zA-Z])')
-        elif keywords is None:
-            print(re.compile(fr'((?:[{"|".join(re.escape(op) for op in operators)}])|\d|[a-zA-Z])'))
+        if level == 1:
+            return re.compile(fr'(?:[{"|".join(re.escape(op) for op in operators)}])')
+        elif level == 2:
+            return re.compile(fr'((?:[{"|".join(re.escape(op) for op in operators)}])|\d)')
+        else:
             return re.compile(fr'((?:[{"|".join(re.escape(op) for op in operators)}])|\d|[a-zA-Z])')
 
 
@@ -209,7 +205,7 @@ class GetProject(APIView):
         return Response(response, content_type='application/json; charset=utf-8')
 
 
-def getGeneralConcpts(subConcepts):
+def getGeneralConcepts(subConcepts):
     generalConcepts = set()
     for concept in subConcepts:
         subConcept = SubConcept.objects.filter(name=concept).first()
@@ -217,15 +213,29 @@ def getGeneralConcpts(subConcepts):
     return generalConcepts
 
 
-class GetProjectSubConcepts(APIView):
+def check_availability(obj, student_profile):
+    generalConcepts = obj['generalConcepts']
+    for name in generalConcepts:
+        generalConcept = GeneralConcept.objects.filter(name=name).first()
+        # practical_skill = PracticalSkill.objects.filter(student=student_profile, generalConcept=generalConcept).first()
+        theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile, generalConcept=generalConcept).first()
+        # if theoretical_skill['skill']
+        if not theoretical_skill.availability:
+            return False
+    return True
+
+
+class GetProjectGeneralConcepts(APIView):
     def get(self, request):
+        profile_id = profileId(request)
+        student_profile = StudentProfile.objects.get(id=profile_id)
         projects_ids = Project.objects.values_list('id', flat=True)
         my_set = []
         for project_id in projects_ids:
-            subConcepts_set = set()
-            subConcepts_set.update(
-                Project.objects.filter(id=project_id).values_list('subConcepts', flat=True).order_by('subConcepts'))
-            index = next((i for i, obj in enumerate(my_set) if obj['subConcepts'] == subConcepts_set), None)
+            generalConcepts_set = set()
+            generalConcepts_set.update(
+                Project.objects.filter(id=project_id).values_list('generalConcepts', flat=True).order_by('generalConcepts'))
+            index = next((i for i, obj in enumerate(my_set) if obj['generalConcepts'] == generalConcepts_set), None)
             if index is not None:
 
                 # subconcepts set already exists in my_set, add project_id to its related projects_ids
@@ -233,113 +243,90 @@ class GetProjectSubConcepts(APIView):
             else:
                 # subconcepts set does not exist in my_set, add it and its related project_id
                 my_set.append({
-                    'subConcepts': subConcepts_set,
+                    'generalConcepts': generalConcepts_set,
                     'project_ids': [project_id],
                 })
-
+        i = -1
+        project_sets = [{'set': obj, 'availability': check_availability(obj=obj, student_profile=student_profile)}
+                        for obj in my_set]
         response = {
             'message': 'SUCCESS',
             'data': {
                 # "projectConcepts": serializer.data
-                "projectConcepts": my_set
+                "projectConcepts": project_sets
             }
         }
         return Response(response)
 
 
-class GetProjectGeneralConcepts(APIView):
-    def get(self, request):
-        projects_ids = Project.objects.values_list('id', flat=True)
-        my_set = []
-        for project_id in projects_ids:
-            subConcepts_set = set()
-            subConcepts_set.update(
-                Project.objects.filter(id=project_id).values_list('subConcepts', flat=True).order_by('subConcepts'))
-            generalConcepts = getGeneralConcpts(subConcepts_set)
-            index = next((i for i, obj in enumerate(my_set) if obj['generalConcepts'] == generalConcepts), None)
-            if index is not None:
-                # subconcepts set already exists in my_set, add project_id to its related projects_ids
-                my_set[index]['project_ids'].append(project_id)
-            else:
-                # subconcepts set does not exist in my_set, add it and its related project_id
-                my_set.append({
-                    'generalConcepts': generalConcepts,
-                    'project_ids': [project_id],
-                })
+def check_practical_skill(skill):
+    if skill <= 17:
+        return 1
+    elif 17 < skill <= 51:
+        return 2
+    else:
+        return 3
 
-        response = {
-            'message': 'SUCCESS',
-            'data': {
-                # "projectConcepts": serializer.data
-                "projectConcepts": my_set
-            }
-        }
-        return Response(response, content_type='application/json; charset=utf-8')
+
+def returnCommentsAndStrings(endResult, comments, strings):
+    for i in range(len(comments["start"])):
+        before = endResult[:comments["start"][i]]
+        after = endResult[comments["end"][i]:]
+        endResult = before + comments["comment"][i] + after
+
+    for i in range(len(strings["start"])):
+        before = endResult[:strings["start"][i]]
+        after = endResult[strings["end"][i]:]
+        endResult = before + strings["string"][i] + after
+    return endResult
 
 
 class CodeDump(APIView):
     def post(self, request):
         profile_id = profileId(request)
         student_profile = StudentProfile.objects.get(id=profile_id)
-        # get concepts student know them
-        theoretical_data_objects = student_profile.studentKnowledge.all()
-        subconcepts = SubConcept.objects.filter(theoreticaldata__in=theoretical_data_objects).distinct()
-        code = Project.objects.get(id=request.data['project_id'])
-        code = code.correctAnswerSample
-        level = request.data['level']
-        keywords = set()
-        operators = set()
-        print(subconcepts)
-        for subconcept in subconcepts:
-            concept_keywords = conceptKeywords(subconcept.name)
-            concept_operators = conceptOperators(subconcept.name)
-            keywords.update(set([obj.name for obj in concept_keywords]))
-            operators.update(set([obj.name for obj in concept_operators]))
+        project = Project.objects.get(id=request.data['project_id'])
+        generalConcepts = project.generalConcepts.all()
+        code = project.correctAnswerSample
         comments, strings = getCommentsAndStrings(code)
-        lines = code.split('\n')
-        result = ''
-        print(keywords)
-        print(operators)
-        # operators = []
-        for line in lines:
-            if line_filter(["main"], None, line):
+        result = code
+        # get concepts student know them
+        for generalConcept in generalConcepts:
+            student_skill = PracticalSkill.objects.filter(student=student_profile, generalConcept=generalConcept).first()
+
+            level = check_practical_skill(student_skill.skill)
+
+            concept_keywords = conceptKeywords(generalConcept.name)
+            concept_operators = conceptOperators(generalConcept.name)
+
+            keywords = set([obj.name for obj in concept_keywords])
+            operators = set([obj.name for obj in concept_operators])
+            if len(operators) == 0: operators = None
+            if len(keywords) == 0: keywords = None
+            lines = result.split('\n')
+            if operators is None and keywords is None:
                 continue
-            if len(operators) == 0 and len(keywords) > 0:
-                if line_filter(keywords, None, line):
-                    pattern = patternLevel(level, keywords, None)
+            if level == 0:
+                continue
+            result = ''
+            for line in lines:
+                if line_filter(["main"], None, line):
+                    result += line + '\n'
+                    continue
+                if line_filter(keywords, operators, line):
+                    pattern = patternLevel(level, keywords, operators)
                     line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
-            elif len(operators) > 0 and len(keywords) == 0:
-                if line_filter(None, operators, line):
-                    pattern = patternLevel(level, None, operators)
-                    line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
-            elif len(operators) > 0 and len(keywords) > 0:
-                if line_filter(None, operators, line):
-                    print(operators)
-                    pattern = patternLevel(level, None, operators)
-                    line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
-                if line_filter(keywords, None, line):
-                    pattern = patternLevel(level, keywords, None)
-                    line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
-            result += line + '\n'
+
+                result += line + '\n'
 
         endResult = result
-
+        endResult = returnCommentsAndStrings(endResult, comments, strings)
         # restore strings and comments
-        for i in range(len(comments["start"])):
-            before = endResult[:comments["start"][i]]
-            after = endResult[comments["end"][i]:]
-            endResult = before + comments["comment"][i] + after
 
-        for i in range(len(strings["start"])):
-            before = endResult[:strings["start"][i]]
-            after = endResult[strings["end"][i]:]
-            endResult = before + strings["string"][i] + after
-        # serializer = KeywordSerializer(subconcepts, many=True)
-        print(endResult)
         response = {
             'message': 'SUCCESS',
             'data': {
-                "keywords": keywords,
+                "code": code,
                 "result": endResult
             }
         }

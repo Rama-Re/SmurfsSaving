@@ -48,19 +48,35 @@ class GetPersonality(APIView):
         return Response(response)
 
 # edit profile
-class PutPersonality(APIView):
-    def put(self, request):
-        pass
-        # profile_id = profileId(request)
-        # personality = PersonalitiesLetters.objects.filter(profile_id=profile_id).fiirst()
-        # serializer = PersonalitiesLettersSerializer(personality)
-        # if serializer.save():
-        #     response = {
-        #         'message': 'SUCCESS',
-        #         'data': serializer.data
-        #     }
-        # response = {
-        #     'message': 'FAILED',
-        # }
-        # return Response(response)
+# class PutPersonality(APIView):
+#     def put(self, request):
+#         pass
+
+
+class EditPracticalSkill(APIView):
+    def post(self, request):
+        profile_id = profileId(request)
+        student_profile = StudentProfile.objects.get(id=profile_id)
+        practical_skill = PracticalSkill.objects.filter(student=student_profile, generalConcept=request.data['generalConcept']).first()
+        practical_skill.skill = request.data['skill']
+        practical_skill.save()
+        response = {
+            'message': 'SUCCESS'
+        }
+        return Response(response)
+
+
+class EditTheoreticalSkill(APIView):
+    def post(self, request):
+        profile_id = profileId(request)
+        student_profile = StudentProfile.objects.get(id=profile_id)
+        theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile, generalConcept=request.data['generalConcept']).first()
+        theoretical_skill.skill = request.data['skill']
+        theoretical_skill.self_rate = request.data['self_rate']
+        theoretical_skill.availability = request.data['availability']
+        theoretical_skill.save()
+        response = {
+            'message': 'SUCCESS'
+        }
+        return Response(response)
 

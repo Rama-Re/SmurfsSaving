@@ -63,4 +63,12 @@ class UserSerializer(serializers.ModelSerializer):
         student = StudentProfile()
         student.user_id = instance.id
         student.save()
+
+        ### test
+        generalconcepts = GeneralConcept.objects.all()
+        for generalconcept in generalconcepts:
+            theoretical_skill = TheoreticalSkill.objects.create(generalConcept=generalconcept, student=student, skill=0,
+                                                                self_rate=0, availability=False)
+            practical_skill = PracticalSkill.objects.create(generalConcept=generalconcept, student=student, skill=0)
+
         return instance

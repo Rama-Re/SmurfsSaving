@@ -75,21 +75,21 @@ class QuizzesQuestionSerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ['id', 'question', 'correctAnswerSample', 'output', 'explanation', 'hint', 'difficulty', 'img_src']
-        extra_kwargs = {
-            'correctAnswerSample': {
-                'write_only': True
-            }
-        }
+        fields = ['id', 'question', 'correctAnswerSample', 'output', 'explanation', 'hint', 'difficulty', 'img_src', 'generalConcepts']
+        # extra_kwargs = {
+        #     'correctAnswerSample': {
+        #         'write_only': True
+        #     }
+        # }
 
 
 class KeywordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Keyword
-        fields = ['name']
+        fields = ['name', 'generalConcepts']
 
 
 class OperatorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Operator
-        fields = ['name']
+        fields = ['name', 'generalConcepts']

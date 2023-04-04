@@ -34,30 +34,13 @@ class Migration(migrations.Migration):
                             question=question,
                             answer=item,
                         )
-                        print(f"answer {i} loaded!")
-                print(f"question {i} loaded!")
+                        # print(f"answer {i} loaded!")
+                # print(f"question {i} loaded!")
 
     dependencies = [
-        ('domainModel', 'migrate'),
+        ('domainModel', 'add_projects'),
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='QuizzesQuestion',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('question', models.TextField()),
-                ('correctAnswer', models.TextField()),
-                ('generalConcept', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='domainModel.generalconcept')),
-            ],
-        ),
-        migrations.CreateModel(
-            name='QuizzesAnswers',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('answer', models.TextField()),
-                ('question', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='domainModel.quizzesquestion')),
-            ],
-        ),
         migrations.RunPython(load_data),
     ]

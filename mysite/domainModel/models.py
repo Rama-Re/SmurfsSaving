@@ -56,17 +56,17 @@ class Project(models.Model):
     hint = models.TextField(null=True)
     difficulty = models.DecimalField(max_digits=6, decimal_places=3)
     img_src = models.TextField(null=True)
-    subConcepts = models.ManyToManyField(SubConcept)
+    generalConcepts = models.ManyToManyField(GeneralConcept, related_name='projects')
 
 
 class Operator(models.Model):
     name = models.CharField(primary_key=True, max_length=6)  # this is "required"
-    subConcepts = models.ManyToManyField(SubConcept, related_name='operators')
+    generalConcepts = models.ManyToManyField(GeneralConcept, related_name='operators')
 
 
 class Keyword(models.Model):
     name = models.CharField(primary_key=True, max_length=50)  # this is "required"
-    subConcepts = models.ManyToManyField(SubConcept, related_name='keywords')
+    generalConcepts = models.ManyToManyField(GeneralConcept, related_name='keywords')
 
 #
 # class SubConceptFeatures(models.Model):

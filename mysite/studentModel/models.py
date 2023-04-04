@@ -13,25 +13,6 @@ class StudentProfile(models.Model):
 
 class PersonalitiesNames(models.Model):
     personalityName = models.CharField(primary_key=True, max_length=255)
-    # architect = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    # logician = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    # commander = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    # debater = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    #
-    # advocate = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    # mediator = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    # protagonist = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    # campaigner = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    #
-    # logistician = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    # defender = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    # executive = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    # consul = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    #
-    # virtuoso = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    # adventurer = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    # entrepreneur = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
-    # entertainer = models.ForeignKey(PersonalitiesLetters, on_delete=models.CASCADE, null=True)
 
 class PersonalitiesLetters(models.Model):
     '''
@@ -49,7 +30,6 @@ class PersonalitiesLetters(models.Model):
     j = models.DecimalField(max_digits=6, decimal_places=2)  # acronym of judging
     p = models.DecimalField(max_digits=6, decimal_places=2)  # acronym of prospecting
 
-    # personalityName = models.ForeignKey(apps.get_model('domainModel','PersonalitiesNames'), on_delete=models.CASCADE, null=True)
     personalityName = models.ForeignKey(PersonalitiesNames, on_delete=models.CASCADE, null=True)
     studentProfile = models.OneToOneField(StudentProfile, on_delete=models.CASCADE)
 
@@ -61,6 +41,22 @@ class StudentProject(models.Model):
     spentTime = models.DurationField()
     solutionCode = models.TextField()
     projectCodeCompletionLevel = models.IntegerField() # to be edited maybe? as enuums: easy, medium, hard
+
+
+class TheoreticalSkill(models.Model):
+    student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
+    generalConcept = models.ForeignKey(GeneralConcept, on_delete=models.CASCADE)
+    skill = models.IntegerField()
+    self_rate = models.IntegerField()
+    availability = models.BooleanField()
+
+
+
+class PracticalSkill(models.Model):
+    student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
+    generalConcept = models.ForeignKey(GeneralConcept, on_delete=models.CASCADE)
+    skill = models.IntegerField()
+
 
 # class StudentKnowledge(models.Model):
 #     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
