@@ -26,7 +26,7 @@ class PersonalitiesLettersSerializer(serializers.ModelSerializer):
 class StudentProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentProject
-        fields = ['errorsNumber', 'spentTime', 'solutionCode', 'projectCodeCompletionLevel', 'project_id', 'student_id']
+        fields = ['used_concept_difficulty', 'hint_levels', 'solutionCode', 'projectCodeCompletionLevel', 'project_id', 'student_id']
 
 
 class TheoreticalSkillSerializer(serializers.ModelSerializer):
@@ -39,4 +39,29 @@ class PracticalSkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = PracticalSkill
         fields = ['student', 'generalConcept', 'skill']
+
+
+class DifficultyPerformanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DifficultyPerformance
+        fields = ['student', 'performance']
+
+
+class TimePerformanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TimePerformance
+        fields = ['student', 'performance']
+
+
+class HintPerformanceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HintPerformance
+        fields = ['student', 'performance']
+
+
+class SolveTryingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SolveTrying
+        fields = ['time', 'student_project']
+
 
