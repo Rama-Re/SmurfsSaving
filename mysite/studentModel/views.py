@@ -70,11 +70,13 @@ class EditTheoreticalSkill(APIView):
     def post(self, request):
         profile_id = profileId(request)
         student_profile = StudentProfile.objects.get(id=profile_id)
-        theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile, generalConcept=request.data['generalConcept']).first()
-        theoretical_skill.skill = request.data['skill']
-        theoretical_skill.self_rate = request.data['self_rate']
-        theoretical_skill.availability = request.data['availability']
-        theoretical_skill.save()
+        theoretical_skills = request.data['TheoreticalSkill']
+        for data in theoretical_skills:
+            theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile, generalConcept=data['generalConcept']).first()
+            theoretical_skill.skill = data['skill']
+            theoretical_skill.self_rate = data['self_rate']
+            theoretical_skill.availability = data['availability']
+            theoretical_skill.save()
         response = {
             'message': 'SUCCESS'
         }
