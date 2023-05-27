@@ -13,8 +13,17 @@ from .serializers import *
 
 class GeneralConcepts(APIView):
     def get(self, request):
+        profile_id = profileId(request)
         generalConcepts = GeneralConcept.objects.all()
         serializer = GeneralConceptSerializer(generalConcepts, many=True)
+        availability_data = []
+        student_profile = StudentProfile.objects.get(id=profile_id)
+        for concept in generalConcepts:
+            theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile, generalConcept=concept).first()
+            availability_data.append(theoretical_skill.availability if theoretical_skill else False)
+
+        for data, availability in zip(serializer.data, availability_data):
+            data['availability'] = availability
         response = {
             'message': 'SUCCESS',
             'data': serializer.data
@@ -184,10 +193,13 @@ class GetProject(APIView):
     def post(self, request):
         project = Project.objects.get(id=request.data['project_id'])
         serializer = ProjectSerializer(project)
+        hints = ProjectHint.objects.filter(project=project)
+        hint_serializer = ProjectHintSerializer(hints, many=True)
         response = {
             'message': 'SUCCESS',
             'data': {
-                "project": serializer.data
+                "project": serializer.data,
+                "required_concept_hint": hint_serializer.data
             }
         }
         return Response(response, content_type='application/json; charset=utf-8')
