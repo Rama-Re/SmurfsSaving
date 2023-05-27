@@ -47,6 +47,7 @@ class GetPersonality(APIView):
         }
         return Response(response)
 
+
 # edit profile
 # class PutPersonality(APIView):
 #     def put(self, request):
@@ -57,7 +58,8 @@ class EditPracticalSkill(APIView):
     def post(self, request):
         profile_id = profileId(request)
         student_profile = StudentProfile.objects.get(id=profile_id)
-        practical_skill = PracticalSkill.objects.filter(student=student_profile, generalConcept=request.data['generalConcept']).first()
+        practical_skill = PracticalSkill.objects.filter(student=student_profile,
+                                                        generalConcept=request.data['generalConcept']).first()
         practical_skill.skill = request.data['skill']
         practical_skill.save()
         response = {
@@ -72,7 +74,8 @@ class EditTheoreticalSkill(APIView):
         student_profile = StudentProfile.objects.get(id=profile_id)
         theoretical_skills = request.data['TheoreticalSkill']
         for data in theoretical_skills:
-            theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile, generalConcept=data['generalConcept']).first()
+            theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile,
+                                                                generalConcept=data['generalConcept']).first()
             theoretical_skill.skill = data['skill']
             theoretical_skill.self_rate = data['self_rate']
             theoretical_skill.availability = data['availability']
@@ -80,5 +83,24 @@ class EditTheoreticalSkill(APIView):
         response = {
             'message': 'SUCCESS'
         }
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')
 
+
+class AddSolveTrying(APIView):
+    def post(self, request):
+        profile_id = profileId(request)
+        student_profile = StudentProfile.objects.get(id=profile_id)
+        project_id = request.data['project_id']
+        solve_time = request.data['time']
+        student_project, created = StudentProject.objects.get_or_create(student=student_profile, project_id=project_id)
+        solve_trying = SolveTrying.objects.create(time=solve_time, student_project=student_project)
+        student_project.solutionCode = None
+        student_project.used_concept_difficulty = None
+        student_project.hint_levels = request.data['hint_levels']
+        student_project.solve_date = None
+        student_project.save()
+
+        response = {
+            'message': 'SUCCESS',
+        }
+        return Response(response, content_type='application/json; charset=utf-8')
