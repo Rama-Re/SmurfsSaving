@@ -22,7 +22,7 @@ class RegisterView(APIView):
         #     'message': 'SUCCESS',
         #     'data': serializer.data
         # }
-        return Response(serializer.data)
+        return Response(serializer.data, content_type='application/json; charset=utf-8')
 
 
 
@@ -50,8 +50,10 @@ class LoginView(APIView):
 
         response = Response()
         response.set_cookie(key='jwt', value=token, httponly=True)
+        serializer = UserSerializer(user)
         response.data = {
-            'jwt': token
+            'jwt': token,
+            'user': serializer.data
         }
         return response
 
@@ -100,7 +102,7 @@ class LogoutView(APIView):
 class VerifyEmail(APIView):
     def post(self, request):
         code = request.data.get('code')
-        email = request.data['email']
+        email = request.data.get('email')
         user = User.objects.filter(email=email).first()
 
         if user.verification_code == code:
