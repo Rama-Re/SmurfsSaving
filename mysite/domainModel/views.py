@@ -3,10 +3,11 @@ from rest_framework.response import Response
 from .models import *
 from studentModel.views import *
 from django.contrib.postgres.aggregates import ArrayAgg
-from django.db.models import Count
+from django.db.models import Count, Q
+from django.shortcuts import get_object_or_404
 import re
 import jwt, datetime
-
+import numpy as np
 # from .serializers import UserSerializer
 from .serializers import *
 
@@ -187,6 +188,117 @@ class GetProjectsByIds(APIView):
             }
         }
         return Response(response)
+
+
+## Recommendation Start
+def getAvailableProjects(student_profile, general_concept):
+    general_concepts = GeneralConcept.objects.filter(
+        theoreticalskill__availability=True,
+        theoreticalskill__student=student_profile
+    ).all()
+
+    # Query the projects
+    projects = Project.objects.filter(
+        generalConcepts=general_concept,
+        generalConcepts__theoreticalskill__availability=True,
+        generalConcepts__theoreticalskill__student=student_profile,
+    ).exclude(
+        generalConcepts__in=general_concepts,
+        generalConcepts__theoreticalskill__availability=False,
+        generalConcepts__theoreticalskill__student=student_profile,
+    ).distinct()
+    return projects
+
+
+def euclidean_distance(point1, point2):
+    point1 = np.array(point1)
+    point2 = np.array(point2)
+    distance = np.linalg.norm(point1 - point2)
+    return distance
+
+
+def map_skill(skill):
+    if skill <= 17:
+        return 1
+    elif 17 < skill <= 51:
+        return 2
+    elif 51 <= skill < 100:
+        return 3
+    else:
+        return 4
+
+
+class GetRecommendedProjects(APIView):
+    def post(self, request):
+        profile_id = profileId(request)
+        student_profile = StudentProfile.objects.get(id=profile_id)
+        general_concept = GeneralConcept.objects.get(name=request.data['generalConcept'])
+        available_projects = getAvailableProjects(student_profile, general_concept)
+        solved_projects = available_projects.filter(
+            studentproject__student = student_profile,
+            studentproject__solve_date__isnull = False,
+        )
+        tried_solving_projects = available_projects.filter(
+            studentproject__student=student_profile,
+            studentproject__solve_date__isnull=True,
+        )
+        rest_projects = available_projects.filter(
+            studentproject__isnull=True,
+        )
+        ## recommendation
+        # Retrieve the difficulty performance
+        difficulty_performance = DifficultyPerformance.objects.get(student=student_profile)
+        difficulty_performance = difficulty_performance.performance
+
+        # Retrieve the time performance
+        time_performance = TimePerformance.objects.get(student=student_profile)
+        time_performance = time_performance.performance
+
+        # Retrieve the hint performance
+        hint_performance = HintPerformance.objects.get(student=student_profile)
+        hint_performance = hint_performance.performance
+        # hint_performance = eval(hint_performance)
+        hint_performance = eval("{'الأساسيات': 1, 'أنواع البيانات': 4, 'العوامل': 2}")
+        # sorted_hint_dict = {k: hint_performance[k] for k in sorted(hint_performance.keys())}
+        recommended_projects = []
+        for project in rest_projects:
+            project_difficulty = ProjectDifficulty.objects.get(project=project)
+            project_time = ProjectTime.objects.get(project=project)
+            project_hint = ProjectHint.objects.get(project=project)
+
+            # Access the attributes of each object
+            project_difficulty = project_difficulty.difficulty
+            project_time = project_time.time
+            project_hint = project_hint.required_concept_hint
+            project_hint = eval(project_hint)
+            project_hint = {k: project_hint[k] for k in sorted(project_hint.keys())}
+            project_hint_list = list(project_hint.values())
+            project_hint_list = [map_skill(value) for value in project_hint_list]
+            project_features = [float(project_difficulty), float(project_time)] + project_hint_list
+            hint_list = []
+            for concept in project_hint.keys():
+                hint_list.append(hint_performance[concept])
+
+            hint_list = [map_skill(value) for value in hint_list]
+            student_features = [float(difficulty_performance), float(time_performance)] + hint_list
+
+            print(project_features)
+            distance = euclidean_distance(student_features, project_features)
+            dist_min = [0] * 2 + [1] * (len(student_features) - 2)
+            dist_max = [100] * 2 + [4] * (len(project_features) - 2)
+            distance_max = euclidean_distance(dist_min, dist_max)
+            S = 100 * (1 - (distance / distance_max))
+            print(S)
+            recommended_projects.append((project.id, S))
+            recommended_projects = sorted(recommended_projects, key=lambda x: x[1], reverse=True)
+
+        # serializer = ProjectSerializer(recommended_projects, many=True)
+
+        response = {
+            'message': 'SUCCESS',
+            'data': recommended_projects
+        }
+        return Response(response, content_type='application/json; charset=utf-8')
 
 
 class GetProject(APIView):

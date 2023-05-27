@@ -71,7 +71,7 @@ class TimePerformance(models.Model):
 
 
 class HintPerformance(models.Model):
-    performance = models.DecimalField(max_digits=6, decimal_places=3)
+    performance = models.CharField(primary_key=False, max_length=500, default='')
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
 
 
