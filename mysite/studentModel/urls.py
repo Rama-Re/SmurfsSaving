@@ -8,4 +8,5 @@ urlpatterns = [
     path('private/getPersonality', GetPersonality.as_view()),
     path('public/editTheoreticalSkill', EditTheoreticalSkill.as_view()),
     path('public/editPracticalSkill', EditPracticalSkill.as_view()),
+    path('public/addSolveTrying', AddSolveTrying.as_view()),
 ]
