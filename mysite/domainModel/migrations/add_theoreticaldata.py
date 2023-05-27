@@ -12,6 +12,16 @@ class Migration(migrations.Migration):
         ParagraphData = apps.get_model('domainModel', 'ParagraphData')
         CodeData = apps.get_model('domainModel', 'CodeData')
         ExampleData = apps.get_model('domainModel', 'ExampleData')
+        concepts_level = {'الأساسيات': 1,
+                          'أنواع البيانات': 2,
+                          'المتغيرات': 2,
+                          'التعامل مع الأعداد': 3,
+                          'التعامل مع النصوص': 3,
+                          'العوامل': 3,
+                          'المصفوفات': 3,
+                          'الدوال': 3,
+                          'الحلقات': 4,
+                          'الشروط': 4}
         with open('harmash_data.csv', encoding='utf-8') as f:
             reader = csv.reader(f)
             header = next(reader)  # skip header row
@@ -19,7 +29,7 @@ class Migration(migrations.Migration):
             for row in reader:
                 i += 1
                 # Create or get the GeneralConcept object
-                generalconcept, created = GeneralConcept.objects.get_or_create(name=row[0])
+                generalconcept, created = GeneralConcept.objects.get_or_create(name=row[0], concept_level=concepts_level[row[0]])
                 # Create the SubConcept object with foreign key to GeneralConcept
                 subconcept, created = SubConcept.objects.get_or_create(name=row[1], generalConcept=generalconcept)
                 # Create the Lesson object with foreign key to SubConcept

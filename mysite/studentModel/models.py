@@ -37,10 +37,13 @@ class PersonalitiesLetters(models.Model):
 class StudentProject(models.Model):
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    errorsNumber = models.IntegerField()
-    spentTime = models.DurationField()
+    # errorsNumber = models.IntegerField()
+    # spentTime = models.DurationField()
+    solve_date = models.DateTimeField(default=None)
     solutionCode = models.TextField()
-    projectCodeCompletionLevel = models.IntegerField() # to be edited maybe? as enuums: easy, medium, hard
+    used_concept_difficulty = models.IntegerField()
+    hint_levels = models.CharField(max_length=255, default='') # like enuums: easy, medium, hard
+
 
 
 class TheoreticalSkill(models.Model):
@@ -51,11 +54,31 @@ class TheoreticalSkill(models.Model):
     availability = models.BooleanField()
 
 
-
 class PracticalSkill(models.Model):
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
     generalConcept = models.ForeignKey(GeneralConcept, on_delete=models.CASCADE)
-    skill = models.IntegerField()
+    skill = models.IntegerField(default=0)
+
+
+class DifficultyPerformance(models.Model):
+    performance = models.DecimalField(max_digits=6, decimal_places=3)
+    student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
+
+
+class TimePerformance(models.Model):
+    performance = models.DecimalField(max_digits=6, decimal_places=3)
+    student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
+
+
+class HintPerformance(models.Model):
+    performance = models.DecimalField(max_digits=6, decimal_places=3)
+    student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
+
+
+class SolveTrying(models.Model):
+    time = models.DecimalField(max_digits=6, decimal_places=3)
+    student_project = models.ForeignKey(StudentProject, on_delete=models.CASCADE)
+
 
 
 # class StudentKnowledge(models.Model):

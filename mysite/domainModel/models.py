@@ -3,6 +3,7 @@ from django.db import models
 
 class GeneralConcept(models.Model):
     name = models.CharField(primary_key=True, max_length=255)
+    concept_level = models.IntegerField(default=0)
 
 
 class SubConcept(models.Model):
@@ -54,7 +55,7 @@ class Project(models.Model):
     output = models.TextField()
     explanation = models.TextField()
     hint = models.TextField(null=True)
-    difficulty = models.DecimalField(max_digits=6, decimal_places=3)
+    # difficulty = models.DecimalField(max_digits=6, decimal_places=3)
     img_src = models.TextField(null=True)
     generalConcepts = models.ManyToManyField(GeneralConcept, related_name='projects')
 
@@ -67,6 +68,22 @@ class Operator(models.Model):
 class Keyword(models.Model):
     name = models.CharField(primary_key=True, max_length=50)  # this is "required"
     generalConcepts = models.ManyToManyField(GeneralConcept, related_name='keywords')
+
+
+class ProjectDifficulty(models.Model):
+    difficulty = models.DecimalField(max_digits=6, decimal_places=3)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+
+class ProjectTime(models.Model):
+    time = models.DecimalField(max_digits=6, decimal_places=3)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
+
+class ProjectHint(models.Model):
+    required_concept_hint = models.CharField(primary_key=False, max_length=500, default='')
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+
 
 #
 # class SubConceptFeatures(models.Model):

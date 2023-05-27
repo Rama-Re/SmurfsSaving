@@ -19,7 +19,7 @@ class GeneralConcepts(APIView):
             'message': 'SUCCESS',
             'data': serializer.data
         }
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')
 
 
 class SubConcepts(APIView):
@@ -30,7 +30,7 @@ class SubConcepts(APIView):
             'message': 'SUCCESS',
             'data': serializer.data
         }
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')
 
 
 class GetTheoreticalData(APIView):
@@ -39,18 +39,6 @@ class GetTheoreticalData(APIView):
         paragraph_data_list = ParagraphData.objects.filter(title_id__in=titles).prefetch_related('code_data',
                                                                                                  'example_data')
         serialized_data = TheoreticalDataSerializer(paragraph_data_list, many=True).data
-        # data = []
-        # for paragraph_data in paragraph_data_list:
-        #     code_data_list = []
-        #     for code_data in paragraph_data.code_data.filter(code__isnull=False).exclude(code__exact=''):
-        #         code_data_list.append(CodeDataSerializer(code_data).data)
-        #     example_data_list = []
-        #     for example_data in paragraph_data.example_data.filter(example__isnull=False).exclude(example__exact=''):
-        #         example_data_list.append(ExampleDataSerializer(example_data).data)
-        #     paragraph_data_dict = ParagraphDataSerializer(paragraph_data).data
-        #     paragraph_data_dict['code_data'] = code_data_list
-        #     paragraph_data_dict['example_data'] = example_data_list
-        #     data.append(paragraph_data_dict)
         response = {
             'message': 'SUCCESS',
             'data': serialized_data
@@ -67,7 +55,7 @@ class GetQuiz(APIView):
             'message': 'SUCCESS',
             'data': serializer.data
         }
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')
 
 
 def conceptKeywords(generalConceptName):

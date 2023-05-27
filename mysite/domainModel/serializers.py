@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 class GeneralConceptSerializer(serializers.ModelSerializer):
     class Meta:
         model = GeneralConcept
-        fields = ['name']
+        fields = ['name', 'concept_level']
 
 
 class SubConceptSerializer(serializers.ModelSerializer):
@@ -75,7 +75,7 @@ class QuizzesQuestionSerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ['id', 'question', 'correctAnswerSample', 'output', 'explanation', 'hint', 'difficulty', 'img_src', 'generalConcepts']
+        fields = ['id', 'question', 'correctAnswerSample', 'output', 'explanation', 'hint', 'img_src', 'generalConcepts']
         # extra_kwargs = {
         #     'correctAnswerSample': {
         #         'write_only': True
@@ -89,7 +89,19 @@ class KeywordSerializer(serializers.ModelSerializer):
         fields = ['name', 'generalConcepts']
 
 
-class OperatorSerializer(serializers.ModelSerializer):
+class ProjectDifficultySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Operator
-        fields = ['name', 'generalConcepts']
+        model = ProjectDifficulty
+        fields = ['difficulty', 'project']
+
+
+class ProjectTimeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectTime
+        fields = ['time', 'project']
+
+
+class ProjectHintSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectHint
+        fields = ['required_concept_hint', 'project']

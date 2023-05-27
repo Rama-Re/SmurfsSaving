@@ -5,6 +5,7 @@ import secrets
 from django.core.mail import send_mail
 from django.conf import settings
 
+
 class ChoiceField(serializers.ChoiceField):
 
     def to_representation(self, obj):
@@ -28,14 +29,14 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'name', 'email', 'password', 'username', 'register_year', 'birthday', 'gender', 'nickname', 'shown_name']
+        fields = ['id', 'name', 'email', 'password', 'username', 'register_year', 'birthday', 'gender', 'nickname',
+                  'shown_name']
         # fields = ['id', 'name', 'email', 'password']
         extra_kwargs = {
-            'password' : {
-                'write_only' : True
+            'password': {
+                'write_only': True
             }
         }
-
 
     def send_verification_code_email(self, email, code):
         subject = 'Verification code'
@@ -44,9 +45,8 @@ class UserSerializer(serializers.ModelSerializer):
         recipient_list = [email]
         send_mail(subject, message, from_email, recipient_list)
 
-
     def create(self, validated_data):
-        password = validated_data.pop('password',None)
+        password = validated_data.pop('password', None)
 
         instance = self.Meta.model(**validated_data)
         gender = ChoiceField(choices=self.GenderChoice)
@@ -58,13 +58,26 @@ class UserSerializer(serializers.ModelSerializer):
         code = secrets.token_urlsafe(6)
         # self.send_verification_code_email(validated_data['email'], code)
         instance.verification_code = code
-        instance.is_verified = True # temp just not to need verification every time
+        instance.is_verified = True  # temp just not to need verification every time
         instance.save()
         student = StudentProfile()
         student.user_id = instance.id
-        student.save()
 
-        ### test
+        student.save()
+        difficultyPerformance = DifficultyPerformance()
+        difficultyPerformance.student = student
+        difficultyPerformance.performance = 0
+        difficultyPerformance.save()
+        timePerformance = TimePerformance()
+        timePerformance.student = student
+        timePerformance.performance = 0
+        timePerformance.save()
+        hintPerformance = HintPerformance()
+        hintPerformance.student = student
+        hintPerformance.performance = 0
+        hintPerformance.save()
+
+        ### maybe delete
         generalconcepts = GeneralConcept.objects.all()
         for generalconcept in generalconcepts:
             theoretical_skill = TheoreticalSkill.objects.create(generalConcept=generalconcept, student=student, skill=0,
