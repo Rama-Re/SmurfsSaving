@@ -71,7 +71,8 @@ class TimePerformance(models.Model):
 
 
 class HintPerformance(models.Model):
-    performance = models.CharField(primary_key=False, max_length=500, default='')
+    performance = models.CharField(primary_key=False, max_length=500,
+                                   default="{'الأساسيات': 1, 'أنواع البيانات': 1, 'المتغيرات': 1, 'التعامل مع الأعداد': 1, 'التعامل مع النصوص': 1, 'العوامل': 1, 'المصفوفات': 1, 'الدوال': 1, 'الحلقات': 1, 'الشروط': 1}")
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
 
 

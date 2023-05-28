@@ -97,7 +97,7 @@ class Migration(migrations.Migration):
             name='HintPerformance',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('performance', models.CharField(default='', max_length=500)),
+                ('performance', models.CharField(default="{'الأساسيات': 1, 'أنواع البيانات': 1, 'المتغيرات': 1, 'التعامل مع الأعداد': 1, 'التعامل مع النصوص': 1, 'العوامل': 1, 'المصفوفات': 1, 'الدوال': 1, 'الحلقات': 1, 'الشروط': 1}", max_length=500)),
                 ('student', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='studentModel.studentprofile')),
             ],
         ),
