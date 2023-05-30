@@ -3,7 +3,6 @@ import django.db.models.deletion
 import csv
 import ast
 from math import ceil
-from domainModel.views import conceptsInCode
 
 
 def load_data(apps, schema_editor):

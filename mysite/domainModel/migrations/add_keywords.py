@@ -1,7 +1,6 @@
 from django.db import migrations, models
 import django.db.models.deletion
 import csv
-from domainModel.views import conceptsInCode
 
 
 def load_data(apps, schema_editor):

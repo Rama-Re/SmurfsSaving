@@ -1,16 +1,10 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from .models import *
 from studentModel.views import *
-from django.contrib.postgres.aggregates import ArrayAgg
-from django.db.models import Count, Q
-from django.shortcuts import get_object_or_404
 import re
-import jwt, datetime
 import numpy as np
-# from .serializers import UserSerializer
+import pandas as pd
 from .serializers import *
-
+from django.db.models import Count, F, Sum, Q
+from .models import Operator, Keyword, GeneralConcept
 
 class GeneralConcepts(APIView):
     def get(self, request):
@@ -68,28 +62,10 @@ class GetQuiz(APIView):
         return Response(response, content_type='application/json; charset=utf-8')
 
 
-def conceptKeywords(generalConceptName):
+def getConceptItems(generalConceptName, itemType):
     concept = GeneralConcept.objects.get(name=generalConceptName)
-    keywords = concept.keywords.all()
-    return keywords
-
-
-def conceptOperators(generalConceptName):
-    concept = GeneralConcept.objects.get(name=generalConceptName)
-    operators = concept.operators.all()
-    return operators
-
-
-def conceptOfOperator(operator):
-    operators = Operator.objects.get(name=operator.name)
-    general_concepts_with_operator = operators.generalConcepts.all()
-    return general_concepts_with_operator
-
-
-def conceptOfKeyword(keyword):
-    keywords = Keyword.objects.get(name=keyword.name)
-    general_concepts_with_keyword = keywords.generalConcepts.all()
-    return general_concepts_with_keyword
+    items = getattr(concept, itemType).all()
+    return items
 
 
 def line_filter(keyword, operator, line):
@@ -108,45 +84,20 @@ def line_filter(keyword, operator, line):
     return bool(match)
 
 
-def conceptsInCode(code):
-    generalConcepts = set()
-    keywords = Keyword.objects.all()
-    operators = Operator.objects.all()
-    lines = code.split('\n')
-    for line in lines:
-        for keyword in keywords:
-            if line_filter([keyword.name], None, line):
-                for generalConcept in conceptOfKeyword(keyword):
-                    generalConcepts.add(generalConcept)
-        for operator in operators:
-            if line_filter(None, [operator.name], line):
-                for generalConcept in conceptOfOperator(operator):
-                    generalConcepts.add(generalConcept)
-    return generalConcepts
-
-
 def patternLevel(level, keywords, operators):
-    if keywords is not None:
-        if level == 1:
-            return re.compile(fr'(\b(?:{"|".join(re.escape(k) for k in keywords)})\b)')
-        elif level == 2:
-            if operators is not None:
-                return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|(?:[{"|".join(re.escape(op) for op in operators)}])|\d)')
-            else:
-                return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|\d)')
-        else:
-            if operators is not None:
-                return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|(?:[{"|".join(re.escape(op) for op in operators)}])|\d|[a-zA-Z])')
-            else:
-                return re.compile(fr'((\b(?:{"|".join(re.escape(k) for k in keywords)})\b)|\d|[a-zA-Z])')
+    keyword_part = fr'(\b(?:{"|".join(re.escape(k) for k in keywords)})\b)' if keywords is not None else ''
+    operator_part = fr'(?:[{"|".join(re.escape(op) for op in operators)}])' if operators is not None else ''
+    digit_part = r'\d'
+    letter_part = r'[a-zA-Z]'
 
+    if level == 1:
+        return re.compile(keyword_part) if keywords is not None else re.compile(operator_part)
+    elif level == 2:
+        return re.compile(fr'{keyword_part}|{operator_part}|{digit_part}')
+    elif level == 4:
+        return re.compile('.*')  # Match everything in the line
     else:
-        if level == 1:
-            return re.compile(fr'(?:[{"|".join(re.escape(op) for op in operators)}])')
-        elif level == 2:
-            return re.compile(fr'((?:[{"|".join(re.escape(op) for op in operators)}])|\d)')
-        else:
-            return re.compile(fr'((?:[{"|".join(re.escape(op) for op in operators)}])|\d|[a-zA-Z])')
+        return re.compile(fr'{keyword_part}|{operator_part}|{digit_part}|{letter_part}')
 
 
 def getCommentsAndStrings(input_string):
@@ -317,24 +268,19 @@ class GetProject(APIView):
         return Response(response, content_type='application/json; charset=utf-8')
 
 
-def getGeneralConcepts(subConcepts):
-    generalConcepts = set()
-    for concept in subConcepts:
-        subConcept = SubConcept.objects.filter(name=concept).first()
-        generalConcepts.add(subConcept.generalConcept.name)
-    return generalConcepts
-
+# def getGeneralConcepts(subConcepts):
+#     generalConcepts = set()
+#     for concept in subConcepts:
+#         subConcept = SubConcept.objects.filter(name=concept).first()
+#         generalConcepts.add(subConcept.generalConcept.name)
+#     return generalConcepts
 
 def check_availability(obj, student_profile):
     generalConcepts = obj['generalConcepts']
-    for name in generalConcepts:
-        generalConcept = GeneralConcept.objects.filter(name=name).first()
-        # practical_skill = PracticalSkill.objects.filter(student=student_profile, generalConcept=generalConcept).first()
-        theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile, generalConcept=generalConcept).first()
-        # if theoretical_skill['skill']
-        if not theoretical_skill.availability:
-            return False
-    return True
+    generalConcepts_names = [name for name in generalConcepts]
+    theoretical_skills = TheoreticalSkill.objects.filter(student=student_profile, generalConcept__name__in=generalConcepts_names)
+    return all(theoretical_skill.availability for theoretical_skill in theoretical_skills)
+
 
 
 class GetProjectGeneralConcepts(APIView):
@@ -371,69 +317,59 @@ class GetProjectGeneralConcepts(APIView):
         return Response(response)
 
 
-def check_practical_skill(skill):
-    if skill <= 17:
-        return 1
-    elif 17 < skill <= 51:
-        return 2
-    else:
-        return 3
-
-
 def returnCommentsAndStrings(endResult, comments, strings):
-    for i in range(len(comments["start"])):
-        before = endResult[:comments["start"][i]]
-        after = endResult[comments["end"][i]:]
-        endResult = before + comments["comment"][i] + after
+    for comment_start, comment_end, comment_text in zip(comments["start"], comments["end"], comments["comment"]):
+        endResult = endResult[:comment_start] + comment_text + endResult[comment_end:]
 
-    for i in range(len(strings["start"])):
-        before = endResult[:strings["start"][i]]
-        after = endResult[strings["end"][i]:]
-        endResult = before + strings["string"][i] + after
+    for string_start, string_end, string_text in zip(strings["start"], strings["end"], strings["string"]):
+        endResult = endResult[:string_start] + string_text + endResult[string_end:]
+
     return endResult
 
 
 class CodeDump(APIView):
     def post(self, request):
-        profile_id = profileId(request)
-        student_profile = StudentProfile.objects.get(id=profile_id)
-        project = Project.objects.get(id=request.data['project_id'])
-        generalConcepts = project.generalConcepts.all()
+        project_id = request.data.get('project_id')
+        concept_hint = request.data.get('concept_hint')
+
+        project = Project.objects.filter(id=project_id).first()
+        if not project:
+            return Response({'message': 'Project not found'}, status=404)
+
+        generalConcepts = eval(concept_hint)
         code = project.correctAnswerSample
         comments, strings = getCommentsAndStrings(code)
         result = code
-        # get concepts student know them
-        for generalConcept in generalConcepts:
-            student_skill = PracticalSkill.objects.filter(student=student_profile, generalConcept=generalConcept).first()
+        concept_keywords = {}
+        concept_operators = {}
 
-            level = check_practical_skill(student_skill.skill)
+        for generalConcept, concept_value in generalConcepts.items():
+            level = map_skill(concept_value)
+            if generalConcept not in concept_keywords:
+                concept_keywords[generalConcept] = getConceptItems(generalConcept, 'keywords')
+            if generalConcept not in concept_operators:
+                concept_operators[generalConcept] = getConceptItems(generalConcept, 'operators')
 
-            concept_keywords = conceptKeywords(generalConcept.name)
-            concept_operators = conceptOperators(generalConcept.name)
-
-            keywords = set([obj.name for obj in concept_keywords])
-            operators = set([obj.name for obj in concept_operators])
-            if len(operators) == 0: operators = None
-            if len(keywords) == 0: keywords = None
+            keywords = {obj.name for obj in concept_keywords[generalConcept]}
+            operators = {obj.name for obj in concept_operators[generalConcept]}
             lines = result.split('\n')
-            if operators is None and keywords is None:
+
+            if not keywords and not operators:
                 continue
-            if level == 0:
-                continue
-            result = ''
+
+            code_lines = []
             for line in lines:
                 if line_filter(["main"], None, line):
-                    result += line + '\n'
+                    code_lines.append(line)
                     continue
                 if line_filter(keywords, operators, line):
                     pattern = patternLevel(level, keywords, operators)
                     line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
+                code_lines.append(line)
 
-                result += line + '\n'
+            result = '\n'.join(code_lines)
 
-        endResult = result
-        endResult = returnCommentsAndStrings(endResult, comments, strings)
-        # restore strings and comments
+        endResult = returnCommentsAndStrings(result, comments, strings)
 
         response = {
             'message': 'SUCCESS',
@@ -442,4 +378,8 @@ class CodeDump(APIView):
                 "result": endResult
             }
         }
-        return Response(response, content_type='application/json; charset=utf-8')
+        return Response(response)
+
+
+
+
