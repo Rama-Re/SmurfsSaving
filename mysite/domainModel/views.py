@@ -186,8 +186,8 @@ class GetRecommendedProjects(APIView):
         general_concept = GeneralConcept.objects.get(name=request.data['generalConcept'])
         available_projects = getAvailableProjects(student_profile, general_concept)
         solved_projects = available_projects.filter(
-            studentproject__student = student_profile,
-            studentproject__solve_date__isnull = False,
+            studentproject__student=student_profile,
+            studentproject__solve_date__isnull=False,
         )
         tried_solving_projects = available_projects.filter(
             studentproject__student=student_profile,
@@ -258,6 +258,8 @@ class GetProject(APIView):
         serializer = ProjectSerializer(project)
         hints = ProjectHint.objects.filter(project=project)
         hint_serializer = ProjectHintSerializer(hints, many=True)
+        result = {key: check_practical_skill(value) for key, value in eval(hint_serializer.data[0]['required_concept_hint']).items()}
+        hint_serializer.data[0]['required_concept_hint'] = str(result)
         response = {
             'message': 'SUCCESS',
             'data': {
@@ -378,7 +380,7 @@ class CodeDump(APIView):
                 "result": endResult
             }
         }
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')
 
 
 
