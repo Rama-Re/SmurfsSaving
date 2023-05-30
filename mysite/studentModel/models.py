@@ -9,6 +9,7 @@ from domainModel.models import *
 class StudentProfile(models.Model):
     # user = models.OneToOneField(apps.get_model('users','User'), on_delete=models.CASCADE)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    xp = models.IntegerField()
     studentKnowledge = models.ManyToManyField(ParagraphData)
 
 class PersonalitiesNames(models.Model):
@@ -39,10 +40,10 @@ class StudentProject(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     # errorsNumber = models.IntegerField()
     # spentTime = models.DurationField()
-    solve_date = models.DateTimeField(default=None)
-    solutionCode = models.TextField()
-    used_concept_difficulty = models.IntegerField()
-    hint_levels = models.CharField(max_length=255, default='') # like enuums: easy, medium, hard
+    solve_date = models.DateTimeField(null=True)
+    solutionCode = models.TextField(null=True)
+    used_concept_difficulty = models.IntegerField(null=True)
+    hint_levels = models.CharField(max_length=255, default="") # like enuums: easy, medium, hard
 
 
 
@@ -72,7 +73,7 @@ class TimePerformance(models.Model):
 
 class HintPerformance(models.Model):
     performance = models.CharField(primary_key=False, max_length=500,
-                                   default="{'الأساسيات': 1, 'أنواع البيانات': 1, 'المتغيرات': 1, 'التعامل مع الأعداد': 1, 'التعامل مع النصوص': 1, 'العوامل': 1, 'المصفوفات': 1, 'الدوال': 1, 'الحلقات': 1, 'الشروط': 1}")
+                                   default="")
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
 
 

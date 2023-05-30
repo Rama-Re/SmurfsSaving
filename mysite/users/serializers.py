@@ -62,8 +62,9 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
         student = StudentProfile()
         student.user_id = instance.id
-
+        student.xp = 0
         student.save()
+
         difficultyPerformance = DifficultyPerformance()
         difficultyPerformance.student = student
         difficultyPerformance.performance = 0
@@ -74,7 +75,7 @@ class UserSerializer(serializers.ModelSerializer):
         timePerformance.save()
         hintPerformance = HintPerformance()
         hintPerformance.student = student
-        hintPerformance.performance = 0
+        hintPerformance.performance = "{'الأساسيات': 0, 'أنواع البيانات': 0, 'المتغيرات': 0, 'التعامل مع الأعداد': 0, 'التعامل مع النصوص': 0, 'العوامل': 0, 'المصفوفات': 0, 'الدوال': 0, 'الحلقات': 0, 'الشروط': 0}"
         hintPerformance.save()
 
         ### maybe delete

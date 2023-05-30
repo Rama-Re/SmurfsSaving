@@ -21,7 +21,7 @@ def load_data(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('studentModel', '0001_initial'),
+        ('studentModel', '0002_initial'),
     ]
 
     operations = [
