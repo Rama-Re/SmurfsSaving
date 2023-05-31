@@ -12,8 +12,10 @@ class StudentProfile(models.Model):
     xp = models.IntegerField()
     studentKnowledge = models.ManyToManyField(ParagraphData)
 
+
 class PersonalitiesNames(models.Model):
     personalityName = models.CharField(primary_key=True, max_length=255)
+
 
 class PersonalitiesLetters(models.Model):
     '''
@@ -44,7 +46,6 @@ class StudentProject(models.Model):
     solutionCode = models.TextField(null=True)
     used_concept_difficulty = models.IntegerField(null=True)
     hint_levels = models.CharField(max_length=255, default="") # like enuums: easy, medium, hard
-
 
 
 class TheoreticalSkill(models.Model):
@@ -80,14 +81,5 @@ class HintPerformance(models.Model):
 class SolveTrying(models.Model):
     time = models.DecimalField(max_digits=6, decimal_places=3)
     student_project = models.ForeignKey(StudentProject, on_delete=models.CASCADE)
-
-
-
-# class StudentKnowledge(models.Model):
-#     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
-#     knowledge = models.ForeignKey(TheoreticalData, on_delete=models.CASCADE)
-#
-
-
 
 

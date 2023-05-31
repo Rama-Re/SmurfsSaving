@@ -8,11 +8,10 @@ from .models import Operator, Keyword, GeneralConcept
 
 class GeneralConcepts(APIView):
     def get(self, request):
-        profile_id = profileId(request)
+        student_profile = get_profile(request)
         generalConcepts = GeneralConcept.objects.all()
         serializer = GeneralConceptSerializer(generalConcepts, many=True)
         availability_data = []
-        student_profile = StudentProfile.objects.get(id=profile_id)
         for concept in generalConcepts:
             theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile, generalConcept=concept).first()
             availability_data.append(theoretical_skill.availability if theoretical_skill else False)
@@ -181,8 +180,7 @@ def map_skill(skill):
 
 class GetRecommendedProjects(APIView):
     def post(self, request):
-        profile_id = profileId(request)
-        student_profile = StudentProfile.objects.get(id=profile_id)
+        student_profile = get_profile(request)
         general_concept = GeneralConcept.objects.get(name=request.data['generalConcept'])
         available_projects = getAvailableProjects(student_profile, general_concept)
         solved_projects = available_projects.filter(
@@ -258,7 +256,7 @@ class GetProject(APIView):
         serializer = ProjectSerializer(project)
         hints = ProjectHint.objects.filter(project=project)
         hint_serializer = ProjectHintSerializer(hints, many=True)
-        result = {key: check_practical_skill(value) for key, value in eval(hint_serializer.data[0]['required_concept_hint']).items()}
+        result = {key: map_skill(value) for key, value in eval(hint_serializer.data[0]['required_concept_hint']).items()}
         hint_serializer.data[0]['required_concept_hint'] = str(result)
         response = {
             'message': 'SUCCESS',
@@ -270,13 +268,6 @@ class GetProject(APIView):
         return Response(response, content_type='application/json; charset=utf-8')
 
 
-# def getGeneralConcepts(subConcepts):
-#     generalConcepts = set()
-#     for concept in subConcepts:
-#         subConcept = SubConcept.objects.filter(name=concept).first()
-#         generalConcepts.add(subConcept.generalConcept.name)
-#     return generalConcepts
-
 def check_availability(obj, student_profile):
     generalConcepts = obj['generalConcepts']
     generalConcepts_names = [name for name in generalConcepts]
@@ -284,11 +275,9 @@ def check_availability(obj, student_profile):
     return all(theoretical_skill.availability for theoretical_skill in theoretical_skills)
 
 
-
 class GetProjectGeneralConcepts(APIView):
     def get(self, request):
-        profile_id = profileId(request)
-        student_profile = StudentProfile.objects.get(id=profile_id)
+        student_profile = get_profile(request)
         projects_ids = Project.objects.values_list('id', flat=True)
         my_set = []
         for project_id in projects_ids:

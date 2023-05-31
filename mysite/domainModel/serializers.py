@@ -61,7 +61,7 @@ class TheoreticalDataSerializer(serializers.ModelSerializer):
 class QuizzesAnswersSerializer(serializers.ModelSerializer):
     class Meta:
         model = QuizzesAnswers
-        fields = ['answer']
+        fields = ['id', 'answer']
 
 
 class QuizzesQuestionSerializer(serializers.ModelSerializer):
@@ -69,7 +69,7 @@ class QuizzesQuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = QuizzesQuestion
-        fields = ['generalConcept_id', 'question', 'correctAnswer', 'answers']
+        fields = ['id', 'generalConcept_id', 'question', 'correctAnswer', 'answers']
 
 
 class ProjectSerializer(serializers.ModelSerializer):

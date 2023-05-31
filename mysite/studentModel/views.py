@@ -1,33 +1,22 @@
-import ast
-import json
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from users.models import *
 from users.views import *
-
-from .models import *
-from django.db.models import Count, Q, Sum, F
+from django.db.models import Sum, F
 import re
 import math
-import jwt
 from django.utils import timezone
-# from .serializers import UserSerializer
 from .serializers import *
 from domainModel.models import *
 
 
-def profileId(request):
+def get_profile(request):
     user_id = userId(request)
-    serializer = StudentProfileSerializer(StudentProfile.objects.filter(user_id=user_id).first())
-    return serializer.data.get('id')
+    profile = StudentProfile.objects.filter(user_id=user_id).first()
+    return profile
 
 
 class AddPersonality(APIView):
     def post(self, request):
-        profile_id = profileId(request)
-        # # print(profile_id)
-        request.data['studentProfile'] = profile_id
+        student_profile = get_profile(request)
+        request.data['studentProfile'] = student_profile.id
         serializer = PersonalitiesLettersSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -44,8 +33,15 @@ class AddPersonality(APIView):
 
 class GetPersonality(APIView):
     def get(self, request):
-        profile_id = profileId(request)
-        personality = PersonalitiesLetters.objects.filter(studentProfile=profile_id).first()
+        try:
+            student_profile = get_profile(request)
+            personality = PersonalitiesLetters.objects.get(studentProfile=student_profile)
+        except PersonalitiesLetters.DoesNotExist:
+            response = {
+                'message': 'FAILED'
+            }
+            return Response(response)
+
         serializer = PersonalitiesLettersSerializer(personality)
         response = {
             'message': 'SUCCESS',
@@ -54,30 +50,50 @@ class GetPersonality(APIView):
         return Response(response)
 
 
-# edit profile
-# class PutPersonality(APIView):
-#     def put(self, request):
-#         pass
-
-
-class EditPracticalSkill(APIView):
+class EditPersonality(APIView):
     def post(self, request):
-        profile_id = profileId(request)
-        student_profile = StudentProfile.objects.get(id=profile_id)
-        practical_skill = PracticalSkill.objects.filter(student=student_profile,
-                                                        generalConcept=request.data['generalConcept']).first()
-        practical_skill.skill = request.data['skill']
-        practical_skill.save()
-        response = {
-            'message': 'SUCCESS'
-        }
+        try:
+            studentProfile = get_profile(request)
+            personality = PersonalitiesLetters.objects.get(studentProfile=studentProfile)
+            request.data['personality_id'] = personality.id
+            request.data['studentProfile'] = studentProfile.id
+        except PersonalitiesLetters.DoesNotExist:
+            response = {
+                'message': 'FAILED'
+            }
+            return Response(response)
+
+        serializer = PersonalitiesLettersSerializer(personality, request.data)
+        if serializer.is_valid():
+            serializer.save()
+            response = {
+                'message': 'SUCCESS',
+                'data': serializer.data
+            }
+        else:
+            response = {
+                'message': serializer.errors
+            }
         return Response(response)
+
+
+# class EditPracticalSkill(APIView):
+#     def post(self, request):
+#         profile_id = profileId(request)
+#         student_profile = StudentProfile.objects.get(id=profile_id)
+#         practical_skill = PracticalSkill.objects.filter(student=student_profile,
+#                                                         generalConcept=request.data['generalConcept']).first()
+#         practical_skill.skill = request.data['skill']
+#         practical_skill.save()
+#         response = {
+#             'message': 'SUCCESS'
+#         }
+#         return Response(response)
 
 
 class EditTheoreticalSkill(APIView):
     def post(self, request):
-        profile_id = profileId(request)
-        student_profile = StudentProfile.objects.get(id=profile_id)
+        student_profile = get_profile(request)
         theoretical_skills = request.data['TheoreticalSkill']
         for data in theoretical_skills:
             theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile,
@@ -94,8 +110,7 @@ class EditTheoreticalSkill(APIView):
 
 class AddSolveTrying(APIView):
     def post(self, request):
-        profile_id = profileId(request)
-        student_profile = StudentProfile.objects.get(id=profile_id)
+        student_profile = get_profile(request)
         project_id = request.data['project_id']
         solve_time = request.data['time']
         student_project, created = StudentProject.objects.get_or_create(student=student_profile, project_id=project_id)
@@ -251,8 +266,7 @@ def map_skill(skill):
 
 class AddProjectSolve(APIView):
     def post(self, request):
-        profile_id = profileId(request)
-        student_profile = StudentProfile.objects.get(id=profile_id)
+        student_profile = get_profile(request)
         project = Project.objects.get(id=request.data['project_id'])
         student_project, created = StudentProject.objects.get_or_create(
             student=student_profile,
@@ -342,3 +356,69 @@ class AddProjectSolve(APIView):
             'new_xp': student_profile.xp
         }
         return Response(response)
+
+
+def check_student_answers(answers_dict):
+    true_solve_ids = []
+    wrong_solve_ids = []
+    # Iterate through the dictionary items (question_id, student_answer_id)
+    for question_id, student_answer_id in answers_dict.items():
+        try:
+            # Retrieve the question and its correct answer from the database
+            question = QuizzesQuestion.objects.get(id=question_id)
+            correct_answer = question.correctAnswer
+
+            # Retrieve the student's answer from the database
+            student_answer = QuizzesAnswers.objects.get(id=student_answer_id)
+
+            # Compare the student's answer with the correct answer
+            if student_answer.answer == correct_answer:
+                true_solve_ids.append(question.id)
+            else:
+                wrong_solve_ids.append(question.id)
+
+        except (QuizzesQuestion.DoesNotExist, QuizzesAnswers.DoesNotExist):
+            # Handle the case where the question or student answer does not exist
+            pass
+
+    return true_solve_ids, wrong_solve_ids
+
+
+class CheckQuizSolve(APIView):
+    def post(self, request):
+        student_profile = get_profile(request)
+        generalConcept = request.data['generalConcept']
+        answers_dict = eval(request.data['answers_dict'])
+
+        # Call check_student_answers function
+        true_solve_ids, wrong_solve_ids = check_student_answers(answers_dict)
+        # Calculate the success rate
+        total_questions = len(true_solve_ids) + len(wrong_solve_ids)
+        if total_questions > 0:
+            success_rate = 100 * len(true_solve_ids) / total_questions
+        else:
+            success_rate = 0
+
+        # Determine the result
+        if success_rate >= 60:
+            result = 'pass'
+        else:
+            result = 'fail'
+
+        # Prepare the response
+        response = {
+            'message': 'SUCCESS',
+            'result': result,
+        }
+
+        student_profile.theoreticalskill_set.filter(generalConcept=generalConcept).update(skill=success_rate)
+
+        # Add question results if the success rate is available
+        if success_rate > 60:
+            question_results = {}
+            for question_id in true_solve_ids + wrong_solve_ids:
+                question_results[question_id] = question_id in true_solve_ids
+            response['question_results'] = question_results
+
+        return Response(response)
+

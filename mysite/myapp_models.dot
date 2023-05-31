@@ -1,6 +1,6 @@
 digraph model_graph {
   // Dotfile by Django-Extensions graph_models
-  // Created: 2023-05-27 12:39
+  // Created: 2023-06-01 01:47
   // Cli Options: -a --dot -o myapp_models.dot
 
   fontname = "Roboto"
@@ -1067,6 +1067,14 @@ digraph model_graph {
     </TD></TR>
   
   
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">xp</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">IntegerField</FONT>
+    </TD></TR>
+  
+  
     </TABLE>
     >]
 
@@ -1447,7 +1455,7 @@ digraph model_graph {
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">performance</FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DecimalField</FONT>
+    <FONT FACE="Roboto">CharField</FONT>
     </TD></TR>
   
   
