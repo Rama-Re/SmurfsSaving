@@ -16,18 +16,15 @@ def get_profile(request):
 class AddPersonality(APIView):
     def post(self, request):
         student_profile = get_profile(request)
-        request.data['studentProfile'] = student_profile.id
-        serializer = PersonalitiesLettersSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            response = {
-                'message': 'SUCCESS',
-                'data': serializer.data
-            }
-        else:
-            response = {
-                'message': 'FAILED'
-            }
+        for data in request.data['personalities']:
+            personality_name = data['name']
+            pp = data['pp']
+            personality = Personality.objects.get(name=personality_name)
+            student_personality = StudentPersonality.objects.create(studentProfile=student_profile, personality=personality, pp=pp)
+
+        response = {
+            'message': 'SUCCESS',
+        }
         return Response(response)
 
 
@@ -35,14 +32,14 @@ class GetPersonality(APIView):
     def get(self, request):
         try:
             student_profile = get_profile(request)
-            personality = PersonalitiesLetters.objects.get(studentProfile=student_profile)
-        except PersonalitiesLetters.DoesNotExist:
+            personality = StudentPersonality.objects.filter(studentProfile=student_profile)
+        except Personality.DoesNotExist:
             response = {
                 'message': 'FAILED'
             }
             return Response(response)
 
-        serializer = PersonalitiesLettersSerializer(personality)
+        serializer = StudentPersonalitySerializer(personality, many=True)
         response = {
             'message': 'SUCCESS',
             'data': serializer.data
@@ -54,10 +51,10 @@ class EditPersonality(APIView):
     def post(self, request):
         try:
             studentProfile = get_profile(request)
-            personality = PersonalitiesLetters.objects.get(studentProfile=studentProfile)
+            personality = Personality.objects.get(studentProfile=studentProfile)
             request.data['personality_id'] = personality.id
             request.data['studentProfile'] = studentProfile.id
-        except PersonalitiesLetters.DoesNotExist:
+        except Personality.DoesNotExist:
             response = {
                 'message': 'FAILED'
             }
@@ -74,6 +71,17 @@ class EditPersonality(APIView):
             response = {
                 'message': serializer.errors
             }
+        return Response(response)
+
+
+class AddStudentKnowledge(APIView):
+    def post(self, request):
+        studentProfile = get_profile(request)
+        subConcept = SubConcept.objects.get(name=request.data['subConcept'])
+        studentProfile.studentKnowledge.add(subConcept)
+        response = {
+            'message': 'success'
+        }
         return Response(response)
 
 
@@ -101,6 +109,8 @@ class EditTheoreticalSkill(APIView):
             theoretical_skill.skill = data['skill']
             theoretical_skill.self_rate = data['self_rate']
             theoretical_skill.availability = data['availability']
+            theoretical_skill.edit_date = datetime.datetime.now()
+
             theoretical_skill.save()
         response = {
             'message': 'SUCCESS'
@@ -250,7 +260,7 @@ def calculate_updated_performance(project_performance_required, student_performa
     updated_project_performance_required = max(0, min(100, project_performance_required + 0.05 * (
             p - student_performance_in_current_project)))
 
-    return updated_performance, updated_project_performance_required, (student_performance_in_current_project - p)/100
+    return updated_performance, updated_project_performance_required, (student_performance_in_current_project - p) / 100
 
 
 def map_skill(skill):
@@ -284,7 +294,8 @@ class AddProjectSolve(APIView):
 
         solve_tryings = SolveTrying.objects.filter(student_project=student_project)
         student_total_time = solve_tryings.aggregate(total_time=Sum('time'))['total_time']
-
+        if student_total_time is None: student_total_time = request.data['solve_time']
+        else: student_total_time += request.data['solve_time']
         # student performance
         hint_performance = HintPerformance.objects.filter(student=student_profile).last()
         hint_performance_dic = eval(hint_performance.performance)
@@ -308,9 +319,10 @@ class AddProjectSolve(APIView):
         # Evaluating performance and calculating skills.
         # difficulty
         student_current_difficulty = student_concepts_difficulty(request.data['solutionCode'])
-        new_performance_difficulty, new_required_difficulty, dp_difficulty = calculate_updated_performance(float(difficulty_required.difficulty),
-                                                                                                           student_current_difficulty,
-                                                                                                           float(difficulty_performances.performance))
+        new_performance_difficulty, new_required_difficulty, dp_difficulty = calculate_updated_performance(
+            float(difficulty_required.difficulty),
+            student_current_difficulty,
+            float(difficulty_performances.performance))
         dp_list.append(dp_difficulty)
         difficulty_performances.performance = new_performance_difficulty
         difficulty_performances.save()
@@ -319,10 +331,11 @@ class AddProjectSolve(APIView):
 
         # time
         student_current_time = min(100., (student_total_time / 30) * 100)
-        student_current_time = min(100., (time_required.time / student_current_time) * 100)
+        student_current_time = min(100., (float(time_required.time) / student_current_time) * 100)
         new_performance_time, new_required_time, dp_time = calculate_updated_performance(float(time_required.time),
                                                                                          float(student_current_time),
-                                                                                         float(time_performances.performance))
+                                                                                         float(
+                                                                                             time_performances.performance))
         dp_list.append(dp_time)
         time_performances.performance = new_performance_time
         time_performances.save()
@@ -335,19 +348,20 @@ class AddProjectSolve(APIView):
 
         for concept_hint, student_hint in zip(project_hint_list, hint_performance_list):
             new_performance, new_required, dp = calculate_updated_performance(float(concept_hint),
-                                                                              student_hint/concept_hint * 100,
+                                                                              student_hint / concept_hint * 100,
                                                                               float(student_hint))
             new_performance_list.append(new_performance)
             new_required_list.append(new_required)
             dp_list.append(dp)
-        project_hint_required = {k: i for k,i in zip(project_hint_required.keys(), new_required_list)}
+        project_hint_required = {k: i for k, i in zip(project_hint_required.keys(), new_required_list)}
         project_hint.required_concept_hint = str(project_hint_required)
         project_hint.save()
-        hint_performance_dic.update((k, i) for k, i in zip(project_hint_required.keys(), new_performance_list) if k in hint_performance_dic)
+        hint_performance_dic.update(
+            (k, i) for k, i in zip(project_hint_required.keys(), new_performance_list) if k in hint_performance_dic)
         hint_performance.performance = str(hint_performance_dic)
         hint_performance.save()
 
-        dxp = problem_xp + problem_xp * (sum(dp_list)/len(dp_list))
+        dxp = problem_xp + problem_xp * (sum(dp_list) / len(dp_list))
         student_profile.xp += round(dxp)
         student_profile.save()
         response = {
@@ -421,4 +435,3 @@ class CheckQuizSolve(APIView):
             response['question_results'] = question_results
 
         return Response(response)
-

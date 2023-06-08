@@ -17,6 +17,8 @@ class ProcessRequestMiddleware(MiddlewareMixin):
             try:
                 payload = jwt.decode(token, 'secret', algorithms=['HS256'])
                 user = User.objects.filter(id=payload['id']).first()
+                if user is None:
+                    return HttpResponse('UserNotExist!', status=401)
                 if user.is_verified:
                     return None
                 else:

@@ -6,32 +6,100 @@ from .serializers import *
 from django.db.models import Count, F, Sum, Q
 from .models import Operator, Keyword, GeneralConcept
 
+required_concepts = {'الأساسيات': [],
+                     'أنواع البيانات': ['الأساسيات'],
+                     'المتغيرات': ['الأساسيات'],
+                     'التعامل مع الأعداد': ['أنواع البيانات', 'المتغيرات', 'الأساسيات'],
+                     'التعامل مع النصوص': ['أنواع البيانات', 'المتغيرات', 'الأساسيات'],
+                     'العوامل': ['أنواع البيانات', 'المتغيرات', 'الأساسيات'],
+                     'المصفوفات': ['أنواع البيانات', 'المتغيرات', 'الأساسيات'],
+                     'الدوال': ['أنواع البيانات', 'المتغيرات', 'الأساسيات'],
+                     'الحلقات': ['العوامل', 'أنواع البيانات', 'المتغيرات', 'الأساسيات'],
+                     'الشروط': ['العوامل', 'أنواع البيانات', 'المتغيرات', 'الأساسيات']}
+
+university_path = {'الأساسيات': 1,
+                   'أنواع البيانات': 2,
+                   'المتغيرات': 3,
+                   'التعامل مع الأعداد': 4,
+                   'التعامل مع النصوص': 5,
+                   'العوامل': 6,
+                   'المصفوفات': 10,
+                   'الدوال': 9,
+                   'الحلقات': 8,
+                   'الشروط': 7}
+
+
 class GeneralConcepts(APIView):
     def get(self, request):
         student_profile = get_profile(request)
+
         generalConcepts = GeneralConcept.objects.all()
         serializer = GeneralConceptSerializer(generalConcepts, many=True)
         availability_data = []
+        completed = []
+        unavailable_data = []
+        available = []
+        closed = []
         for concept in generalConcepts:
             theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile, generalConcept=concept).first()
             availability_data.append(theoretical_skill.availability if theoretical_skill else False)
 
         for data, availability in zip(serializer.data, availability_data):
             data['availability'] = availability
+            if student_profile.learning_path == 'university_path':
+                data['order'] = university_path[data['name']]
+            else:
+                data['required'] = required_concepts[data['name']]
+            if availability:
+                completed.append(data)
+            else:
+                unavailable_data.append(data)
+
+        if student_profile.learning_path == 'university_path':
+            if len(completed) == 0:
+                max_order = 1
+            else:
+                max_order = max(completed, key=lambda x: x['order']) + 1
+            available = [x for x in unavailable_data if x['order'] == max_order]
+            closed = [x for x in unavailable_data if x['order'] > max_order]
+        else:
+            completed_names = [x['name'] for x in completed]
+            available = [x for x in unavailable_data if all(elem in completed_names for elem in x['required'])]
+            closed = [x for x in unavailable_data if not all(elem in completed_names for elem in x['required'])]
+
         response = {
             'message': 'SUCCESS',
-            'data': serializer.data
+            'data': {
+                'completed': completed,
+                'available': available,
+                'closed': closed
+            }
         }
         return Response(response, content_type='application/json; charset=utf-8')
 
 
 class SubConcepts(APIView):
     def post(self, request):
+        student_profile = get_profile(request)
         subConcepts = SubConcept.objects.filter(generalConcept_id=request.data['generalConcept'])
         serializer = SubConceptSerializer(subConcepts, many=True)
+        studentKnowledge = student_profile.studentKnowledge.all()
+        knowledges = [x.name for x in studentKnowledge]
+        completed = [data for data in serializer.data if data['name'] in knowledges]
+        uncompleted = [data for data in serializer.data if data['name'] not in knowledges]
+        theoreticalSkill = TheoreticalSkill.objects.get(generalConcept=request.data['generalConcept'],
+                                                        student=student_profile)
+        skill = theoreticalSkill.skill
         response = {
             'message': 'SUCCESS',
-            'data': serializer.data
+            'data': {
+                'completed': completed,
+                'uncompleted': uncompleted,
+                'quiz': {
+                    'quiz_state': skill > 60,
+                    'quiz_mark': skill
+                }
+            }
         }
         return Response(response, content_type='application/json; charset=utf-8')
 
@@ -71,15 +139,16 @@ def line_filter(keyword, operator, line):
     comments_and_strings_pattern = re.compile(r'(//.*|/\*.*?\*/|".*?")')
     # Remove comments and strings from the code line
     code_line_without_comments_and_strings = comments_and_strings_pattern.sub('', line)
-    if operator is None and keyword is None:
+    if (operator is None or len(operator) == 0) and (keyword is None or len(keyword) == 0):
         return False
-    elif operator is None:
+    elif operator is None or len(operator) == 0:
         word_pattern = re.compile(fr'(\b({"|".join(re.escape(k) for k in keyword)})\b)')
-    elif keyword is None:
+    elif keyword is None or len(keyword) == 0:
         word_pattern = re.compile(fr'(?:[{"|".join(re.escape(k) for k in operator)}])')
-    else: word_pattern = re.compile(fr'(?:[{"|".join(re.escape(k) for k in operator)}])|(\b({"|".join(re.escape(k) for k in keyword)})\b)')
+    else:
+        word_pattern = re.compile(
+            fr'(?:[{"|".join(re.escape(k) for k in operator)}])|(\b({"|".join(re.escape(k) for k in keyword)})\b)')
     match = word_pattern.search(code_line_without_comments_and_strings)
-
     return bool(match)
 
 
@@ -256,7 +325,8 @@ class GetProject(APIView):
         serializer = ProjectSerializer(project)
         hints = ProjectHint.objects.filter(project=project)
         hint_serializer = ProjectHintSerializer(hints, many=True)
-        result = {key: map_skill(value) for key, value in eval(hint_serializer.data[0]['required_concept_hint']).items()}
+        result = {key: map_skill(value) for key, value in
+                  eval(hint_serializer.data[0]['required_concept_hint']).items()}
         hint_serializer.data[0]['required_concept_hint'] = str(result)
         response = {
             'message': 'SUCCESS',
@@ -271,7 +341,8 @@ class GetProject(APIView):
 def check_availability(obj, student_profile):
     generalConcepts = obj['generalConcepts']
     generalConcepts_names = [name for name in generalConcepts]
-    theoretical_skills = TheoreticalSkill.objects.filter(student=student_profile, generalConcept__name__in=generalConcepts_names)
+    theoretical_skills = TheoreticalSkill.objects.filter(student=student_profile,
+                                                         generalConcept__name__in=generalConcepts_names)
     return all(theoretical_skill.availability for theoretical_skill in theoretical_skills)
 
 
@@ -283,7 +354,8 @@ class GetProjectGeneralConcepts(APIView):
         for project_id in projects_ids:
             generalConcepts_set = set()
             generalConcepts_set.update(
-                Project.objects.filter(id=project_id).values_list('generalConcepts', flat=True).order_by('generalConcepts'))
+                Project.objects.filter(id=project_id).values_list('generalConcepts', flat=True).order_by(
+                    'generalConcepts'))
             index = next((i for i, obj in enumerate(my_set) if obj['generalConcepts'] == generalConcepts_set), None)
             if index is not None:
 
@@ -335,7 +407,7 @@ class CodeDump(APIView):
         concept_operators = {}
 
         for generalConcept, concept_value in generalConcepts.items():
-            level = map_skill(concept_value)
+            level = concept_value
             if generalConcept not in concept_keywords:
                 concept_keywords[generalConcept] = getConceptItems(generalConcept, 'keywords')
             if generalConcept not in concept_operators:
@@ -370,7 +442,3 @@ class CodeDump(APIView):
             }
         }
         return Response(response, content_type='application/json; charset=utf-8')
-
-
-
-

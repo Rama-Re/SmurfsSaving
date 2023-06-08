@@ -1,14 +1,14 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser,BaseUserManager
+from django.contrib.auth.models import AbstractUser, BaseUserManager
 from enum import Enum
 
 
-class GenderChoice():   # A subclass of Enum
+class GenderChoice():  # A subclass of Enum
     Male = "Male"
     Female = "Female"
 
 
-class ShowNameChoice(Enum):   # A subclass of Enum
+class ShowNameChoice(Enum):  # A subclass of Enum
     username = "username"
     nickname = "nickname"
 
@@ -26,7 +26,8 @@ class UserManager(BaseUserManager):
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        return self.create_user(email, password, **{'is_staff': True, 'is_superuser': True, 'username':extra_fields.get('username')})
+        return self.create_user(email, password,
+                                **{'is_staff': True, 'is_superuser': True, 'username': extra_fields.get('username')})
 
 
 class User(AbstractUser):
@@ -38,7 +39,7 @@ class User(AbstractUser):
     register_year = models.DateField()
     birthday = models.DateField()
     nickname = models.CharField(max_length=255)
-    gender = models.CharField(max_length=6, choices=[("Male", "Male"), ("Female", "Female")])
+    gender = models.CharField(max_length=6, choices=[("M", "Male"), ("F", "Female")])
     shown_name = models.CharField(max_length=8, choices=[("username", "username"), ("nickname", "nickname")])
     verification_code = models.CharField(max_length=10, null=True)
     is_verified = models.BooleanField()

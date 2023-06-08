@@ -21,5 +21,6 @@ urlpatterns = [
     # path('api-auth/', include('rest_framework.urls')),
     path('api/auth/', include('users.urls')),
     path('domainModel/', include('domainModel.urls')),
-    path('studentModel/', include('studentModel.urls'))
+    path('studentModel/', include('studentModel.urls')),
+    path('gamificationModel/', include('gamificationModel.urls'))
 ]

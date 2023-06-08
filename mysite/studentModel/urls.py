@@ -12,4 +12,5 @@ urlpatterns = [
     path('private/addSolveTrying', AddSolveTrying.as_view()),
     path('private/addProjectSolve', AddProjectSolve.as_view()),
     path('private/checkQuizSolve', CheckQuizSolve.as_view()),
+    path('private/addStudentKnowledge', AddStudentKnowledge.as_view()),
 ]

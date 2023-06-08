@@ -10,20 +10,19 @@ from studentModel.models import *
 import jwt, datetime
 
 
-
-# Create your views here.
-
 class RegisterView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        # response = {
-        #     'message': 'SUCCESS',
-        #     'data': serializer.data
-        # }
-        return Response(serializer.data, content_type='application/json; charset=utf-8')
-
+        studentSerializer = StudentProfileSerializer()
+        student = studentSerializer.create_profile(learning_path=request.data['learning_path'],
+                                                   user_id=serializer.data.get('id'))
+        response = {
+            **serializer.data,
+            **(StudentProfileSerializer(student)).data
+        }
+        return Response(response, content_type='application/json; charset=utf-8')
 
 
 class LoginView(APIView):
@@ -84,7 +83,7 @@ class UserView(APIView):
         serializer = UserSerializer(user)
         response = {
             'message': 'SUCCESS',
-            'data' : serializer.data
+            'data': serializer.data
         }
         return Response(response)
 
@@ -111,7 +110,3 @@ class VerifyEmail(APIView):
             return Response({'message': 'Email verified'})
         else:
             return Response({'message': 'Invalid verification code'})
-
-
-
-

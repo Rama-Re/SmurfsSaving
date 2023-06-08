@@ -21,7 +21,7 @@ class ChoiceField(serializers.ChoiceField):
 
 class UserSerializer(serializers.ModelSerializer):
     GenderChoice = (
-        ("M", "Male"), ("F", "Female")
+        ("Male", "M"), ("Female", "F")
     )
     ShowNameChoice = (
         ("username", "username"), ("nickname", "nickname")
@@ -60,29 +60,4 @@ class UserSerializer(serializers.ModelSerializer):
         instance.verification_code = code
         instance.is_verified = True  # temp just not to need verification every time
         instance.save()
-        student = StudentProfile()
-        student.user_id = instance.id
-        student.xp = 0
-        student.save()
-
-        difficultyPerformance = DifficultyPerformance()
-        difficultyPerformance.student = student
-        difficultyPerformance.performance = 0
-        difficultyPerformance.save()
-        timePerformance = TimePerformance()
-        timePerformance.student = student
-        timePerformance.performance = 0
-        timePerformance.save()
-        hintPerformance = HintPerformance()
-        hintPerformance.student = student
-        hintPerformance.performance = "{'الأساسيات': 0, 'أنواع البيانات': 0, 'المتغيرات': 0, 'التعامل مع الأعداد': 0, 'التعامل مع النصوص': 0, 'العوامل': 0, 'المصفوفات': 0, 'الدوال': 0, 'الحلقات': 0, 'الشروط': 0}"
-        hintPerformance.save()
-
-        ### maybe delete
-        generalconcepts = GeneralConcept.objects.all()
-        for generalconcept in generalconcepts:
-            theoretical_skill = TheoreticalSkill.objects.create(generalConcept=generalconcept, student=student, skill=0,
-                                                                self_rate=0, availability=False)
-            practical_skill = PracticalSkill.objects.create(generalConcept=generalconcept, student=student, skill=0)
-
         return instance
