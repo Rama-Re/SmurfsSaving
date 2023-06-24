@@ -225,7 +225,7 @@ class GetToReview(APIView):
 class GetMyToReview(APIView):
     def get(self, request):
         student_profile = get_profile(request)
-        to_review = ToReview.objects.filter(owner=student_profile).annotate(num_reviews=Count('reviewed'))
+        to_review = ToReview.objects.annotate(num_reviews=Count('reviewed', distinct=True)).filter(owner=student_profile)
 
         response_data = []
         for review in to_review:
@@ -251,7 +251,7 @@ class GetMyToReview(APIView):
 class GetMyReviewed(APIView):
     def get(self, request):
         student_profile = get_profile(request)
-        to_review = ToReview.objects.annotate(num_reviews=Count('reviewed')).filter(reviewed__reviewer=student_profile)
+        to_review = ToReview.objects.annotate(num_reviews=Count('reviewed', distinct=True)).filter(reviewed__reviewer=student_profile)
 
         response_data = []
         for review in to_review:
