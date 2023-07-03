@@ -7,7 +7,7 @@ urlpatterns = [
     path('public/generalConcepts', GeneralConcepts.as_view()),
     path('public/subConcepts', SubConcepts.as_view()),
     path('public/theoreticalData', GetTheoreticalData.as_view()),
-    path('public/codeDump', CodeDump.as_view()),
+    path('public/codeComplete', CodeComplete.as_view()),
     path('public/getProject', GetProject.as_view()),
     path('public/getProjectGeneralConcepts', GetProjectGeneralConcepts.as_view()),
     path('public/getProjectsByIds', GetProjectsByIds.as_view()),

@@ -36,10 +36,10 @@ class GeneralConcepts(APIView):
         generalConcepts = GeneralConcept.objects.all()
         serializer = GeneralConceptSerializer(generalConcepts, many=True)
         availability_data = []
-        completed = []
         unavailable_data = []
-        available = []
-        closed = []
+        sorted_data = []
+        # available = []
+        # closed = []
         for concept in generalConcepts:
             theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile, generalConcept=concept).first()
             availability_data.append(theoretical_skill.availability if theoretical_skill else False)
@@ -51,29 +51,45 @@ class GeneralConcepts(APIView):
             else:
                 data['required'] = required_concepts[data['name']]
             if availability:
-                completed.append(data)
+                data['state'] = 'completed'
             else:
+                data['state'] = 'unavailable'
                 unavailable_data.append(data)
 
         if student_profile.learning_path == 'university_path':
-            if len(completed) == 0:
-                max_order = 1
-            else:
-                max_order = max(completed, key=lambda x: x['order']) + 1
-            available = [x for x in unavailable_data if x['order'] == max_order]
-            closed = [x for x in unavailable_data if x['order'] > max_order]
+            min_order = min((item['order'] for item in serializer.data if item['state'] != 'completed'), default=0)
+            for data in serializer.data:
+                if data['state'] == 'unavailable':
+                    if data['order'] == min_order:
+                        data['state'] = 'available'
+                    else:
+                        data['state'] = 'closed'
+            sorted_data = sorted(serializer.data, key=lambda x: x['order'])
         else:
-            completed_names = [x['name'] for x in completed]
-            available = [x for x in unavailable_data if all(elem in completed_names for elem in x['required'])]
-            closed = [x for x in unavailable_data if not all(elem in completed_names for elem in x['required'])]
+            completed_names = [x['name'] for x in serializer.data if x['state'] == 'completed']
+            for data in serializer.data:
+                if data['state'] == 'unavailable':
+                    if all(elem in completed_names for elem in data['required']):
+                        data['state'] = 'available'
+                    else:
+                        data['state'] = 'closed'
+            sorted_data = sorted(serializer.data, key=lambda x: len(x['required']))
+
+        # if student_profile.learning_path == 'university_path':
+        #     if len(completed) == 0:
+        #         max_order = 1
+        #     else:
+        #         max_order = max(completed, key=lambda x: x['order']) + 1
+        #     available = [x for x in unavailable_data if x['order'] == max_order]
+        #     closed = [x for x in unavailable_data if x['order'] > max_order]
+        # else:
+        #     completed_names = [x['name'] for x in completed]
+        #     available = [x for x in unavailable_data if all(elem in completed_names for elem in x['required'])]
+        #     closed = [x for x in unavailable_data if not all(elem in completed_names for elem in x['required'])]
 
         response = {
             'message': 'SUCCESS',
-            'data': {
-                'completed': completed,
-                'available': available,
-                'closed': closed
-            }
+            'data': sorted_data
         }
         return Response(response, content_type='application/json; charset=utf-8')
 
@@ -209,24 +225,20 @@ class GetProjectsByIds(APIView):
         return Response(response)
 
 
-## Recommendation Start
-def getAvailableProjects(student_profile, general_concept):
-    general_concepts = GeneralConcept.objects.filter(
-        theoreticalskill__availability=True,
-        theoreticalskill__student=student_profile
-    ).all()
-
+# Recommendation Start
+def get_available_projects(student_profile, general_concept):
     # Query the projects
     projects = Project.objects.filter(
         generalConcepts=general_concept,
         generalConcepts__theoreticalskill__availability=True,
         generalConcepts__theoreticalskill__student=student_profile,
-    ).exclude(
-        generalConcepts__in=general_concepts,
+    ).distinct()
+    projects2 = Project.objects.filter(
         generalConcepts__theoreticalskill__availability=False,
         generalConcepts__theoreticalskill__student=student_profile,
     ).distinct()
-    return projects
+    available_projects = projects.exclude(pk__in=projects2)
+    return available_projects
 
 
 def euclidean_distance(point1, point2):
@@ -237,21 +249,21 @@ def euclidean_distance(point1, point2):
 
 
 def map_skill(skill):
-    if skill <= 17:
-        return 1
-    elif 17 < skill <= 51:
-        return 2
-    elif 51 <= skill < 100:
-        return 3
-    else:
-        return 4
+    if skill <= 30:
+        return 1.
+    elif 30 < skill <= 80:
+        return 2.
+    elif 80 < skill <= 100:
+        return 3.
+    # else:
+    #     return 4
 
 
 class GetRecommendedProjects(APIView):
     def post(self, request):
         student_profile = get_profile(request)
         general_concept = GeneralConcept.objects.get(name=request.data['generalConcept'])
-        available_projects = getAvailableProjects(student_profile, general_concept)
+        available_projects = get_available_projects(student_profile, general_concept)
         solved_projects = available_projects.filter(
             studentproject__student=student_profile,
             studentproject__solve_date__isnull=False,
@@ -265,24 +277,22 @@ class GetRecommendedProjects(APIView):
         )
         ## recommendation
         # Retrieve the difficulty performance
-        difficulty_performance = DifficultyPerformance.objects.get(student=student_profile)
+        difficulty_performance = DifficultyPerformance.objects.filter(student=student_profile).last()
         difficulty_performance = difficulty_performance.performance
 
         # Retrieve the time performance
-        time_performance = TimePerformance.objects.get(student=student_profile)
+        time_performance = TimePerformance.objects.filter(student=student_profile).last()
         time_performance = time_performance.performance
 
         # Retrieve the hint performance
-        hint_performance = HintPerformance.objects.get(student=student_profile)
+        hint_performance = HintPerformance.objects.filter(student=student_profile).last()
         hint_performance = hint_performance.performance
-        # hint_performance = eval(hint_performance)
-        hint_performance = eval("{'الأساسيات': 1, 'أنواع البيانات': 4, 'العوامل': 2}")
-        # sorted_hint_dict = {k: hint_performance[k] for k in sorted(hint_performance.keys())}
+        hint_performance = eval(hint_performance)
         recommended_projects = []
         for project in rest_projects:
-            project_difficulty = ProjectDifficulty.objects.get(project=project)
-            project_time = ProjectTime.objects.get(project=project)
-            project_hint = ProjectHint.objects.get(project=project)
+            project_difficulty = ProjectDifficulty.objects.filter(project=project).last()
+            project_time = ProjectTime.objects.filter(project=project).last()
+            project_hint = ProjectHint.objects.filter(project=project).last()
 
             # Access the attributes of each object
             project_difficulty = project_difficulty.difficulty
@@ -300,17 +310,13 @@ class GetRecommendedProjects(APIView):
             hint_list = [map_skill(value) for value in hint_list]
             student_features = [float(difficulty_performance), float(time_performance)] + hint_list
 
-            print(project_features)
             distance = euclidean_distance(student_features, project_features)
             dist_min = [0] * 2 + [1] * (len(student_features) - 2)
             dist_max = [100] * 2 + [4] * (len(project_features) - 2)
             distance_max = euclidean_distance(dist_min, dist_max)
             S = 100 * (1 - (distance / distance_max))
-            print(S)
             recommended_projects.append((project.id, S))
             recommended_projects = sorted(recommended_projects, key=lambda x: x[1], reverse=True)
-
-        # serializer = ProjectSerializer(recommended_projects, many=True)
 
         response = {
             'message': 'SUCCESS',
@@ -390,7 +396,148 @@ def returnCommentsAndStrings(endResult, comments, strings):
     return endResult
 
 
-class CodeDump(APIView):
+def remove_comments(code):
+    code = re.sub(r'\/\/.*', '', code)
+    code = re.sub(r'\/\*.*?\*\/', '', code, flags=re.DOTALL)
+    code = code.strip()
+    code = re.sub(r'^\s*\n', '', code, flags=re.MULTILINE)
+    return code
+
+
+def detect_concept(code):
+    # Regular expressions for different declarations
+    declaration_patterns = {
+        'الحلقات': r'((?:for\s*\([^;]+;[^;]+;[^)]+\))|(?:while\s*\([^)]+\))|(?:do\s*\{[^}]+\}\s*while\s*\([^)]+\)))',
+        'الشروط': r'((?:if\s*\([^)]+\)(?:\s*\{[^}]*\})*)|else\s*if\s*\([^)]+\)(?:\s*\{[^}]*\})*|else(?:\s*\{[^}]*\})*|switch\s*\([^)]+\)(?:\s*\{[^}]*\})*)',
+        # 'المتغيرات': r'( (?:float|char|int|double|bool)\s+([a-zA-Z_]\w*)\s*(?:\[[^\]]+\])?(?:\s*=\s*(?:[^,;{}()]+|{.*}))?\s*(?:,|\[|\)|;|\{))',
+        'أنواع البيانات': r'(\b(?:unsigned|signed|const|static|extern|volatile|register|auto|bool|char|short|int|long|float|double|string)[^;\)\(\[\]]*;)',
+        'الأساسيات': r'((cin\s*>>.*|cout\s*<<.*|//.* ?|\/\*(.|\n)+?\*\/))',
+        'التعامل مع الأعداد': r'(\b(?:acos|asin|atan|atan2|ceil|cos|cosh|exp|fabs|floor|fmod|frexp|ldexp|log|log10|modf|pow|sin|sinh|sqrt|tan|tanh)\b)',
+        'التعامل مع النصوص': r'(\b(?:string|"?\.(append|substr|length|empty|insert|replace|find)\([^)]*\)))',
+        'المصفوفات': r'(\b((?:unsigned|signed|const|static|extern|volatile|register|auto|bool|char|short|int|long|float|double|string)\s+)?\w+\[\d*\w*\][^;]*;)',
+        # 'العوامل': r'((?:\+=|-=|\*=|/=|<=|>=|==|!=|&&|\|\||%=|<<|>>|>>=|<<=|&=|\|=|\^=|\+\+|--|\+|-|\*|/|%|<|>|&|\||\^|!|~|=))',
+        'الدوال': r'(\b(?:\w+\s+)+\w+\s*\([^)]*\)\s*(?:const)?\s*(?=\{)|return[^;]*;)'
+    }
+    results = {}
+
+    # Extract declarations and positions for each pattern
+    for key, pattern in declaration_patterns.items():
+        matches = []
+        for match in re.finditer(pattern, code):
+            start, end = match.span()
+            declaration = match.group(0)
+            matches.append({'declaration': declaration, 'start': start, 'end': end})
+        if len(matches) > 0:
+            results[key] = matches
+
+    return results
+
+
+def replace_characters_with_spaces(input_string):
+    # Define the regular expression pattern to match characters that should be replaced with spaces
+    pattern = r'[^ \n\t]'
+
+    # Replace matched characters with spaces
+    output_string = re.sub(pattern, ' ', input_string)
+
+    return output_string
+
+
+def get_level_re(concept, level):
+    keywords_to_preserve = []
+    operators_to_preserve = []
+
+    if level == 2:
+        if concept == 'الأساسيات' or concept == 'أنواع البيانات':
+            keywords_to_preserve = ['cout', 'cin', 'endl', 'unsigned', 'signed', 'const', 'static', 'bool', 'char',
+                                    'short', 'int', 'long',
+                                    'float', 'double', 'long long', 'string']
+
+        if concept == 'التعامل مع الأعداد' or concept == 'التعامل مع النصوص':
+            keywords_to_preserve = ['acos', 'asin', 'atan', 'atan2', 'ceil', 'cos', 'cosh', 'exp', 'fabs',
+                                    'floor', 'fmod', 'frexp', 'ldexp', 'log', 'log10', 'modf', 'pow', 'sin', 'sinh',
+                                    'sqrt', 'tan', 'tanh',
+                                    'append', 'substr', 'length', 'empty', 'insert', 'replace', 'find']
+
+        if concept == 'الشروط' or concept == 'الحلقات':
+            keywords_to_preserve = ['if', 'else if', 'else', 'switch', 'case', 'default', 'break', 'continue', 'for',
+                                    'while', 'do']
+
+        if concept == 'الدوال':
+            keywords_to_preserve = ['unsigned', 'signed', 'const', 'static', 'bool', 'char', 'short', 'int', 'long',
+                                    'float', 'double', 'long long', 'string', 'void', 'return']
+
+        if concept == 'المصفوفات':
+            keywords_to_preserve = ['unsigned', 'signed', 'const', 'static', 'bool', 'char', 'short', 'int', 'long',
+                                    'float', 'double', 'long long', 'string', '[a-zA-Z_].*(?=\[)']
+
+    elif level == 1:
+        if concept == 'الأساسيات' or concept == 'أنواع البيانات':
+            keywords_to_preserve = ['cout', 'cin', 'endl', 'unsigned', 'signed', 'const', 'static', 'bool', 'char',
+                                    'short', 'int', 'long',
+                                    'float', 'double', 'long long', 'string']
+            operators_to_preserve = ['>>', '<<', '=', ';']
+
+        if concept == 'التعامل مع الأعداد' or concept == 'التعامل مع النصوص':
+            keywords_to_preserve = ['acos', 'asin', 'atan', 'atan2', 'ceil', 'cos', 'cosh', 'exp', 'fabs',
+                                    'floor', 'fmod', 'frexp', 'ldexp', 'log', 'log10', 'modf', 'pow', 'sin', 'sinh',
+                                    'sqrt', 'tan', 'tanh',
+                                    'append', 'substr', 'length', 'empty', 'insert', 'replace', 'find']
+            operators_to_preserve = ['\(', '\)', '\.', '\,']
+
+        if concept == 'الشروط' or concept == 'الحلقات':
+            keywords_to_preserve = ['if', 'else if', 'else', 'switch', 'case', 'default', 'break', 'continue', 'for',
+                                    'while', 'do']
+            operators_to_preserve = ['>=', '<=', '\!=', '==', '\!', '>', '<', '\&\&', '\|\|']
+
+        if concept == 'الدوال':
+            keywords_to_preserve = ['unsigned', 'signed', 'const', 'static', 'bool', 'char', 'short', 'int', 'long',
+                                    'float', 'double', 'long long', 'string', 'void']
+            operators_to_preserve = ['\(', '\)', '\,', '\{', '\}', '[a-zA-Z_].*(?=\()']
+
+        if concept == 'المصفوفات':
+            keywords_to_preserve = ['unsigned', 'signed', 'const', 'static', 'bool', 'char', 'short', 'int', 'long',
+                                    'float', 'double', 'long long', 'string', '[a-zA-Z_].*(?=\[)']
+            operators_to_preserve = ['\[', '\]', '\[.*\]']
+
+    return keywords_to_preserve, operators_to_preserve
+
+
+def code_completion(code, concepts, level):
+    # Replace concepts with spaces while preserving keywords and operators
+    for name, concept in concepts.items():
+        keywords_to_preserve, operators_to_preserve = get_level_re(name, level[name])
+        for match in concept:
+            declaration = match['declaration']
+            start = match['start']
+            end = match['end']
+            subcode = code[start:end]
+            for keyword in keywords_to_preserve:
+                keyword_pattern = re.compile(r'\b' + keyword + r'\b')
+                preserved_keywords = keyword_pattern.finditer(declaration)
+                for preserved_keyword in preserved_keywords:
+                    keyword_start = start + preserved_keyword.start()
+                    keyword_end = start + preserved_keyword.end()
+                    preserved_keyword_text = preserved_keyword.group()
+                    subcode = subcode[:keyword_start - start] + preserved_keyword_text + subcode[keyword_end - start:]
+
+            # Find and preserve operators
+            for operator in operators_to_preserve:
+                operator_pattern = re.compile(operator)
+                preserved_operators = operator_pattern.finditer(declaration)
+                for preserved_operator in preserved_operators:
+                    operator_start = start + preserved_operator.start()
+                    operator_end = start + preserved_operator.end()
+                    preserved_operator_text = preserved_operator.group()
+                    subcode = subcode[:operator_start - start] + preserved_operator_text + subcode[
+                                                                                           operator_end - start:]
+
+            code = code[:start] + subcode + code[end:]
+
+    return code
+
+
+class CodeComplete(APIView):
     def post(self, request):
         project_id = request.data.get('project_id')
         concept_hint = request.data.get('concept_hint')
@@ -399,46 +546,22 @@ class CodeDump(APIView):
         if not project:
             return Response({'message': 'Project not found'}, status=404)
 
-        generalConcepts = eval(concept_hint)
+        concept_hint = eval(concept_hint)
         code = project.correctAnswerSample
-        comments, strings = getCommentsAndStrings(code)
-        result = code
-        concept_keywords = {}
-        concept_operators = {}
+        code_without_comments = remove_comments(code)
+        code_without_strings = re.sub(r'\".*?\"', '', code_without_comments)
+        # comments, strings = getCommentsAndStrings(code)
+        output_string = replace_characters_with_spaces(code_without_strings)
 
-        for generalConcept, concept_value in generalConcepts.items():
-            level = concept_value
-            if generalConcept not in concept_keywords:
-                concept_keywords[generalConcept] = getConceptItems(generalConcept, 'keywords')
-            if generalConcept not in concept_operators:
-                concept_operators[generalConcept] = getConceptItems(generalConcept, 'operators')
+        concepts = detect_concept(code_without_strings)
 
-            keywords = {obj.name for obj in concept_keywords[generalConcept]}
-            operators = {obj.name for obj in concept_operators[generalConcept]}
-            lines = result.split('\n')
-
-            if not keywords and not operators:
-                continue
-
-            code_lines = []
-            for line in lines:
-                if line_filter(["main"], None, line):
-                    code_lines.append(line)
-                    continue
-                if line_filter(keywords, operators, line):
-                    pattern = patternLevel(level, keywords, operators)
-                    line = re.sub(pattern, lambda m: '_' * len(m.group()), line)
-                code_lines.append(line)
-
-            result = '\n'.join(code_lines)
-
-        endResult = returnCommentsAndStrings(result, comments, strings)
+        updated_code = code_completion(output_string, concepts, concept_hint)
 
         response = {
             'message': 'SUCCESS',
             'data': {
                 "code": code,
-                "result": endResult
+                "result": updated_code
             }
         }
         return Response(response, content_type='application/json; charset=utf-8')

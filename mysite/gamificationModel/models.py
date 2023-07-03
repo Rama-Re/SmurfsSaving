@@ -1,5 +1,7 @@
 import datetime
 
+from django.utils import timezone
+
 from studentModel.models import *
 
 
@@ -9,7 +11,7 @@ class GamificationFeature(models.Model):
 
 
 class FeaturePersonalityRelationship(models.Model):
-    rr = models.DecimalField(default=0,max_digits=3, decimal_places=2)
+    rr = models.DecimalField(default=0, max_digits=3, decimal_places=2)
     personality = models.ForeignKey(Personality, on_delete=models.CASCADE)
     gamificationFeature = models.ForeignKey(GamificationFeature, on_delete=models.CASCADE)
 
@@ -28,3 +30,9 @@ class Reviewed(models.Model):
     review = models.ForeignKey(ToReview, on_delete=models.CASCADE)
 
 
+class Challenge(models.Model):
+    challenger = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
+    challenge_type = models.CharField(max_length=12, choices=[("Th", "Theoretical"), ("XP", "XP"), ("P", "Projects")])
+    challenge_target = models.CharField(max_length=255, default="")
+    challenge_state = models.BooleanField(default=False)
+    challenge_date = models.DateField(default=timezone.now)

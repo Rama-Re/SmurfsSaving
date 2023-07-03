@@ -1,6 +1,10 @@
+import datetime
+
 from django.db import models
 
 # from django.apps import apps
+from django.utils import timezone
+
 from users.models import *
 from domainModel.models import *
 
@@ -11,7 +15,6 @@ class Personality(models.Model):
 
 
 class StudentProfile(models.Model):
-    # user = models.OneToOneField(apps.get_model('users','User'), on_delete=models.CASCADE)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     xp = models.IntegerField(default=0)
     learning_path = models.CharField(max_length=15, choices=[("up", "university_path"), ("fp", "free_path")],
@@ -51,20 +54,29 @@ class PracticalSkill(models.Model):
 
 class DifficultyPerformance(models.Model):
     performance = models.DecimalField(max_digits=6, decimal_places=3)
+    date = models.DateTimeField(default=datetime.datetime.now())
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
 
 
 class TimePerformance(models.Model):
     performance = models.DecimalField(max_digits=6, decimal_places=3)
+    date = models.DateTimeField(default=datetime.datetime.now())
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
 
 
 class HintPerformance(models.Model):
     performance = models.CharField(primary_key=False, max_length=500,
                                    default="")
+    date = models.DateTimeField(default=datetime.datetime.now())
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
 
 
 class SolveTrying(models.Model):
     time = models.DecimalField(max_digits=6, decimal_places=3)
     student_project = models.ForeignKey(StudentProject, on_delete=models.CASCADE)
+
+
+class Streak(models.Model):
+    student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
+    interactions = models.IntegerField(default=0)
+    streak_date = models.DateField(default=timezone.now)

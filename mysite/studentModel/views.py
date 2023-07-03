@@ -1,10 +1,23 @@
+from datetime import date, timedelta
+
 from users.views import *
-from django.db.models import Sum, F
+from django.db.models import Sum
 import re
 import math
 from django.utils import timezone
 from .serializers import *
 from domainModel.models import *
+
+concepts_level = {'الأساسيات': 1,
+                  'أنواع البيانات': 2,
+                  'المتغيرات': 2,
+                  'التعامل مع الأعداد': 3,
+                  'التعامل مع النصوص': 3,
+                  'العوامل': 3,
+                  'المصفوفات': 3,
+                  'الدوال': 3,
+                  'الحلقات': 4,
+                  'الشروط': 4}
 
 
 def get_profile(request):
@@ -20,12 +33,13 @@ class AddPersonality(APIView):
             personality_name = data['name']
             pp = data['pp']
             personality = Personality.objects.get(name=personality_name)
-            student_personality = StudentPersonality.objects.create(studentProfile=student_profile, personality=personality, pp=pp)
+            student_personality = StudentPersonality.objects.create(studentProfile=student_profile,
+                                                                    personality=personality, pp=pp)
 
         response = {
             'message': 'SUCCESS',
         }
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')
 
 
 class GetPersonality(APIView):
@@ -37,52 +51,57 @@ class GetPersonality(APIView):
             response = {
                 'message': 'FAILED'
             }
-            return Response(response)
+            return Response(response, content_type='application/json; charset=utf-8')
 
         serializer = StudentPersonalitySerializer(personality, many=True)
         response = {
             'message': 'SUCCESS',
             'data': serializer.data
         }
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')
 
 
-class EditPersonality(APIView):
-    def post(self, request):
-        try:
-            studentProfile = get_profile(request)
-            personality = Personality.objects.get(studentProfile=studentProfile)
-            request.data['personality_id'] = personality.id
-            request.data['studentProfile'] = studentProfile.id
-        except Personality.DoesNotExist:
-            response = {
-                'message': 'FAILED'
-            }
-            return Response(response)
-
-        serializer = PersonalitiesLettersSerializer(personality, request.data)
-        if serializer.is_valid():
-            serializer.save()
-            response = {
-                'message': 'SUCCESS',
-                'data': serializer.data
-            }
-        else:
-            response = {
-                'message': serializer.errors
-            }
-        return Response(response)
+# class EditPersonality(APIView):
+#     def post(self, request):
+#         try:
+#             studentProfile = get_profile(request)
+#             personality = Personality.objects.get(studentProfile=studentProfile)
+#             request.data['personality_id'] = personality.id
+#             request.data['studentProfile'] = studentProfile.id
+#         except Personality.DoesNotExist:
+#             response = {
+#                 'message': 'FAILED'
+#             }
+#             return Response(response, content_type='application/json; charset=utf-8')
+#
+#         serializer = PersonalitiesLettersSerializer(personality, request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             response = {
+#                 'message': 'SUCCESS',
+#                 'data': serializer.data
+#             }
+#         else:
+#             response = {
+#                 'message': serializer.errors
+#             }
+#         return Response(response, content_type='application/json; charset=utf-8')
 
 
 class AddStudentKnowledge(APIView):
     def post(self, request):
-        studentProfile = get_profile(request)
+        student_profile = get_profile(request)
         subConcept = SubConcept.objects.get(name=request.data['subConcept'])
-        studentProfile.studentKnowledge.add(subConcept)
+        student_profile.studentKnowledge.add(subConcept)
+        dxp = 5
+        student_profile.xp += dxp
+        student_profile.save()
         response = {
-            'message': 'success'
+            'message': 'success',
+            'added_xp': dxp,
+            'new_xp': student_profile.xp
         }
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')
 
 
 # class EditPracticalSkill(APIView):
@@ -140,17 +159,34 @@ class AddSolveTrying(APIView):
 # add solve of project
 
 def remove_comments(code):
-    code = re.sub(r'\/\/.*', '// \\n', code)
+    code = re.sub(r'\/\/.*', '\\n', code)
     code = re.sub(r'\/\*.*?\*\/', '/* */ \\n', code, flags=re.DOTALL)
     code = code.strip()
     code = re.sub(r'^\s*\n', '', code, flags=re.MULTILINE)
     return code
 
 
-def count_functions(code):
-    pattern = r'\w+\s+\w+\(.*\)\s*{?'
-    matches = re.findall(pattern, code)
-    return len(matches)
+def detect_concept(code):
+    # Regular expressions for different declarations
+    declaration_patterns = {
+        'الحلقات': r'(?:for\s*\([^;]+;[^;]+;[^)]+\))|(?:while\s*\([^)]+\))|(?:do\s*\{[^}]+\}\s*while\s*\([^)]+\))',
+        'الشروط': r'(?:if\s*\([^)]+\)(?:\s*\{[^}]*\})*)|else\s*if\s*\([^)]+\)(?:\s*\{[^}]*\})*|else(?:\s*\{[^}]*\})*|switch\s*\([^)]+\)(?:\s*\{[^}]*\})*',
+        'المتغيرات': r'(?: (?:float|char|int|double|bool)\s+)+([a-zA-Z_]\w*)\s*(?:\[[^\]]+\])?(?:\s*=\s*(?:[^,;{}()]+|{.*}))?\s*(?:,|\[|\)|;|\{)',
+        'أنواع البيانات': r'\b(?:unsigned|signed|const|static|extern|volatile|register|auto|bool|char|short|int|long|float|double|void|string)\b',
+        'الأساسيات': r'(cin\s*>>.*|cout\s*<<|//.* ?|\/\*(.|\n)+?\*\/)',
+        'التعامل مع الأعداد': r'\b(?:acos|asin|atan|atan2|ceil|cos|cosh|exp|fabs|floor|fmod|frexp|ldexp|log|log10|modf|pow|sin|sinh|sqrt|tan|tanh)\b',
+        'التعامل مع النصوص': r'\b(?: string|"?\.(append|substr|length|empty|insert|replace|find))\b',
+        'المصفوفات': r'\b\w+\[\d*\w*\]',
+        'العوامل': r'(?:\+=|-=|\*=|/=|<=|>=|==|!=|&&|\|\||%=|<<|>>|>>=|<<=|&=|\|=|\^=|\+\+|--|\+|-|\*|/|%|<|>|&|\||\^|!|~|=)',
+        'الدوال': r'\b(?:\w+\s+)+\w+\s*\([^)]*\)\s*(?:const)?\s*(?:{[^}]*})?'
+    }
+    results = {}
+
+    # Extract declarations for each pattern
+    for key, pattern in declaration_patterns.items():
+        if (len(re.findall(pattern, code)) != 0):
+            results[key] = len(re.findall(pattern, code))
+    return results
 
 
 def remove_main_function(code):
@@ -182,55 +218,10 @@ def student_concepts_difficulty(code):
     code_without_comments = remove_comments(code)
     code_without_strings = re.sub(r'\".*?\"', '', code_without_comments)
     new_code = remove_main_function(code_without_strings)
-
-    operator_counts = {}
-    for operator in Operator.objects.all():
-        count = new_code.count(operator.name)
-        operator_counts[operator.name] = count
-
-    keyword_counts = {}
-    for keyword in Keyword.objects.all():
-        count = new_code.count(keyword.name)
-        keyword_counts[keyword.name] = count
-
-    operator_counts = Operator.objects.filter(name__in=operator_counts.keys()).annotate(
-        keyword_count=models.Case(
-            *[models.When(name=operator_name, then=keyword_count) for operator_name, keyword_count in
-              operator_counts.items()],
-            default=0, output_field=models.IntegerField()
-        ),
-        generalConcepts_name=F('generalConcepts__name'),
-        generalConcepts_concept_level=F('generalConcepts__concept_level')
-    ).filter(keyword_count__gt=0).values('generalConcepts_name', 'generalConcepts_concept_level').annotate(
-        total_count=Sum('keyword_count')
-    )
-
-    keyword_counts = Keyword.objects.filter(name__in=keyword_counts.keys()).annotate(
-        keyword_count=models.Case(
-            *[models.When(name=keyword_name, then=keyword_count) for keyword_name, keyword_count in
-              keyword_counts.items()],
-            default=0, output_field=models.IntegerField()
-        ),
-        generalConcepts_name=F('generalConcepts__name'),
-        generalConcepts_concept_level=F('generalConcepts__concept_level')
-    ).filter(keyword_count__gt=0).values('generalConcepts_name', 'generalConcepts_concept_level').annotate(
-        total_count=Sum('keyword_count')
-    )
-    union_counts = operator_counts.union(keyword_counts)
-    grouped_counts = {}
-    for item in union_counts:
-        general_concepts_name = item['generalConcepts_name']
-        concept_level = item['generalConcepts_concept_level']
-        keyword_count = item['total_count']
-
-        key = (general_concepts_name, concept_level)
-        if key not in grouped_counts:
-            grouped_counts[key] = keyword_count
-        else:
-            grouped_counts[key] += keyword_count
-
-    result = [{'generalConcepts_name': key[0], 'generalConcepts_concept_level': key[1], 'total_count': value} for
-              key, value in grouped_counts.items()]
+    detected_concept = detect_concept(new_code)
+    result = [{'generalConcepts_name': key, 'generalConcepts_concept_level': concepts_level[key], 'total_count': value}
+              for
+              key, value in detected_concept.items()]
     total_count_sum = sum(item['total_count'] for item in result)
     general_concepts = result
     difficulty_sum = 0
@@ -264,14 +255,12 @@ def calculate_updated_performance(project_performance_required, student_performa
 
 
 def map_skill(skill):
-    if skill <= 17:
+    if skill <= 30:
         return 1
-    elif 17 < skill <= 51:
+    elif 30 < skill <= 80:
         return 2
-    elif 51 <= skill < 100:
+    elif 80 < skill <= 100:
         return 3
-    else:
-        return 4
 
 
 class AddProjectSolve(APIView):
@@ -294,8 +283,10 @@ class AddProjectSolve(APIView):
 
         solve_tryings = SolveTrying.objects.filter(student_project=student_project)
         student_total_time = solve_tryings.aggregate(total_time=Sum('time'))['total_time']
-        if student_total_time is None: student_total_time = request.data['solve_time']
-        else: student_total_time += request.data['solve_time']
+        if student_total_time is None:
+            student_total_time = request.data['solve_time']
+        else:
+            student_total_time += request.data['solve_time']
         # student performance
         hint_performance = HintPerformance.objects.filter(student=student_profile).last()
         hint_performance_dic = eval(hint_performance.performance)
@@ -324,10 +315,17 @@ class AddProjectSolve(APIView):
             student_current_difficulty,
             float(difficulty_performances.performance))
         dp_list.append(dp_difficulty)
-        difficulty_performances.performance = new_performance_difficulty
-        difficulty_performances.save()
-        difficulty_required.difficulty = new_required_difficulty
-        difficulty_required.save()
+
+        # difficulty_performances.performance = new_performance_difficulty
+        # difficulty_performances.save()
+        student_difficulty_performances = DifficultyPerformance.objects.create(student=student_profile,
+                                                                               performance=new_performance_difficulty,
+                                                                               date=datetime.datetime.now())
+        # difficulty_required.difficulty = new_required_difficulty
+        # difficulty_required.save()
+        project_difficulty_required = ProjectDifficulty.objects.create(project=project,
+                                                                       difficulty=new_required_difficulty,
+                                                                       date=datetime.datetime.now())
 
         # time
         student_current_time = min(100., (student_total_time / 30) * 100)
@@ -337,10 +335,16 @@ class AddProjectSolve(APIView):
                                                                                          float(
                                                                                              time_performances.performance))
         dp_list.append(dp_time)
-        time_performances.performance = new_performance_time
-        time_performances.save()
-        time_required.time = new_required_time
-        time_required.save()
+        # time_performances.performance = new_performance_time
+        # time_performances.save()
+        student_time_performances = TimePerformance.objects.create(student=student_profile,
+                                                                   performance=new_performance_time,
+                                                                   date=datetime.datetime.now())
+        # time_required.time = new_required_time
+        # time_required.save()
+        project_time_required = ProjectTime.objects.create(project=project,
+                                                           time=new_required_time,
+                                                           date=datetime.datetime.now())
 
         # hint
         new_performance_list = []
@@ -354,12 +358,18 @@ class AddProjectSolve(APIView):
             new_required_list.append(new_required)
             dp_list.append(dp)
         project_hint_required = {k: i for k, i in zip(project_hint_required.keys(), new_required_list)}
-        project_hint.required_concept_hint = str(project_hint_required)
-        project_hint.save()
+        # project_hint.required_concept_hint = str(project_hint_required)
+        # project_hint.save()
+        project_project_hint = ProjectHint.objects.create(project=project,
+                                                          required_concept_hint=str(project_hint_required),
+                                                          date=datetime.datetime.now())
         hint_performance_dic.update(
             (k, i) for k, i in zip(project_hint_required.keys(), new_performance_list) if k in hint_performance_dic)
-        hint_performance.performance = str(hint_performance_dic)
-        hint_performance.save()
+        # hint_performance.performance = str(hint_performance_dic)
+        # hint_performance.save()
+        student_hint_performance = HintPerformance.objects.create(student=student_profile,
+                                                                  performance=str(hint_performance_dic),
+                                                                  date=datetime.datetime.now())
 
         dxp = problem_xp + problem_xp * (sum(dp_list) / len(dp_list))
         student_profile.xp += round(dxp)
@@ -369,7 +379,7 @@ class AddProjectSolve(APIView):
             'added_xp': round(dxp),
             'new_xp': student_profile.xp
         }
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')
 
 
 def check_student_answers(answers_dict):
@@ -434,4 +444,71 @@ class CheckQuizSolve(APIView):
                 question_results[question_id] = question_id in true_solve_ids
             response['question_results'] = question_results
 
-        return Response(response)
+        return Response(response, content_type='application/json; charset=utf-8')
+
+
+class EditStreak(APIView):
+    def get(self, request):
+        student_profile = get_profile(request)
+        current_date = timezone.now().today()
+        streak = Streak.objects.filter(student_id=student_profile.id, streak_date=current_date).first()
+
+        if streak:
+            # If a streak exists, increment the interactions by one
+            streak.interactions += 1
+            streak.save()
+        else:
+            # If no streak exists, create a new streak with interactions set to 1
+            streak = Streak.objects.create(student=student_profile, interactions=1, streak_date=current_date)
+
+        response = {
+            'message': 'SUCCESS',
+            # 'date': [StreakSerializer(streak).data]
+        }
+        return Response(response, content_type='application/json; charset=utf-8')
+
+
+class GetStreak(APIView):
+    def get(self, request):
+        student_profile = get_profile(request)
+        current_date = date.today()
+        streaks = Streak.objects.filter(student=student_profile, interactions__gt=0).order_by('-streak_date')
+        latest_streak_date = streaks.latest('streak_date').streak_date
+        days_diff = (current_date - latest_streak_date).days
+        current_streak = []
+        next_date = latest_streak_date + timedelta(days=1)
+        if days_diff <= 1:
+            for streak in streaks:
+                print(streak.streak_date)
+                if streak.streak_date == next_date - timedelta(days=1):
+                    current_streak.append(streak)
+                else:
+                    break
+                next_date = streak.streak_date
+        response = {
+            'message': 'SUCCESS',
+            'data': StreakSerializer(current_streak, many=True).data
+        }
+        return Response(response, content_type='application/json; charset=utf-8')
+
+
+class GetProfile(APIView):
+    def get(self, request):
+        student_profile = get_profile(request)
+        if student_profile.user.shown_name == 'username':
+            displayed_name = student_profile.user.username
+        elif student_profile.user.shown_name == 'nickname':
+            displayed_name = student_profile.user.nickname
+        else:
+            displayed_name = ''
+
+        profile_data = {
+            'displayed_name': displayed_name,
+            'name': student_profile.user.name,
+            'xp': student_profile.xp,
+        }
+        response = {
+            'message': 'SUCCESS',
+            'data': profile_data,
+        }
+        return Response(response, content_type='application/json; charset=utf-8')

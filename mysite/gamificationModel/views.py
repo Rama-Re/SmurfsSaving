@@ -1,14 +1,21 @@
+from datetime import date
 from decimal import Decimal
 
 from users.views import *
 from .serializers import *
 from domainModel.models import *
+from domainModel.views import *
 from studentModel.views import *
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.exceptions import ValidationError
 from django.db.models import F, Case, When, Value, CharField
-from django.db.models.functions import Coalesce
+from django.db.models.functions import Coalesce, TruncDate
 from django.db.models import Count
+
+TargetChoice = (
+    ("Theoretical", "Th"), ("XP", "XP"), ("Projects", "P")
+)
+
 
 # Create your views here.
 class PerformInteraction(APIView):
@@ -177,11 +184,11 @@ class GetToReviews(APIView):
             response_data.append(review_data)
 
         response = {
-                'message': 'Success',
-                'data': {
-                    'reviews': response_data
-                }
+            'message': 'Success',
+            'data': {
+                'reviews': response_data
             }
+        }
         return Response(response, content_type='application/json; charset=utf-8')
 
 
@@ -225,7 +232,8 @@ class GetToReview(APIView):
 class GetMyToReview(APIView):
     def get(self, request):
         student_profile = get_profile(request)
-        to_review = ToReview.objects.annotate(num_reviews=Count('reviewed', distinct=True)).filter(owner=student_profile)
+        to_review = ToReview.objects.annotate(num_reviews=Count('reviewed', distinct=True)).filter(
+            owner=student_profile)
 
         response_data = []
         for review in to_review:
@@ -240,18 +248,19 @@ class GetMyToReview(APIView):
             response_data.append(review_data)
 
         response = {
-                'message': 'Success',
-                'data': {
-                    'reviews': response_data
-                }
+            'message': 'Success',
+            'data': {
+                'reviews': response_data
             }
+        }
         return Response(response, content_type='application/json; charset=utf-8')
 
 
 class GetMyReviewed(APIView):
     def get(self, request):
         student_profile = get_profile(request)
-        to_review = ToReview.objects.annotate(num_reviews=Count('reviewed', distinct=True)).filter(reviewed__reviewer=student_profile)
+        to_review = ToReview.objects.annotate(num_reviews=Count('reviewed', distinct=True)).filter(
+            reviewed__reviewer=student_profile)
 
         response_data = []
         for review in to_review:
@@ -266,9 +275,164 @@ class GetMyReviewed(APIView):
             response_data.append(review_data)
 
         response = {
-                'message': 'Success',
-                'data': {
-                    'reviews': response_data
-                }
+            'message': 'Success',
+            'data': {
+                'reviews': response_data
             }
+        }
+        return Response(response, content_type='application/json; charset=utf-8')
+
+
+class GetChallenge(APIView):
+    def get(self, request):
+        student_profile = get_profile(request)
+        challenge_type = ChoiceField(choices=TargetChoice)
+        current_date = date.today()
+        # Retrieve challenges of the current day
+        theoretical_challenge = Challenge.objects.filter(challenger=student_profile, challenge_date=current_date,
+                                                         challenge_type='Theoretical').first()
+        project_challenge = Challenge.objects.filter(challenger=student_profile, challenge_date=current_date,
+                                                     challenge_type='Projects').first()
+        xp_challenge = Challenge.objects.filter(challenger=student_profile, challenge_date=current_date,
+                                                challenge_type='XP').first()
+        if theoretical_challenge is None:
+            generalConcepts = GeneralConcept.objects.all()
+
+            serializer = GeneralConceptSerializer(generalConcepts, many=True)
+            availability_data = []
+            completed = []
+            unavailable_data = []
+            available = []
+            closed = []
+            availability_data = [TheoreticalSkill.objects.filter
+                                 (student=student_profile, generalConcept=concept).first().availability
+                                 if TheoreticalSkill.objects.filter(student=student_profile,
+                                                                    generalConcept=concept).exists()
+                                 else False for concept in generalConcepts]
+
+            for data, availability in zip(serializer.data, availability_data):
+                data['availability'] = availability
+                if student_profile.learning_path == 'university_path':
+                    data['order'] = university_path[data['name']]
+                # else:
+                #     data['required'] = required_concepts[data['name']]
+                (completed if availability else unavailable_data).append(data)
+
+            if student_profile.learning_path == 'university_path':
+                if len(completed) == 0:
+                    max_order = 1
+                else:
+                    max_order = max(completed, key=lambda x: x['order']) + 1
+                available = sorted([x for x in unavailable_data if x['order'] == max_order], key=lambda x: x['order'])
+                closed = sorted([x for x in unavailable_data if x['order'] > max_order], key=lambda x: x['order'])
+            else:
+                completed_names = [x['name'] for x in completed]
+                available = [x for x in unavailable_data if all(elem in completed_names for elem in x['required'])]
+                closed = [x for x in unavailable_data if not all(elem in completed_names for elem in x['required'])]
+
+            challenge_target = ''
+            if len(available) > 0:
+                if student_profile.learning_path == 'university_path':
+                    challenge_target = 'أنجز مفهوم ' + available[0]['name']
+                    print(challenge_target)
+                else:
+                    challenge_target = 'أنجز مفهوما جديداً'
+                    print(challenge_target)
+            # else:
+            #     # راجع المفهوم يلي عليه اقل عدد مسائل
+
+            print('theoretical_challenge is None')
+            challenge = Challenge.objects.get_or_create(
+                challenger=student_profile,
+                challenge_type=challenge_type.to_internal_value('Th'),
+                challenge_target=challenge_target,
+                challenge_state=False,
+                challenge_date=current_date
+            )
+
+        # Projects
+        if project_challenge is None:
+            projects = StudentProject.objects.filter(solve_date__isnull=False, student=student_profile)
+            project_counts = projects.annotate(date=TruncDate('solve_date')).values('date').annotate(count=Count('id'))
+            num_days = (projects.latest('solve_date').solve_date.date() - projects.earliest(
+                'solve_date').solve_date.date()).days + 1
+            average_daily_count = round(sum(count['count'] for count in project_counts) / num_days)
+
+            print(average_daily_count)
+            print('project_challenge is None')
+            challenge = Challenge.objects.get_or_create(
+                challenger=student_profile,
+                challenge_type=challenge_type.to_internal_value('P'),
+                challenge_target=str(round(average_daily_count)),
+                challenge_state=False,
+                challenge_date=current_date
+            )
+
+        # XP
+        # if xp_challenge is None:
+            challenge = Challenge.objects.get_or_create(
+                challenger=student_profile,
+                challenge_type=challenge_type.to_internal_value('XP'),
+                challenge_target=str(int(average_daily_count * 40)),
+                challenge_state=False,
+                challenge_date=current_date
+            )
+        challenges = Challenge.objects.filter(challenger=student_profile, challenge_date=current_date)
+
+        response = {
+            'message': 'Success',
+            'data': ChallengeSerializer(challenges, many=True).data
+        }
+        return Response(response, content_type='application/json; charset=utf-8')
+
+
+class CheckingChallenges(APIView):
+    def get(self, request):
+        student_profile = get_profile(request)
+        # Get the current date
+        current_date = date.today()
+
+        # Retrieve challenges of the current day
+        theoretical_challenge = Challenge.objects.filter(challenger=student_profile, challenge_date=current_date,
+                                                         challenge_type='Theoretical').first()
+        project_challenge = Challenge.objects.filter(challenger=student_profile, challenge_date=current_date,
+                                                     challenge_type='Projects').first()
+        xp_challenge = Challenge.objects.filter(challenger=student_profile, challenge_date=current_date,
+                                                challenge_type='XP').first()
+
+        # Retrieve theoretical skills count for the current day
+        theoretical_skills = TheoreticalSkill.objects.filter(edit_date__date=current_date,
+                                                             student=student_profile).count()
+        remaining_theoretical_challenge = 0 if theoretical_skills > 0 else 1
+        if remaining_theoretical_challenge == 0:
+            theoretical_challenge.update(challenge_state=True)
+
+        # Retrieve student projects count for the current day
+        student_projects = StudentProject.objects.filter(solve_date__date=current_date, student=student_profile).count()
+        all_project_challenge = int(project_challenge.challenge_target)
+        remaining_project_challenge = max(0, all_project_challenge - student_projects)
+
+        if remaining_project_challenge == 0:
+            project_challenge.update(challenge_state=True)
+
+        # XP
+        all_xp_challenge = int(xp_challenge.challenge_target)
+        remaining_xp_challenge = max(0, all_xp_challenge - student_projects * 40)
+        if remaining_xp_challenge == 0:
+            xp_challenge.update(challenge_state=True)
+
+        response = {
+            'message': 'Success',
+            'data': [
+                {
+                    ** ChallengeSerializer(theoretical_challenge).data,
+                    'remaining': remaining_theoretical_challenge, },
+                {
+                    ** ChallengeSerializer(project_challenge).data,
+                    'remaining': remaining_project_challenge},
+                {
+                    ** ChallengeSerializer(xp_challenge).data,
+                    'remaining': remaining_xp_challenge}
+            ]
+        }
         return Response(response, content_type='application/json; charset=utf-8')

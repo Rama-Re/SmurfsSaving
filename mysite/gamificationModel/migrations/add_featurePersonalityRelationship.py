@@ -67,9 +67,22 @@ featurePersonalityRelationship_dic = {
             "Introvert": 0.2,
             "Sensor": 0.2,
             "Thinker": 0.5,
+            "Judger": 0.3,
+        }
+    },
+    "Daily Challenges": {
+        "threshold": 0.5,
+        "rr": {
+            "Extravert": 1,
+            "Intuitive": 0.5,
+            "Feeler": 0.2,
+            "Perceiver": 0.2,
+            "Introvert": 0.2,
+            "Sensor": 0.2,
+            "Thinker": 0.2,
             "Judger": 0.2,
         }
-    }
+    },
 }
 
 

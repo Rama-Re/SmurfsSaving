@@ -14,4 +14,6 @@ urlpatterns = [
     path('private/getToReview', GetToReview.as_view()),
     path('private/getMyToReview', GetMyToReview.as_view()),
     path('private/getMyReviewed', GetMyReviewed.as_view()),
+    path('private/getChallenge', GetChallenge.as_view()),
+    path('private/checkingChallenges', CheckingChallenges.as_view()),
 ]

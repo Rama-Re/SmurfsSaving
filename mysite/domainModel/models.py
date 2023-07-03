@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 
@@ -72,16 +74,19 @@ class Keyword(models.Model):
 
 class ProjectDifficulty(models.Model):
     difficulty = models.DecimalField(max_digits=6, decimal_places=3)
+    date = models.DateTimeField(default=datetime.datetime.now())
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
 
 class ProjectTime(models.Model):
     time = models.DecimalField(max_digits=6, decimal_places=3)
+    date = models.DateTimeField(default=datetime.datetime.now())
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
 
 class ProjectHint(models.Model):
     required_concept_hint = models.CharField(primary_key=False, max_length=500, default='')
+    date = models.DateTimeField(default=datetime.datetime.now())
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
 
