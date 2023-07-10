@@ -365,7 +365,8 @@ class GetChallenge(APIView):
             projects = StudentProject.objects.filter(solve_date__isnull=False, student=student_profile)
             average_daily_count = 1
             if projects:
-                project_counts = projects.annotate(date=TruncDate('solve_date')).values('date').annotate(count=Count('id'))
+                project_counts = projects.annotate(date=TruncDate('solve_date')).values('date').annotate(
+                    count=Count('id'))
                 num_days = (projects.latest('solve_date').solve_date.date() - projects.earliest(
                     'solve_date').solve_date.date()).days + 1
                 average_daily_count = round(sum(count['count'] for count in project_counts) / num_days)
@@ -417,7 +418,8 @@ class CheckingChallenges(APIView):
                                                              student=student_profile).count()
         remaining_theoretical_challenge = 0 if theoretical_skills > 0 else 1
         if remaining_theoretical_challenge == 0:
-            theoretical_challenge.update(challenge_state=True)
+            theoretical_challenge.challenge_state = True
+            theoretical_challenge.save()
 
         # Retrieve student projects count for the current day
         student_projects = StudentProject.objects.filter(solve_date__date=current_date, student=student_profile).count()
@@ -425,13 +427,15 @@ class CheckingChallenges(APIView):
         remaining_project_challenge = max(0, all_project_challenge - student_projects)
 
         if remaining_project_challenge == 0:
-            project_challenge.update(challenge_state=True)
+            project_challenge.challenge_state = True
+            project_challenge.save()
 
         # XP
         all_xp_challenge = int(xp_challenge.challenge_target)
         remaining_xp_challenge = max(0, all_xp_challenge - student_projects * 40)
         if remaining_xp_challenge == 0:
-            xp_challenge.update(challenge_state=True)
+            xp_challenge.challenge_state = True
+            xp_challenge.save()
 
         response = {
             'message': 'Success',
