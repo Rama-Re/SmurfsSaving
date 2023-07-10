@@ -30,13 +30,13 @@ class PerformInteraction(APIView):
         for r in rr:
             matching_pp = pp.filter(personality=r.personality).last()
             if event == 'USE':
-                updated_pp = matching_pp.pp + (1 - matching_pp.pp) * Decimal(s) * r.rr
+                updated_pp = min( matching_pp.pp + (1 - matching_pp.pp) * Decimal(s) * r.rr, 1)
                 sp = StudentPersonality.objects.create(studentProfile=student_profile, pp=updated_pp,
                                                        personality=matching_pp.personality,
                                                        edit_date=datetime.datetime.now())
                 print(matching_pp.personality)
             else:
-                updated_pp = matching_pp.pp - matching_pp.pp * s * r.rr
+                updated_pp = max(matching_pp.pp - matching_pp.pp * s * r.rr, 0)
                 sp = StudentPersonality.objects.create(studentProfile=student_profile, pp=updated_pp,
                                                        personality=matching_pp.personality,
                                                        edit_date=datetime.datetime.now())
