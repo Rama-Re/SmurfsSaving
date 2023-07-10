@@ -23,9 +23,10 @@ class StudentProfile(models.Model):
 
 
 class StudentPersonality(models.Model):
-    studentProfile = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
-    personality = models.ForeignKey(Personality, on_delete=models.CASCADE)
+    studentProfile = models.ForeignKey(StudentProfile, on_delete=models.CASCADE, default=None)
+    personality = models.ForeignKey(Personality, on_delete=models.CASCADE, default=None)
     pp = models.DecimalField(max_digits=3, decimal_places=2, default=0)
+    edit_date = models.DateTimeField(default=datetime.datetime.today())
 
 
 class StudentProject(models.Model):
@@ -80,3 +81,12 @@ class Streak(models.Model):
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
     interactions = models.IntegerField(default=0)
     streak_date = models.DateField(default=timezone.now)
+
+
+class MbtiQuestions(models.Model):
+    question_text = models.CharField(max_length=512)
+
+
+class MbtiAnswers(models.Model):
+    question = models.ForeignKey(MbtiQuestions, on_delete=models.CASCADE)
+    answer = models.CharField(max_length=512)

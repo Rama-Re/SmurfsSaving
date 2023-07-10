@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -25,7 +24,7 @@ SECRET_KEY = 'django-insecure-ffydli5v7+&7pm(et(k^j9n08vg$2o5p_et(cqf(_^@9l1k$%s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,7 +42,8 @@ INSTALLED_APPS = [
     'domainModel',
     'studentModel',
     'django_seed',
-    'django_extensions'
+    'django_extensions',
+    'gamificationModel',
 ]
 
 MIDDLEWARE = [
@@ -86,12 +86,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'gradproject',
-        'USER' : 'root',
-        'PASSWORD' :'',
-        'Host' : '127.0.0.1',
-        'PORT' : '3306',
-        'OPTIONS' : {
-            'sql_mode' : 'STRICT_TRANS_TABLES'
+        'USER': 'root',
+        'PASSWORD': '',
+        'Host': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'STRICT_TRANS_TABLES'
         }
     }
 }
@@ -143,7 +143,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = "smurfssaving"
+EMAIL_HOST_USER = "smurfssaving@gmail.com"
 EMAIL_HOST_PASSWORD = ""
 
 CORS_ORIGIN_ALLOW_ALL = True

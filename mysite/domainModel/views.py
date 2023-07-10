@@ -3,7 +3,7 @@ import re
 import numpy as np
 import pandas as pd
 from .serializers import *
-from django.db.models import Count, F, Sum, Q
+from django.db.models import Count, F, Sum, Q, Value, CharField
 from .models import Operator, Keyword, GeneralConcept
 
 required_concepts = {'الأساسيات': [],
@@ -36,7 +36,7 @@ class GeneralConcepts(APIView):
         generalConcepts = GeneralConcept.objects.all()
         serializer = GeneralConceptSerializer(generalConcepts, many=True)
         availability_data = []
-        unavailable_data = []
+        # unavailable_data = []
         sorted_data = []
         # available = []
         # closed = []
@@ -54,8 +54,6 @@ class GeneralConcepts(APIView):
                 data['state'] = 'completed'
             else:
                 data['state'] = 'unavailable'
-                unavailable_data.append(data)
-
         if student_profile.learning_path == 'university_path':
             min_order = min((item['order'] for item in serializer.data if item['state'] != 'completed'), default=0)
             for data in serializer.data:
@@ -267,11 +265,13 @@ class GetRecommendedProjects(APIView):
         solved_projects = available_projects.filter(
             studentproject__student=student_profile,
             studentproject__solve_date__isnull=False,
-        )
+        ).annotate(state=Value("solved", output_field=CharField())).values('id', 'state')
+
         tried_solving_projects = available_projects.filter(
             studentproject__student=student_profile,
             studentproject__solve_date__isnull=True,
-        )
+        ).annotate(state=Value("tried_solving", output_field=CharField())).values('id', 'state')
+
         rest_projects = available_projects.filter(
             studentproject__isnull=True,
         )
@@ -315,12 +315,14 @@ class GetRecommendedProjects(APIView):
             dist_max = [100] * 2 + [4] * (len(project_features) - 2)
             distance_max = euclidean_distance(dist_min, dist_max)
             S = 100 * (1 - (distance / distance_max))
-            recommended_projects.append((project.id, S))
-            recommended_projects = sorted(recommended_projects, key=lambda x: x[1], reverse=True)
+            recommended_projects.append({"project_id": project.id, "similarity": S, "state": 'recommended'})
+            recommended_projects = sorted(recommended_projects, key=lambda x: x['similarity'], reverse=True)
 
         response = {
             'message': 'SUCCESS',
-            'data': recommended_projects
+            'data':
+                list(solved_projects.union(tried_solving_projects)) + recommended_projects
+
         }
         return Response(response, content_type='application/json; charset=utf-8')
 
@@ -329,16 +331,19 @@ class GetProject(APIView):
     def post(self, request):
         project = Project.objects.get(id=request.data['project_id'])
         serializer = ProjectSerializer(project)
-        hints = ProjectHint.objects.filter(project=project)
-        hint_serializer = ProjectHintSerializer(hints, many=True)
+        hints = ProjectHint.objects.filter(project=project).last()
+        time = ProjectTime.objects.filter(project=project).last()
+        serializer_data = serializer.data
+        serializer_data['time'] = ProjectTimeSerializer(time).data['time']
+        hint_serializer = ProjectHintSerializer(hints)
         result = {key: map_skill(value) for key, value in
-                  eval(hint_serializer.data[0]['required_concept_hint']).items()}
-        hint_serializer.data[0]['required_concept_hint'] = str(result)
+                  eval(hint_serializer.data['required_concept_hint']).items()}
+        hint_serializer.data['required_concept_hint'] = str(result)
         response = {
             'message': 'SUCCESS',
             'data': {
-                "project": serializer.data,
-                "required_concept_hint": hint_serializer.data
+                "project": serializer_data,
+                "required_concept_hint": str(result)
             }
         }
         return Response(response, content_type='application/json; charset=utf-8')

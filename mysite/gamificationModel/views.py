@@ -21,21 +21,25 @@ TargetChoice = (
 class PerformInteraction(APIView):
     def post(self, request):
         student_profile = get_profile(request)
-        pp = StudentPersonality.objects.filter(studentProfile=student_profile)
+        pp = StudentPersonality.objects.filter(studentProfile=student_profile).distinct()
         # pp = student_profile.studentPersonality.all()
         g = GamificationFeature.objects.get(feature_name=request.data['feature_name'])
         rr = FeaturePersonalityRelationship.objects.filter(gamificationFeature_id=g.id)
         s = request.data['s']
         for r in rr:
-            matching_pp = pp.get(personality=r.personality)
+            matching_pp = pp.filter(personality=r.personality).last()
             if s > 0:
                 updated_pp = matching_pp.pp + (1 - matching_pp.pp) * Decimal(s) * r.rr
-                matching_pp.pp = updated_pp
-                matching_pp.save()
+                sp = StudentPersonality.objects.create(studentProfile=student_profile, pp=updated_pp,
+                                                       personality=matching_pp.personality,
+                                                       edit_date=datetime.datetime.now())
+                print(matching_pp.personality)
             else:
                 updated_pp = matching_pp.pp - matching_pp.pp * s * r.rr
-                matching_pp.pp = updated_pp
-                matching_pp.save()
+                sp = StudentPersonality.objects.create(studentProfile=student_profile, pp=updated_pp,
+                                                       personality=matching_pp.personality,
+                                                       edit_date=datetime.datetime.now())
+                print("else", matching_pp.personality)
         response = {
             'message': 'Success'
         }
@@ -49,12 +53,13 @@ class StudentGamificationFeatures(APIView):
         pp = StudentPersonality.objects.filter(studentProfile=student_profile)
         # pp = student_profile.studentPersonality.all()
         gfs = GamificationFeature.objects.all()
+        print(gfs)
         for g in gfs:
             rr = FeaturePersonalityRelationship.objects.filter(gamificationFeature_id=g.id)
             sum_rng_pn = 0
             sum_rng = 0
             for rng in rr:
-                pn = pp.get(personality=rng.personality)
+                pn = pp.filter(personality=rng.personality).last()
                 sum_rng_pn += rng.rr * pn.pp
                 sum_rng += rng.rr
             score = sum_rng_pn / sum_rng
@@ -299,11 +304,7 @@ class GetChallenge(APIView):
             generalConcepts = GeneralConcept.objects.all()
 
             serializer = GeneralConceptSerializer(generalConcepts, many=True)
-            availability_data = []
-            completed = []
-            unavailable_data = []
-            available = []
-            closed = []
+            first_available = None
             availability_data = [TheoreticalSkill.objects.filter
                                  (student=student_profile, generalConcept=concept).first().availability
                                  if TheoreticalSkill.objects.filter(student=student_profile,
@@ -314,33 +315,42 @@ class GetChallenge(APIView):
                 data['availability'] = availability
                 if student_profile.learning_path == 'university_path':
                     data['order'] = university_path[data['name']]
-                # else:
-                #     data['required'] = required_concepts[data['name']]
-                (completed if availability else unavailable_data).append(data)
-
-            if student_profile.learning_path == 'university_path':
-                if len(completed) == 0:
-                    max_order = 1
                 else:
-                    max_order = max(completed, key=lambda x: x['order']) + 1
-                available = sorted([x for x in unavailable_data if x['order'] == max_order], key=lambda x: x['order'])
-                closed = sorted([x for x in unavailable_data if x['order'] > max_order], key=lambda x: x['order'])
+                    data['required'] = required_concepts[data['name']]
+                if availability:
+                    data['state'] = 'completed'
+                else:
+                    data['state'] = 'unavailable'
+            if student_profile.learning_path == 'university_path':
+                min_order = min((item['order'] for item in serializer.data if item['state'] != 'completed'), default=0)
+                for data in serializer.data:
+                    if data['state'] == 'unavailable':
+                        if data['order'] == min_order:
+                            data['state'] = 'available'
+                        else:
+                            data['state'] = 'closed'
+                sorted_data = sorted(serializer.data, key=lambda x: x['order'])
             else:
-                completed_names = [x['name'] for x in completed]
-                available = [x for x in unavailable_data if all(elem in completed_names for elem in x['required'])]
-                closed = [x for x in unavailable_data if not all(elem in completed_names for elem in x['required'])]
-
+                completed_names = [x['name'] for x in serializer.data if x['state'] == 'completed']
+                for data in serializer.data:
+                    if data['state'] == 'unavailable':
+                        if all(elem in completed_names for elem in data['required']):
+                            data['state'] = 'available'
+                        else:
+                            data['state'] = 'closed'
+                sorted_data = sorted(serializer.data, key=lambda x: len(x['required']))
+            first_available = next((item for item in sorted_data if item['state'] == 'available'), None)
             challenge_target = ''
-            if len(available) > 0:
+
+            if first_available:
                 if student_profile.learning_path == 'university_path':
-                    challenge_target = 'أنجز مفهوم ' + available[0]['name']
+                    challenge_target = 'أنجز مفهوم ' + first_available['name']
                     print(challenge_target)
                 else:
                     challenge_target = 'أنجز مفهوما جديداً'
                     print(challenge_target)
             # else:
             #     # راجع المفهوم يلي عليه اقل عدد مسائل
-
             print('theoretical_challenge is None')
             challenge = Challenge.objects.get_or_create(
                 challenger=student_profile,
@@ -368,8 +378,8 @@ class GetChallenge(APIView):
                 challenge_date=current_date
             )
 
-        # XP
-        # if xp_challenge is None:
+            # XP
+            # if xp_challenge is None:
             challenge = Challenge.objects.get_or_create(
                 challenger=student_profile,
                 challenge_type=challenge_type.to_internal_value('XP'),
@@ -381,7 +391,7 @@ class GetChallenge(APIView):
 
         response = {
             'message': 'Success',
-            'data': ChallengeSerializer(challenges, many=True).data
+            # 'data': ChallengeSerializer(challenges, many=True).data
         }
         return Response(response, content_type='application/json; charset=utf-8')
 
@@ -425,13 +435,13 @@ class CheckingChallenges(APIView):
             'message': 'Success',
             'data': [
                 {
-                    ** ChallengeSerializer(theoretical_challenge).data,
+                    **ChallengeSerializer(theoretical_challenge).data,
                     'remaining': remaining_theoretical_challenge, },
                 {
-                    ** ChallengeSerializer(project_challenge).data,
+                    **ChallengeSerializer(project_challenge).data,
                     'remaining': remaining_project_challenge},
                 {
-                    ** ChallengeSerializer(xp_challenge).data,
+                    **ChallengeSerializer(xp_challenge).data,
                     'remaining': remaining_xp_challenge}
             ]
         }

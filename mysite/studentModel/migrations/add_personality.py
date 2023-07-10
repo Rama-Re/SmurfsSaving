@@ -11,7 +11,7 @@ def load_data(apps, schema_editor):
     i = 0
     for p in personalitiesNames:
         try:
-            Personality.objects.create(name=p)
+            Personality.objects.get_or_create(name=p)
             print(f"personalityName {p} loaded!")
 
         except:

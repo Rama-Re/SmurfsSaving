@@ -1,4 +1,5 @@
 from datetime import date, timedelta
+from decimal import Decimal
 
 from users.views import *
 from django.db.models import Sum
@@ -284,9 +285,9 @@ class AddProjectSolve(APIView):
         solve_tryings = SolveTrying.objects.filter(student_project=student_project)
         student_total_time = solve_tryings.aggregate(total_time=Sum('time'))['total_time']
         if student_total_time is None:
-            student_total_time = request.data['solve_time']
+            student_total_time = Decimal(request.data['solve_time'])
         else:
-            student_total_time += request.data['solve_time']
+            student_total_time += Decimal(request.data['solve_time'])
         # student performance
         hint_performance = HintPerformance.objects.filter(student=student_profile).last()
         hint_performance_dic = eval(hint_performance.performance)
