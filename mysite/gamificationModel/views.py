@@ -363,12 +363,14 @@ class GetChallenge(APIView):
         # Projects
         if project_challenge is None:
             projects = StudentProject.objects.filter(solve_date__isnull=False, student=student_profile)
-            project_counts = projects.annotate(date=TruncDate('solve_date')).values('date').annotate(count=Count('id'))
-            num_days = (projects.latest('solve_date').solve_date.date() - projects.earliest(
-                'solve_date').solve_date.date()).days + 1
-            average_daily_count = round(sum(count['count'] for count in project_counts) / num_days)
+            average_daily_count = 1
+            if projects:
+                project_counts = projects.annotate(date=TruncDate('solve_date')).values('date').annotate(count=Count('id'))
+                num_days = (projects.latest('solve_date').solve_date.date() - projects.earliest(
+                    'solve_date').solve_date.date()).days + 1
+                average_daily_count = round(sum(count['count'] for count in project_counts) / num_days)
 
-            print(average_daily_count)
+                print(average_daily_count)
             print('project_challenge is None')
             challenge = Challenge.objects.get_or_create(
                 challenger=student_profile,
