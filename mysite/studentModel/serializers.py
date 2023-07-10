@@ -50,7 +50,7 @@ class StudentProfileSerializer(serializers.ModelSerializer):
         hintPerformance.performance = "{'الأساسيات': 0, 'أنواع البيانات': 0, 'التعامل مع الأعداد': 0, 'التعامل مع النصوص': 0, 'المصفوفات': 0, 'الدوال': 0,'المتغيرات': 0,'العوامل': 0, 'الحلقات': 0, 'الشروط': 0}"
         hintPerformance.save()
 
-        ### maybe delete
+        ### maybe deletehttps://github.com/Rama-Re/gradProject.git
         generalconcepts = GeneralConcept.objects.all()
         for generalconcept in generalconcepts:
             theoretical_skill = TheoreticalSkill.objects.create(generalConcept=generalconcept, student=student,
