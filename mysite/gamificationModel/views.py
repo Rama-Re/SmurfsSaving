@@ -24,11 +24,12 @@ class PerformInteraction(APIView):
         pp = StudentPersonality.objects.filter(studentProfile=student_profile).distinct()
         # pp = student_profile.studentPersonality.all()
         g = GamificationFeature.objects.get(feature_name=request.data['feature_name'])
+        event = request.data['event']
         rr = FeaturePersonalityRelationship.objects.filter(gamificationFeature_id=g.id)
         s = request.data['s']
         for r in rr:
             matching_pp = pp.filter(personality=r.personality).last()
-            if s > 0:
+            if event == 'USE':
                 updated_pp = matching_pp.pp + (1 - matching_pp.pp) * Decimal(s) * r.rr
                 sp = StudentPersonality.objects.create(studentProfile=student_profile, pp=updated_pp,
                                                        personality=matching_pp.personality,
