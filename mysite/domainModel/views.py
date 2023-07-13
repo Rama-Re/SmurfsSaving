@@ -408,6 +408,25 @@ def remove_comments(code):
     code = re.sub(r'^\s*\n', '', code, flags=re.MULTILINE)
     return code
 
+def remove_main_function(code):
+    lines = code.split('\n')
+    new_lines = []
+    is_main_function = False
+
+    for line in lines:
+        if 'int main(' in line:
+            is_main_function = True
+            new_lines.append('\n')
+            continue
+        elif 'return' in line and is_main_function:
+            new_lines.append('\n')
+            is_main_function = False
+            continue
+
+        new_lines.append(line)
+
+    new_code = '\n'.join(new_lines)
+    return new_code
 
 def detect_concept(code):
     # Regular expressions for different declarations
@@ -424,6 +443,7 @@ def detect_concept(code):
         'الدوال': r'(\b(?:\w+\s+)+\w+\s*\([^)]*\)\s*(?:const)?\s*(?=\{)|return[^;]*;)'
     }
     results = {}
+    code = remove_main_function(code)
 
     # Extract declarations and positions for each pattern
     for key, pattern in declaration_patterns.items():
@@ -510,6 +530,7 @@ def get_level_re(concept, level):
 
 def code_completion(code, concepts, level):
     # Replace concepts with spaces while preserving keywords and operators
+    print(concepts)
     for name, concept in concepts.items():
         keywords_to_preserve, operators_to_preserve = get_level_re(name, level[name])
         for match in concept:
