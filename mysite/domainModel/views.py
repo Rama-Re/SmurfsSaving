@@ -253,8 +253,8 @@ def map_skill(skill):
         return 2.
     elif 80 < skill <= 100:
         return 3.
-    # else:
-    #     return 4
+    else:
+        return 3.
 
 
 class GetRecommendedProjects(APIView):
