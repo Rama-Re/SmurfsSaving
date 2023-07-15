@@ -474,18 +474,19 @@ class GetStreak(APIView):
         student_profile = get_profile(request)
         current_date = date.today()
         streaks = Streak.objects.filter(student=student_profile, interactions__gt=0).order_by('-streak_date')
-        latest_streak_date = streaks.latest('streak_date').streak_date
-        days_diff = (current_date - latest_streak_date).days
         current_streak = []
-        next_date = latest_streak_date + timedelta(days=1)
-        if days_diff <= 1:
-            for streak in streaks:
-                print(streak.streak_date)
-                if streak.streak_date == next_date - timedelta(days=1):
-                    current_streak.append(streak)
-                else:
-                    break
-                next_date = streak.streak_date
+        if streaks:
+            latest_streak_date = streaks.latest('streak_date').streak_date
+            days_diff = (current_date - latest_streak_date).days
+            next_date = latest_streak_date + timedelta(days=1)
+            if days_diff <= 1:
+                for streak in streaks:
+                    print(streak.streak_date)
+                    if streak.streak_date == next_date - timedelta(days=1):
+                        current_streak.append(streak)
+                    else:
+                        break
+                    next_date = streak.streak_date
         response = {
             'message': 'SUCCESS',
             'data': StreakSerializer(current_streak, many=True).data
