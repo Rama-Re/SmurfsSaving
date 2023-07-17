@@ -30,7 +30,7 @@ class PerformInteraction(APIView):
         for r in rr:
             matching_pp = pp.filter(personality=r.personality).last()
             if event == 'USE':
-                updated_pp = min( matching_pp.pp + (1 - matching_pp.pp) * Decimal(s) * r.rr, 1)
+                updated_pp = min(matching_pp.pp + (1 - matching_pp.pp) * Decimal(s) * r.rr, 1)
                 sp = StudentPersonality.objects.create(studentProfile=student_profile, pp=updated_pp,
                                                        personality=matching_pp.personality,
                                                        edit_date=datetime.datetime.now())
@@ -451,5 +451,73 @@ class CheckingChallenges(APIView):
                     **ChallengeSerializer(xp_challenge).data,
                     'remaining': remaining_xp_challenge}
             ]
+        }
+        return Response(response, content_type='application/json; charset=utf-8')
+
+
+class GetMbtiTest(APIView):
+    def get(self, request):
+        questions = MbtiQuestions.objects.all()
+        serializer = MbtiQuestionsSerializer(questions, many=True)
+        response = {
+            'message': 'Success',
+            'data': serializer.data
+        }
+        return Response(response, content_type='application/json; charset=utf-8')
+
+
+class AddMbtiTestResult(APIView):
+    def post(self, request):
+        student_profile = get_profile(request)
+        personalities = Personality.objects.all()
+        current_date = date.today()
+        answers = request.data['answers']
+        counts = {
+            'Extravert': 0,
+            'Introvert': 0,
+            'Sensor': 0,
+            'Intuitive': 0,
+            'Thinker': 0,
+            'Feeler': 0,
+            'Judger': 0,
+            'Perceiver': 0
+        }
+        for index, answer in enumerate(answers, start=1):
+            category = index % 7
+            if category == 1:
+                counts['Extravert' if answer == 1 else 'Introvert'] += 1
+            elif category == 2 or category == 3:
+                counts['Sensor' if answer == 1 else 'Intuitive'] += 1
+            elif category == 4 or category == 5:
+                counts['Thinker' if answer == 1 else 'Feeler'] += 1
+            elif category == 6 or category == 0:
+                counts['Judger' if answer == 1 else 'Perceiver'] += 1
+
+        percentages = {
+            'Extravert': (counts['Extravert'] / (counts['Extravert'] + counts['Introvert'])) if len(
+                answers) > 0 else .50,
+            'Introvert': (counts['Introvert'] / (counts['Extravert'] + counts['Introvert'])) if len(
+                answers) > 0 else .50,
+            'Sensor': (counts['Sensor'] / (counts['Sensor'] + counts['Intuitive'])) if len(answers) > 0 else .50,
+            'Intuitive': (counts['Intuitive'] / (counts['Sensor'] + counts['Intuitive'])) if len(answers) > 0 else .50,
+            'Thinker': (counts['Thinker'] / (counts['Thinker'] + counts['Feeler'])) if len(answers) > 0 else .50,
+            'Feeler': (counts['Feeler'] / (counts['Thinker'] + counts['Feeler'])) if len(answers) > 0 else .50,
+            'Judger': (counts['Judger'] / (counts['Judger'] + counts['Perceiver'])) if len(answers) > 0 else .50,
+            'Perceiver': (counts['Perceiver'] / (counts['Judger'] + counts['Perceiver'])) if len(answers) > 0 else .50
+        }
+
+        for key, value in percentages.items():
+            personality_model, _ = Personality.objects.get_or_create(name=key)
+            pp = Decimal(value)
+            student_personality = StudentPersonality.objects.create(
+                studentProfile=student_profile,
+                personality=personality_model,
+                pp=pp,
+                edit_date=current_date
+            )
+
+        response = {
+            'message': 'Success',
+            "data": percentages
         }
         return Response(response, content_type='application/json; charset=utf-8')

@@ -49,3 +49,17 @@ class ChallengeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Challenge
         fields = ['challenger', 'challenge_type', 'challenge_target', 'challenge_state', 'challenge_date']
+
+
+class MbtiAnswersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MbtiAnswers
+        fields = ['id', 'question', 'answer']
+
+
+class MbtiQuestionsSerializer(serializers.ModelSerializer):
+    answers = MbtiAnswersSerializer(many=True, source='mbtianswers_set')
+
+    class Meta:
+        model = MbtiQuestions
+        fields = ['id', 'question_text', 'answers']
