@@ -26,7 +26,7 @@ class StudentPersonality(models.Model):
     studentProfile = models.ForeignKey(StudentProfile, on_delete=models.CASCADE, default=None)
     personality = models.ForeignKey(Personality, on_delete=models.CASCADE, default=None)
     pp = models.DecimalField(max_digits=3, decimal_places=2, default=0)
-    edit_date = models.DateTimeField(default=datetime.datetime.today())
+    edit_date = models.DateTimeField(default=datetime.datetime.now())
 
 
 class StudentProject(models.Model):
@@ -82,3 +82,10 @@ class Streak(models.Model):
     interactions = models.IntegerField(default=0)
     streak_date = models.DateField(default=timezone.now)
 
+class Recommend(models.Model):
+    student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    recommend_date = models.DateTimeField(default=datetime.datetime.now())
+    solved = models.BooleanField(null=True)
+    solve_date = models.DateTimeField(null=True)
+    good_recommend = models.BooleanField(null=True)

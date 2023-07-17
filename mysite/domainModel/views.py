@@ -287,7 +287,9 @@ class GetRecommendedProjects(APIView):
         hint_performance = HintPerformance.objects.filter(student=student_profile).last()
         hint_performance = hint_performance.performance
         hint_performance = eval(hint_performance)
-        recommended_projects = []
+        harder_projects = []
+        easier_projects = []
+        # recommended_projects = []
         for project in rest_projects:
             project_difficulty = ProjectDifficulty.objects.filter(project=project).last()
             project_time = ProjectTime.objects.filter(project=project).last()
@@ -307,6 +309,7 @@ class GetRecommendedProjects(APIView):
                 hint_list.append(hint_performance[concept])
 
             hint_list = [map_skill(value) for value in hint_list]
+
             student_features = [float(difficulty_performance), float(time_performance)] + hint_list
 
             distance = euclidean_distance(student_features, project_features)
@@ -314,8 +317,21 @@ class GetRecommendedProjects(APIView):
             dist_max = [100] * 2 + [4] * (len(project_features) - 2)
             distance_max = euclidean_distance(dist_min, dist_max)
             S = 100 * (1 - (distance / distance_max))
-            recommended_projects.append({"project_id": project.id, "similarity": S, "state": 'recommended'})
-            recommended_projects = sorted(recommended_projects, key=lambda x: x['similarity'], reverse=True)
+            if float(project_difficulty) >= float(difficulty_performance) or float(project_time) >= float(time_performance):
+                harder_projects.append({"project_id": project.id, "similarity": S, "state": 'recommended'})
+            else:
+                if any(hint > p_hint for hint, p_hint in zip(hint_list, project_hint_list)):
+                    harder_projects.append({"project_id": project.id, "similarity": S, "state": 'recommended'})
+                else:
+                    easier_projects.append({"project_id": project.id, "similarity": S, "state": 'recommended'})
+
+        harder_projects = sorted(harder_projects, key=lambda x: x['similarity'], reverse=True)
+        easier_projects = sorted(easier_projects, key=lambda x: x['similarity'], reverse=True)
+        recommended_projects = harder_projects + easier_projects
+
+        if len(recommended_projects) > 0:
+            project = Project.objects.get(id=recommended_projects[0]['project_id'])
+            recommend = Recommend.objects.create(student=student_profile, project=project)
 
         response = {
             'message': 'SUCCESS',

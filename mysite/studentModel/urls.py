@@ -16,4 +16,5 @@ urlpatterns = [
     path('private/editStreak', EditStreak.as_view()),
     path('private/getStreak', GetStreak.as_view()),
     path('private/getProfile', GetProfile.as_view()),
+    path('private/evaluateRecommend', EvaluateRecommend.as_view()),
 ]

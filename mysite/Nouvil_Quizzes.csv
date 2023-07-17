@@ -1,7 +1,7 @@
 ﻿generalConcepts,question,answers,correctanswer,
-الأساسيات,"في C ++ ، يتم استخدام الرمز // من أجل:","['تقسيم الارقام', 'التعليقات', 'ربط نص بنص', 'exponentiation']",التعليقات,
+الأساسيات,في C ++ ، يتم استخدام الرمز // من أجل:,"['تقسيم الارقام', 'التعليقات', 'ربط نص بنص', 'exponentiation']",التعليقات,
 الأساسيات,ما هو الرمز المسموح به في الـ identifier name ؟,"['$', '@', '_', '-']",_,
-الأساسيات,"في C ++ ، الـ cout موجود في أي مكتبة؟","['ctype.h', 'stdlib.h', 'math.h', 'iostream.h']",iostream.h,
+الأساسيات,في C ++ ، الـ cout موجود في أي مكتبة؟,"['ctype.h', 'stdlib.h', 'math.h', 'iostream.h']",iostream.h,
 الأساسيات,أي مما يلي يستخدم لعمل سطر جديد في C ++؟,"['\\n', 'nc', '/nc']",\n,
 التعامل مع النصوص,الـ function هذا strlen() يحسب:,"['طول النص مع تضمين الفاصل الفارغ', 'طول النص مع عدم تضمين الفاصل الفارغ', 'عدد الاحرف الابجدية في النص', 'لا يوجد مثل هذه الدالة من الاساس']",طول النص مع عدم تضمين الفاصل الفارغ,
 الحلقات,ما هو الرمز المستخدم لوضع عبارات برمجية داخل بنية الـ loop في C ++؟,"['% %', '( )', '{ }', 'لا شئ مما سبق']",{ },
@@ -14,11 +14,11 @@
 الحلقات,أي من هؤلاء لا يعتبر loop؟,"['for', 'have', 'do', 'while']",have,
 الحلقات,ما هي الـ loop التي تتطلب أقواس مجعدة {}؟,"['for', 'do', 'while', 'كل ما سبق']",كل ما سبق,
 الحلقات,ما هو الرمز المستخدم لوضع عبارات برمجية داخل بنية الـ loop في C ++؟,"['% %', '( )', '{ }', 'لا شئ مما سبق']",{ },
-الدوال,"إذا كانت الـ function في C ++ لا تُرجع قيمة ، فسيتم الإشارة إلى نوع الإرجاع الخاص بها بـ .....","['Int', 'Float', 'Void', 'لا شئ مما سبق']",Void,
+الدوال,إذا كانت الـ function في C ++ لا تُرجع قيمة ، فسيتم الإشارة إلى نوع الإرجاع الخاص بها بـ .....,"['Int', 'Float', 'Void', 'لا شئ مما سبق']",Void,
 الدوال,كم عدد القيم التي يمكن إرجاعها بواسطة الـ function في C ++؟,"['0', '1', 'عدد لا نهائي من القيم', 'لا شئ مما سبق']",1,
 الدوال,...... هي عبارة تستخدم لتشغيل او مناداة الـ function,"['function declaration', 'function call', 'function definition', 'function name']",function call,
 الدوال,...... هو نوع من المتغيرات التي لا يمكن استخدامه إلا داخل الدالة,"['local variable', 'global variable', 'parameter variables', 'constant variable']",local variable,
-الدوال,"إذا كانت الـ function في C ++ لا تُرجع قيمة ، فسيتم الإشارة إلى نوع الإرجاع الخاص بها بـ .....","['Int', 'Float', 'Void', 'لا شئ مما سبق']",Void,
+الدوال,إذا كانت الـ function في C ++ لا تُرجع قيمة ، فسيتم الإشارة إلى نوع الإرجاع الخاص بها بـ .....,"['Int', 'Float', 'Void', 'لا شئ مما سبق']",Void,
 الدوال,...... هي عبارة تخبر المترجم عن اسم الـ function  ونوع الـ return والـ parameters,"['function definition', 'function declaration', 'function call', 'function name']",function declaration,
 الدوال,كم عدد القيم التي يمكن إرجاعها بواسطة الـ function في C ++؟,"['0', '1', 'عدد لا نهائي من القيم', 'لا شئ مما سبق']",1,
 الدوال,........ هو جزء من البرنامج يؤدي مهمة محددة,"['array', 'function', 'looping', 'conditional statements']",function,
@@ -41,13 +41,982 @@
 المصفوفات,أي من العبارات التالية ليس تعريف صحيح للـ array,"['bool array1[10]', 'double array2[20,0]', 'char array3[30]', 'double array4[7]']","double array2[20,0]",
 المصفوفات,يبدأ اول index في الـ array من,"['0', '1', '2', 'لا شئ مما سبق']",0,
 المصفوفات,يعتبر الـ index في الـ array في حد ذاته ........,"['a character', 'an integer', 'a floating point number', 'a negative number']",an integer,
-المصفوفات,"في العبارة التالية a [3] = 5 ، أي مما يلي قيمة الـ index؟","['a', '3', '5']",3,
+المصفوفات,في العبارة التالية a [3] = 5 ، أي مما يلي قيمة الـ index؟,"['a', '3', '5']",3,
 المصفوفات,ما هو آخر index في هذه المصفوفة؟int values[5],"['0', '5', '4', '6']",4,
 المصفوفات,الـ array هذا nouvil [10] يمكن التصريح عنه باستخدام الـ pointer  بــ ـ.........,"['% nouvil[]', '/ nouvil[]', '* nouvil[]', '@ nouvil[]']",* nouvil[],
-المصفوفات,"يمكن للمصفوفة تخزين مجموعة من القيم ، ولكن يجب أن تكون القيم ...","['من نفس نوع البيانات', 'من اي نوع البيانات', 'constants', 'integers']",من نفس نوع البيانات,
+المصفوفات,يمكن للمصفوفة تخزين مجموعة من القيم ، ولكن يجب أن تكون القيم ...,"['من نفس نوع البيانات', 'من اي نوع البيانات', 'constants', 'integers']",من نفس نوع البيانات,
 المصفوفات,"أين يتم تخزين 77 في المصفوفة scores؟int scores[]={83, 62, 77, 97}","['scores[0]', 'scores[1]', 'scores[2]', 'scores[3]']",scores[2],
 المصفوفات,أي مما يلي يعد تعريفًا صالحًا لـ array في C ++؟,"['int nums[10];', 'int array[0];', 'void numbers[5];', 'float $$payments[10];']",int nums[10];,
 المصفوفات,ماذا يحدث في هذا الكود؟ for (int index = 0; index < 5; index++)    cin >> numbers[index];,"['index ضع البيانات في مصفوفة مكونة من خمسة عناصر تسمى', 'numbers ضع البيانات في مصفوفة مكونة من أربعة عناصر تسمى', 'numbers ضع البيانات في مصفوفة مكونة من خمسة عناصر تسمى', 'index ضع البيانات في مصفوفة مكونة من أربعة عناصر تسمى']",numbers ضع البيانات في مصفوفة مكونة من خمسة عناصر تسمى,
 أنواع البيانات,ما نوع البيانات الذي يمكن استخدامه لعمل حرف عريض (hold a wide character) في C ++؟,"['unsigned char', 'int', 'wchar_t', 'none of the above']",wchar_t,
 أنواع البيانات,أي مما يلي لا يعتبر نوع بيانات في C ++؟,"['Real', 'Double', 'Float', 'Int']",Real,
 أنواع البيانات,ما هي نتيجة الكود؟ #include<iostream>using namespace std;main() {    short unsigned int i = 0;    cout<<i--;},"['0', '65535', '32767', 'Compile error']",0,
+أنواع البيانات,Which of the following is not a Primary data type of cpp?,"['Integer', 'Float', 'Character', 'Pointer']",Pointer,
+أنواع البيانات,Which of the following is not a Derived Data Type of cpp?,"['Function', 'Array', 'Pointer', 'Union']",Union,
+أنواع البيانات,What data type would be most appropriate for representing logical values?,"['Boolean', 'Integer', 'Float', 'Character']",Boolean,
+أنواع البيانات,Which of the following doesn’t come under the signed Modifiers in C++?,"['Integer', 'Char', 'Double', 'Long-Prefix']",Double,
+أنواع البيانات,"What is the output of the following code snippet?
+#include<iostream>
+using namespace std;
+int main()
+{
+    cout <<  sizeof(char)<< ” byte” <<” &”;
+    cout <<  sizeof(int)<< ” bytes” << endl;
+    return 0;
+}","['1 byte & 4 bytes', '2 byte & 4 bytes', '1 byte & 8 bytes', '2 byte & 8 bytes']",1 byte & 4 bytes,
+أنواع البيانات,"What is the output of the following code snippet?
+#include<iostream>
+using namespace std;
+int main()
+{
+    cout <<sizeof(short int)<< ” bytes” << ” & “;
+    cout << sizeof(long int)<< ” bytes” << endl;
+       return 0;
+}","['2 bytes & 4 bytes', '2 bytes & 8 bytes', '4 bytes & 8 bytes', '4 bytes & 4 bytes']",2 bytes & 8 bytes,
+أنواع البيانات,"What is the output of the following code snippet?
+#include<iostream>
+using namespace std;
+int main()
+{
+            cout << sizeof(float)<< ” bytes,” <<endl;
+            cout << sizeof(double)<< ” bytes &” << endl;
+            cout << sizeof(wchar_t)<< ” bytes” <<endl;
+            return 0;
+}","['4 bytes, 4bytes & 4 bytes', '4 bytes , 8 bytes & 8 bytes', '4 bytes, 4 bytes & 4 bytes', '4 bytes, 8 bytes & 4 bytes']","4 bytes, 8 bytes & 4 bytes",
+أنواع البيانات,"In the following C++ program, what is the size of a float and a pointer variable?
+#include <iostream>
+using namespace std;
+int main() 
+{
+    int  x ;
+    int  *ip;        
+    float a=0;
+    cout <<  ” ” << sizeof(ip)<<“bytes”<<endl;
+    cout << sizeof(a)<<“bytes”<< endl;
+    return 0;
+}","['4 bytes and 8 bytes', '4 bytes and 4 bytes', '4 bytes and 2 bytes', '8 bytes and 2 bytes']",4 bytes and 8 bytes,
+أنواع البيانات,أي مما يلي لا يعتبر نوع بيانات في C ++؟,"['Real', 'Double', 'Float', 'Int']",Real,
+أنواع البيانات,Which of the following is not a fundamental type is not present in C but present in C++?,"['int', 'void', 'bool', 'char']",['bool'],
+أنواع البيانات,What is the size of a boolean variable in C++?,"['1 bit', '2bit', '1byte', '2byte']",['1 bit'],
+أنواع البيانات,"What is the type of the temp variable?
+var temp = 14.55;","['Double', 'Boolean', 'Integer', 'String']",['Double'],
+أنواع البيانات,What is void?,"['A statement that returns a value', ""A statement that doesn't return a value"", 'A function that return a value', ""A function that doesn't return a value""]","[""A function that doesn't return a value""]",
+أنواع البيانات,ما هي نتيجة الكود؟ #include<iostream>using namespace std;main() {    short unsigned int i = 0;    cout<<i--;},"['0', '65535', '32767', 'Compile error']",0,
+أنواع البيانات,ما نوع البيانات الذي يمكن استخدامه لعمل حرف عريض (hold a wide character) في C ++؟,"['unsigned char', 'int', 'wchar_t', 'none of the above']",wchar_t,
+أنواع البيانات,6. Which of the following is not a correct variable type?,"['A. float', 'B. real', 'C. int', 'D. double']",real,
+أنواع البيانات,What is a default return type of any function C++? (If return type is not specified?),"['void', 'float', 'int', 'long']",['int'],
+الأساسيات,What is the only function that all C++ programs must contain?,"['main ()', 'void ()', 'system ()', 'start ()']",['main ()'],
+الأساسيات,أي مما يلي يستخدم لعمل سطر جديد في C ++؟,"['\\n', 'nc', '/nc']",\n,
+الأساسيات,في C ++ ، الـ cout موجود في أي مكتبة؟,"['ctype.h', 'stdlib.h', 'math.h', 'iostream.h']",iostream.h,
+الأساسيات,ما هو الرمز المسموح به في الـ identifier name ؟,"['$', '@', '_', '-']",_,
+الأساسيات,في C ++ ، يتم استخدام الرمز // من أجل:,"['تقسيم الارقام', 'التعليقات', 'ربط نص بنص', 'exponentiation']",التعليقات,
+الأساسيات,Which command moves the shown text to the next line?,"['\\t', '\\n', '\\r', '\\s']",['\\n'],
+الأساسيات,What punctuation is used to signal the beginning and end of code blocks?,"['{ }', '-> and <-', 'BEGIN and END', '( and )']",['{ }'],
+الأساسيات,C++ is _____________,"['Both procedural & object oriented programming language', 'Procedural programming language', 'Functional programming language']",['Both procedural & object oriented programming language'],
+الأساسيات,How to input age in C++?,"['cin<<age;', 'cin>>age;', 'cin<<""age"";', 'cppin>>age;']",['cin>>age;'],
+الأساسيات,Which statement is used to go on newline in C++?,"['endline', 'endl', 'lend', 'lineend']",['endl'],
+الأساسيات,Which of the following is C++ equivalent for scanf()?,"['cout', 'cin', 'scanf', 'input']",['cin'],
+الأساسيات,"Considering:
+rollno=25
+per=78.9
+How to print following?
+Roll No is 25 and Percent are 78.9","['cout<<""Roll No is ""<<""rollno""<<"" and Percent are ""<<""per"";', 'cout<<""Roll No is ""<<rollno<<"" and Percent are ""<<per;', 'cout>>""Roll No is "">>rollno>>"" and Percent are "">>per;', 'None of the above']","['cout<<""Roll No is ""<<rollno<<"" and Percent are ""<<per;']",
+الأساسيات,Identify the correct output statement in C++.,"['cout<<""MindSpace Computers"";', 'cout>>""MindSpace Computers"";', 'cin<<""MindSpace Computers"";', 'cin>>""MindSpace Computers"";']","['cout<<""MindSpace Computers"";']",
+الأساسيات,Which of the following is used for comments in C++?,"['// comment', '/* comment */', 'both // comment or /* comment */', '// comment */']",['both // comment or /* comment */'],
+الأساسيات,C++ is a,"['high-level language', 'low-level language']",['high-level language'],
+الأساسيات,iostream,"['Displays output from the screen and input from the keyboard', 'Has all the math equations', 'Counts the time', 'Checks if the code has a function']",['Displays output from the screen and input from the keyboard'],
+الأساسيات,1. What is the correct value to return to the operating system upon the successful completion of a program?,"['A. -1', 'B. 1', 'C. 0', 'D. Programs do not return a value.']",0,
+الأساسيات,3. What punctuation is used to signal the beginning and end of code blocks?,"['A. { }', 'B. -> and C. BEGIN and END', 'D. ( and )']",{ },
+الأساسيات,2. What is the only function all C++ programs must contain?,"['A. start()', 'B. system()', 'C. main()', 'D. program()']",main(),
+الأساسيات,4. What punctuation ends most lines of C++ code?,"['A. .', 'B. ;', 'C. :', ""D. '""]",;,
+الأساسيات,5. Which of the following is a correct comment?,"['A. */ Comments */', 'B. ** Comment **', 'C. /* Comment */', 'D. { Comment }']",/* Comment */,
+التعامل مع الأعداد,"What is the output of the following code snippet?
+#include<bits/stdc++.h>
+using namespace std;
+int main() {
+ float var= 54.154365;
+cout << setprecision(6) << var;
+    return 0;
+}","['54.1543', '54.154365', '54.1544', 'Compiler Error']",54.1544,
+التعامل مع الأعداد,"cout<<floor(12.5)<<endl;
+prints:","['12', '13', '12.5', 'None of the above']",['12'],
+التعامل مع النصوص,5. Which of the following adds one string to the end of another?,"['append();', 'stringadd();', 'strcat();', 'stradd();']",strcat();,
+التعامل مع النصوص,4. Which of the following functions compares two strings?,"['compare();', 'stringcompare();', 'cmp();', 'strcmp();']",strcmp();,
+التعامل مع النصوص,الـ function هذا strlen() يحسب:,"['طول النص مع تضمين الفاصل الفارغ', 'طول النص مع عدم تضمين الفاصل الفارغ', 'عدد الاحرف الابجدية في النص', 'لا يوجد مثل هذه الدالة من الاساس']",طول النص مع عدم تضمين الفاصل الفارغ,
+التعامل مع النصوص,3. Which of the following reads in a string named x with one hundred characters?,"[""cin.getline(x, 100, '\\n');"", ""cin.getline(100, x, '\\n');"", ""readline(x, 100, '\\n');"", 'read(x);']","cin.getline(x, 100, '\n');",
+التعامل مع النصوص,2. What character ends all strings?,"['.', ' ', '\\0', '\\n']",'\0',
+التعامل مع النصوص,1. Which of the following is a static string?,"['Static String', '""Static String""', ""'Static String'"", 'char string[100];']","""Static String""",
+التعامل مع النصوص,"What is the output of the following code snippet?
+ #include <iostream>
+    #include <cstring>
+    #include<string>
+    using namespace std;
+    int main ()
+    {
+        string str1{ “C++ String”};
+        string str2{ “Quiz”};
+        string str3;
+        int  len ;
+        str3=str1;
+        str1=str1+str2;
+        len = str1.length();
+        cout << len << endl;
+        return 0;
+    }","['10', '15', '14', '4']",14,
+التعامل مع النصوص,"What is the output of the following code snippet?
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+    string s1 {“QuizOrbit”};
+    for (int i = 0; i < s1.length(); i++)
+    {
+    s1[i]=toupper(s1[i]);
+    }
+    cout<<s1;
+    return 0;
+}","['QuizOrbit', 'quizorbit', 'QUIZORBIT', 'Error']",QUIZORBIT,
+التعامل مع النصوص,"What is the output of the following code snippet?
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+    string s1 {“QuizOrbit”};
+    unsigned long int found = s1.find_last_of(“aeiou”);
+    while (found != string :: npos)
+    {
+        s1[found] = ‘*’;
+        found = s1.find_last_of(“aeiou”, found + 1);
+    }
+    cout << s1 << “\n”;
+    return 0;
+}","['QuizOrbit', 'Quizorbit', 'Q**zOrb*t', 'None of the above']",Q**zOrb*t,
+التعامل مع النصوص,"What is the output of the following code snippet?
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+    string s1 {“QuizOrbit”};
+    for (int i = 0; i < s1.length(); i++)
+    {
+    s1[i]=tolower(s1[i]);
+    }
+    cout<<s1;
+    return 0;
+}","['QuizOrbit', 'QUIZORBIT', 'quizorbit', 'Error']",quizorbit,
+التعامل مع النصوص,"What is the output of the following code snippet if the string entered by the user is “Hello World”?
+#include <iostream> 
+#include <string>
+using namespace std; 
+int main()
+{
+    string str;
+    int i;
+    cin>>str;
+    for(i=2;i<str.length();i++)
+    cout<<str[i];
+}","['Hello World', 'Hello', 'llo', 'Error']",llo,
+التعامل مع النصوص,"What is the output of the following code snippet?
+#include <iostream> 
+#include <string>
+using namespace std; 
+int main()
+{
+    string str={“Hello World”};
+    cout<<str[6];
+    return 0;
+}","['H', 'W', 'o', 'Error']",W,
+التعامل مع النصوص,"What is the output of the following code snippet?
+#include <iostream> 
+#include <string>
+using namespace std; 
+int main()
+{
+    string str={“Hello World”};
+    cout<<str;
+    return 0;
+}","['Hello World', 'str', 'Error', 'Segmentation fault']",Hello World,
+التعامل مع النصوص,"What is the output of the following code snippet?
+#include <iostream>
+#include <cstring>
+using namespace std;
+int main()
+{
+    char s1[50]=”Hello”, s2[50]=”World”;
+    strcat(s1, s2); 
+    cout << s1 << endl;
+    return 0;
+}","['HelloWorld', 'Hello', 'World', 'Error']",HelloWorld,
+الحلقات,ما هي الـ loop التي سيتم تنفيذها دائمًا مرة واحدة على الأقل؟,"['do', 'for', 'while']",do,
+الحلقات,ما هو الحد الأدنى لعدد مرات تنفيذ حلقة do ؟,"['0', '1', 'Infinity', 'Could not be predicted']",1,
+الحلقات,ما هو الرمز المستخدم لوضع عبارات برمجية داخل بنية الـ loop في C ++؟,"['% %', '( )', '{ }', 'لا شئ مما سبق']",{ },
+الحلقات,Which of the following is an exit-controlled loop?,"['for', 'while', 'do-while', 'all of above']",['do-while'],
+الحلقات,Which of the following is an entry-controlled loop?,"['for', 'none', 'do-while', 'all of above']",['for'],
+الحلقات,"How many times QuizOrbit.com is printed?
+#include <iostream>
+using namespace std;
+int main()
+{
+    int i=0;
+    label:
+    cout<<“QuizOrbit.com”<<endl;
+    i++;
+    if(i<6)
+    {
+    goto label;
+    }
+    return 0;
+}","['2', '3', '4', '6']",6,
+الحلقات,Loops in C Language are implemented using.?,"['While', 'For', 'Do While', 'All the above']",['All the above'],
+الحلقات,Which of the following loops goes to infinity?,"['for (int i=0 ; ; )', 'for (int i=0 ; ; i=∞)', 'for (int i=0 ; i<=1000000000000000000 ; i++)', 'for (int i=0 ; ; i++)']",['for (int i=0 ; ; i++)'],
+الحلقات,Which loop executes the statements at least one time before evaluating the expression?,"['do-while loop', 'for loop', 'while loop', 'none of the above']",['do-while loop'],
+الحلقات,"What will be the output of this code?
+for (int n=10; n>0; n- -)
+{
+                      if (n==4) continue;
+                        cout<<n<<endl;
+ }","['10,9,8,7,6,4,3,2,1', '10,9,8,7,6,5,4,3,2,1', '10,9,8,7,6,5,3,2,1', '10,9,8,7,6,5,4,3,2,1,0']","['10,9,8,7,6,5,3,2,1']",
+الحلقات,4. How many times is a do while loop guaranteed to loop?,"['A. 0', 'B. Infinitely', 'C. 1', 'D. Variable']",1,
+الحلقات,1. What is the final value of x when the code int x; for(x=0; x<10; x++) {} is run?,"['A. 10', 'B. 9', 'C. 0', 'D. 1']",10,
+الحلقات,2. When does the code block following while(x<100) execute?,"['A. When x is less than one hundred', 'B. When x is greater than one hundred', 'C. When x is equal to one hundred', 'D. While it wishes']",When x is less than one hundred,
+الحلقات,3. Which is not a loop structure?,"['A. For', 'B. Do while', 'C. While', 'D. Repeat Until']",Repeat Until,
+الحلقات,"ما هي نتيجة هذا الكود؟for (int i = 1; i <= 3; )    System.out.println(""A"");","['AAA', 'AAAA', '1', 'infinite loop']",infinite loop,
+الحلقات,What is the way to suddenly come out of or Quit any Loop in C Language.?,"['continue; statement', 'break; statement', 'leave; statement', 'quit; statement']",['break; statement'],
+الحلقات,ما هو الـ loop الصحيح؟,"['do {//code}while (condition);', 'do {//code}while (condition)', 'do {//code}while (condition):', 'do{while(condition); code;}']",do {//code}while (condition);,
+الحلقات,"How many times QuizOrbit.com is printed?
+#include <iostream>
+using namespace std;
+int main()
+{
+    int i,j;
+    for(i=0;i<5;i++)
+        for(j=0;j<i;j++)
+    cout<<“QuizOrbit.com”<<endl;
+    return 0;
+}","['5', '6', '8', '10']",10,
+الحلقات,أي من هؤلاء لا يعتبر loop؟,"['for', 'have', 'do', 'while']",have,
+الحلقات,"What is the output of the following program?
+#include <iostream>
+using namespace std;
+int main()
+{
+int i = 0, j = 0;
+do
+{
+    if(i % 2 == 0)
+    {
+       cout<<j;
+       j++;
+    }
+    ++i;
+}while(i<10);
+cout<<j;
+    return 0;
+}","['12345', '012345', '234510', '0123']",12345,
+الحلقات,Is it possible to include a while loop in a for loop?,"['Yes', 'No', 'Compilation Error', 'Runtime Error']",Yes,
+الحلقات,"How many times QuizOrbit.com is printed?
+#include <iostream>
+using namespace std;
+int main()
+{
+    int i,j;
+    for(i=0;i<5;i++)
+    {
+        while(j<i)
+    {
+        cout<<“QuizOrbit.com”<<endl;
+        j++;
+    }
+    }
+    return 0;
+}","['4', '5', '6', '7']",4,
+الحلقات,"What is the output of the following program?
+#include <iostream>
+using namespace std;
+int main()
+{
+int i,j=0;
+for(i=10;i>0;i/=2)
+{
+    j++;
+    cout<<j;
+}
+cout<<j;
+    return 0;
+}","['0123456789', '123456789', '12344', '12345']",12344,
+الحلقات,"What is the output of the following program?
+#include <iostream>
+using namespace std;
+int main()
+{
+int i=10,j=0;
+while(1)
+{
+if(j<i)
+    j++;
+    cout<<j;
+}
+ return 0;
+}","['1', '2', '', 'Infinite times']",Infinite times,
+الحلقات,"What is the output of the following program?
+#include <iostream>
+using namespace std;
+int main()
+{
+int x = 9;
+ while (x<9);
+ x++;
+ cout<<x;
+ return 0;
+}","['20', '10', '15', '9']",10,
+الحلقات,"What is the output of the following program?
+#include<iostream>
+#include<algorithm>
+using namespace std;
+void displayx2(int x)
+{
+    cout << x * 2 << ” “;
+}
+class Multiply2
+{
+    void operator() (int x)
+    {
+        cout << x * 3 << ” “;
+    }
+};
+int main()
+{
+    // initializing array
+    int arr[5] = { 1, 5, 2, 4, 3 };
+    for_each(arr, arr + 5, displayx2);
+    return 0;
+}","['1 5 2 4 3', '1 2 3 4 5', '2 10 4 8 6', '3 15 6 12 9']",2 10 4 8 6,
+الحلقات,"How many times will QuizOrbit be printed?
+#include <iostream>
+using namespace std;
+int main()
+{
+    int i = 100;
+    for (; i; i >>= 1)
+        cout<<“QuizOrbit”<<endl;
+    return 0;
+}","['Eight', 'Six', 'Four', 'Seven']",Seven,
+الحلقات,"How many times QuizOrbit.com is printed?
+#include <iostream>
+using namespace std;
+int main()
+{
+    int i;
+    for(i=0;i<5;i++)
+    cout<<“QuizOrbit.com”<<endl;
+    return 0;
+}","['5', '6', '3', '4']",5,
+الحلقات,What is the number of loops in C++?,"['2', '3', '4', '5']",4,
+الحلقات,ما هي نتيجة هذا الكود؟for (int i = 1; i <= 10; i+=2)    System.out.println(i);,"['13579', '1357', '13578']",13579,
+الحلقات,ما هي الـ loop التي تتطلب أقواس مجعدة {}؟,"['for', 'do', 'while', 'كل ما سبق']",كل ما سبق,
+الحلقات,ما هو الرمز المستخدم لوضع عبارات برمجية داخل بنية الـ loop في C ++؟,"['% %', '( )', '{ }', 'لا شئ مما سبق']",{ },
+الدوال,كم عدد القيم التي يمكن إرجاعها بواسطة الـ function في C ++؟,"['0', '1', 'عدد لا نهائي من القيم', 'لا شئ مما سبق']",1,
+الدوال,"What is the output of the following program?
+#include <iostream>
+using namespace std;
+void find();
+void find()
+{
+    static int i=1;
+    cout<<i<<” “;
+    i++;
+}
+int main()
+{
+    find();
+    find();
+    find();
+    return 0;
+}","['Compile time Error', '1 2 3', '1 1 1', '3 3 3']",1 2 3,
+الدوال,"What is the output of the following code snippet?
+#include <iostream>
+using namespace std;
+   inline int maximum(int a, int b )
+    {
+        return ( a > b ? a : b );
+    }
+    int main()
+    {
+        int x = 30;
+        int y = 40;
+        cout << maximum(x, y );
+        return 0;
+    }","['30', '40', 'Either 30 or 40', 'Compile time Error']",40,
+الدوال,"What is the output of the following code snippet?
+#include <iostream>
+using namespace std;
+    int gCD(int a, int b)
+    {
+        int tempvar=0;
+        while (b != 0) 
+        {
+            tempvar = a% b;
+            a = b;
+            b = tempvar;
+        }
+        return(a);
+    }
+    int main ()
+    {
+        int a=9, b = 12;
+        cout << gCD(a, b);
+        return(0);
+    }  ","['1', '3', '9', '12']",3,
+الدوال,إذا كانت الـ function في C ++ لا تُرجع قيمة ، فسيتم الإشارة إلى نوع الإرجاع الخاص بها بـ .....,"['Int', 'Float', 'Void', 'لا شئ مما سبق']",Void,
+الدوال,4. Which of the following is a complete function?,"['A. int funct();', 'B. int funct(int x) {return x=x+1;}', 'C. void funct(int) {cout&tl;<""Hello""}', 'D. void funct(x) {cout<<""Hello""}']",int funct(int x) {return x=x+1;},
+الدوال,3. Which of the following is a valid function call (assuming the function exists)?,"['A. funct;', 'B. funct x, y;', 'C. funct();', 'D. int funct();']",funct();,
+الدوال,كم عدد القيم التي يمكن إرجاعها بواسطة الـ function في C ++؟,"['0', '1', 'عدد لا نهائي من القيم', 'لا شئ مما سبق']",1,
+الدوال,...... هي عبارة تستخدم لتشغيل او مناداة الـ function,"['function declaration', 'function call', 'function definition', 'function name']",function call,
+الدوال,"2. What is the return type of the function with prototype: ""int func(char x, float v, double t);""","['A. char', 'B. int', 'C. float', 'D. double']",int,
+الدوال,...... هو نوع من المتغيرات التي لا يمكن استخدامه إلا داخل الدالة,"['local variable', 'global variable', 'parameter variables', 'constant variable']",local variable,
+الدوال,إذا كانت الـ function في C ++ لا تُرجع قيمة ، فسيتم الإشارة إلى نوع الإرجاع الخاص بها بـ .....,"['Int', 'Float', 'Void', 'لا شئ مما سبق']",Void,
+الدوال,"...... يكون موجود في العادة في اعلى الدالة ""function header"" و يحدد مدخلاً للـ function لأداء مهمتها","['global variable', 'function arguments or function parameters', 'function statements', 'function heading']",function arguments or function parameters,
+الدوال,...... هي عبارة تخبر المترجم عن اسم الـ function  ونوع الـ return والـ parameters,"['function definition', 'function declaration', 'function call', 'function name']",function declaration,
+الدوال,1. Which is not a proper prototype?,"['A. int funct(char x, char y);', 'B. double funct(char x)', 'C. void funct();', 'D. char x();']",double funct(char x),
+الدوال,What is the minimum number of functions needed in C++?,"['Zero', 'One', 'Two', 'Infinite']",One,
+الدوال,...... تنهي تنفيذ الـ function و يمكنها ارجاع قيمة اذا تم استدعاء هذه الـ function,"['break', 'return', 'getch', 'main']",return,
+الدوال,...... إنه جزء اساسي من الـ function header و يستخدم لتعريف و تحديد الـ function,"['function name', 'function data type', 'function parameters', 'function body']",function name,
+الدوال,...... إنه نوع return يعني عدم إرجاع أي قيمة,"['int', 'double', 'void', 'char']",void,
+الدوال,........ هو جزء من البرنامج يؤدي مهمة محددة,"['array', 'function', 'looping', 'conditional statements']",function,
+الدوال,"ما هي نتيجة هذا الكود؟ #include <iostream>using namespace std;void duplicate (int& a, int& b, int& c){    a *= 2;    b *= 2;    c *= 2;}int main (){    int x = 1, y = 3, z = 7;    duplicate (x, y, z);    cout << x << y << z;    return 0;}","['1468', '2812', '2614', '2713']",2614,
+الدوال,"What is the output of the following code snippet?
+#include<bits/stdc++.h>
+using namespace std;
+int mul(int a, int b)
+{
+    return (a * b);
+}
+float mul(float a, float b)
+{
+    return (a / b);
+}
+int main()
+{
+    int x = 10, y = 2;
+    float n = 13.2345, m = 2.0;
+    cout << mul(x, y) <<”    “;
+    cout <<setprecision(3)<< mul(n, m);
+    return 0;
+} ","['20 6', '20 6.6', '20 6.62', '20 6.617']",20 6.62,
+الدوال,"What is the output of the following program?
+#include<iostream>
+ using namespace std;
+void dFunction(int p, …)
+{
+    cout<<p<<” “;
+}
+int main()
+{
+    dFunction(1, 3, 5, 7);
+    dFunction(3, 6, 12);
+    return 0;
+}","['1 3', '2 3', '3 3', 'Compilation Error']",1 3,
+الدوال,"What is the output of the following program?
+#include <iostream>
+using namespace std;
+int fun(int n)
+{
+  for(;n > 0; n–)
+   cout<<“QuizOrbit”<<” “;
+  return 0;
+}
+int main()
+{
+    int ptr=fun(2);
+    return 0;
+}","['QuizOrbit', 'QuizOrbit QuizOrbit', 'Compilation Error', 'Runtime Error']",QuizOrbit QuizOrbit,
+الدوال,"What is the output of the following code snippet?
+#include <iostream>
+#include <string>
+using namespace std;
+void fun(string str, string str1)
+{
+   cout<<str.capacity()<<” “<<str1.capacity();
+}
+int main() {
+   string str {“C++ String Quiz”};
+    string str1 {“string”};
+    fun(str,str1);
+    return 0;
+}","['15 5', '15 7', '15 6', '16 7']",15 6,
+الدوال,"What is the output of the following code snippet?
+#include <iostream>
+#include <string>
+using namespace std;
+void fun(string str, string str1)
+{
+    unsigned int found = str.find(str1);
+    if (found != string :: npos)
+    cout << found << endl;
+}
+int main() {
+   string str {“C++ string Quiz”};
+    string str1 {“string”};
+    fun(str,str1);
+    return 0;
+}","['23', 'string', 'Quiz', '4']",4,
+الدوال,"How many times will QuizOrbit be printed?
+#include <iostream>
+using namespace std;
+#define DISPLAY(i, limit) do { if (i++ < limit) { cout<<“QuizOrbit”<<endl; continue; } }while(i<limit)
+int main()
+{
+    int i = 0;
+    DISPLAY(i, 4);
+    return 0;
+}","['Four', 'Five', 'Three', 'Seven']",Four,
+الدوال,"What is the output of the following program?
+#include <iostream>
+using namespace std;
+inline int display(int a, int b)
+{
+    return a*b;
+}
+int main()
+{
+    int i,a=10,b=5;
+   for(i=1;i<display(a,b);i=i*2)
+    cout<<i<<” “;
+    return 0;
+}","['1 2 4 8 16 32', '2 4 8 16 32 64', '1 2 4 8 16', 'Infinite']",1 2 4 8 16 32,
+الدوال,"What is the output of the following code snippet?
+#include <iostream.h>
+using namespace std;
+int function(int* ptr)
+{
+    return (*ptr + 50);
+}
+int main()
+{
+    const int value = 20;
+    const int *pointer = &value;
+    int *ptr1 = const_cast <int *>(pointer);
+    cout << function(ptr1);
+    return 0;
+}","['80', '50', '90', '70']",70,
+الشروط,"4. What is the result of the following code?
+ int x=0;
+
+switch(x)
+
+{
+
+  case 1: cout<<""One"";
+
+  case 0: cout<<""Zero"";
+
+  case 2: cout<<""Hello World"";
+
+}","['A. One', 'B. Zero', 'C. Hello World', 'D. ZeroHello World']",ZeroHello World,
+الشروط,2. What is required to avoid falling through from one case to the next?,"['A. end;', 'B. break;', 'C. Stop;', 'D. A semicolon.']",break;,
+الشروط,3. What keyword covers unhandled possibilities?,"['A. all', 'B. contingency', 'C. default', 'D. other']",default,
+الشروط,"ما هي نتيجة هذا البرنامج؟#include <iostream>using namespace std;int main (){    int x = 5;    if(x++ == 5)        cout<<""Five""<<endl;    else        if(++x == 6)            cout<<""Six""<<endl;    return 0;}","['Five', 'Six', 'FiveSix', 'Compilation Error']",Five,
+الشروط,"ما هي نتيجة هذا البرنامج؟#include <iostream>using namespace std;int main (){    int x = 5;    if(-1 == -1){cout<<""Hey.."";}    else{cout<<""Nouvil.com"";}    return 0;}","['Hey..', 'Nouvil.com', 'Compilation Error', 'لا شئ مما سبق']",Hey..,
+الشروط,4. Which of the following shows the correct syntax for an if statement?,"['A. if expression', 'B. if { expression', 'C. if ( expression )', 'D. expression if']",if ( expression ),
+الشروط,Switch Statement,"['Is a statement with a set of conditions called cases', 'Is a case', 'Is a condition with no cases', 'Is a boolean statement']",['Is a statement with a set of conditions called cases'],
+الشروط,"اذا قام المستخدم بادخال 5 الى هذا البرنامج , فما هي نتيجة البرنامج؟#include <iostream>using namespace std;int main (){    int a;    cin>>a; // user can enter any value    if (++a*5 <= 25)    {        cout<<""Hello"";    }    else    {        cout<<""Bye"";}    return 0;}","['Hello', 'Bye', 'Undefined', 'Compilation Error']",Bye,
+الشروط,"ما هي نتيجة هذا الكود؟#include <iostream>using namespace std;int main (){    if(0)    {        cout<<""Hi"";    }    else    {        cout<<""Bye"";    }    return 0;}","['Hi', 'Bye', 'HiBye', 'Compilation Error']",Bye,
+الشروط,ما هي نتيجة هذا الكود؟#include <iostream>using namespace std;int main (){    int n;    for (n = 5; n > 0; n--)    {        cout << n;        if (n == 3)            break;        }    return 0;},"['543', '54', '5432', '53']",543,
+الشروط,"ما هي نتيجة هذا الكود؟#include <iostream>using namespace std;int main (){    int a = 1;    switch(a)    {        case 1: cout<<""One"";        case 2: cout<<""Two"";        case 3: cout<<""Three""; break;        default: cout<<""Default"";}    return 0;}","['One', 'Two', 'OneTwoThree', 'Default']",OneTwoThree,
+الشروط,ما هي نتيجة هذا الكود؟#include <iostream>using namespace std;int main (){    int a = 10;    if (a < 15)    {        time:        cout << a;        goto time;    }    break;    return 0;},"['1010', '10', '5432', '53']",10,
+الشروط,اي مما يلي صحيح اذا تحدثنا عن الـ if في الـ c++؟,"['if expression', 'if { expression', 'if ( expression )', 'expression if']",if ( expression ),
+الشروط,1. Which follows the case statement?,"['A. :', 'B. ;', 'C. -', 'D. A newline']",:,
+العوامل,Which operators are used in C++?,"['==', '+=', '**', '++']","['==', '+=', '++']",
+العوامل,"Which of the following is called insertion/put to operator, which is used in cout statement?","['<<', '>>', '<', '>']",['<<'],
+العوامل,"Which of the following is called extraction/get from operator, which is sued in cin statement??","['<<', '>>', '<', '>']",['>>'],
+العوامل,AND operator in C++ is written as:,"['&&', '&', '||', 'AND']",['&&'],
+العوامل,What is the alternative for x = x + 5?,"['x += 5;', 'x -= 4;', 'x = y + 5;', 'x=+5']",['x += 5;'],
+العوامل,((4==4) && (3>6))   returns:,"['True', 'False']",['False'],
+العوامل,Which of the following is called extraction or get from operator?,"['>>', '<<', '>', '**']",['>>'],
+العوامل,Which of the following is called insertion operator?,"['<<', '>>', '*', '<']",['<<'],
+العوامل,3. Evaluate !(1 && !(0 || 1)).,"['A. True', 'B. False', 'C. Unevaluatable']",TRUE,
+العوامل,What does <= mean?,"['less than', 'greater than', 'less than or equal to', 'greater than or equal to']",['less than or equal to'],
+العوامل,2. Which of the following is the boolean operator for logical-and?,"['A. &', 'B. &&', 'C. |', 'D. |&']",&&,
+العوامل,"Evaluate the following expressions to true or false
+
+3!=4-1","['true', 'False']",['False'],
+العوامل,"What is the output of the following program?
+#include <iostream>
+using namespace std;
+int main()
+{
+    int a = 20, b = 30;
+    bool res = ((a != b) && cout << “QuizOrbit\n”);
+    if(res==1)
+    cout<<“TRUE”;
+    else
+    cout<<“FALSE”;
+    return 0;
+}","['QuizOrbit FALSE', 'QuizOrbit TRUE', 'FALSE', 'TRUE']",QuizOrbit TRUE,
+العوامل,"What is the output of the following code snippet?
+#include <iostream>
+using namespace std;
+int main()
+{
+    int a = 20, b = 30, c = 50, d = 40;
+      if (a > b && a > c && a>d)
+        cout << “A is greater than b,c and d”<<endl;
+    else
+        cout << “Logical And Condition Fails”<<endl;
+      if (a > b || a>c || a>d)
+        cout << “Either a is greater than b, c or d “<<endl;
+    else
+        cout << “Neither a is greater than b, c nor d”<<endl;
+    return 0;
+}","['Logical And Condition Fails Neither a is greater than b, c nor d', 'A is greater than b,c and d Neither a is greater than b, c nor d', 'Logical And Condition Fails Either a is greater than b, c or d', 'A is greater than b,c and d Either a is greater than b, c or d']","Logical And Condition Fails Neither a is greater than b, c nor d",
+العوامل,7. Which of the following is the correct operator to compare two variables?,"['A. :=', 'B. =', 'C. equal', 'D. ==']",==,
+العوامل,"What is the output of the following program?
+#include <iostream>
+using namespace std;
+int main()
+{
+    int i = 6;
+   cout<<i++<< ” “<<++i<<” “<<i++;
+    return 0;
+}","['6 7 7', '6 8 8', '7 8 8', '7 7 7']",6 8 8,
+العوامل,"What is the output of the following code snippet?
+#include <iostream>
+using namespace std;
+int main()
+{
+    int a = 60, b = 50, c=10;
+    if (a > b && a >c)
+    {
+        cout << “a is greater than b and c\n”;
+    }
+    else if(b>a && b>c)
+    {   
+        cout << “b is greater than a and c\n”;
+    }
+    else if(c>a&& c>b)
+    {
+        cout<<“c is greater than a and b\n”;
+    }
+    else if(a==b && a==c)
+    {
+        cout<<“a is equal to b and c”;
+    }
+    else if(a==b)
+    {
+        cout<<“a is equal to b”;
+    }
+    else if(a==c)
+    {
+        cout<<“a is equal to c”;
+    }
+    else if(b==c)
+    {
+        cout<<“b is equal to c”;
+    }
+    return 0;
+}","['a is greater than b and c', 'b is greater than a and c', 'c is greater than a and b', 'a is equal to b and c']",a is greater than b and c,
+المتغيرات,"Find the output of the following code:
+#include<iostream>
+using namespace std;
+int main()
+{
+    float x = 0.1;
+    if ( x == 0.1 )
+        cout<<“Data”;
+    else if (x == 0.1f)
+        cout<<“QuizOrbit”;
+    else
+        cout<<“Quizzes”;
+}","['Data', 'QuizOrbit', 'Quizzes', 'Compile Time Error']",QuizOrbit,
+المتغيرات,"What is the output of the following code snippet?
+#include<iostream>
+using namespace std;
+int main()
+{
+    char c = 65;
+    c = c+10;
+    cout<<c;
+    return 0;
+}","['D', '75', 'K', '}']",K,
+المتغيرات,"What is the output of the following code:
+    #include <iostream>
+    using namespace std;
+    int main()
+    {
+        typedef int number;
+        number a = 30, b = 35;
+        number c = 2*a + 2*b – 3*b – 2*a;
+        cout << c;
+        return 0;
+    }   ","['20', '5', '-35', '35']",-35,
+المتغيرات,"Find the output of the following C++ code.
+#include <iostream>
+using namespace std;
+int main()
+{
+   int data = “98”;
+   int val=50;
+  cout<<“After Adding value with val result is “<<data<<“+”<<val<<“we   get”<<data+val;
+    return 0;
+}","['Invalid Conversion error', 'Invalid input', 'Syntax error', 'None of the above']",Invalid Conversion error,
+المتغيرات,"What is the output of the following program?
+#include <iostream>
+using namespace std;
+int main()
+{
+int res;
+res = 20*30/5+6;
+cout<<res;
+return 0;
+}","['126', '128', '132', '136']",126,
+المتغيرات,"What is the output of this code?
+int x = 8;
+// x = 3;
+cout<<x<<endl;","['3', '8', 'error', 'x']",['8'],
+المتغيرات,"What is the output of the following code snippet?
+#include<iostream>
+using namespace std;
+int main()
+{
+int a,b,c,d,i;
+a=40;
+b=50;
+c=a,b;
+d=(a,b);
+i = (d++, d + 100, 50 + d);
+cout << i;
+return 0;
+}","['100', '101', '150', '151']",101,
+المتغيرات,"What is the output of the following code:
+#include <iostream>
+using namespace std;
+int main ()
+{
+int a, b;
+a = 10;
+b = ++a * a++;
+cout <<“a=”<<a<<“b=”<< b<<” “;
+b = a++ * ++a;
+cout <<“new a=”<< a<<“new b=”<< b;
+return 0;
+}","['a=11 b=121 new a=13 new b=143', 'a=10 b=100 new a=12 new b=144', 'a=12 b=132 new a=14 new b=168', 'a=12 b=132 new a=13 new b=169']",a=12 b=132 new a=14 new b=168,
+المتغيرات,"What is the output of the following code snippet?
+#include <iostream>
+using namespace std;
+int main()
+{
+int val1, val2, c;
+val1=40;
+val2=50;
+val1>val2?cout<<“value1 is greater than value2″<<endl:cout<<“value2 is greater than value1″<<endl;
+c= (val1> val2)?val1:val2;
+cout << c;
+return 0;
+}","['value1 is greater than value2 40', 'Compiler Error', 'value2 is greater than value1 50', 'None of these']",value2 is greater than value1 50,
+المتغيرات,"What are the mistakes in this code?
+#include<iostream.h>
+#include<math.h>
+void main()
+{
+   int x;
+   int sum = 0;
+   cin>>x;
+   for (x = 1; x < 100; x++)
+   {
+      sum = sum + log10(x);
+   }
+   cout << ""The sum is equal to "" << sum << endl;
+}","['x must be <=10 instead of x<100', 'The function is log(x) not log10(x)', 'float sum must be used instead of int sum', 'cin>>x\nis not needed', 'Math library is not needed']","['x must be <=10 instead of x<100', 'The function is log(x) not log10(x)', 'float sum must be used instead of int sum', 'cin>>x\nis not needed']",
+المتغيرات,"What is the output of the following program?
+#include <iostream>
+using namespace std;
+int main()
+{
+float a;
+float b=65.564545;
+int c ;
+double d=65.567634;
+c = (int) b;
+a = (float)d;
+cout << c <<” “<< a;
+return 0;
+}","['65 65', '65 65.5676', '65 65.5645', '65.5645 65']",65 65.5676,
+المتغيرات,"What is the output of the following code?
+#include <iostream>
+using namespace std;
+int main()
+{
+    double value= 55.5;
+    int c = value; 
+    int d = static_cast<int>(value);
+    cout << d++ + ++d;
+}","['110', '111', '112', 'Error']",112,
+المتغيرات,"What is the output of the following code?
+#include <iostream>
+using namespace std;
+int main()
+{
+    int i = 20;
+    int size = sizeof(++i);
+    cout << ” Size of i = ” << size<<endl;
+    i=i,++i;
+    cout << ” Value of i = ” << i;
+    return 0;
+}","['Size of i=4 Value of i=21', 'Size of i=4 Value of i=20', 'Size of i=8 Value of i=21', 'Error']",Size of i=4 Value of i=21,
+المتغيرات,"ما هي نتيجة الكود؟ #include<iostream>using namespace std;main() {    int r, x = 2;    float y = 5;    r = y%x;    cout<<r;}","['1', '0', '2', 'Compile error']",Compile error,
+المتغيرات,"Find the output of the following code:
+#include <iostream>
+using namespace std;
+int main()
+{
+   int if = 98;
+   int value;
+value = 100+if;
+cout<<“Value is “<<value;
+    return 0;
+}","['Value is 198', 'Compiles Successfully', 'Invalid Syntax', 'Value Error']",Invalid Syntax,
+المصفوفات,"What is the size of the following Array?
+Int arr={1,2,3,1,2,3,4,5,1,2};","['8', '9', '10', '11']",10,
+المصفوفات,"What is the value of the element at arr[3][0] in the following program?
+#include<iostream>
+using namespace std;
+int main()
+{
+    int arr[5][2] = {{0,1}, {2,3}, {4,5}};
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 2; j++)
+        {
+            cout << “Element at arr[” << i
+                << “][” << j << “]: “;
+            cout << arr[i][j]<<endl;
+        }
+    }
+    return 0;
+}","['', '5', '4', '3']",,
+المصفوفات,"In the following array initialization, what value is assigned to arr[4]?
+int arr[5]={5,4,3,6,3};","['4', '6', '3', '5']",6,
+المصفوفات,"In what range do the index values of the following array fall?
+int arr[500];","['0 to 500', '0 to 499', '1 to 500', '1 to 499']",0 to 499,
+المصفوفات,"What is the value of the element at arr[0][1][1] in the following program?
+#include<iostream>
+using namespace std;
+int main()
+{
+    int arr[1][3][2] =
+    {
+        { {0,1}, {2,3}, {4,5} } 
+    };
+    for (int i = 0; i < 1; ++i)
+    {
+        for (int j = 0; j < 3; ++j)
+        {
+            for (int k = 0; k < 2; ++k)
+            {
+                cout << “Element at arr[” << i << “][” << j
+                    << “][” << k << “] = ” << arr[i][j][k]
+                    << endl;
+            }
+        }
+    }
+    return 0;
+}","['4', '', '2', '3']",3,
+المصفوفات,ماذا يحدث في هذا الكود؟ for (int index = 0; index < 5; index++)    cin >> numbers[index];,"['index ضع البيانات في مصفوفة مكونة من خمسة عناصر تسمى', 'numbers ضع البيانات في مصفوفة مكونة من أربعة عناصر تسمى', 'numbers ضع البيانات في مصفوفة مكونة من خمسة عناصر تسمى', 'index ضع البيانات في مصفوفة مكونة من أربعة عناصر تسمى']",numbers ضع البيانات في مصفوفة مكونة من خمسة عناصر تسمى,
+المصفوفات,"What is the output of the following code?
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+int a[][2] = {{1, 2}, {3, 4},{5,6}}; 
+cout<<a;
+return 0;
+}","['Memory address of the first element in the array.', 'Compiler Error', 'Memory address of the last element in the array.', 'Value of first element in the array.']",Memory address of the first element in the array.,
+المصفوفات,"  What is the output of the following code?
+#include<bits/stdc++.h>
+using namespace std;
+    int main()
+    {
+        char str[7]=”DATA”;
+        cout << str[2]<<” “<<str;
+        return 0;
+    }","['T', 'T DATA', 'A', 'A DATA']",T DATA,
+المصفوفات,2. What is the index number of the last element of an array with 29 elements?,"['A. 29', 'B. 28', 'C. 0', 'D. Programmer-defined']",28,
+المصفوفات,3. Which of the following is a two-dimensional array?,"['A. array anarray[20][20];', 'B. int anarray[20][20];', 'C. int array[20, 20];', 'D. char array[20];']",int anarray[20][20];,
+المصفوفات,"5. Which of the following gives the memory address of the first element in array foo, an array with 100 elements?","['A. foo[0];', 'B. foo;', 'C. &foo;', 'D. foo[1];']",foo;,
+المصفوفات,"What is the output of the following code?
+#include <iostream>
+#include <string>
+using namespace std;
+int main()
+{
+    string student[4] = { “Harry”, “Ritik”,
+                            “Jaish”, “Jackline” };
+    for (int i = 0; i < 4; i++)
+        if(i%2==0)
+        cout << student[i] << ” “;
+return 0;
+}","['Harry Ritik', 'Harry Jaish', 'Harry Jackline', 'Jaish Jackline']",Harry Jaish,
+المصفوفات,"What is the output of the following code?
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+int a[][2] = {{1, 2}, {3, 4},{5,6}}; 
+cout << sizeof(a); 
+return 0;
+}","['4*sizeofInt', '5*sizeofint', '6*sizeofInt', 'Compiler Error']",6*sizeofInt,
+المصفوفات,"What is the output of the following code?
+#include <iostream>
+using namespace std;
+int main() {
+    int c = 1,i,temp,n=3,j;
+   int arr[3][3]={11,12,13,14,15,1};
+for(i=1;i<n;i++)
+{
+    for(j = 1;j<n;j++)
+    {
+        temp = arr[i][j] + c;
+        arr[i][j] = arr[j][i];
+        arr[j][i] = temp – c;
+    } 
+}
+for(i = 0; i<n;i++)
+    for(j = 0;j<n;j++)
+        cout<< arr[i][j] <<” “;
+    return 0;
+}","['11 12 13 14 15 0 0 0 0', '11 12 13 14 15 1 0 0 0', '11 12 13 14 15 0 0 0 1', 'Compiler Error']",11 12 13 14 15 1 0 0 0,
+المصفوفات,"What is the output of the following code?
+#include <iostream>
+#include <array>
+#include <string>
+using namespace std;
+int main()
+{
+    array<string, 5> students {“Jaish”, “Gunjan”, “Vivaan”,
+                                    “Harry” };
+    for (int i = 0; i < 4; i++)
+        if(i%2!=0)
+        cout << students[i] << ” “;
+    return 0;
+}","['Jaish Harry', 'Gunjan Harry', 'Vivaan Harry', 'Jaish Vivaan']",Gunjan Harry,
+المصفوفات,في العبارة التالية a [3] = 5 ، أي مما يلي قيمة الـ index؟,"['a', '3', '5']",3,
+المصفوفات,يبدأ اول index في الـ array من,"['0', '1', '2', 'لا شئ مما سبق']",0,
+المصفوفات,أي مما يلي يعد تعريفًا صالحًا لـ array في C ++؟,"['int nums[10];', 'int array[0];', 'void numbers[5];', 'float $$payments[10];']",int nums[10];,
+المصفوفات,"أين يتم تخزين 77 في المصفوفة scores؟int scores[]={83, 62, 77, 97}","['scores[0]', 'scores[1]', 'scores[2]', 'scores[3]']",scores[2],
+المصفوفات,يمكن للمصفوفة تخزين مجموعة من القيم ، ولكن يجب أن تكون القيم ...,"['من نفس نوع البيانات', 'من اي نوع البيانات', 'constants', 'integers']",من نفس نوع البيانات,
+المصفوفات,ما هو آخر index في هذه المصفوفة؟int values[5],"['0', '5', '4', '6']",4,
+المصفوفات,"What is the output of the following code?
+#include <iostream>
+using namespace std;
+int main() {
+    int i;
+    int arr[6] = { 10, 20, 30, 40 };
+   // cout<<arr[5];
+   for(i=0;i<6;i++)
+    cout<<arr[i]<<” “;
+    return 0;
+}","['10 20 30 40 0 0', '0 0 10 20 30 40', '10 20 30 40 454 343', 'Error']",10 20 30 40 0 0,
+المصفوفات,يعتبر الـ index في الـ array في حد ذاته ........,"['a character', 'an integer', 'a floating point number', 'a negative number']",an integer,
+المصفوفات,1. Which of the following correctly declares an array?,"['A. int anarray[10];', 'B. int anarray;', 'C. anarray{10};', 'D. array anarray[10];']",int anarray[10];,
+المصفوفات,يبدأ اول index في الـ array من,"['0', '1', '2', 'لا شئ مما سبق']",0,
+المصفوفات,أي من العبارات التالية ليس تعريف صحيح للـ array,"['bool array1[10]', 'double array2[20,0]', 'char array3[30]', 'double array4[7]']","double array2[20,0]",

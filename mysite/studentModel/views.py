@@ -264,6 +264,20 @@ def map_skill(skill):
         return 3
 
 
+class EvaluateRecommend(APIView):
+    def post(self, request):
+        student_profile = get_profile(request)
+        project = Project.objects.get(id=request.data['project_id'])
+        recommend = Recommend.objects.filter(student=student_profile).last()
+        if (project.id == recommend.project.id):
+            recommend.good_recommend = request.data['good_recommend']
+            recommend.save()
+        response = {
+            'message': 'SUCCESS',
+        }
+        return Response(response, content_type='application/json; charset=utf-8')
+
+
 class AddProjectSolve(APIView):
     def post(self, request):
         student_profile = get_profile(request)
@@ -281,7 +295,15 @@ class AddProjectSolve(APIView):
         student_project.hint_levels = request.data['hint_levels']
         student_project.solve_date = timezone.now()
         student_project.save()
-
+        recommend = Recommend.objects.filter(student=student_profile).last()
+        if (student_project.project.id == recommend.project.id and recommend.solved is None):
+            recommend.solved = True
+            recommend.solve_date = datetime.datetime.now()
+            recommend.save()
+        elif (student_project.project.id != recommend.project.id and recommend.solved is None):
+            recommend.solved = False
+            recommend.solve_date = datetime.datetime.now()
+            recommend.save()
         solve_tryings = SolveTrying.objects.filter(student_project=student_project)
         student_total_time = solve_tryings.aggregate(total_time=Sum('time'))['total_time']
         if student_total_time is None:
@@ -330,7 +352,7 @@ class AddProjectSolve(APIView):
 
         # time
         student_current_time = min(100., (student_total_time / 30) * 100)
-        student_current_time = min(100., (float(time_required.time) / student_current_time) * 100)
+        student_current_time = min(100., (float(time_required.time) / float(student_current_time)) * 100)
         new_performance_time, new_required_time, dp_time = calculate_updated_performance(float(time_required.time),
                                                                                          float(student_current_time),
                                                                                          float(
