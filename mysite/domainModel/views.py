@@ -99,16 +99,20 @@ class SubConcepts(APIView):
         serializer = SubConceptSerializer(subConcepts, many=True)
         studentKnowledge = student_profile.studentKnowledge.all()
         knowledges = [x.name for x in studentKnowledge]
-        completed = [data for data in serializer.data if data['name'] in knowledges]
-        uncompleted = [data for data in serializer.data if data['name'] not in knowledges]
+        # completed = [data for data in serializer.data if data['name'] in knowledges]
+        # uncompleted = [data for data in serializer.data if data['name'] not in knowledges]
+        for data in serializer.data:
+            if data['name'] in knowledges:
+                data['state'] = 'completed'
+            else:
+                data['state'] = 'uncompleted'
         theoreticalSkill = TheoreticalSkill.objects.get(generalConcept=request.data['generalConcept'],
                                                         student=student_profile)
         skill = theoreticalSkill.skill
         response = {
             'message': 'SUCCESS',
             'data': {
-                'completed': completed,
-                'uncompleted': uncompleted,
+                'subConcepts': serializer.data,
                 'quiz': {
                     'quiz_state': skill > 60,
                     'quiz_mark': skill

@@ -1,0 +1,6975 @@
+Consept,ex,required,img_src,code,output,Explanation,hint
+رسم أشكال هندسية,1,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-1/ex-1-solution-using-cpp/cde215fc-34c9-416c-8424-6daf0888d576_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines:"";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= i; j++)
+		{
+			printf(""*"");
+		}
+		printf(""\n"");
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 5
+*
+**
+***
+****
+*****
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5  عند التشغيل.,
+رسم أشكال هندسية,2,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-1/ex-2-solution-using-cpp/b9f9f9a1-3815-4814-8dbc-dc0ded671fc1_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do
+	{
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int k = 1; k <= n - i; k++)
+		{
+			std::cout << "" "";
+		}
+		for (int j = 1; j <= i; j++)
+		{
+			std::cout << ""*"";
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 5
+    *
+   **
+  ***
+ ****
+*****
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5  عند التشغيل.,
+رسم أشكال هندسية,3,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-1/ex-3-solution-using-cpp/3d736ee8-dccf-43c9-8146-0087878d83bf_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do
+	{
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n + 1 - i; j++)
+		{
+			std::cout << ""*"";
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 5
+*****
+****
+***
+**
+*
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5  عند التشغيل.,
+رسم أشكال هندسية,4,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-1/ex-4-solution-using-cpp/06da100f-9cd5-4731-8215-10463402ca21_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do
+	{
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int k = 1; k < i; k++)
+		{
+			std::cout << "" "";
+		}
+
+		for (int j = 1; j <= n + 1 - i; j++)
+		{
+			std::cout << ""*"";
+		}
+
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 5
+*****
+ ****
+  ***
+   **
+    *
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5  عند التشغيل.,
+رسم أشكال هندسية,5,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر و أعمدة الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عددين أكبر من صفر, لأن عدد أسطر و أعمدة الرسمة لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-1/ex-5-solution-using-cpp/de7cf833-dd60-4da4-bd81-1927ddcb2bc2_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+	int m;
+
+	do
+	{
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	do
+	{
+		std::cout << ""Enter the number of columns: "";
+		std::cin >> m;
+	} while (m <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int k = 1; k <= n - i; k++)
+		{
+			std::cout << "" "";
+		}
+
+		for (int j = 1; j <= m; j++)
+		{
+			std::cout << ""*"";
+		}
+
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+	
+}
+		","
+Enter the number of lines: 5
+Enter the number of columns: 10
+    **********
+   **********
+  **********
+ **********
+**********
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5 كعدد الأسطر و الرقم 10 كعدد الأعمدة عند التشغيل.,
+رسم أشكال هندسية,6,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر و أعمدة الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عددين أكبر من صفر, لأن عدد أسطر و أعمدة الرسمة لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-2/ex-1-solution-using-cpp/f301dee0-5a63-49f3-a47f-f1e1f98e8431_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+	int m;
+
+	do
+	{
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	do
+	{
+		std::cout << ""Enter the number of columns: "";
+		std::cin >> m;
+	}
+	while (m <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int k = 1; k < i; k++)
+		{
+			std::cout << "" "";
+		}
+
+		for (int j = 1; j <= m; j++)
+		{
+			std::cout << ""*"";
+		}
+
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 5
+Enter the number of columns: 10
+**********
+ **********
+  **********
+   **********
+    **********
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5 كعدد الأسطر و الرقم 10 كعدد الأعمدة عند التشغيل.,
+رسم أشكال هندسية,7,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-2/ex-2-solution-using-cpp/98faafe3-9b2d-4a2a-8e39-4a4b976260b6_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do
+	{
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+	
+	for (int i = 1; i <= n; i++)
+	{
+		for (int k = 1; k <= n - i; k++)
+		{
+			std::cout << "" "";
+		}
+
+		std::cout << ""*"";
+
+		for (int j = 1; j < (i * 2) - 1; j++)
+		{
+			std::cout << ""*"";
+		}
+
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 5
+    *
+   ***
+  *****
+ *******
+*********
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5  عند التشغيل.,
+رسم أشكال هندسية,8,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-2/ex-3-solution-using-cpp/b0cc8d3f-ebc1-4cbf-b878-e1f2db97a949_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do
+	{
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int k = 1; k < i; k++)
+		{
+			std::cout << "" "";
+		}
+
+		std::cout << ""*"";
+
+		for (int j = 1; j <= (n * 2) - (i * 2); j++)
+		{
+			std::cout << ""*"";
+		}
+
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 5
+*********
+ *******
+  *****
+   ***
+    *
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5  عند التشغيل.,
+رسم أشكال هندسية,9,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-2/ex-4-solution-using-cpp/b7ac9046-1d25-451b-a7ab-13f21beb0277_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do
+	{
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i <= n / 2)
+		{
+			for (int j = 1; j <= i; j++)
+			{
+				std::cout << ""*"";
+			}
+		}
+		else
+		{
+			for (int j = 1; j < n - i + 2; j++)
+			{
+				std::cout << ""*"";
+			}
+		}
+		
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 5
+*
+**
+***
+**
+*
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5  عند التشغيل.,
+رسم أشكال هندسية,10,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-2/ex-5-solution-using-cpp/546916f3-0911-4639-8d1a-af9620cb45a9_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do
+	{
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i <= n / 2)
+		{
+			for (int k = 1; k < (n / 2) - i + 2; k++)
+			{
+				std::cout << "" "";
+			}
+			for (int j = 1; j <= i; j++)
+			{
+				std::cout << ""*"";
+			}
+		}
+		else
+		{
+			for (int k = 1; k < i - (n / 2); k++)
+			{
+				std::cout << "" "";
+			}
+			for (int j = 1; j < n - i + 2; j++)
+			{
+				std::cout << ""*"";
+			}
+		}
+
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 5
+  *
+ **
+***
+ **
+  *
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5  عند التشغيل.,
+رسم أشكال هندسية,11,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-3/ex-1-solution-using-cpp/89c74957-eb5a-4d32-aafa-6c961a8e29a1_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i <= n / 2)
+		{
+			for (int k = 1; k < (n / 2) - i + 2; k++)
+			{
+				std::cout << "" "";
+			}
+
+			std::cout << ""*"";
+			
+			for (int j = 1; j < (i * 2) - 1; j++)
+			{
+				std::cout << ""*"";
+			}
+		}
+		else
+		{
+			for (int k = 1; k < i - (n / 2); k++)
+			{
+				std::cout << "" "";
+			}
+			
+			std::cout << ""*"";
+
+			for (int j = 1; j <= (n * 2) - (i * 2); j++)
+			{
+				std::cout << ""*"";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 9
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,
+رسم أشكال هندسية,12,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-3/ex-2-solution-using-cpp/14ea2b57-f1d9-4e8c-b1c1-c6d559354c5e_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i <= n / 2)
+		{
+			for (int k = 1; k < (n / 2) - i + 2; k++)
+			{
+				std::cout << "" "";
+			}
+
+			std::cout << ""*"";
+
+			for (int j = 1; j < (i * 2) - 2; j++)
+			{
+				std::cout << "" "";
+			}
+
+			if (i != 1)
+			{
+				std::cout << ""*"";
+			}
+		}
+		else
+		{
+			for (int k = 1; k < i - (n / 2); k++)
+			{
+				std::cout << "" "";
+			}
+
+			std::cout << ""*"";
+
+			for (int j = 1; j < (n * 2) - (i * 2); j++)
+			{
+				std::cout << "" "";
+			}
+
+			if (i != n)
+			{
+				std::cout << ""*"";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 9
+    *
+   * *
+  *   *
+ *     *
+*       *
+ *     *
+  *   *
+   * *
+    *
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,
+رسم أشكال هندسية,13,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-3/ex-3-solution-using-cpp/7daab33f-8756-4a6b-a8c5-6c2e62330c4b_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i <= n / 2)
+		{
+			for (int k = 1; k < (n / 2) - i + 2; k++)
+			{
+				std::cout << ""-"";
+			}
+
+			std::cout << ""*"";
+
+			for (int j = 1; j < (i * 2) - 2; j++)
+			{
+				std::cout << "" "";
+			}
+
+			if (i != 1)
+			{
+				std::cout << ""*"";
+			}
+
+			for (int k = 1; k < (n / 2) - i + 2; k++)
+			{
+				std::cout << ""-"";
+			}
+		}
+		else
+		{
+			for (int k = 1; k < i - (n / 2); k++)
+			{
+				std::cout << ""-"";
+			}
+
+			std::cout << ""*"";
+
+			for (int j = 1; j < (n * 2) - (i * 2); j++)
+			{
+				std::cout << "" "";
+			}
+
+			if (i != n)
+			{
+				std::cout << ""*"";
+			}
+
+			for (int k = 1; k < i - (n / 2); k++)
+			{
+				std::cout << ""-"";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 9
+----*----
+---* *---
+--*   *--
+-*     *-
+*       *
+-*     *-
+--*   *--
+---* *---
+----*----
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,
+رسم أشكال هندسية,14,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد واحد يمثل طول أسطر و أعمدة الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد أكبر من صفر, لأن عدد الأسطر أو الأعمدة لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-3/ex-4-solution-using-cpp/ec2abc14-3d84-47fc-b8f3-3475c3e35206_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter square side length: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i == 1 || i == n)
+		{
+			for (int j = 1; j <= n; j++)
+			{
+				std::cout << ""*"";
+			}
+		}
+		else
+		{
+			std::cout << ""*"";
+			for (int k = 1; k <= n - 2; k++)
+			{
+				std::cout << "" "";
+			}
+			std::cout << ""*"";
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 10
+**********
+*        *
+*        *
+*        *
+*        *
+*        *
+*        *
+*        *
+*        *
+**********
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 10 عند التشغيل.,"الشكل الذي يظهر لك في النتيجة النهائية عبارة عن مربع لأن عدد النجوم التي تظهر عامودياً يساوي عدد النجوم التي تظهر أفقياً, لكنه لا يظهر لك كذلك بسبب الهامش الإفتراضي الذي يقوم الحاسوب بوضعه بين الأسطر."
+رسم أشكال هندسية,15,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر و أعمدة الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عددين أكبر من صفر, لأن عدد أسطر و أعمدة الرسمة لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-3/ex-5-solution-using-cpp/234d40be-f74f-4281-bf4d-6809ce82ae0d_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+	int m;
+
+
+	do {
+		std::cout << ""Enter the height: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+	
+	do {
+		std::cout << ""Enter the width: "";
+		std::cin >> m;
+	}
+	while (m <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i == 1 || i == n)
+		{
+			for (int j = 1; j <= m; j++)
+			{
+				std::cout << ""*"";
+			}
+		}
+		else
+		{
+			std::cout << ""*"";
+			for (int k = 1; k < m - 1; k++)
+			{
+				std::cout << "" "";
+			}
+			std::cout << ""*"";
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the height: 5
+Enter the width: 10
+**********
+*        *
+*        *
+*        *
+**********
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5 كطول المستطيل و الرقم 10 كعرض المستطيل عند التشغيل.,
+رسم أشكال هندسية,16,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-4/ex-1-solution-using-cpp/8fbcd1a0-ac30-4094-ac57-198d1bbbae30_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (i == j)
+			{
+				std::cout << "" "";
+			}
+			else
+			{
+				std::cout << ""*"";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 9
+ ********
+* *******
+** ******
+*** *****
+**** ****
+***** ***
+****** **
+******* *
+******** 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,"الشكل الذي يظهر لك في النتيجة النهائية عبارة عن مربع لأن عدد النجوم التي تظهر عامودياً يساوي عدد النجوم التي تظهر أفقياً, لكنه لا يظهر لك كذلك بسبب الهامش الإفتراضي الذي يقوم الحاسوب بوضعه بين الأسطر."
+رسم أشكال هندسية,17,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, مع الإشارة إلى أنه في حال قام بإدخال عدد مزدوج يجب أن يتم قبوله مع إضافة واحد عليه حتى يصبح مفرد.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-4/ex-2-solution-using-cpp/eba93bee-b967-462b-8c8d-ad74b454243f_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	if (n % 2 == 0)
+	{
+		n++;
+	}
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+
+			if (i == j || j == n - i + 1)
+			{
+				std::cout << "" "";
+			}
+			else
+			{
+				std::cout << ""*"";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 9
+ ******* 
+* ***** *
+** *** **
+*** * ***
+**** ****
+*** * ***
+** *** **
+* ***** *
+ ******* 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,"الشكل الذي يظهر لك في النتيجة النهائية عبارة عن مربع لأن عدد النجوم التي تظهر عامودياً يساوي عدد النجوم التي تظهر أفقياً, لكنه لا يظهر لك كذلك بسبب الهامش الإفتراضي الذي يقوم الحاسوب بوضعه بين الأسطر."
+رسم أشكال هندسية,18,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, مع الإشارة إلى أنه في حال قام بإدخال عدد مزدوج يجب أن يتم قبوله مع إضافة واحد عليه حتى يصبح مفرد.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-4/ex-3-solution-using-cpp/802b4d67-a61d-4655-b1aa-d777183ec401_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	if (n % 2 == 0)
+	{
+		n++;
+	}
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+
+			if (i == j || j == n - i + 1)
+			{
+				std::cout << ""*"";
+			}
+			else
+			{
+				std::cout << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 9
+*       *
+ *     * 
+  *   *  
+   * *   
+    *    
+   * *   
+  *   *  
+ *     * 
+*       *
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,
+رسم أشكال هندسية,19,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, مع الإشارة إلى أنه في حال قام بإدخال عدد مزدوج يجب أن يتم قبوله مع إضافة واحد عليه حتى يصبح مفرد.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-4/ex-4-solution-using-cpp/d071853e-6d66-49a3-bc51-8c5cdf4c4a03_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	if (n % 2 == 0)
+	{
+		n++;
+	}
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+
+			if (i == 1 || i == n || j == 1 || j == n || i == j || j == n - i + 1)
+			{
+				std::cout << ""*"";
+			}
+			else
+			{
+				std::cout << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 11
+***********
+**       **
+* *     * *
+*  *   *  *
+*   * *   *
+*    *    *
+*   * *   *
+*  *   *  *
+* *     * *
+**       **
+***********
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 11 عند التشغيل.,"الشكل الذي يظهر لك في النتيجة النهائية عبارة عن مربع لأن عدد النجوم التي تظهر عامودياً يساوي عدد النجوم التي تظهر أفقياً, لكنه لا يظهر لك كذلك بسبب الهامش الإفتراضي الذي يقوم الحاسوب بوضعه بين الأسطر."
+رسم أشكال هندسية,20,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, مع الإشارة إلى أنه في حال قام بإدخال عدد مزدوج يجب أن يتم قبوله مع إضافة واحد عليه حتى يصبح مفرد.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-4/ex-5-solution-using-cpp/0fe48a52-d647-4d3d-bc71-85acaf83090b_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	if (n % 2 == 0)
+	{
+		n++;
+	}
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+
+			if (i == 1 || i == n || j == 1 || j == n || i == n / 2 + 1 || j == n / 2 + 1)
+			{
+				std::cout << ""*"";
+			}
+			else
+			{
+				std::cout << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 11
+***********
+*    *    *
+*    *    *
+*    *    *
+*    *    *
+***********
+*    *    *
+*    *    *
+*    *    *
+*    *    *
+***********
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 11 عند التشغيل.,"الشكل الذي يظهر لك في النتيجة النهائية عبارة عن مربع لأن عدد النجوم التي تظهر عامودياً يساوي عدد النجوم التي تظهر أفقياً, لكنه لا يظهر لك كذلك بسبب الهامش الإفتراضي الذي يقوم الحاسوب بوضعه بين الأسطر."
+رسم أشكال هندسية,21,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-5/ex-1-solution-using-cpp/81812f16-9a79-4c18-a651-19cbd4ecbf96_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if ((i <= n / 2 && j <= n / 2) || (i > n / 2 + 1 && j > n / 2 + 1))
+			{
+				std::cout << "" "";
+			}
+			else
+			{
+				std::cout << ""*"";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 9
+    *****
+    *****
+    *****
+    *****
+*********
+*****    
+*****    
+*****    
+*****    
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,22,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-5/ex-2-solution-using-cpp/7931bf20-81f0-4f15-8422-c66e8d36ba73_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if ((i <= n / 2 + 1 && j <= n / 2 + 1) || (i > n / 2 && j > n / 2))
+			{
+				std::cout << ""*"";
+			}
+			else
+			{
+				std::cout << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 9
+*****
+*****
+*****
+*****
+*********
+    *****
+    *****
+    *****
+    *****
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,23,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-5/ex-3-solution-using-cpp/938c9db1-28cb-410c-962c-2f0423dbdca6_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i <= n / 2)
+		{
+			for (int k = 1; k <= n / 2; k++)
+			{
+				std::cout << "" "";
+			}
+
+			std::cout << ""*"";
+
+			for (int j = 1; j <= n / 2 - 1; j++)
+			{
+				if (i == 1 || i == n / 2 + 1)
+				{
+					std::cout << ""*"";
+				}
+				else
+				{
+					std::cout << "" "";
+				}
+			}
+
+			std::cout << ""*"";
+		}
+		else if (i == n / 2 + 1)
+		{
+			for (int j = 1; j <= n; j++)
+			{
+				std::cout << ""*"";
+			}
+		}
+		else
+		{
+			std::cout << ""*"";
+
+			for (int j = 1; j <= n / 2 - 1; j++)
+			{
+				if (i == n)
+				{
+					std::cout << ""*"";
+				}
+				else
+				{
+					std::cout << "" "";
+				}
+			}
+
+			std::cout << ""*"";
+		}
+
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 9
+    *****
+    *   *
+    *   *
+    *   *
+*********
+*   *
+*   *
+*   *
+*****
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,24,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-5/ex-4-solution-using-cpp/8c8bd1ac-8f52-4b52-879e-275350774bc7_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i <= n / 2)
+		{
+			std::cout << ""*"";
+
+			for (int j = 1; j <= n / 2 - 1; j++)
+			{
+				if (i == 1 || i == n / 2 + 1)
+				{
+					std::cout << ""*"";
+				}
+				else
+				{
+					std::cout << "" "";
+				}
+			}
+
+			std::cout << ""*"";
+		}
+		else if (i == n / 2 + 1)
+		{
+			for (int j = 1; j <= n; j++)
+			{
+				std::cout << ""*"";
+			}
+		}
+		else
+		{
+			for (int k = 1; k <= n / 2; k++)
+			{
+				std::cout << "" "";
+			}
+
+			std::cout << ""*"";
+
+			for (int j = 1; j <= n / 2 - 1; j++)
+			{
+				if (i == n)
+				{
+					std::cout << ""*"";
+				}
+				else
+				{
+					std::cout << "" "";
+				}
+			}
+
+			std::cout << ""*"";
+		}
+
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 9
+*****
+*   *
+*   *
+*   *
+*********
+    *   *
+    *   *
+    *   *
+    *****
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,25,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-5/ex-5-solution-using-cpp/6a1401ec-1a52-40c1-bfcf-00aa454cbe2c_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (i < j)
+			{
+				std::cout << ""1"";
+			}
+			else if (i > j)
+			{
+				std::cout << ""0"";
+			}
+			else
+			{
+				std::cout << ""*"";
+			}
+		}
+		std::cout << ""\n"";
+	}	
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 9
+*11111111
+0*1111111
+00*111111
+000*11111
+0000*1111
+00000*111
+000000*11
+0000000*1
+00000000*
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,26,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات و حاول كتابة أصغر كود ممكن.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-6/ex-1-solution-using-cpp/f2d535d1-a5f2-4671-9690-876cdbe778a2_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if ((i <= n / 2 && j > i && j <= n - i) || (i > n / 2 && j < i && j > n - i + 1))
+			{
+				std::cout << "" "";
+			}
+			else
+			{
+				std::cout << ""*"";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 9
+*       *
+**     **
+***   ***
+**** ****
+*********
+**** ****
+***   ***
+**     **
+*       *
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,27,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات و حاول كتابة أصغر كود ممكن.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-6/ex-2-solution-using-cpp/d0aa80f8-3b3a-4de4-8e5f-b957193c314c_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if ((i <= n / 2 + 1 && j >= i && j <= n - i + 1) || (i > n / 2 - 1 && j <= i && j > n - i))
+			{
+				std::cout << ""*"";
+			}
+			else
+			{
+				std::cout << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 9
+*********
+ ******* 
+  *****  
+   ***   
+    *    
+   ***   
+  *****  
+ ******* 
+*********
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,28,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات و حاول كتابة أصغر كود ممكن.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-6/ex-3-solution-using-cpp/f65fad26-eb75-45cd-817e-adec78cd9984_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if ((i <= n / 2 && j > i && j <= n - i) || (i > n / 2 && j < i && j > n - i + 1) || i == n / 2 + 1)
+			{
+				std::cout << "" "";
+			}
+			else
+			{
+				std::cout << ""*"";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 9
+*       *
+**     **
+***   ***
+**** ****
+         
+**** ****
+***   ***
+**     **
+*       *
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,29,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات و حاول كتابة أصغر كود ممكن.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-6/ex-4-solution-using-cpp/0aad6bf3-51e1-4d0a-8176-e4ff147956ee_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (((i <= n / 2 + 1 && j >= i && j <= n - i + 1) || (i > n / 2 - 1 && j <= i && j > n - i)) && j != n / 2 + 1)
+			{
+				std::cout << ""*"";
+			}
+			else
+			{
+				std::cout << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 9
+**** ****
+ *** *** 
+  ** **  
+   * *   
+         
+   * *   
+  ** **  
+ *** *** 
+**** ****
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,30,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات و حاول كتابة أصغر كود ممكن.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-6/ex-5-solution-using-cpp/5b32a802-cd2f-4279-8336-aabbff1e8073_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (i == n / 2 + 1 || j == n / 2 + 1)
+			{
+				std::cout << "" "";
+			}
+			else
+			{
+				std::cout << ""*"";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 9
+**** ****
+**** ****
+**** ****
+**** ****
+         
+**** ****
+**** ****
+**** ****
+**** ****
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 9 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,31,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات و حاول كتابة أصغر كود ممكن.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-7/ex-1-solution-using-cpp/c4b16526-654e-4b0d-8810-cd0ee109fc8d_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (j == 1 || j == n || i == j || j == n - i + 1)
+			{
+				std::cout << ""*"";
+			}
+			else
+			{
+				std::cout << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 11
+*         *
+**       **
+* *     * *
+*  *   *  *
+*   * *   *
+*    *    *
+*   * *   *
+*  *   *  *
+* *     * *
+**       **
+*         *
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 11 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,32,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات و حاول كتابة أصغر كود ممكن.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-7/ex-2-solution-using-cpp/e679c509-ffea-4837-ae59-b317d38cbd1f_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (i == 1 || i == n || i == j || j == n - i + 1)
+			{
+				std::cout << ""*"";
+			}
+			else
+			{
+				std::cout << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 11
+***********
+ *       * 
+  *     *  
+   *   *   
+    * *    
+     *     
+    * *    
+   *   *   
+  *     *  
+ *       * 
+***********
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 11 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,33,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات و حاول كتابة أصغر كود ممكن.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-7/ex-3-solution-using-cpp/fcb73034-617a-4156-ab9a-f2d03b7b2819_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if ((j == 1 || j == n || i == n / 2 || i == n / 2 + 2 || j == i || j == n - i + 1)
+				&& i != n / 2 + 1 && j != n / 2 + 1)
+			{
+				std::cout << ""*"";
+			}
+			else
+			{
+				std::cout << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 11
+*         *
+**       **
+* *     * *
+*  *   *  *
+***** *****
+           
+***** *****
+*  *   *  *
+* *     * *
+**       **
+*         *
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 11 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,34,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات و حاول كتابة أصغر كود ممكن.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد مفرد و أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون مزدوجاً أو قيمته تساوي صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-7/ex-4-solution-using-cpp/f49daf6d-a396-4442-99af-87ce4bb59e9e_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if ((i == 1 || i == n || j == n / 2 || j == n / 2 + 2 || j == i || j == n - i + 1)
+				&& i != n / 2 + 1 && j != n / 2 + 1)
+			{
+				std::cout << ""*"";
+			}
+			else
+			{
+				std::cout << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 11
+***** *****
+ *  * *  * 
+  * * * *  
+   ** **   
+    * *    
+           
+    * *    
+   ** **   
+  * * * *  
+ *  * *  * 
+***** *****
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 11 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,35,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات و حاول كتابة أصغر كود ممكن.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أسطر الشكل الذي سيتم رسمه.
+إنتبه: يجب أن يدخل المستخدم عدد أكبر من صفر, لأن عدد الأسطر لا يمكن أن يكون صفر أو أقل من صفر.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-7/ex-5-solution-using-cpp/bd40119b-a5b2-4f21-b2f2-89af229441f9_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter an odd number as the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0 || n % 2 == 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if ((i == 1 || i == n / 2 || i == n / 2 + 2 || i == n ||
+				 j == 1 || j == n / 2 || j == n / 2 + 2 || j == n)
+				&& j != n / 2 + 1 && i != n / 2 + 1)
+			{
+				std::cout << ""*"";
+			}
+			else
+			{
+				std::cout << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter an odd number as the number of lines: 11
+***** *****
+*   * *   *
+*   * *   *
+*   * *   *
+***** *****
+           
+***** *****
+*   * *   *
+*   * *   *
+*   * *   *
+***** *****
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 11 عند التشغيل.,"للتأكد من النتيجة بشكل دقيق, قم بعد عدد النجوم و المسافات الفارغة الموجودة في كل سطر."
+رسم أشكال هندسية,36,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أكبر من صفر يمثل عدد أسطر الشكل الذي سيتم رسمه.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-8/ex-1-solution-using-cpp/23640d02-15ab-4ba2-acee-c9fec61b1d6b_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			std::cout << j << "" "";
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 7
+1 2 3 4 5 6 7 
+1 2 3 4 5 6 7 
+1 2 3 4 5 6 7 
+1 2 3 4 5 6 7 
+1 2 3 4 5 6 7 
+1 2 3 4 5 6 7 
+1 2 3 4 5 6 7 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 7 عند التشغيل.,
+رسم أشكال هندسية,37,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أكبر من صفر يمثل عدد أسطر الشكل الذي سيتم رسمه.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-8/ex-2-solution-using-cpp/7a541c0d-65e1-4bdc-b0d3-6d6724f12c51_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			std::cout << i << "" "";
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 7
+1 1 1 1 1 1 1 
+2 2 2 2 2 2 2 
+3 3 3 3 3 3 3 
+4 4 4 4 4 4 4 
+5 5 5 5 5 5 5 
+6 6 6 6 6 6 6 
+7 7 7 7 7 7 7 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 7 عند التشغيل.,
+رسم أشكال هندسية,38,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أكبر من صفر يمثل عدد أسطر الشكل الذي سيتم رسمه.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-8/ex-3-solution-using-cpp/58e8a4df-2899-4311-9751-962b04b53185_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (i % 2 == 1)
+			{
+				std::cout << ""1 "";
+			}
+			else
+			{
+				std::cout << ""0 "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 7
+1 1 1 1 1 1 1 
+0 0 0 0 0 0 0 
+1 1 1 1 1 1 1 
+0 0 0 0 0 0 0 
+1 1 1 1 1 1 1 
+0 0 0 0 0 0 0 
+1 1 1 1 1 1 1 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 7 عند التشغيل.,
+رسم أشكال هندسية,39,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أكبر من صفر يمثل عدد أسطر الشكل الذي سيتم رسمه.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-8/ex-4-solution-using-cpp/785fbab7-d4be-44e2-a361-b8b26f4e4a03_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (j % 2 == 1)
+			{
+				std::cout << ""1 "";
+			}
+			else
+			{
+				std::cout << ""0 "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 7
+1 0 1 0 1 0 1 
+1 0 1 0 1 0 1 
+1 0 1 0 1 0 1 
+1 0 1 0 1 0 1 
+1 0 1 0 1 0 1 
+1 0 1 0 1 0 1 
+1 0 1 0 1 0 1 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 7 عند التشغيل.,
+رسم أشكال هندسية,40,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أكبر من صفر يمثل عدد أسطر الشكل الذي سيتم رسمه.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-8/ex-5-solution-using-cpp/b47a4e4b-0e6c-4c72-bbbc-74d0d3cfca33_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (i % 2 == 1 && j % 2 == 1 || i % 2 == 0 && j % 2 == 0)
+			{
+				std::cout << ""0 "";
+			}
+			else
+			{
+				std::cout << ""1 "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 7
+0 1 0 1 0 1 0 
+1 0 1 0 1 0 1 
+0 1 0 1 0 1 0 
+1 0 1 0 1 0 1 
+0 1 0 1 0 1 0 
+1 0 1 0 1 0 1 
+0 1 0 1 0 1 0 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 7 عند التشغيل.,
+رسم أشكال هندسية,41,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أكبر من صفر حتى يتم رسم الشكل المطلوب بناءاً عليه.
+ملاحظة: هنا افترضنا أن المستخدم قام بإدخال الرقم 3 عند التشغيل.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-9/ex-1-solution-using-cpp/6dfd60f6-e7ea-478f-9be6-705bfce151db_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n * 2; i++)
+	{
+		for (int j = 1; j <= n * 2; j++)
+		{
+			if (i <= n * 2 / 2)
+			{
+				std::cout << i << "" "";
+			}
+			else
+			{
+				std::cout << n * 2 - i + 1 << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 3
+1 1 1 1 1 1 
+2 2 2 2 2 2 
+3 3 3 3 3 3 
+3 3 3 3 3 3 
+2 2 2 2 2 2 
+1 1 1 1 1 1 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 3 عند التشغيل.,
+رسم أشكال هندسية,42,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أكبر من صفر حتى يتم رسم الشكل المطلوب بناءاً عليه.
+ملاحظة: هنا افترضنا أن المستخدم قام بإدخال الرقم 3 عند التشغيل.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-9/ex-2-solution-using-cpp/45388d94-52ff-46ef-99ec-3a8d8ba21e62_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n * 2; i++)
+	{
+		for (int j = 1; j <= n * 2; j++)
+		{
+			if (j <= n * 2 / 2)
+			{
+				std::cout << j << "" "";
+			}
+			else
+			{
+				std::cout << n * 2 - j + 1 << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 3
+1 2 3 3 2 1 
+1 2 3 3 2 1 
+1 2 3 3 2 1 
+1 2 3 3 2 1 
+1 2 3 3 2 1 
+1 2 3 3 2 1 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 3 عند التشغيل.,
+رسم أشكال هندسية,43,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أكبر من صفر يمثل عدد أسطر الشكل الذي سيتم رسمه.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-9/ex-3-solution-using-cpp/e293a7f7-2414-41db-ba21-8dfc6845f8bc_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (j <= i)
+			{
+				std::cout << j << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 6
+1 
+1 2 
+1 2 3 
+1 2 3 4 
+1 2 3 4 5 
+1 2 3 4 5 6 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 6 عند التشغيل.,
+رسم أشكال هندسية,44,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أكبر من صفر يمثل عدد أسطر الشكل الذي سيتم رسمه.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-9/ex-4-solution-using-cpp/bd4f53b6-7d83-48d0-9be2-e418470ff813_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (j <= i)
+			{
+				std::cout << i << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 6
+1 
+2 2 
+3 3 3 
+4 4 4 4 
+5 5 5 5 5 
+6 6 6 6 6 6 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 6 عند التشغيل.,
+رسم أشكال هندسية,45,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد أكبر من صفر يمثل عدد أسطر الشكل الذي سيتم رسمه.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-9/ex-5-solution-using-cpp/3527d8ea-6cf4-42b1-b489-637716b098ae_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (j <= i)
+			{
+				std::cout << j << "" "";
+			}
+			else
+			{
+				std::cout << i << "" "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 6
+1 1 1 1 1 1 
+1 2 2 2 2 2 
+1 2 3 3 3 3 
+1 2 3 4 4 4 
+1 2 3 4 5 5 
+1 2 3 4 5 6 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 6 عند التشغيل.,
+رسم أشكال هندسية,46,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد بين 1 و 9 حتى يتم رسم الشكل المطلوب بناءً عليه.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-10/ex-1-solution-using-cpp/6a7c38c3-bf05-4357-91b9-3647361a28cb_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n < 1 || n > 9);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (j == 1 || j == i || i == n)
+			{
+				std::cout << j << "" "";
+			}
+			else
+			{
+				std::cout << ""  "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 6
+1 
+1 2 
+1   3 
+1     4 
+1       5 
+1 2 3 4 5 6 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 6 عند التشغيل.,
+رسم أشكال هندسية,47,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد بين 1 و 9 حتى يتم رسم الشكل المطلوب بناءً عليه.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-10/ex-2-solution-using-cpp/5a17ff33-7b39-4e89-bff4-1bc5b878dcb7_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n < 1 || n > 9);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (j == 1 || j == i || i == n)
+			{
+				std::cout << n - j + 1 << "" "";
+			}
+			else
+			{
+				std::cout << ""  "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 6
+6 
+6 5 
+6   4 
+6     3 
+6       2 
+6 5 4 3 2 1 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 6 عند التشغيل.,
+رسم أشكال هندسية,48,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد بين 1 و 9 يمثل عدد أسطر الشكل الذي سيتم رسمه.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-10/ex-3-solution-using-cpp/91bc2c57-b47e-4a0e-9d62-e1dc624571e7_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n < 1 || n > 9);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (j == n - i + 1)
+			{
+				std::cout << ""1 "";
+			}
+			else if (j == n)
+			{
+				std::cout << i << "" "";
+			}
+			else if (i == n)
+			{
+				std::cout << j << "" "";
+			}
+			else
+			{
+				std::cout << ""  "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 6
+          1 
+        1 2 
+      1   3 
+    1     4 
+  1       5 
+1 2 3 4 5 6 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 6 عند التشغيل.,
+رسم أشكال هندسية,49,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد بين 1 و 9 يمثل عدد أسطر الشكل الذي سيتم رسمه.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-10/ex-4-solution-using-cpp/8383f553-fe65-4588-aafc-43063f51a390_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n < 1 || n > 9);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (j == n - i + 1)
+			{
+				std::cout << n << "" "";
+			}
+			else if (j == n)
+			{
+				std::cout << n - i + 1 << "" "";
+			}
+			else if (i == n)
+			{
+				std::cout << n - j + 1 << "" "";
+			}
+			else
+			{
+				std::cout << ""  "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 6
+          6 
+        6 5 
+      6   4 
+    6     3 
+  6       2 
+6 5 4 3 2 1 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 6 عند التشغيل.,
+رسم أشكال هندسية,50,"أكتب برنامج مهمته رسم الشكل التالي بواسطة الحلقات.
+	عند تشغيل البرنامج, يجب أن يطلب من المستخدم إدخال عدد بين 1 و 9 يمثل عدد أسطر الشكل الذي سيتم رسمه.",https://harmash.com//tutorials/algorithms-and-data-structure/drawing-test-10/ex-5-solution-using-cpp/bb8a1130-60b5-4777-8d92-1ef4cc216b1b_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+
+	do {
+		std::cout << ""Enter the number of lines: "";
+		std::cin >> n;
+	}
+	while (n < 1 || n > 9);
+
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = n; j >= i; j--)
+		{
+			if (i == 1 || j == n || j == i)
+			{
+				std::cout << j << "" "";
+			}
+			else
+			{
+				std::cout << ""  "";
+			}
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the number of lines: 6
+6 5 4 3 2 1 
+6       2 
+6     3 
+6   4 
+6 5 
+6 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 6 عند التشغيل.,
+التعامل مع الأرقام و النصوص,1,"أكتب برنامج يطلب من المستخدم إدخال رقم. بعدها يعرض له ناتج جمع أعداد هذا الرقم.
+مثال: إذا قام المستخدم بإدخال الرقم 123 فسيتم حساب مجموع أعداده هكذا 1 + 2 + 3 و النتيجة ستكون 6.",,"
+#include <iostream>
+
+int main() {
+
+	int n;
+	int s = 0;
+
+	std::cout << ""Enter a number: "";
+	std::cin >> n;
+
+	while (n != 0)
+	{
+		s += n % 10;
+		n /= 10;
+	}
+
+	std::cout << ""The sum of the digits is: "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 1234
+The sum of the digits is: 10
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 1234 عند التشغيل.,"إذا كنت تتعامل مع عدد صحيح إسمه n و قلت n % 10 فأنت بذلك ستحصل على أخر عدد موجود في الرقم.
+	و إذا قلت n / 10 فأنت بذلك ستتخلص من أخر عدد كان موجوداً في الرقم."
+التعامل مع الأرقام و النصوص,2,"أكتب برنامج يطلب من المستخدم إدخال رقم. بعدها يعرض له نسخة من هذا الرقم و لكن بشكل معكوس.
+مثال: إذا قام المستخدم بإدخال الرقم 12345, النتيجة ستكون 54321.",,"
+#include <iostream>
+
+int main() {
+
+	int number;
+	int originalNumber;
+	int reversedNumber = 0;
+	int remainder;
+
+	std::cout << ""Enter a number: "";
+	std::cin >> number;
+
+	originalNumber = number;
+
+	while (number != 0)
+	{
+		remainder = number % 10;
+		reversedNumber = reversedNumber * 10 + remainder;
+		number /= 10;
+	}
+
+	std::cout << ""Reversed version of "" << originalNumber << "" is: "" << reversedNumber;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 12345
+Reversed version of 12345 is: 54321
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 12345 عند التشغيل.,
+التعامل مع الأرقام و النصوص,3,"أكتب برنامج يطلب من المستخدم إدخال رقم. بعدها يعرض له إن كان هذا الرقم عبارة عن Palindrome أم لا.
+الـ Palindrome عبارة عن رقم أعداده معكوسة بشكل متساوي من اليمين إلى اليسار و من اليسار إلى اليمين.",,"
+#include <iostream>
+
+int main() {
+
+	int number;
+	int originalNumber;
+	int reversedNumber = 0;
+	int remainder;
+
+	std::cout << ""Enter a number: "";
+	std::cin >> number;
+
+	originalNumber = number;
+
+	while (number != 0)
+	{
+		remainder = number % 10;
+		reversedNumber = reversedNumber * 10 + remainder;
+		number /= 10;
+	}
+
+	if (originalNumber == reversedNumber)
+	{
+		std::cout << originalNumber << "" is a palindrome"";
+	}
+	else
+	{
+		std::cout << originalNumber << "" is not a palindrome"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 1234
+1234 is not a palindrome
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 1234 عند التشغيل.,أمثلة: الأرقام التالية جميعها تعتبر أرقام Palindrome: 1001 - 123321 - 4554 - 45654.
+التعامل مع الأرقام و النصوص,4,"قم بتعريف دالة إسمها CountOccurrences, عند استدعاءها نمرر لها نصيّن, فترجع عدد صحيح يمثل كم مرة النص الثاني مكرر في النص الأول.
+	بعدها قم بتجربة هذه الدالة في البرنامج مع جعل المستخدم هو من يدخل النصيّن.",,"
+#include <iostream>
+#include <string>
+
+int CountOccurrences(std::string s1, std::string s2)
+{
+
+	int counter = 0;
+
+	for (int i = 0; i < s1.length() - s2.length() + 1; i++)
+	{
+		if (s1.substr(i, s2.length()) == s2)
+		{
+			counter++;
+		}
+	}
+
+	return counter;
+}
+
+
+int main() {
+
+	std::string text;
+	std::string keyword;
+
+	std::cout << ""Enter any text: "";
+	getline(std::cin, text);
+
+	std::cout << ""Enter word to search occurrences: "";
+	getline(std::cin, keyword);
+
+	int result = CountOccurrences(text, keyword);
+
+	std::cout << ""Total occurrences of '"" << keyword << ""' is: "" << result;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter any text: I like cats. I have one cat called Lola
+Enter word to search occurrences: cat
+Total occurrences of 'cat' is: 2
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,مثال: إذا قمنا باستخدام الدالة CountOccurrences() لمعرفة كم مرة تكررت الكلمة cat في النص I like cats. I have one cat called Lola فإنها سترجع الرقم 2.
+التعامل مع الأرقام و النصوص,5,"قم بتعريف دالة إسمها ReverseString, عند استدعاءها نمرر لها نص, فترجعه معكوساً.
+	بعدها قم بتجربة هذه الدالة في البرنامج مع جعل المستخدم هو يدخل النص الذي سيتم عرضه بشكل عكسي.",,"
+#include <iostream>
+#include <string>
+
+std::string reverseString(std::string s)
+{
+	std::string newS = """";
+
+	for (int i = 0; i < s.length(); i++)
+	{
+		newS = s[i] + newS;
+	}
+
+	return newS;
+}
+
+int main() {
+
+	std::string text;
+
+	std::cout << ""Enter any text: "";
+	getline(std::cin, text);
+
+	std::string reversedText = reverseString(text);
+
+	std::cout << ""Reversed Text: "" << reversedText;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter any text:  I love programming
+Reversed Text: gnimmargorp evol I
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,مثال: إذا قمنا باستخدام الدالة ReverseString() و تمرير النص I love programming فمن المفترض أن ترجعه هكذا gnimmargorp evol I.
+التعامل مع الأرقام و النصوص,6,"قم بتعريف دالة إسمها RemoveAll, عند استدعاءها نمرر لها نصيّن, فترجع نسخة من النص لا تحتوي على النص الثاني.
+	بعدها قم بتجربة هذه الدالة في البرنامج.",,"
+#include <iostream>
+#include <string>
+
+std::string removeAll(std::string s1, std::string s2) {
+
+	int L1 = s1.length();
+	int L2 = s2.length();
+	std::string newS = """";
+
+	for (int i = 0; i < L1;)
+	{
+		if (i <= L1 - L2 && s1.substr(i, L2) == s2)
+		{
+			i += L2;
+		}
+		else
+		{
+			newS += s1[i];
+			i += 1;
+		}
+
+	}
+
+	return newS;
+}
+
+int main() {
+
+	std::string text = ""I like cats. I have one cat."";
+	std::string keyword = ""cat"";
+	std::string newText = removeAll(text, keyword);
+
+	std::cout << ""Before: "" << text << ""\n"";
+	std::cout << ""After:  "" << newText << ""\n"";
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Before: I like cats. I have one cat.
+After:  I like s. I have one .
+		",سنحصل على النتيجة التالية عند التشغيل.,"مثال: إذا قمنا باستخدام الدالة RemoveAll() و تمرير النص ""I like cats. I have one cat."" و الكلمة ""cat"" لها فإنها سترجع النص ""I like s. I have one .""."
+التعامل مع الأرقام و النصوص,7,"قم بتعريف دالة إسمها ReplaceAll, فكرتها البحث في النص عن جزئية ( كلمة أو جملة ) محددة و تبديلها  بجزئية أخرى.
+	عند استدعاءها يجب أن نمرر لها ثلاث نصوص. الأول يمثل نص عادي, الثاني يمثل الجزئية التي نريد البحث عنها, و الثالث يمثل الجزئية التي نريد وضعها مكان الجزئية الثانية.
+	في النهاية يجب أن ترجع نسخة من النص الأول بعد أن تم تبديل الجزئية التي البحث عنها بالجزئية التي نريد وضعها مكانها.
+	بعدها قم بتجربة هذه الدالة في البرنامج.",,"
+#include <iostream>
+#include <string>
+
+std::string replaceAll(std::string text, std::string find, std::string replacement) {
+
+	int L1 = text.length();
+	int L2 = find.length();
+
+	std::string newText = """";
+
+	for (int i = 0; i < L1;)
+	{
+		if (i <= L1 - L2 && text.substr(i, L2) == find)
+		{
+			newText += replacement;
+			i += L2;
+		}
+		else
+		{
+			newText += text[i];
+			i += 1;
+		}
+	}
+	return newText;
+}
+
+int main() {
+
+	std::string text = ""I like cats. I have one cat."";
+	std::string find = ""cat"";
+	std::string replacement = ""dog"";
+	std::string newText = replaceAll(text, find, replacement);
+
+	std::cout << ""Before: "" << text << ""\n"";
+	std::cout << ""After:  "" << newText << ""\n"";
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Before: I like cats. I have one cat.
+After:  I like dogs. I have one dog.
+		",سنحصل على النتيجة التالية عند التشغيل.,"مثال: باستخدام الدالة ReplaceAll() يمكننا تبديل كل كلمة ""cat"" موجودة في النص ""I like cats. I have one cat."" بالكلمة ""dog"" و عندها سترجع لنا النص ""I like dogs. I have one dog.""."
+التعامل مع الأرقام و النصوص,8,"قم بتعريف دالة إسمها DoubleChars, نمرر لها نص عند إستدعاءها فتعيد لنا نسخة من هذا النص كل حرف فيها مكرر مرتين.",,"
+#include <iostream>
+#include <string>
+
+std::string doubleChars(std::string text) {
+
+	std::string newText = """";
+
+	for (int i = 0; i < text.length(); i++)
+	{
+		newText += text[i];
+		newText += text[i];
+	}
+
+	return newText;
+
+}
+
+int main() {
+
+	std::string text = ""Iron Man"";
+	std::string newText = doubleChars(text);
+
+	std::cout << ""Before: "" << text << ""\n"";
+	std::cout << ""After:  "" << newText << ""\n"";
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Before: Iron Man
+After:  IIrroonn  MMaann
+		",سنحصل على النتيجة التالية عند التشغيل.,"مثال: إذا قمنا باستخدام الدالة DoubleChars() و تمرير النص ""Iron Man"" فإنها سترجع النص ""IIrroonn  MMaann""."
+التعامل مع الأرقام و النصوص,9,"قم بإنشاء برنامج يطلب من المستخدم إدخال ثلاث نصوص و يخزنهم في ثلاث متغيرات نصية هي S1, S2 و S3 و بعدها ينفذ التالي:
+يخبره ما إن كان دمج S1 مع S2 يساوي S3 أم لا.
+يخبره ما إن كان S1 يمثل جزء من S2 أو يساويه ( أي S1 == s2 ).
+إذا كان طول S1 أكبر من طول S2 قم بإضافة نص S2 على S1 و خزن الناتج في متغير نصي جديد إسمه S4.
+إذا كان طول S2 أكبر من طول S1 قم بإضافة نص S1 على S2 و خزن الناتج في متغير نصي جديد إسمه S4.
+يخبره ما إن كان S2 يمثل جزء من ثاني نصف في S1.
+يعرض له الأحرف الموجودة في أول نصف في S1.
+",,"
+#include <iostream>
+#include <string>
+
+int main() {
+
+	std::string S1, S2, S3, S4;
+
+	std::cout << ""Enter S1: "";
+	getline(std::cin, S1);
+
+	std::cout << ""Enter S2: "";
+	getline(std::cin, S2);
+
+	std::cout << ""Enter S3: "";
+	getline(std::cin, S3);
+
+	std::cout << ""---------------------------------------\n"";
+
+	// Part 1
+	std::cout << ""The concatenation of S1 and S2 is equal S3? ""
+		<< ((S3 == (S1 + S2)) ? ""True"" : ""False"")
+		<< ""\n"";
+	
+	// Part 2
+	std::cout << ""S1 is part of S2 or S1=S2? ""
+		<< ((S2.find(S1, 0) != std::string::npos) ? ""True"" : ""False"")
+		<< ""\n"";
+	
+	// Part 3
+	if (S1.length() > S2.length()) {
+		S4 = S2 + S1;
+	}
+	
+	// Part 4
+	if (S2.length() > S1.length()) {
+		S4 = S1 + S2;
+	}
+	
+	// Part 5
+	std::cout << ""S2 is part of the second half of S1? "" 
+		<< ((S1.find(S2, S1.length() / 2) != std::string::npos) ? ""True"" : ""False"")
+		<< ""\n"";
+	
+	// Part 6
+	std::cout << ""The first half characters of S1 are: "";
+	for (int i = 0; i < S1.length() / 2; i++) {
+		std::cout << S1[i];
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter S1: Mhamad
+Enter S2: Harmush
+Enter S3: MhamadHarmush
+---------------------------------------
+The concatenation of S1 and S2 is equal S3? True
+S1 is part of S2 or S1=S2? False
+S2 is part of the second half of S1? False
+The first half characters of S1 are: Mha
+",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع الأرقام و النصوص,10,"قم بإنشاء برنامج يطلب من المستخدم إدخال نص و من ثم إدخل حرف واحد.
+	بعدها سيقوم البرنامج بطباعة مكان كل  ( Index ) موجود عليه هذا الحرف في النص.",,"
+#include <iostream>
+#include <string>
+
+int main() {
+
+	std::string text;
+	char character;
+
+	std::cout << ""Enter any text: "";
+	getline(std::cin, text);
+
+	std::cout << ""Enter a character: "";
+	std::cin >> character;
+
+	for (int i = 0; i < text.length(); i++)
+	{
+		if (text[i] == character)
+		{
+			std::cout << ""'"" << character << ""' found at index: "" << i << ""\n"";
+		}
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter any text: Harmash is the best site to learn programming
+Enter a character: a
+'a' found at index: 1
+'a' found at index: 4
+'a' found at index: 30
+'a' found at index: 39
+",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,"مثال: إذا قام المستخدم بإدخال النص ""Harmash is the best site to learn programming"" و من ثم أدخل الحرف ""a"" فيجب أن يطبع له النتيجة التالية عند التشغيل.
+
+'a' found at index: 1
+'a' found at index: 4
+'a' found at index: 30
+'a' found at index: 39
+	"
+التعامل مع الأرقام و النصوص,11,"قم بتعريف دالة إسمها CountWords, عند استدعاءها نمرر لها نص, فترجع عدد الكلمات الموجودة في هذا النص.
+	بعدها قم بتجربة هذه الدالة في البرنامج.",,"
+#include <iostream>
+#include <string>
+
+int countWords(std::string s) {
+
+	if (s.empty())
+	{
+		return 0;
+	}
+
+	int counter = 0;
+	
+	// هذه الإضافة سببها هو سواء كان يوجد مسافة فارغة في آخر النص أم لا يوجد, فإنها لن تؤثر على النتيجة
+	s += "" "";
+
+	for (int i = 0; i < s.length() - 1; i++)
+	{
+		if (s[i] != ' ' && s[i+1] == ' ')
+		{
+			counter++;
+		}
+
+	}
+
+	return counter;
+}
+
+int main() {
+
+	std::string text = ""Programming is easy to learn."";
+	int numberOfWords = countWords(text);
+
+	std::cout << ""Total words: "" << numberOfWords;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Total words: 5
+		",سنحصل على النتيجة التالية عند التشغيل.,"مثال: إذا قمنا باستخدام الدالة CountWords() و تمرير النص ""Programming is easy to learn."" فإنها سترجع الرقم 5."
+التعامل مع الأرقام و النصوص,12,"قم بتعريف دالة إسمها CountNoneEscapeChars, عند استدعاءها نمرر لها نص, فترجع عدد الأحرف الموجودة في هذا النص.
+ملاحظة: أي حرف يعتبر Escape Character مثل الأحرف \t و \n إلخ.. لا يجب أن يتم حساب عددهم ضمن عدد الأحرف.
+	يمكنك إستخدام الـ Regex للتمييز بين الأحرف العادية و الأحرف التي تعتبر Escape Characters.",,"
+#include <iostream>
+#include <string>
+#include <regex>
+
+static int countNoneEscapeChars(std::string s) {
+
+	if (s.empty())
+	{
+		return 0;
+	}
+
+	int counter = 0;
+	std::string character = """";
+	std::regex regex(""\\S"");
+	
+	for (int i = 0; i < s.length(); i++)
+	{
+		character = s[i];
+		if ( std::regex_match(character, regex) )
+		{
+			counter++;
+		}
+	}
+
+	return counter;
+
+}
+
+int main() {
+
+	std::string text = ""Hi Lora.\nHow are you?."";
+	int numberOfNoneEscapeChars = countNoneEscapeChars(text);
+
+	std::cout << ""Total characters: "" << numberOfNoneEscapeChars;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Total characters: 18
+		",سنحصل على النتيجة التالية عند التشغيل.,"مثال: إذا قمنا باستخدام الدالة CountNoneEscapeChars() و تمرير النص ""Hi Lora.\nHow are you?."" فإنها سترجع الرقم 18."
+التعامل مع الأرقام و النصوص,13,"قم بتعريف دالة إسمها PrintWordsOccurence, نمرر لها نص عند إستدعاءها فتقوم بطباعة كم مرة تكررت كل كلمة في هذا النص.",,"
+#include <iostream>
+#include <string>
+#include ""vector""
+
+void printWordsOccurence(std::string s) {
+
+	if (s.empty())
+	{
+		return;
+	}
+
+	int counter = 0;
+	std::string word = """";
+	std::vector<std::string> words;
+
+	// هذه الإضافة سببها هو سواء كان يوجد مسافة فارغة في آخر النص أم لا يوجد, فإنها لن تؤثر على النتيجة
+	s += "" "";
+
+	for (int i = 0; i < s.length() - 1; i++)
+	{
+		if (s[i] != ' ')
+		{
+			word += s[i];
+		}
+		else
+		{
+			words.push_back(word);
+			word = """";
+		}
+	}
+
+	for (int i = 0; i < words.size(); i++)
+	{
+		counter = 1;
+		for (int j = i + 1; j < words.size(); j++)
+		{
+			if (words[i] == words[j])
+			{
+				counter = counter + 1;
+				words[j] = """";
+			}
+		}
+		if (words[i] != """")
+		{
+			std::cout << ""["" << counter << ""] "" << words[i] << ""\n"";
+		}
+	}
+}
+
+int main() {
+
+	std::string text = ""I am happy. I am a doctor. I like chocolate."";
+	printWordsOccurence(text);
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+[3] I
+[2] am
+[1] happy.
+[1] a
+[1] doctor.
+[1] like
+[1] chocolate.
+		",سنحصل على النتيجة التالية عند التشغيل.,"مثال: إذا قمنا باستخدام الدالة PrintWordsOccurence() و تمرير النص ""I am happy. I am a doctor. I like chocolate."" فإنها ستطبع النتيجة التالية.
+
+[3] I
+[2] am
+[1] happy.
+[1] a
+[1] doctor.
+[1] like
+[1] chocolate.
+	"
+التعامل مع الأرقام و النصوص,14,"قم بإنشاء برنامج يطلب من المستخدم إدخال نصّين, بعدها يقوم بطباعة ما إن كان النص الأول يبدأ بالنص الثاني أم لا.",,"
+#include <iostream>
+#include <string>
+#include <stdbool.h>
+
+int main() {
+
+	std::string text1, text2;
+	bool found = true;
+
+	std::cout << ""Enter text 1: "";
+	getline(std::cin, text1);
+
+	std::cout << ""Enter text 2: "";
+	getline(std::cin, text2);
+
+	for (int i = 0; i < text2.length() && found == true; i++)
+	{
+		if (text1[i] != text2[i])
+		{
+			found = false;
+		}
+	}
+
+	std::cout << ""--------------------------------\n"";
+
+	if (found)
+	{
+		std::cout << ""Text 1 start with '"" << text2 << ""'"";
+	}
+	else
+	{
+		std::cout << ""Text 1 is not start with '"" << text2 << ""'"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter text 1: I like programming.
+Enter text 2: Hello
+--------------------------------
+Text 1 is not start with 'Hello'
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,"مثال
+
+Enter text 1: I like programming.
+Enter text 2: Hello
+--------------------------------
+Text 1 is not start with 'Hello'
+	"
+التعامل مع الأرقام و النصوص,15,"قم بإنشاء برنامج يطلب من المستخدم إدخال نصّين, بعدها يقوم بطباعة ما إن كان النص الأول ينتهي بالنص الثاني أم لا.",,"
+#include <iostream>
+#include <string>
+#include <stdbool.h>
+
+int main() {
+
+	std::string text1, text2;
+	int text2Counter = 0;
+	bool found = true;
+
+	std::cout << ""Enter text 1: "";
+	getline(std::cin, text1);
+
+	std::cout << ""Enter text 2: "";
+	getline(std::cin, text2);
+
+	for (int i = text1.length() - text2.length(); i < text1.length() && found == true; i++)
+	{
+		if (text1[i] != text2[text2Counter])
+		{
+			found = false;
+		}
+		text2Counter++;
+	}
+
+	std::cout << ""--------------------------------\n"";
+
+	if (found)
+	{
+		std::cout << ""Text 1 end with '"" << text2 << ""'"";
+	}
+	else
+	{
+		std::cout << ""Text 1 is not end with '"" << text2 << ""'"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter text 1: Welcome to my world
+Enter text 2: world
+--------------------------------
+Text 1 is end with 'world'
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,"مثال
+
+Enter text 1: Welcome to my world
+Enter text 2: world
+--------------------------------
+Text 1 is end with 'world'
+	"
+إجراء عمليات حسابية,1,"أكتب برنامج يطلب من المستخدم إدخال رقم أكبر من 0, ثم يعرض له ناتج جمع جميع الأرقام من 1 لهذا الرقم.
+مثال: إذا قام المستخدم بإدخال الرقم 5 فستكون النتيجة كالتالي.
+
+Enter a number: 5
+S = 1 + 2 + 3 + 4 + 5
+S = 15
+	",,"
+#include <iostream>
+
+int main() {
+
+	int n, s = 0;
+
+	std::cout << ""Enter a number: "";
+	std::cin >> n;
+
+	std::cout << ""S = "";
+
+	for (int i = 1; i <= n; i++)
+	{
+		std::cout << i << ((i < n) ? "" + "" : """");
+		s += i;
+	}
+
+	std::cout << ""\nS = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 5
+S = 1 + 2 + 3 + 4 + 5
+S = 15
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5 عند التشغيل.,
+إجراء عمليات حسابية,2,"أكتب برنامج يطلب من المستخدم إدخال رقم أكبر من 0, ثم يعرض له ناتج ضرب جميع الأرقام من 1 لهذا الرقم.
+مثال: إذا قام المستخدم بإدخال الرقم 5 فستكون النتيجة كالتالي.
+
+Enter a number: 5
+M = 1 * 2 * 3 * 4 * 5
+M = 120
+	",,"
+#include <iostream>
+
+int main() {
+
+	int n, m = 1;
+
+	std::cout << ""Enter a number: "";
+	std::cin >> n;
+
+	std::cout << ""M = "";
+
+	for (int i = 1; i <= n; i++)
+	{
+		std::cout << i << ((i < n) ? "" * "" : """");
+		m *= i;
+	}
+
+	std::cout << ""\nM = "" << m;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 5
+M = 1 * 2 * 3 * 4 * 5
+M = 120
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5 عند التشغيل.,
+إجراء عمليات حسابية,3,"أكتب برنامج يطلب من المستخدم إدخال رقمين, ثم يعرض له من هو العدد الأكبر بينهما, و في حال كانا متساويان سيعرض له أنهما كذلك.
+مثال: إذا قام المستخدم بإدخال الرقمين 3 و 8 فستكون النتيجة كالتالي.
+
+Enter first number: 3
+Enter second number: 8
+The biggest number is '8'
+	",,"
+#include <iostream>
+
+int main() {
+
+	int x, y;
+
+	std::cout << ""Enter first number: "";
+	std::cin >> x;
+
+	std::cout << ""Enter second number: "";
+	std::cin >> y;
+
+	if (x == y)
+	{
+		std::cout << ""They are equal"";
+	}
+	else
+	{
+		std::cout << ""The biggest number is '"" << ((x > y) ? x : y) << ""'"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter first number: 3
+Enter second number: 8
+The biggest number is '8'
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقمين 3 و 8 عند التشغيل.,
+إجراء عمليات حسابية,4,"أكتب برنامج يطلب من المستخدم إدخال رقمين, ثم يعرض له من هو العدد الأصغر بينهما, و في حال كانا متساويان سيعرض له أنهما كذلك.
+مثال: إذا قام المستخدم بإدخال الرقمين 3 و 8 فستكون النتيجة كالتالي.
+
+Enter first number: 3
+Enter second number: 8
+The lowest number is '3'
+	",,"
+#include <iostream>
+
+int main() {
+
+	int x, y;
+
+	std::cout << ""Enter first number: "";
+	std::cin >> x;
+
+	std::cout << ""Enter second number: "";
+	std::cin >> y;
+
+	if (x == y)
+	{
+		std::cout << ""They are equal"";
+	}
+	else
+	{
+		std::cout << ""The lowest number is '"" << ((x < y) ? x : y) << ""'"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter first number: 3
+Enter second number: 8
+The lowest number is '3'
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقمين 3 و 8 عند التشغيل.,
+إجراء عمليات حسابية,5,"أكتب برنامج يطلب من المستخدم إدخال رقمين, ثم يعرض له ناتج جمعمها, طرحهما, ضربهما و قسمتهما.
+مثال: إذا قام المستخدم بإدخال الرقمين 14 و 5 فستكون النتيجة كالتالي.
+
+Enter first number: 14
+Enter second number: 5
+14 + 5 = 19
+14 - 5 = 9
+14 * 5 = 70
+14 / 5 = 2
+	",,"
+#include <iostream>
+
+int main() {
+
+	int x, y;
+
+	std::cout << ""Enter first number: "";
+	std::cin >> x;
+
+	std::cout << ""Enter second number: "";
+	std::cin >> y;
+
+	std::cout << x << "" + "" << y << "" = "" << x + y << ""\n"";
+	std::cout << x << "" - "" << y << "" = "" << x - y << ""\n"";
+	std::cout << x << "" * "" << y << "" = "" << x * y << ""\n"";
+	std::cout << x << "" / "" << y << "" = "" << x / y << ""\n"";
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter first number: 14
+Enter second number: 5
+14 + 5 = 19
+14 - 5 = 9
+14 * 5 = 70
+14 / 5 = 2
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقمين 14 و 5 عند التشغيل.,
+إجراء عمليات حسابية,6,"أكتب برنامج يطلب من المستخدم إدخال رقمين, ثم يعرض له نتيجة مقارنة هذين الرقمين.
+مثال: إذا قام المستخدم بإدخال الرقمين 2 و 7 فستكون النتيجة كالتالي.
+
+Enter first number: 7
+Enter second number: 2
+Result: 7 > 2
+	",,"
+#include <iostream>
+
+int main() {
+
+	int x, y;
+
+	std::cout << ""Enter first number: "";
+	std::cin >> x;
+
+	std::cout << ""Enter second number: "";
+	std::cin >> y;
+
+	std::cout << ""Result: "";
+
+	if (x > y)
+	{
+		std::cout << x << "" > "" << y;
+	}
+	else if (x < y)
+	{
+		std::cout << x << "" < "" << y;
+	}
+	else
+	{
+		std::cout << x << "" = "" << y;
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter first number: 7
+Enter second number: 2
+Result: 7 > 2
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقمين 7 و 2 عند التشغيل.,
+إجراء عمليات حسابية,7,"أكتب برنامج يطلب من المستخدم إدخال ثلاث أرقام و خزنها في ثلاث متغيرات (a - b - c ), ثم يعرض له أكبر رقم تم إداخله.
+مثال: إذا قام المستخدم بإدخال الأرقام 2, 7 و 5 فستكون النتيجة كالتالي.
+
+Enter a: 1
+Enter b: 2
+Enter c: 5
+The max number is: 5
+	",,"#include <iostream>
+
+int main() {
+
+    int a, b, c, maximum;
+
+    std::cout << ""Enter a: "";
+    std::cin >> a;
+
+    std::cout << ""Enter b: "";
+    std::cin >> b;
+
+    std::cout << ""Enter c: "";
+    std::cin >> c;
+
+    if (a > b && a > c)
+    {
+        maximum = a;
+    }
+    else if (b > a && b > c)
+    {
+        maximum = b;
+    }
+    else
+    {
+        maximum = c;
+    }
+
+    std::cout << ""The max number is: "" << maximum;
+
+    char end; std::cin >> end;
+    return 0;
+
+}","Enter a: 1
+Enter b: 2
+Enter c: 5
+The max number is: 5","سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الأرقام 2, 1 و 5 عند التشغيل.",
+إجراء عمليات حسابية,7,"أكتب برنامج يطلب من المستخدم إدخال ثلاث أرقام و خزنها في ثلاث متغيرات (a - b - c ), ثم يعرض له أصغر رقم تم إدخاله.",,"
+#include <iostream>
+
+int main() {
+
+	int a, b, c, maximum;
+
+	std::cout << ""Enter a: "";
+	std::cin >> a;
+
+	std::cout << ""Enter b: "";
+	std::cin >> b;
+
+	std::cout << ""Enter c: "";
+	std::cin >> c;
+
+	maximum = (a > b) ? a : b;
+	maximum = (maximum > c) ? maximum : c;
+
+	std::cout << ""The max number is: "" << maximum;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","Enter a: 2
+Enter b: 7
+Enter c: 5
+The min number is: 2","سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الأرقام 2, 7 و 5 عند التشغيل.","مثال: إذا قام المستخدم بإدخال الأرقام 2, 7 و 5 فستكون النتيجة كالتالي.
+
+Enter a: 2
+Enter b: 7
+Enter c: 5
+The min number is: 2"
+إجراء عمليات حسابية,9,أكتب برنامج عند تشغيله يقوم بطباعة جدول الضرب من 1 إلى 10 مع وضع سطر فارغ بين كل جدولين.,,"
+#include <iostream>
+
+int main() {
+
+	for (int i = 1; i <= 10; i++)
+	{
+		for (int j = 1; j <= 10; j++)
+		{
+			std::cout << i << "" * "" << j << "" = "" << (i * j) << ""\n"";
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		",,"سنحصل على النتيجة التالية عند التشغيل.
+
+
+				1 * 1 = 1
+				1 * 2 = 2
+				1 * 3 = 3
+				1 * 4 = 4
+				1 * 5 = 5
+				1 * 6 = 6
+				1 * 7 = 7
+				1 * 8 = 8
+				1 * 9 = 9
+				1 * 10 = 10
+				
+2 * 1 = 2
+				2 * 2 = 4
+				2 * 3 = 6
+				2 * 4 = 8
+				2 * 5 = 10
+				2 * 6 = 12
+				2 * 7 = 14
+				2 * 8 = 16
+				2 * 9 = 18
+				2 * 10 = 20
+				
+3 * 1 = 3
+				3 * 2 = 6
+				3 * 3 = 9
+				3 * 4 = 12
+				3 * 5 = 15
+				3 * 6 = 18
+				3 * 7 = 21
+				3 * 8 = 24
+				3 * 9 = 27
+				3 * 10 = 30
+				
+4 * 1 = 4
+				4 * 2 = 8
+				4 * 3 = 12
+				4 * 4 = 16
+				4 * 5 = 20
+				4 * 6 = 24
+				4 * 7 = 28
+				4 * 8 = 32
+				4 * 9 = 36
+				4 * 10 = 40
+				
+5 * 1 = 5
+				5 * 2 = 10
+				5 * 3 = 15
+				5 * 4 = 20
+				5 * 5 = 25
+				5 * 6 = 30
+				5 * 7 = 35
+				5 * 8 = 40
+				5 * 9 = 45
+				5 * 10 = 50
+				
+6 * 1 = 6
+				6 * 2 = 12
+				6 * 3 = 18
+				6 * 4 = 24
+				6 * 5 = 30
+				6 * 6 = 36
+				6 * 7 = 42
+				6 * 8 = 48
+				6 * 9 = 54
+				6 * 10 = 60
+				
+7 * 1 = 7
+				7 * 2 = 14
+				7 * 3 = 21
+				7 * 4 = 28
+				7 * 5 = 35
+				7 * 6 = 42
+				7 * 7 = 49
+				7 * 8 = 56
+				7 * 9 = 63
+				7 * 10 = 70
+				
+8 * 1 = 8
+				8 * 2 = 16
+				8 * 3 = 24
+				8 * 4 = 32
+				8 * 5 = 40
+				8 * 6 = 48
+				8 * 7 = 56
+				8 * 8 = 64
+				8 * 9 = 72
+				8 * 10 = 80
+				
+9 * 1 = 9
+				9 * 2 = 18
+				9 * 3 = 27
+				9 * 4 = 36
+				9 * 5 = 45
+				9 * 6 = 54
+				9 * 7 = 63
+				9 * 8 = 72
+				9 * 9 = 81
+				9 * 10 = 90
+				
+10 * 1 = 10
+				10 * 2 = 20
+				10 * 3 = 30
+				10 * 4 = 40
+				10 * 5 = 50
+				10 * 6 = 60
+				10 * 7 = 70
+				10 * 8 = 80
+				10 * 9 = 90
+				10 * 10 = 100
+			
+
+",
+إجراء عمليات حسابية,10,"أكتب برنامج يطلب من المستخدم إدخال رقمين, ثم يعرض له قائمة خيارات يمكن تطبيقها على هذين الرقمين.
+	المستخدم سيكون عليه إدخال رقم الخيار فقط حتى يتم تنفيذه.
+الخيار 0 لإيقاف البرنامج.
+الخيار 1 لإطباعة ناتج جمع العددين.
+الخيار 2 لإطباعة ناتج طرح العددين.
+الخيار 3 لإطباعة ناتج شرب العددين.
+الخيار 4 لإطباعة ناتج قسمة العددين.
+",,"
+#include <iostream>
+
+int main() {
+	double a, b;
+	int option = -1;
+
+	std::cout << ""Enter first number: "";
+	std::cin >> a;
+
+	std::cout << ""Enter second number: "";
+	std::cin >> b;
+
+	std::cout << (
+		""\nWrite down the operation number then press enter\n""
+		""0: To end the program.\n""
+		""1: To print the sum.\n""
+		""2: To print the subtraction.\n""
+		""3: To print the multiplication.\n""
+		""4: To print the division."");
+
+	while (option != 0)
+	{
+		std::cout << ""\n-------------------------\n"";
+		std::cout << ""Enter option: "";
+		std::cin >> option;
+
+		switch (option)
+		{
+		case 0:
+			std::cout << ""Program end."";
+			break;
+		case 1:
+			std::cout << a << "" + "" << b << "" = "" << (a + b);
+			break;
+		case 2:
+			std::cout << a << "" - "" << b << "" = "" << (a - b);
+			break;
+		case 3:
+			std::cout << a << "" * "" << b << "" = "" << (a * b);
+			break;
+		case 4:
+			std::cout << a << "" / "" << b << "" = "" << (a / b);
+			break;
+		}
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+
+				Enter first number:  1 
+Enter second number:  4 
+
+Write down the operation number then press enter
+				0: To end the program.
+				1: To print the sum.
+				2: To print the subtraction.
+				3: To print the multiplication.
+				4: To print the division.
+				-------------------------
+				Enter option:  1 
+1 + 4 = 5
+-------------------------
+				Enter option:  2 
+1 - 4 = -3
+-------------------------
+				Enter option:  3 
+1 * 4 = 4
+-------------------------
+				Enter option:  4 
+1 / 4 = 0.25
+-------------------------
+				Enter option:  0 
+Program end.
+
+","إذا قام المستخدم بإدخال الرقمين 1 و 4. ثم قام بتجربة كل الخيارات الموجودة في القائمة, فستكون النتيجة كالتالي.
+		قمنا بتعليم المعلومات التي أدخلها المستخدم باللون الأصفر و النتائج التي ظهرت له بعد إدخالها باللون الأزرق.",
+إجراء عمليات حسابية,11,"أكتب برنامج يطلب من المستخدم إدخال خمسة أعداد ثم يعرض له متوسط هذه الأعداد.
+ملاحظة: كل عدد يتم إدخاله يجب أن يتم تخزينه في متغير. أي ممنوع إستخدام مصفوفة.",,"
+#include <iostream>
+
+int main() {
+	double n1, n2, n3, n4, n5, avg;
+
+	std::cout << ""Enter n1: "";
+	std::cin >> n1;
+
+	std::cout << ""Enter n2: "";
+	std::cin >> n2;
+
+	std::cout << ""Enter n3: "";
+	std::cin >> n3;
+
+	std::cout << ""Enter n4: "";
+	std::cin >> n4;
+
+	std::cout << ""Enter n5: "";
+	std::cin >> n5;
+
+	avg = (n1 + n2 + n3 + n4 + n5) / 5;
+
+	std::cout << ""Average = "" << avg;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+
+				Enter n1: 7 
+				Enter n2: 4 
+				Enter n3: 9 
+				Enter n4: 1 
+				Enter n5: 3 
+				Average = 4.8
+			
+",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,"مثال: إذا قام المستخدم بإدخال الأعداد 7 , 4 , 9 , 1 , 3 فستكون النتيجة كالتالي.
+
+Enter n1: 7
+Enter n2: 4
+Enter n3: 9
+Enter n4: 1
+Enter n5: 3
+Average = 4.8
+	"
+إجراء عمليات حسابية,12,"أكتب برنامج يطلب من المستخدم إدخال رقم الشهر, و بعدها سيقوم بطباعة إسم الشهر باللغة الإنجليزية.
+	رقم الشهر يجب أن يكون بين 1 و 12.
+	في حال قام المستخدم بإدخال رقم أصغر من 1 أو أكبر من 12 سيتم عرض الرسالة التالية له ""Error input, Month number should be between 1 and 12."".",,"
+#include <iostream>
+
+int main() {
+	int month;
+
+	std::cout << ""Month number: "";
+	std::cin >> month;
+
+	std::cout << ""Month name: "";
+
+	switch (month)
+	{
+		case 1:
+			std::cout << ""January"";
+			break;
+		case 2:
+			std::cout << ""February"";
+			break;
+		case 3:
+			std::cout << ""March"";
+			break;
+		case 4:
+			std::cout << ""April"";
+			break;
+		case 5:
+			std::cout << ""May"";
+			break;
+		case 6:
+			std::cout << ""June"";
+			break;
+		case 7:
+			std::cout << ""July"";
+			break;
+		case 8:
+			std::cout << ""August"";
+			break;
+		case 9:
+			std::cout << ""September"";
+			break;
+		case 10:
+			std::cout << ""October"";
+			break;
+		case 11:
+			std::cout << ""November"";
+			break;
+		case 12:
+			std::cout << ""December"";
+			break;
+		default:
+			std::cout << ""Error input, Month number should be between 1 and 12."";
+			break;
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Month number: 5
+Month name: May
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 5 عند التشغيل.,"مثال: إذا قام المستخدم بإدخال الرقم 5 فستكون النتيجة كالتالي.
+
+Month number: 5
+Month name: May
+	"
+إجراء عمليات حسابية,13,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب ناتج جمع جميع الأرقام من 1 إلى n و يخزنها في متغير إسمه s كالتالي.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-3/ex-3-solution-using-cpp/2521000a-3a4c-4a3e-8887-5921610c85ce_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n, s = 0;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		s += i;
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 10
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,14,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب ناتج ضرب جميع الأرقام من 1 إلى n و يخزنها في متغير إسمه m كالتالي.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-3/ex-4-solution-using-cpp/5fec87c6-deee-46e2-ad6c-a81c7d0782ad_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n, m = 1;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		m *= i;
+	}
+
+	std::cout << ""M = "" << m;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+M = 24
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,15,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-3/ex-5-solution-using-cpp/224525b6-587e-4e94-8f89-9b7f6bca998c_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n, s = 0;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i % 2 == 1)
+		{
+			s -= i;
+		}
+		else
+		{
+			s += i;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 2
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,16,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-4/ex-1-solution-using-cpp/522d0bb1-b16e-4a41-b55a-3fb61fb1dbc9_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+	double s = 0;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (double i = 1; i <= n; i++)
+	{
+		s += 1 / i;
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 2.08333
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,17,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-4/ex-2-solution-using-cpp/89835544-7088-4f66-a80f-bdd227d9cea5_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+	double s = 0;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i % 2 == 1)
+		{
+			s += (double) 1 / i;
+		}
+		else
+		{
+			s -= (double) 1 / i;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 0.583333
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,18,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-4/ex-3-solution-using-cpp/f673aa2a-f22a-4db7-bfe2-061e07fa8238_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+	double s = 0;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (double i = 1; i <= n; i++)
+	{
+		s += (i * i) / (i + 1);
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 7.28333
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,19,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-4/ex-4-solution-using-cpp/349b1a02-d15c-4fec-8709-9bbf5d317001_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+	double s = 0;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i % 2 == 1)
+		{
+			s += (double) (i * 2) / (i + 1);
+		}
+		else
+		{
+			s -= (double) (i * 2) / (i + 1);
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = -0.433333
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,20,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-4/ex-5-solution-using-cpp/54ddd6aa-9c9e-426a-8f0d-4c311ebef5c9_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n;
+	double s = 0;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i % 2 == 1)
+		{
+			s += (double) (i * (i + 1)) / (i + 1);
+		}
+		else
+		{
+			s -= (double) (i * (i + 1)) / (i + 1);
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = -2
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,21,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-5/ex-1-solution-using-cpp/26d4188f-fc51-47af-8bd6-8d6ba57a1243_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	int s = 0;
+	int f = 1;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		f *= i;
+		s += f;
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 33
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,22,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-5/ex-2-solution-using-cpp/ea9b5d90-d3a4-4cd6-91c9-6a6ab17bd093_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	int s = 0;
+	int f = 1;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		f *= i;
+
+		if (i % 2 == 1)
+		{
+			s += f;
+		}
+		else
+		{
+			s -= f;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = -19
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,23,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-5/ex-3-solution-using-cpp/7d70cce9-0947-404b-91fc-25183d8ef49b_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	int s = 0;
+	int f = 1;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		f *= i;
+
+		if (i % 2 == 1)
+		{
+			s += i;
+		}
+		else
+		{
+			s += f;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 30
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,24,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-5/ex-4-solution-using-cpp/e9db2b66-766c-4468-8ced-9a1b6fb8e28e_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	int s = 0;
+	int f = 1;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		f *= i;
+
+		if (i % 2 == 1)
+		{
+			s -= i;
+		}
+		else
+		{
+			s += f;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 22
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,25,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-5/ex-5-solution-using-cpp/10596520-cab1-4e08-8e0f-498198a959b0_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	int s = 0;
+	int f = 1;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		f *= i;
+
+		if (i % 2 == 0)
+		{
+			s += f;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 26
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,26,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-6/ex-1-solution-using-cpp/ab095fac-aab4-41b1-b803-d53b41adabeb_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	int s = 0;
+	int p;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		p = 1;
+
+		for (int j = 1; j <= i; j++)
+		{
+			p *= i;
+		}
+
+		s += p;
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 288
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,27,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-6/ex-2-solution-using-cpp/491600d2-c715-4d0c-8290-6dbe4e94bc2d_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	int s = 0;
+	int p;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		p = 1;
+
+		for (int j = 1; j <= i; j++)
+		{
+			p *= i;
+		}
+
+		if (i % 2 == 1)
+		{
+			s -= p;
+		}
+		else
+		{
+			s += p;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 232
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,28,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-6/ex-3-solution-using-cpp/ab7c082d-e2fc-430f-bf38-e83ccbfb8b79_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	int s = 0;
+	int p;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i % 2 == 1)
+		{
+			s += i;
+		}
+		else
+		{
+			p = 1;
+
+			for (int j = 1; j <= i; j++)
+			{
+				p *= i;
+			}
+
+			s += p;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 264
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,29,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-6/ex-4-solution-using-cpp/b1f2508b-9296-44a7-ad38-54b83c9a9dab_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	int s = 0;
+	int p;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i % 2 == 1)
+		{
+			s += i;
+		}
+		else
+		{
+			p = 1;
+
+			for (int j = 1; j <= i; j++)
+			{
+				p *= i;
+			}
+
+			s -= p;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = -256
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,30,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-6/ex-5-solution-using-cpp/dd52cec3-4d4a-4637-9e7f-b50d7eb43a8f_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	int s = 0;
+	int p;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 2; i <= n; i += 2)
+	{
+		p = 1;
+
+		for (int j = 1; j <= i; j++)
+		{
+			p *= i;
+		}
+
+		s += p;
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 260
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,31,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغيرين s و t.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-7/ex-1-solution-using-cpp/521cf6d7-77b0-4bcf-b5f9-06a162479f80_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	int s = 0;
+	int t = 0;
+	int f = 1;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		f *= i;
+
+		if (i % 2 == 1)
+		{
+			s += f;
+		}
+		else
+		{
+			t += f;
+		}
+	}
+
+	std::cout << ""S = "" << s << ""\n"";
+	std::cout << ""T = "" << t;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 7
+T = 26
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,32,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-7/ex-2-solution-using-cpp/3a881aec-ebbd-45ff-897d-25b2e7d9e770_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int f = 1;
+	int n = 0;
+	double s = 0;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (double i = 1; i <= n; i++)
+	{
+		f *= i;
+		s += 1 / (i + f);
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 0.896825
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,33,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-7/ex-3-solution-using-cpp/e8679a59-69ca-49cf-8954-f4079954e973_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int f = 1;
+	int n = 0;
+	double s = 0;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		f *= i;
+
+		if (i % 2 == 1)
+		{
+			s += i;
+		}
+		else
+		{
+			s += (double) 1 / f;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 4.54167
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,34,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-7/ex-4-solution-using-cpp/e82cf9d2-87c5-4c28-8cd9-7838c86892fc_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int f = 1;
+	int n = 0;
+	double s = 0;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (double i = 1; i <= n; i++)
+	{
+		f *= i;
+		s += i / ((i + 1) + f);
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 1.17126
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,35,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-7/ex-5-solution-using-cpp/16a25465-3af7-4552-a86f-798279fbaca6_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int f = 1;
+	int n = 0;
+	int s = 0;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		f = 1;
+
+		for (int j = 1; j <= i + 1; j++)
+		{
+			f *= j;
+		}
+
+		if (i % 2 == 1)
+		{
+			s -= i + f;
+		}
+		else
+		{
+			s += i + f;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 102
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,36,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-8/ex-1-solution-using-cpp/23133ddd-622d-46f4-af12-efdb955267f1_ex-1.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	int s = 0;
+	int f;
+	int p;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i % 2 == 1)
+		{
+			p = 1;
+			for (int j = 1; j <= i; j++)
+			{
+				p *= i;
+			}
+			s += p;
+		}
+		else
+		{
+			f = 1;
+			for (int j = 1; j <= i; j++)
+			{
+				f *= j;
+			}
+			s += f;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 54
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,37,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-8/ex-2-solution-using-cpp/dc4c689a-e0dc-49db-b1e0-8373b8722278_ex-2.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	double s = 0;
+	double f;
+	double p;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		if (i % 2 == 1)
+		{
+			p = 1;
+			for (int j = 1; j <= i; j++)
+			{
+				p *= i;
+			}
+			s += p;
+		}
+		else
+		{
+			f = 1;
+			for (int j = 1; j <= i; j++)
+			{
+				f *= j;
+			}
+			s += 1 / f;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 28.5417
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,38,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-8/ex-3-solution-using-cpp/c98d7149-2927-420e-8a6a-976732db2bc3_ex-3.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	double s = 0;
+	double f;
+	double p;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		p = 1;
+		for (int j = 1; j <= i; j++)
+		{
+			p *= i;
+		}
+
+		f = 1;
+		for (int j = 1; j <= i; j++)
+		{
+			f *= j;
+		}
+
+		s += p / f;
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 18.1667
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,39,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-8/ex-4-solution-using-cpp/bc16a0dd-c0f6-48fe-bfdb-a2e1cab6f96a_ex-4.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	double s = 0;
+	double f;
+	double p;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		f = 1;
+		for (int j = 1; j <= i; j++)
+		{
+			f *= j;
+		}
+
+		p = 1;
+		for (int j = 1; j <= i; j++)
+		{
+			p *= i;
+		}
+
+		s += f / p;
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = 1.81597
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,40,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من صفر و خزنه في المتغير n.
+	بعدها يقوم بحساب القيمة النهائية التي سيتم تخزينها في المتغير s.",https://harmash.com//tutorials/algorithms-and-data-structure/math-operations-test-8/ex-5-solution-using-cpp/5832492e-c10f-4356-9285-7186bdedc602_ex-5.PNG,"
+#include <iostream>
+
+int main() {
+
+	int n = 0;
+	double s = 0;
+	double f;
+	double p;
+
+	do
+	{
+		std::cout << ""Enter a number: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	for (int i = 1; i <= n; i++)
+	{
+		f = 1;
+		for (int j = 1; j <= i; j++)
+		{
+			f *= j;
+		}
+
+		p = 1;
+		for (int j = 1; j <= i; j++)
+		{
+			p *= i;
+		}
+
+		if (i % 2 == 1)
+		{
+			s += f / p;
+		}
+		else
+		{
+			s -= p / f;
+		}
+	}
+
+	std::cout << ""S = "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 4
+S = -11.4444
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 4 عند التشغيل.,
+إجراء عمليات حسابية,41,"قم بتعريف دالة إسمها Power(), عند استدعاءها نمرر لها عددين, فترجع ناتج قيمة العدد الأول مضاعفة بقيمة العدد الثاني.
+	بعدها قم بتجربة هذه الدالة في البرنامج.",,"
+#include <iostream>
+
+int power(int a, int b) {
+
+	int p = 1;
+
+	for (int i = 1; i <= b; i++)
+	{
+		p *= a;
+	}
+
+	return p;
+
+}
+
+
+int main() {
+
+	int x = 5;
+	int y = 2;
+
+	std::cout << x << "" ^ "" << y << "" = "" << power(x, y);
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+5 ^ 2 = 25
+		",سنحصل على النتيجة التالية عند التشغيل.,
+إجراء عمليات حسابية,42,"قم بتعريف دالة إسمها Factorial(), عند استدعاءها نمرر لها عدد, فترجع ناتج قيمة الـ Factorial له.
+	بعدها قم بتجربة هذه الدالة في البرنامج.",,"
+#include <iostream>
+
+int factorial(int n) {
+	int f = 1;
+
+	for (int i = 1; i <= n; i++)
+	{
+		f *= i;
+	}
+
+	return f;
+}
+
+
+int main() {
+
+	int x = 5;
+
+	std::cout << x << ""! = "" << factorial(x);
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+5! = 120
+		",سنحصل على النتيجة التالية عند التشغيل.,
+إجراء عمليات حسابية,43,"قم بتعريف دالة إسمها SquareRoot(), عند استدعاءها نمرر لها عدد, فترجع ناتج قيمة الجزر التربيعي ( Square Root ) له.
+	بعدها قم بتجربة هذه الدالة في البرنامج.",,"
+#include <iostream>
+
+float squareRoot(int n) {
+    float low = 0;
+    float high = (float) n + 1;
+    float mid;
+
+    while ((high-low) > 0.00001)
+	{
+        mid = (low + high) / 2;
+        if (mid * mid < n)
+		{
+            low = mid;
+        }
+        else
+		{
+            high = mid;
+        }
+    }
+	
+    return low;
+}
+
+
+int main() {
+
+    int x = 5;
+
+    std::cout << ""The square root of "" << 5 << "" is: "" << squareRoot(x);
+
+    char end; std::cin >> end;
+    return 0;
+
+}
+		","
+The square root of 5 is: 2.23607
+		",سنحصل على النتيجة التالية عند التشغيل.,
+إجراء عمليات حسابية,44,"قم بتعريف دالة إسمها IsPrime(), عند استدعاءها نمرر لها عدد, فترجع True إذا كان العدد عبارة عن عدد أوّلي ( Prime Number ) و ترجع False إن لم يكن كذلك.
+	بعدها قم بتجربة هذه الدالة في البرنامج.",,"
+#include <iostream>
+
+bool isPrime(int n) {
+
+	// إذا كان الرقم من الأساس أصغر أو يساوي 1 فعندها لا يعتبر عدد أولي
+	if (n <= 1)
+	{
+		return false;
+	}
+
+	// إذا كان الرقم الذي تم تمريره إليها أكبر من 1 عندها سيتم التأكد منه
+	else
+	{
+		// سنحاول قسمته على جميع الأعداد الموجودة إبتداءاً من الرقم 2 إلى نصف قيمه العدد الذي تم تمريره للدالة
+		for (int i = 2; i <= (n / 2); i++)
+		{
+			// إذا كان العدد الذي تم تمريره لها لا يمكن قسمته على أي رقم بين 2 و نصفه فعندها لا يعتبر عدد أولي
+			if (n % i == 0)
+			{
+				return false;
+			}
+		}
+		// إذا كان العدد الذي تم تمريره لها يمكن قسمته على أي رقم بين 2 و نصفه فعندها يعتبر عدد أولي
+		return true;
+	}
+
+}
+
+
+int main() {
+	
+	std::cout << ""2 is a prime number? "" << (isPrime(2) ? ""true"" : ""false"") << ""\n"";
+	std::cout << ""3 is a prime number? "" << (isPrime(3) ? ""true"" : ""false"") << ""\n"";
+	std::cout << ""4 is a prime number? "" << (isPrime(4) ? ""true"" : ""false"") << ""\n"";
+	std::cout << ""5 is a prime number? "" << (isPrime(5) ? ""true"" : ""false"") << ""\n"";
+	std::cout << ""6 is a prime number? "" << (isPrime(6) ? ""true"" : ""false"") << ""\n"";
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+2 is a prime number? true
+3 is a prime number? true
+4 is a prime number? false
+5 is a prime number? true
+6 is a prime number? false
+		",سنحصل على النتيجة التالية عند التشغيل.,معلومة: العدد الأولي هو العدد الذي يقبل القسمة على نفسه و على 1 فقط مثل الأرقام 1 - 3 - 5 - 7 - 11 - 13 - 17 إلخ..
+إجراء عمليات حسابية,45,"أكتب برنامج يطلب من المستخدم إعطائه عدد صحيح أكبر من 2 و خزنه في المتغير n.
+	بعدها يقوم بطباعة جميع الأعداد الأولية ( Prime Numbers ) الموجودة بين 2 و n.",,"
+#include <iostream>
+
+int main() {
+	
+	int n;
+	bool isPrime;
+	do {
+		std::cout <<(""Enter a number: "");
+		std::cin >> n;
+	}
+	while (n <= 1);
+
+	std::cout << ""All prime numbers between 2 and "" << n << "": "";
+
+	for (int i = 2; i <= n; i++)
+	{
+		isPrime = true;
+
+		for (int j = 2; j <= i / 2; j++)
+		{
+			if (i % j == 0)
+			{
+				isPrime = false;
+				break;
+			}
+		}
+
+		if (isPrime)
+		{
+			std::cout << i << "" "";
+		}
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 12
+All prime numbers between 2 and 12: 2 3 5 7 11 
+		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقم 12 عند التشغيل.,معلومة: العدد الأولي هو العدد الذي يقبل القسمة على نفسه و على 1 فقط مثل الأرقام 1 - 3 - 5 - 7 - 11 - 13 - 17 إلخ..
+التعامل مع المصفوفات,1,"أكتب برنامج يطلب من المستخدم إعطائه عدد يمثل عدد عناصر مصفوفة إسمها arr و يخزنه في متغير إسمه n.
+ملاحظة: عدد عناصر المصفوفة يجب أن يكون أكبر من صفر.
+	بعدها ينشئ المصفوفة arr و يحدد أن عدد عناصرها هو العدد الذي أدخله المستخدم.
+	بعدها يطلب من المستخدم إدخال عدد صحيح لكل عنصر فيها.
+	في الأخير, سيعرض للمستخدم عدد عناصر المصفوفة, يليه جميع القيم المخزنة فيها على سطر واحد مع وضع فاصلة بين كل قيمتين.",,"
+#include <iostream>
+
+int main() {
+	
+	int n;
+	int * arr;
+
+	do {
+		std::cout <<(""Enter arr length: "");
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	arr = new int[n];
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter arr["" << i << ""]: "";
+		std::cin >> arr[i];
+	}
+
+	std::cout << ""\nTotal number of items: "" << n;
+
+	std::cout << ""\nArray values: "";
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << arr[i];
+
+		if (i < n - 1)
+		{
+			std::cout << "", "";
+		}
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter arr length: 4
+Enter arr[0]: 2
+Enter arr[1]: 7
+Enter arr[2]: 5
+Enter arr[3]: 3
+Total number of items: 4
+Array values: 2, 7, 5, 3
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,2,"أكتب برنامج يطلب من المستخدم إعطائه عدد يمثل عدد عناصر مصفوفة إسمها arr و يخزنه في متغير إسمه n.
+ملاحظة: عدد عناصر المصفوفة يجب أن يكون أكبر من صفر.
+	بعدها ينشئ المصفوفة arr و يحدد أن عدد عناصرها هو العدد الذي أدخله المستخدم.
+	بعدها يطلب من المستخدم إدخال عدد صحيح لكل عنصر فيها.
+	في الأخير, سيعرض للمستخدم ناتج جمع جميع قيم عناصر المصفوفة.",,"
+#include <iostream>
+
+int main() {
+	
+	int n;
+	int s = 0;
+	int * arr;
+
+	do {
+		std::cout <<(""Enter arr length: "");
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	arr = new int[n];
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter arr["" << i << ""]: "";
+		std::cin >> arr[i];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		s += arr[i];
+	}
+
+	std::cout << ""\nSum of all elements: "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter arr length: 4
+Enter arr[0]: 2
+Enter arr[1]: 7
+Enter arr[2]: 5
+Enter arr[3]: 3
+Sum of all elements: 17
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,3,"أكتب برنامج يطلب من المستخدم إعطائه عدد يمثل عدد عناصر مصفوفة إسمها arr و يخزنه في متغير إسمه n.
+ملاحظة: عدد عناصر المصفوفة يجب أن يكون أكبر من صفر.
+	بعدها ينشئ المصفوفة arr و يحدد أن عدد عناصرها هو العدد الذي أدخله المستخدم.
+	بعدها يطلب من المستخدم إدخال عدد صحيح لكل عنصر فيها.
+	في الأخير يعرض للمستخدم عدد العناصر التي تملك قيم أكبر من صفر, و عدد العناصر التي تملك قيم أصغر من صفر, و عدد العناصر التي تملك قيم تساوي صفر.",,"
+#include <iostream>
+
+int main() {
+	
+	int n;
+	int pCounter = 0;
+	int nCounter = 0;
+	int zCounter = 0;
+	int * arr;
+
+	do {
+		std::cout <<(""Enter arr length: "");
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	arr = new int[n];
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter arr["" << i << ""]: "";
+		std::cin >> arr[i];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] > 0)
+		{
+			pCounter++;
+		}
+		else if (arr[i] < 0)
+		{
+			nCounter++;
+		}
+		else
+		{
+			zCounter++;
+		}
+	}
+
+	std::cout << ""\nNumber of positive numbers: "" << pCounter;
+	std::cout << ""\nNumber of negative numbers: "" << nCounter;
+	std::cout << ""\nNumber of zeros: "" << zCounter;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter arr length: 6
+Enter arr[0]: 2
+Enter arr[1]: -2
+Enter arr[2]: 0
+Enter arr[3]: -1
+Enter arr[4]: 4
+Enter arr[5]: 9
+Number of positive numbers: 3
+Number of negative numbers: 2
+Number of zeros: 1
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,4,"أكتب برنامج يطلب من المستخدم إعطائه عدد يمثل عدد عناصر مصفوفة إسمها arr و يخزنه في متغير إسمه n.
+ملاحظة: عدد عناصر المصفوفة يجب أن يكون أكبر من صفر.
+	بعدها ينشئ المصفوفة arr و يحدد أن عدد عناصرها هو العدد الذي أدخله المستخدم.
+	بعدها يطلب من المستخدم إدخال عدد صحيح لكل عنصر فيها.
+	بعدها يعرض للمستخدم جميع قيم عناصر المصفوفة التي قام هو بإدخالها مع وضع مسافة فارغة بين كل قيمتين.
+	في الأخير, يقوم بترتيب قيم عناصر المصفوفة من الأصغر إلى الأكبر و من ثم يعرضها له من جديد.",,"
+#include <iostream>
+
+int main() {
+	
+	int n;
+	int temp;
+	int * arr;
+
+	do {
+		std::cout <<(""Enter arr length: "");
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	arr = new int[n];
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter arr["" << i << ""]: "";
+		std::cin >> arr[i];
+	}
+
+	std::cout << ""\nCurrent order\n"";
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << arr[i] << "" "";
+	}
+
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (arr[j] < arr[i])
+			{
+				temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+	}
+
+	std::cout << ""\n\nAfter ascending order\n"";
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << arr[i] << "" "";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter arr length: 5
+Enter arr[0]: 7
+Enter arr[1]: 3
+Enter arr[2]: 1
+Enter arr[3]: 6
+Enter arr[4]: 4
+Current order
+7 3 1 6 4 
+After ascending order
+1 3 4 6 7 
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,5,"أكتب برنامج يطلب من المستخدم إعطائه عدد يمثل عدد عناصر مصفوفة إسمها arr و يخزنه في متغير إسمه n.
+ملاحظة: عدد عناصر المصفوفة يجب أن يكون أكبر من صفر.
+	بعدها ينشئ المصفوفة arr و يحدد أن عدد عناصرها هو العدد الذي أدخله المستخدم.
+	بعدها يطلب من المستخدم إدخال عدد صحيح لكل عنصر فيها.
+	بعدها يعرض للمستخدم جميع قيم عناصر المصفوفة التي قام هو بإدخالها مع وضع مسافة فارغة بين كل قيمتين.
+	في الأخير, يقوم بترتيب قيم عناصر المصفوفة من الأكبر إلى الأصغر و من ثم يعرضها له من جديد.",,"
+#include <iostream>
+
+int main() {
+	
+	int n;
+	int temp;
+	int * arr;
+
+	do {
+		std::cout <<(""Enter arr length: "");
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	arr = new int[n];
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter arr["" << i << ""]: "";
+		std::cin >> arr[i];
+	}
+
+	std::cout << ""\nCurrent order\n"";
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << arr[i] << "" "";
+	}
+
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (arr[j] > arr[i])
+			{
+				temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+		}
+	}
+
+	std::cout << ""\n\nAfter descending order\n"";
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << arr[i] << "" "";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter arr length: 5
+Enter arr[0]: 7
+Enter arr[1]: 3
+Enter arr[2]: 1
+Enter arr[3]: 6
+Enter arr[4]: 4
+Current order
+7 3 1 6 4 
+After descending order
+7 6 4 3 1
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,6,"أكتب برنامج يطلب من المستخدم إعطائه عدد يمثل عدد عناصر مصفوفة إسمها array و يخزنه في متغير إسمه n.
+ملاحظة: عدد عناصر المصفوفة يجب أن يكون أكبر من صفر.
+	بعدها ينشئ المصفوفة array و يحدد أن عدد عناصرها هو العدد الذي أدخله المستخدم.
+	بعدها يطلب من المستخدم إدخال عدد صحيح لكل عنصر فيها.
+	بعدها يعرض للمستخدم جميع قيم عناصر المصفوفة التي قام هو بإدخالها مع وضع مسافة فارغة بين كل قيمتين.
+	بعدها يقوم بتحويل كل قيمة في المصفوفة أكبر من صفر إلى 1 و كل قيمة أصغر من صفر إلى -1.
+	في الأخير, يقوم بعرض قيم المصفوفة من جديد.",,"
+#include <iostream>
+
+int main() {
+	
+	int n;
+	int *array;
+
+	do {
+		std::cout << ""Enter array length: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	array = new int[n];
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter array["" << i << ""]: "";
+		std::cin >> array[i];
+	}
+
+	std::cout << ""\nCurrent values:\n"";
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << array[i] << "" "";
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		if (array[i] > 0)
+		{
+			array[i] = 1;
+		}
+		else if (array[i] < 0)
+		{
+			array[i] = -1;
+		}
+	}
+
+	std::cout << ""\n\nNew Values:\n"";
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << array[i] << "" "";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter array length: 5
+Enter array[0]: 2
+Enter array[1]: 4
+Enter array[2]: 0
+Enter array[3]: -3
+Enter array[4]: -2
+Current values:
+2 4 0 -3 -2 
+New values:
+1 1 0 -1 -1
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,7,"أكتب برنامج يقوم بتعريف ثلاث مصفوفات A و B و C.
+	ثم يطلب من المستخدم إدخال عدد يمثل عدد عناصر المصفوفات الثلاثة.
+ملاحظة: عدد عناصر المصفوفات يجب أن يكون أكبر من صفر.
+	بعدها يطلب من المستخدم إدخال قيم لجميع عناصر المصفوفتين A و B و يجمعهم في المصفوفة C.
+	في الأخير, يعرض للمستخدم القيم التي أصبحت تحتويها المصفوفة C على سطر واحد مع وضع مسافة فارغة بين كل قيمتين.",,"
+#include <iostream>
+
+int main() {
+	
+	int n;
+	int *A, *B, *C;
+
+	do {
+		std::cout << ""Enter the length of the 3 arrays: "" ;
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	A = new int[n];
+	B = new int[n];
+	C = new int[n];
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter A["" << i << ""]: "";
+		std::cin >> A[i];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter B["" << i << ""]: "";
+		std::cin >> B[i];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		C[i] = A[i] + B[i];
+	}
+
+	std::cout << ""\nC contains: "";
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << C[i] << "" "";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the length of the 3 arrays: 3
+Enter A[0]: 1
+Enter A[1]: 2
+Enter A[2]: 3
+Enter B[0]: 4
+Enter B[1]: 5
+Enter B[2]: 6
+C contains: 5 7 9 
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,8,"أكتب برنامج يقوم بتعريف ثلاث مصفوفات A و B و C.
+	ثم يطلب من المستخدم إدخال عدد يمثل عدد يمثل عدد عناصر المصفوفتين A و B.
+ملاحظة: عدد عناصر المصفوفتين يجب أن يكون أكبر من صفر.
+	بعدها يطلب من المستخدم إدخال قيم لجميع عناصر المصفوفتين A و B.
+	بعدها يقوم بوضع قيم A و B بنفس الترتيب في المصفوفة C.
+	في الأخير, يعرض للمستخدم القيم التي أصبحت تحتويها المصفوفة C.
+
+
+الحل بلغة C++
+
+#include <iostream>
+
+int main() {
+	
+	int n;
+	int *A, *B, *C;
+
+	do {
+		std::cout <<(""Enter the length of A and B: "");
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	A = new int[n];
+	B = new int[n];
+	C = new int[n * 2];
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter A["" << i << ""]: "";
+		std::cin >> A[i];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter B["" << i << ""]: "";
+		std::cin >> B[i];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		C[i] = A[i];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		C[n + i] = B[i];
+	}
+
+	std::cout << ""\nC contains: "";
+	for (int i = 0; i < n * 2; i++)
+	{
+		std::cout << C[i] << "" "";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		
+
+سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.
+
+Enter the length of A and B: 3
+Enter A[0]: 1
+Enter A[1]: 2
+Enter A[2]: 3
+Enter B[0]: 4
+Enter B[1]: 5
+Enter B[2]: 6
+C contains: 1 2 3 4 5 6 
+		
+
+",,"
+#include <iostream>
+
+int main() {
+	
+	int n;
+	int *A, *B, *C;
+
+	do {
+		std::cout <<(""Enter the length of A and B: "");
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	A = new int[n];
+	B = new int[n];
+	C = new int[n * 2];
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter A["" << i << ""]: "";
+		std::cin >> A[i];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter B["" << i << ""]: "";
+		std::cin >> B[i];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		C[i] = A[i];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		C[n + i] = B[i];
+	}
+
+	std::cout << ""\nC contains: "";
+	for (int i = 0; i < n * 2; i++)
+	{
+		std::cout << C[i] << "" "";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter the length of A and B: 3
+Enter A[0]: 1
+Enter A[1]: 2
+Enter A[2]: 3
+Enter B[0]: 4
+Enter B[1]: 5
+Enter B[2]: 6
+C contains: 1 2 3 4 5 6 
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,"أكتب برنامج يقوم بتعريف ثلاث مصفوفات A و B و C.
+	ثم يطلب من المستخدم إدخال عدد يمثل عدد يمثل عدد عناصر المصفوفتين A و B.
+ملاحظة: عدد عناصر المصفوفتين يجب أن يكون أكبر من صفر.
+	بعدها يطلب من المستخدم إدخال قيم لجميع عناصر المصفوفتين A و B.
+	بعدها يقوم بوضع قيم A و B بنفس الترتيب في المصفوفة C.
+	في الأخير, يعرض للمستخدم القيم التي أصبحت تحتويها المصفوفة C."
+التعامل مع المصفوفات,9,"أكتب برنامج يطلب من المستخدم إدخال أي رقم يريد للبحث عنه بداخل مصفوفة أرقام أحادية (ذات بعد واحد) جاهزة.
+	بعدها سيقوم البرنامج بطباعة ما إن كانت القيمة موجودة في المصفوفة أم لا.",,"
+#include <iostream>
+
+int main() {
+	
+	int array[] = { 1, 2, 5, 3, 2, 4, 7, 2 };
+	int arrayLength = (sizeof(array) / sizeof(*array));
+	int x;
+	bool isExist = false;
+
+	std::cout << ""Enter a number: "";
+	std::cin >> x;
+
+	for (int i = 0; i < arrayLength; i++)
+	{
+		if (array[i] == x)
+		{
+			isExist = true;
+			break;
+		}
+	}
+
+	if (isExist)
+	{
+		std::cout << ""'"" << x << ""' is exists in the array"";
+	}
+	else
+	{
+		std::cout << ""'"" << x << ""' is not exist in the array"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 5
+'5' is exists in the array
+		",سنحصل على النتيجة التالية في حال كانت المصفوفة تحتوي على نفس القيم المجهزة فيها و تم إدخال نفس القيمة التي تم تعليمها باللون الأصفر عند التشغيل.,ملاحظة: بمجرد أن يتم إيجاد القيمة المراد البحث عنها فإنه يجب إيقاف البحث.
+التعامل مع المصفوفات,10,"أكتب برنامج يطلب من المستخدم إدخال أي رقم يريد للبحث عنه بداخل مصفوفة أرقام أحادية (ذات بعد واحد) جاهزة.
+	بعدها سيقوم البرنامج بطباعة كم مرة تم إيجاد الرقم الذي أدخله المستخدم في المصفوفة.",,"
+#include <iostream>
+
+int main() {
+	
+	int array[] = { 1, 2, 5, 3, 2, 4, 7, 2 };
+	int arrayLength = (sizeof(array) / sizeof(*array));
+	int found = 0;
+	int x;
+
+	std::cout <<(""Enter a number: "");
+	std::cin >> x;
+
+	for (int i = 0; i < arrayLength; i++)
+	{
+		if (array[i] == x)
+		{
+			found++;
+		}
+	}
+
+	if (found == 1)
+	{
+		std::cout << ""'"" << x << ""' is found 1 time"";
+	}
+	else if (found > 1)
+	{
+		std::cout << ""'"" << x << ""' is found "" << found << "" times"";
+	}
+	else
+	{
+		std::cout << ""'"" << x << ""' is not found"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter a number: 2
+'2' is found 3 times
+		",سنحصل على النتيجة التالية في حال كانت المصفوفة تحتوي على نفس القيم المجهزة فيها و تم إدخال نفس القيمة التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,11,"قم بتعريف دالة إسمها FindAll, مهمتها البحث في مصفوفة أحادية ( تتألف من أعداد صحيحة ) نمررها لها عن قيمة محددة أيضاً نمررها لها, و من ثم طباعة Index كل عنصر يملك هذه القيمة.
+	بعدها قم بتجربة هذه الدالة في البرنامج.",,"
+#include <iostream>
+
+// هنا قمنا بتعريف الدالة
+void findAll(int arr[], int arrLength, int x) {
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		if (arr[i] == x)
+		{
+			printf(""'%d' found at index %d\n"", x, i);
+		}
+	}
+
+}
+
+int main() {
+	
+	// هنا قمنا بتجهيز القيم التي سنمررها للدالة
+	int array[] = { 1, 2, 3, 2, 5, 2, 7, 2 };
+	int arrayLength = sizeof(array) / sizeof(array[0]);
+	int value = 2;
+
+	// هنا قمنا بتجربة الدالة
+	findAll(array, arrayLength, value);
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+'2' found at index: 1
+'2' found at index: 3
+'2' found at index: 5
+'2' found at index: 7
+		",سنحصل على النتيجة التالية عند التشغيل.,مساعدة: يجب تمرير حجم المصفوفة أيضاً للدالة لأنه لا يمكن معرفته بالطرق العادية من داخل الدالة.
+التعامل مع المصفوفات,12,"قم بتعريف دالة إسمها CountOccurrence, مهمتها البحث في مصفوفة أحادية ( تتألف من أعداد صحيحة ) و طباعة كم مرة تكررت كل قيمة موجودة فيها.
+	بعدها قم بتجربة هذه الدالة في البرنامج.",,"
+#include <iostream>
+
+// هنا قمنا بتعريف الدالة
+void countOccurrence(int arr[], int arrLength)
+{
+	int counter = 0;
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		if (arr[i] == 0)
+		{
+			counter++;
+		}
+	}
+
+	if (counter > 0)
+	{
+		std::cout << ""[0] is repeated "" << counter << "" time(s)\n"";
+	}
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		counter = 1;
+		if (arr[i] != 0)
+		{
+			for (int j = i + 1; j < arrLength; j++)
+			{
+				if (arr[i] == arr[j])
+				{
+					counter++;
+					arr[j] = 0;
+				}
+			}
+			std::cout << ""["" << arr[i] << ""] is repeated "" << counter << "" time(s)\n"";
+		}
+	}
+}
+
+int main() {
+	
+	// هنا قمنا بتجهيز القيم التي سنمررها للدالة
+	int array[] = { 0, 4, 2, 3, 2, 4, 3, 5, 2, 0, 1, 4, 2 };
+	int arrayLength = sizeof(array) / sizeof(array[0]);
+
+	// هنا قمنا بتجربة الدالة
+	countOccurrence(array, arrayLength);
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+[0] is repeated 2 time(s)
+[4] is repeated 3 time(s)
+[2] is repeated 4 time(s)
+[3] is repeated 2 time(s)
+[5] is repeated 1 time(s)
+[1] is repeated 1 time(s)
+		",سنحصل على النتيجة التالية عند التشغيل.,مساعدة: يجب تمرير حجم المصفوفة أيضاً للدالة لأنه لا يمكن معرفته بالطرق العادية من داخل الدالة.
+التعامل مع المصفوفات,13,"أكتب برنامج يطلب من المستخدم إعطائه عدد يمثل عدد عناصر مصفوفة إسمها arr و يخزنه في متغير إسمه n.
+ملاحظة: عدد عناصر المصفوفة يجب أن يكون أكبر من صفر.
+	بعدها ينشئ المصفوفة arr و يحدد أن عدد عناصرها هو العدد الذي أدخله المستخدم.
+	بعدها يطلب من المستخدم إدخال عدد صحيح لكل عنصر فيها.
+	بعدها يعرض للمستخدم جميع القيم التي أدخلها بنفس الترتيب.
+	في الأخير يقوم بترتيب جميع القيم بشكل عكسي ( مثلاً القيمة الأخيرة تصبح في الأول ) و من ثم يعرض قيم المصفوفة من جديد.",,"
+#include <iostream>
+
+int main() {
+	
+	int n;
+	int * arr;
+	int temp;
+
+	do
+	{
+		std::cout << ""Enter arr length: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	arr = new int[n];
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter arr["" << i << ""]: "";
+		std::cin >> arr[i];
+	}
+
+	std::cout << ""\nCurrent order\n"";
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << arr[i] << "" "";
+	}
+
+	for (int i = 0; i < n / 2; i++)
+	{
+		temp = arr[i];
+		arr[i] = arr[n - 1 - i];
+		arr[n - 1 - i] = temp;
+	}
+
+	std::cout << ""\n\nAfter reversing the order\n"";
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << arr[i] << "" "";
+	}
+
+	std::cout << ""\n"";
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter arr length: 4
+Enter arr[0]: 1
+Enter arr[1]: 2
+Enter arr[2]: 3
+Enter arr[3]: 4
+Current order
+1 2 3 4 
+After reversing the order
+4 3 2 1
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,14,"أكتب برنامج يطلب من المستخدم إعطائه عدد يمثل عدد عناصر مصفوفة إسمها arr و يخزنه في متغير إسمه n.
+ملاحظة: عدد عناصر المصفوفة يجب أن يكون أكبر من صفر.
+	بعدها ينشئ المصفوفة arr و يحدد أن عدد عناصرها هو العدد الذي أدخله المستخدم.
+	بعدها يطلب من المستخدم إدخال عدد لكل عنصر فيها.
+	في الأخير, يعرض للمستخدم متوسط هذه القيم.",,"
+#include <iostream>
+
+int main() {
+	
+	int n;
+	double s = 0;
+	double avg;
+	double *arr;
+
+	do
+	{
+		std::cout << ""Enter arr length: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	arr = new double[n];
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << ""Enter arr["" << i << ""]: "";
+		std::cin >> arr[i];
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		s += arr[i];
+	}
+
+	avg = s / n;
+
+	std::cout << ""\nAverage = "" << avg << ""\n"";
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter arr length: 4
+Enter arr[0]: 2
+Enter arr[1]: 6
+Enter arr[2]: 9
+Enter arr[3]: 5
+Average = 5.5
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,15,"أكتب برنامج يطلب من المستخدم إدخال علامة لكل مادة من مواد قم بتجهيز أسماءها في مصفوفة إسمها methods.
+	العلامات التي يدخلها المستخدم يجب تخزينها في مصفوفة ثانية مع الإشارة إلى أن العلامة يمكن أن تكون بين 0 و20 فقط.
+	بعدها قم بحساب متوسط العلامات التي أدخلها المستخدم.
+	في الأخير, إعرض للمستخدم متوسط العلامات التي أدخلها و عبارة ناجح إذا كان معدله أكبر أو يساوي 10 و عبارة راسب إن كان أقل.",,"
+#include <iostream>
+#include <string>
+
+int main() {
+
+	std::string methods[] = { ""Arabic"", ""English"", ""Science"", ""Math"" };
+	int methodsLength = sizeof(methods) / sizeof(methods[0]);
+
+	double notes[5];
+	double avg = 0;
+
+	for (int i = 0; i < methodsLength; i++)
+	{
+		do
+		{
+			std::cout << ""Enter "" << methods[i] << "" note: "";
+			std::cin >> notes[i];
+		} while (notes[i] < 0 || notes[i] > 20);
+	}
+
+	for (int i = 0; i < methodsLength; i++)
+	{
+		avg += notes[i];
+	}
+
+	avg /= methodsLength;
+
+	std::cout << ""\nAverage = "" << avg; 
+	
+	if (avg >= 10)
+	{
+		std::cout << "" [ Succeded ]"";
+	}
+	else
+	{
+		std::cout << "" [ Failed ]"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Enter Arabic note: 14
+Enter English note: 17
+Enter Science note: 8
+Enter Math note: 13
+Average: 13.0 [ Succeeded ]
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,16,"أكتب برنامج يطلب من المستخدم إعطائه عددين, العدد الأول يمثل عدد أسطر مصفوفة ثنائية ( ذات بعدين ) إسمها matrix و العدد الثاني يمثل عدد أعمدتها.
+ملاحظة: عدد أسطر و أعمدة المصفوفة يجب أن يكون أكبر من صفر.
+	بعدها يطلب من المستخدم إدخال عدد صحيح لكل عنصر فيها.
+	في الأخير, سيعرض للمستخدم جميع القيم المخزنة فيها بشكل مرتب.",,"
+#include <iostream>
+
+int main() {
+
+	int rows = 0;
+	int cols = 0;
+	int **matrix;
+
+	do
+	{
+		std::cout << ""Enter rows number: "";
+		std::cin >> rows;
+	}
+	while (rows <= 0);
+
+	do
+	{
+		std::cout << ""Enter cols number: "";
+		std::cin >> cols;
+	}
+	while (cols <= 0);
+
+	matrix = new int *[rows];
+	for (int i = 0; i < rows; i++)
+	{
+		matrix[i] = new int[cols];
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			std::cout << ""Enter matrix["" << i << ""]["" << j << ""]: "";
+			std::cin >> matrix[i][j];
+		}
+	}
+
+	std::cout << ""\nmatrix values\n"";
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			std::cout << matrix[i][j] << "" "";
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+			Enter rows number: 2
+			Enter columns number: 3
+			Enter matrix[0][0]: 1
+			Enter matrix[0][1]: 2
+			Enter matrix[0][2]: 3
+			Enter matrix[1][0]: 4
+			Enter matrix[1][1]: 5
+			Enter matrix[1][2]: 6
+			matrix values
+			1 2 3 
+			4 5 6 
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,17,"أكتب برنامج يعرّف مصفوفة إسمها matrix تتألف من 3 أسطر و 3 أعمدة.
+    بعدها يطلب من المستخدم إدخال عدد صحيح لكل عنصر فيها.
+	في الأخير, يعرض للمستخدم ناتج جمع جميع قيم عناصرها.",,"
+#include <iostream>
+
+int main() {
+
+	const int rows = 3;
+	const int cols = 3;
+	int matrix[rows][cols];
+	int s = 0;
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			std::cout << ""Enter matrix["" << i << ""]["" << j << ""]: "";
+			std::cin >> matrix[i][j];
+		}
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			s += matrix[i][j];
+		}
+	}
+
+	std::cout << ""\nThe sum of all elements: "" << s << ""\n"";
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+			Enter matrix[0][0]: 1
+			Enter matrix[0][1]: 2
+			Enter matrix[0][2]: 3
+			Enter matrix[1][0]: 4
+			Enter matrix[1][1]: 5
+			Enter matrix[1][2]: 6
+			Enter matrix[2][0]: 7
+			Enter matrix[2][1]: 8
+			Enter matrix[2][2]: 9
+			The sum of all elements: 45
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,18,"أكتب برنامج يعرّف مصفوفة إسمها matrix تتألف من 3 أسطر و 3 أعمدة.
+    بعدها يطلب من المستخدم إدخال عدد صحيح لكل عنصر فيها.
+    في الأخير, يعرض للمستخدم ناتج جمع قيم العناصر الموجودة في كل سطر فيها.",,"
+#include <iostream>
+
+int main() {
+
+	const int rows = 3;
+	const int cols = 3;
+	int matrix[rows][cols];
+	int s;
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			std::cout << ""Enter matrix["" << i << ""]["" << j << ""]: "";
+			std::cin >> matrix[i][j];
+		}
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		s = 0;
+		for (int j = 0; j < cols; j++)
+		{
+			s += matrix[i][j];
+		}
+		std::cout << ""\nThe sum of all elements in row "" << i << "": "" << s;
+	}
+
+	std::cout << ""\n"";
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+			Enter matrix[0][0]: 1
+			Enter matrix[0][1]: 2
+			Enter matrix[0][2]: 3
+			Enter matrix[1][0]: 4
+			Enter matrix[1][1]: 5
+			Enter matrix[1][2]: 6
+			Enter matrix[2][0]: 7
+			Enter matrix[2][1]: 8
+			Enter matrix[2][2]: 9
+			The sum of all elements in row 0: 6
+			The sum of all elements in row 1: 15
+			The sum of all elements in row 2: 24
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,19,"أكتب برنامج يعرّف مصفوفة إسمها matrix تتألف من 3 أسطر و 3 أعمدة.
+    بعدها يطلب من المستخدم إدخال عدد صحيح لكل عنصر فيها.
+    في الأخير, يعرض للمستخدم ناتج جمع قيم العناصر الموجودة في كل عامود فيها.",,"
+#include <iostream>
+
+int main() {
+
+	const int rows = 3;
+	const int cols = 3;
+	int matrix[rows][cols];
+	int s;
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			std::cout << ""Enter matrix["" << i << ""]["" << j << ""]: "";
+			std::cin >> matrix[i][j];
+		}
+	}
+
+	for (int j = 0; j < cols; j++)
+	{
+		s = 0;
+		for (int i = 0; i < rows; i++)
+		{
+			s += matrix[i][j];
+		}
+		std::cout << ""\nThe sum of all elements in column "" << j << "": "" << s;
+	}
+
+	std::cout << ""\n"";
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+			Enter matrix[0][0]: 1
+			Enter matrix[0][1]: 2
+			Enter matrix[0][2]: 3
+			Enter matrix[1][0]: 4
+			Enter matrix[1][1]: 5
+			Enter matrix[1][2]: 6
+			Enter matrix[2][0]: 7
+			Enter matrix[2][1]: 8
+			Enter matrix[2][2]: 9
+			The sum of all elements in column 0: 12
+			The sum of all elements in column 1: 15
+			The sum of all elements in column 2: 18
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,20,"أكتب برنامج يعرّف مصفوفة إسمها matrix تتألف من 3 أسطر و 3 أعمدة.
+    بعدها يطلب من المستخدم إدخال عدد صحيح لكل عنصر فيها.
+	بعدها يعرض للمستخدم جميع القيم التي أصبحت تحتويها بشكل مرتب.
+	بعدها يقوم بتخزين جميع القيم الموجودة في المصفوفة matrix بداخل مصفوفة أحادية ( ذات بعد واحد )  إسمها array.
+    في الأخير, يعرض للمستخدم جميع القيم التي أصبحت تحتويهم المصفوفة array على سطر واحد مع وضع مسافة فارغة بين كل قيمتين.",,"
+#include <iostream>
+
+int main() {
+
+	const int rows = 3;
+	const int cols = 3;
+	int matrix[rows][cols];
+	int array[rows * cols];
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			std::cout << ""Enter matrix["" << i << ""]["" << j << ""]: "";
+			std::cin >> matrix[i][j];
+		}
+	}
+
+	std::cout << ""\nMatrix values\n"";
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			std::cout << matrix[i][j] << "" "";
+		}
+		std::cout << ""\n"";
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			array[j + (i * cols)] = matrix[i][j];
+		}
+	}
+
+	std::cout << ""\nArrays values\n"";
+
+	for (int i = 0; i < rows * cols; i++)
+	{
+		std::cout << array[i] << "" "";
+	}
+
+	std::cout << ""\n"";
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+			Enter matrix[0][0]: 1
+			Enter matrix[0][1]: 2
+			Enter matrix[0][2]: 3
+			Enter matrix[1][0]: 4
+			Enter matrix[1][1]: 5
+			Enter matrix[1][2]: 6
+			Enter matrix[2][0]: 7
+			Enter matrix[2][1]: 8
+			Enter matrix[2][2]: 9
+			Matrix values
+			1 2 3 
+			4 5 6 
+			7 8 9 
+			Array values
+			1 2 3 4 5 6 7 8 9 
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,21,"أكتب برنامج يطلب من المستخدم إدخال أي رقم يريد للبحث عنه بداخل مصفوفة أرقام ثنائية (ذات بعدين) جاهزة.
+	بعدها سيقوم البرنامج بطباعة ما إن كانت القيمة موجودة في المصفوفة أم لا.
+ملاحظة: أوقف عملية البحث بمجرد إيجاد عنصر يملك نفس القيمة المراد البحث عنها.",,"
+#include <iostream>
+
+int main() {
+
+	int matrix[3][3] = {
+		{ 1, 2, 3 },
+		{ 4, 5, 6 },
+		{ 7, 8, 9 }
+	};
+
+	int rows = sizeof(matrix) / sizeof(matrix[0]);
+	int cols = sizeof(matrix[0]) / sizeof(int);
+
+	bool isExist = false;
+	int x;
+
+	std::cout << ""Enter a number: "";
+	std::cin >> x;
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			if (x == matrix[i][j])
+			{
+				isExist = true;
+				break;
+			}
+		}
+	}
+
+	if (isExist)
+	{
+		std::cout << ""'"" << x << ""' is exist in the matrix"" << ""\n"";
+	}
+	else
+	{
+		std::cout << ""'"" << x << ""' is not exist in the matrix"" << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+			Enter a number: 2
+			'2' is exist in the matrix
+		",سنحصل على النتيجة التالية في حال كانت المصفوفة تحتوي على نفس القيم المجهزة فيها و تم إدخال نفس القيمة التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,22,"أكتب برنامج يطلب من المستخدم إدخال أي رقم يريد للبحث عنه بداخل مصفوفة أرقام ثنائية (ذات بعدين) جاهزة.
+	بعدها سيقوم البرنامج بطباعة كم مرة تم إيجاد الرقم الذي أدخله المستخدم في المصفوفة.",,"
+#include <iostream>
+
+int main() {
+
+	int matrix[3][3] = {
+		{ 5, 2, 3 },
+		{ 4, 5, 6 },
+		{ 5, 8, 9 }
+	};
+
+	int rows = sizeof(matrix) / sizeof(matrix[0]);
+	int cols = sizeof(matrix[0]) / sizeof(int);
+
+	int found = 0;
+	int x;
+
+	std::cout << ""Enter a number: "";
+	std::cin >> x;
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			if (x == matrix[i][j])
+			{
+				found++;
+			}
+		}
+	}
+
+	if (found == 0)
+	{
+		std::cout << ""'"" << x << ""' is not found"" << ""\n"";
+	}
+	else
+	{
+		std::cout << ""'"" << x << ""' is found "" << found << "" time(s)\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+			Enter a number: 5
+			'5' is found 3 time(s)
+		",سنحصل على النتيجة التالية في حال كانت المصفوفة تحتوي على نفس القيم المجهزة فيها و تم إدخال نفس القيمة التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,23,"أكتب برنامج يقوم بترتيب جميع القيم الموجودة في مصفوفة أرقام ثنائية جاهزة من الأصغر إلى الأكبر.
+	قم بعرض القيم الموجودة في المصفوفة قبل الترتيب و بعد الترتيب.",,"
+#include <iostream>
+
+int main() {
+
+	int matrix[3][3] = {
+		{ 5, 2, 4 },
+		{ 1, 7, 3 },
+		{ 9, 8, 6 }
+	};
+
+	int rows = sizeof(matrix) / sizeof(matrix[0]);
+	int cols = sizeof(matrix[0]) / sizeof(int);
+
+	int temp;
+	int array[rows * cols];
+
+	std::cout << ""Matrix before sorting\n"";
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			std::cout << matrix[i][j] << "" "";
+		}
+		std::cout << ""\n"";
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			array[j + (i * rows)] = matrix[i][j];
+		}
+	}
+
+	for (int i = 0; i < (rows * cols) - 1; i++)
+	{
+		for (int j = i + 1; j < rows * cols; j++)
+		{
+			if (array[j] < array[i])
+			{
+				temp = array[j];
+				array[j] = array[i];
+				array[i] = temp;
+			}
+		}
+	}
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			matrix[i][j] = array[j + (i * rows)];
+		}
+	}
+
+	std::cout << ""\nMatrix after sorting\n"";
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			std::cout << matrix[i][j] << "" "";
+		}
+		std::cout << ""\n"";
+	}
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Matrix before sorting 
+5 2 4 
+1 7 3 
+9 8 6 
+
+Matrix after sorting 
+1 2 3 
+4 5 6 
+7 8 9 
+		",سنحصل على النتيجة التالية عند التشغيل.,
+التعامل مع المصفوفات,24,"أكتب برنامج يطلب من المستخدم إعطائه عددين, العدد الأول يمثل عدد أسطر مصفوفة ثنائية ( ذات بعدين ) إسمها matrix و العدد الثاني يمثل عدد أعمدتها.
+ملاحظة: عدد أسطر و أعمدة المصفوفة يجب أن يكون أكبر من صفر.
+	بعدها يطلب من المستخدم إدخال عدد صحيح لكل عنصر فيها.
+	في الأخير يعرض للمستخدم عدد العناصر التي تملك قيم أكبر من صفر, و عدد العناصر التي تملك قيم أصغر من صفر, و عدد العناصر التي تملك قيم تساوي صفر.",,"
+#include <iostream>
+
+int main() {
+
+	int pCounter = 0;
+	int nCounter = 0;
+	int zCounter = 0;
+
+	int rows = 0;
+	int cols = 0;
+	int **matrix;
+
+	do
+	{
+		std::cout << ""Enter rows number: "";
+		std::cin >> rows;
+	}
+	while (rows <= 0);
+	
+	do
+	{
+		std::cout << ""Enter cols number: "";
+		std::cin >> cols;
+	} 
+	while (cols <= 0);
+	
+	matrix = new int *[rows];
+	for (int i = 0; i < rows; i++)
+	{
+		matrix[i] = new int[cols];
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			std::cout << ""Enter matrix["" << i << ""]["" << j << ""]: "";
+			std::cin >> matrix[i][j];
+		}
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+            if (matrix[i][j] > 0)
+            {
+                pCounter++;
+            }
+            else if (matrix[i][j] < 0)
+            {
+                nCounter++;
+            }
+            else
+            {
+                zCounter++;
+            }
+		}
+	}
+
+	std::cout << ""\nNumber of positive numbers: "" << pCounter;
+	std::cout << ""\nNumber of negative numbers: "" << nCounter;
+	std::cout << ""\nNumber of zeros: "" << zCounter << ""\n"";
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+			Enter rows number: 3
+			Enter cols number: 3
+			Enter matrix[0][0]: 1
+			Enter matrix[0][1]: 2
+			Enter matrix[0][2]: 0
+			Enter matrix[1][0]: 5
+			Enter matrix[1][1]: 0
+			Enter matrix[1][2]: -1
+			Enter matrix[2][0]: -2
+			Enter matrix[2][1]: 4
+			Enter matrix[2][2]: -3
+			Number of positive numbers: 4
+			Number of negative numbers: 3
+			Number of zeros: 2
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,25,"أكتب برنامج يعرّف مصفوفة مربعة إسمها matrix تتألف من 3 أسطر و 3 أعمدة.
+    ثم يطلب من المستخدم إدخال قيم لها.
+إنتبه: نريد هذه المصفوفة أن تحتوي فقط على قيم أكبر أو تساوي صفر.
+    ثم يعرض للمستخدم جميع القيم التي أصبحت تحتويها المصفوفة.
+    بعدها يقوم بجمع قيم جميع العناصر الموجودة على القطر ( On Diagonal ), فوق القطر ( Above Diagonal ), و تحت القطر ( Under Diagonal ).
+    في الأخير يعرض للمستخدم ناتج الجمع.",,"
+#include <iostream>
+
+int main() {
+
+	const int rows = 3;
+	const int cols = 3;
+	int matrix[3][3];
+
+	int sumOnDiagonals = 0;
+	int sumAboveDiagonals = 0;
+	int sumUnderDiagonals = 0;
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			std::cout << ""Enter matrix["" << i << ""]["" << j << ""]: "";
+			std::cin >> matrix [i][j];
+		}
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			if (j > i)
+			{
+				sumAboveDiagonals += matrix[i][j];
+			}
+			else if (j < i)
+			{
+				sumUnderDiagonals += matrix[i][j];
+			}
+			else
+			{
+				sumOnDiagonals += matrix[i][j];
+			}
+		}
+	}
+
+	std::cout << ""\nNumber of elements above diagonals: "" << sumAboveDiagonals;
+	std::cout << ""\nNumber of elements under diagonals: "" << sumUnderDiagonals;
+	std::cout << ""\nNumber of elements on diagonals: "" << sumOnDiagonals;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+			Enter matrix[0][0]: 1
+			Enter matrix[0][1]: 2
+			Enter matrix[0][2]: 3
+			Enter matrix[1][0]: 4
+			Enter matrix[1][1]: 5
+			Enter matrix[1][2]: 6
+			Enter matrix[2][0]: 7
+			Enter matrix[2][1]: 8
+			Enter matrix[2][2]: 9
+			Sum of elements above diagonals: 11
+			Sum of elements under diagonals: 19
+			Sum of elements on diagonals: 15
+		",سنحصل على النتيجة التالية في حال تم إدخال نفس القيم التي تم تعليمها باللون الأصفر عند التشغيل.,
+التعامل مع المصفوفات,26,"قم بتعريف دالة إسمها PrintSecondBiggest, عند استدعاءها نمرر لها مصفوفة أحادية (ذات بعد واحد) فتقوم بطباعة ثاني أكبر عدد موجود فيها.
+	بعدها قم بإنشاء مصفوفة في البرنامج و تجربة استدعاء الدالة لمعرفة ثاني أكبر عدد موجود في المصفوفة.",,"
+#include <iostream>
+
+// printSecondBiggest() هنا قمنا بتعريف الدالة
+void printSecondBiggest(int *arr, int arrLength) {
+
+	if (arrLength == 0)
+	{
+		std::cout << ""Invalid params"";
+		return;
+	}
+
+	int secondBiggest = arr[0];
+	int temp;
+
+	for (int i = 0; i < arrLength - 1; i++)
+	{
+		for (int j = i + 1; j < arrLength; j++)
+		{
+			if (arr[i] > arr[j])
+			{
+				temp = arr[j];
+				arr[j] = arr[i];
+				arr[i] = temp;
+			}
+		}
+	}
+
+	for (int i = arrLength - 1; i >= 0; i--)
+	{
+		if (arr[i] != arr[arrLength - 1])
+		{
+			secondBiggest = arr[i];
+			break;
+		}
+	}
+
+	if (secondBiggest == arr[0])
+	{
+		std::cout << ""There isn't a second biggest number"";
+		return;
+	}
+
+	std::cout << ""Second biggest number is: "" << secondBiggest;
+
+}
+
+
+// printSecondBiggest() هنا قمنا بإنشاء مصفوفة أرقام أحادية و تجربة الدالة
+int main() {
+
+	int arr[] = { 5, 9, 3, 6, 4, 2, 7, 1, 8 };
+	int arrLength = sizeof(arr) / sizeof(arr[0]);
+
+	printSecondBiggest(arr, arrLength);
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Second biggest number is: 8
+		",سنحصل على النتيجة التالية عند التشغيل في حال كانت المصفوفة تحتوي على نفس القيم المجهزة فيها.,
+التعامل مع المصفوفات,27,"قم بتعريف دالة إسمها PrintSecondLowest, عند استدعاءها نمرر لها مصفوفة أحادية (ذات بعد واحد) فتقوم بطباعة ثاني أصغر عدد موجود فيها.
+	بعدها قم بإنشاء مصفوفة في البرنامج و تجربة استدعاء الدالة لمعرفة ثاني أصغر عدد موجود في المصفوفة.",,"
+#include <iostream>
+
+// printSecondLowest() هنا قمنا بتعريف الدالة
+void printSecondLowest(int *arr, int arrLength) {
+
+	if (arrLength == 0)
+	{
+		std::cout << ""Invalid params"";
+		return;
+	}
+
+	int secondLowest = arr[0];
+	int temp;
+
+	for (int i = 0; i < arrLength - 1; i++)
+	{
+		for (int j = i + 1; j < arrLength; j++)
+		{
+			if (arr[i] > arr[j])
+			{
+				temp = arr[j];
+				arr[j] = arr[i];
+				arr[i] = temp;
+			}
+		}
+	}
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		if (arr[i] != arr[0])
+		{
+			secondLowest = arr[i];
+			break;
+		}
+	}
+
+	if (secondLowest == arr[0])
+	{
+		std::cout << ""There isn't a second lowest number"";
+		return;
+	}
+
+	std::cout << ""Second lowest number is: "" << secondLowest;
+
+}
+
+
+// printSecondLowest() هنا قمنا بإنشاء مصفوفة أرقام أحادية و تجربة الدالة
+int main() {
+
+	int arr[] = { 5, 9, 3, 6, 4, 2, 7, 1, 8 };
+	int arrLength = sizeof(arr) / sizeof(arr[0]);
+
+	printSecondLowest(arr, arrLength);
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Second lowest number is: 2
+		",سنحصل على النتيجة التالية عند التشغيل في حال كانت المصفوفة تحتوي على نفس القيم المجهزة فيها.,
+التعامل مع المصفوفات,28,"أكتب برنامج يطلب من المستخدم إعطائه عدد يمثل عدد عناصر مصفوفة إسمها arr و يخزنه في متغير إسمه n.
+ملاحظة: عدد عناصر المصفوفة يجب أن يكون أكبر من صفر.
+	بعدها ينشئ المصفوفة arr و يحدد أن عدد عناصرها هو العدد الذي أدخله المستخدم.
+	بعدها يقوم بإعطاء قيمة عشوائية بين 1 و 10 لكل عنصر فيها.
+	في الأخير, سيعرض للمستخدم جميع القيم المخزنة فيها على سطر واحد مع وضع فاصلة بين كل قيمتين و من ثم ناتج جمع جميع العناصر.",,"
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+int main() {
+
+	// هنا قمنا بجعل الرقم العشوائي يتم توليده بالإعتماد على وقت جهاز المستخدم كنقطة بداية
+	// C++ ملاحظة: هذه الطريقة, هي الطريقة المعتمدة في التحضير لتوليد أرقام عشوائية في لغة
+	srand((unsigned) time(0));
+
+	int n;
+	int s = 0;
+	int *arr;
+
+	do
+	{
+		std::cout << ""Enter array length: "";
+		std::cin >> n;
+	}
+	while (n <= 0);
+
+	arr = new int[n];
+
+	for (int i = 0; i < n; i++)
+	{
+		arr[i] = (rand() % 10) + 1;
+	}
+
+	std::cout << ""\nArray values: "";
+
+	for (int i = 0; i < n; i++)
+	{
+		std::cout << arr[i];
+
+		if (i < n - 1)
+		{
+			std::cout << "", "";
+		}
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		s += arr[i];
+	}
+
+	std::cout << ""\nSum of all elements: "" << s;
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+			Enter array length: 10
+			Array values: 3, 8, 3, 6, 1, 4, 9, 9, 6, 4
+			Sum of all elements: 53
+		",في حال تم إدخال الرقم 10 عند التشغيل سنحصل على نتيجة تشبه النتيجة التالية و ليس مثلها لأنه في كل مرة نقوم فيها بتشغيل البرنامج سيتم توليد أرقام عشوائية مختلفة.,
+التعامل مع المصفوفات,29,"قم بتعريف دالة إسمها PrintLongestName, عند استدعاءها نمرر لها مصفوفة تحتوي على أسماء أشخاص فتقوم بطباعة الإسم الأطول و عدد أحرفه.
+	بعدها قم بإنشاء مصفوفة أسماء في البرنامج و تجربة استدعاء الدالة لمعرفة ما هو الإسم الأطول الموجود في المصفوفة.",,"
+#include <iostream>
+#include <string>
+
+// printLongestName() هنا قمنا بتعريف الدالة
+void printLongestName(std::string arr[], int arrLength) {
+
+	int longestWordLength = 0;
+	int longestWordIndex = 0;
+
+	for (int i = 0; i < arrLength; i++)
+	{
+		if (arr[i].length() > longestWordLength)
+		{
+			longestWordLength = arr[i].length();
+			longestWordIndex = i;
+		}
+	}
+
+	std::cout << ""The longest name is '"" << arr[longestWordIndex] << ""', which is contain "" << longestWordLength << "" characters "";
+}
+
+// printLongestName() هنا قمنا بإنشاء مصفوفة أرقام أحادية و تجربة الدالة
+int main() {
+
+	std::string names[] = { ""Mhamad"", ""Abdullah"", ""Rami"", ""Zeina"", ""Marwa"" };
+	int arrLength = sizeof(names) / sizeof(names[0]);
+
+	printLongestName(names, arrLength);
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+The longest name is 'Abdullah', which is contain 8 characters
+		",سنحصل على النتيجة التالية عند التشغيل في حال كانت المصفوفة تحتوي على نفس القيم المجهزة فيها.,
+التعامل مع المصفوفات,30,"قم بتعريف دالة إسمها CompareArrays, عند استدعائها نمرر لها مصفوفتين أحاديتين (عندهم بعد واحد) يحتويان على أعداد صحيحة فتقوم بمقارنتهما و من ثم طباعة ما إن كانتا متطابقتين من حيث عدد العناصر و قيمهم أم لا.
+	بعدها قم بإنشاء مصفوفتين أو أكثر في البرنامج و تجربة استدعاء الدالة لمعرفة ما إن كان يوجد بينهم تطابق أم لا.",,"
+#include <iostream>
+
+// compareArrays() هنا قمنا بتعريف الدالة
+void compareArrays(int arr1[], int arr1Length, int arr2[], int arr2Length) {
+	if (arr1Length == arr2Length)
+	{
+		std::cout << ""They have the same length"";
+	}
+	else
+	{
+		std::cout << ""They have different length\n"";
+		return;
+	}
+
+	for (int i = 0; i < arr1Length; i++)
+	{
+		if (arr1[i] != arr2[i])
+		{
+			std::cout << "" but their values are not equals\n"";
+			return;
+		}
+	}
+
+	std::cout << "" and their values are equal\n"";
+}
+
+// compareArrays() هنا قمنا بإنشاء 4 مصفوفات أحادية و من مقارنتهم بواسطة الدالة
+int main() {
+
+	int arr1[] = { 1, 2, 3, 4, 5 };
+	int arr2[] = { 1, 2, 3, 4, 5 };
+	int arr3[] = { 1, 2, 3, 6, 8 };
+	int arr4[] = { 1, 2, 3, 4 };
+
+	int arr1Length = sizeof(arr1) / sizeof(arr1[0]);
+	int arr2Length = sizeof(arr2) / sizeof(arr2[0]);
+	int arr3Length = sizeof(arr3) / sizeof(arr3[0]);
+	int arr4Length = sizeof(arr4) / sizeof(arr4[0]);
+
+	std::cout << ""Compare arr1 & arr2 => "";
+	compareArrays(arr1, arr1Length, arr2, arr2Length);
+
+	std::cout << ""Compare arr2 & arr3 => "";
+	compareArrays(arr2, arr2Length, arr3, arr3Length);
+
+	std::cout << ""Compare arr3 & arr4 => "";
+	compareArrays(arr3, arr3Length, arr4, arr4Length);
+
+	char end; std::cin >> end;
+	return 0;
+
+}
+		","
+Compare arr1 & arr2 => They have the same length and their values are equal
+Compare arr2 & arr3 => They have the same length but their values are not equals
+Compare arr3 & arr4 => They have different length
+		",سنحصل على النتيجة التالية عند التشغيل في حال كانت المصفوفات تحتوي على نفس القيم المجهزة فيها.,
