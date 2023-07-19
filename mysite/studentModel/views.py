@@ -238,7 +238,7 @@ def linear_mapping(x, value):
     return (value * x) / 100
 
 
-def calculate_updated_performance(project_performance_required, student_performance_in_current_project,
+def calculate_updated_performance(student_profile, project_performance_required, student_performance_in_current_project,
                                   student_performance, completion_flag=0):
     if completion_flag == 1:
         mapping_student_performance = linear_mapping(5, map_skill(student_performance))
@@ -246,7 +246,11 @@ def calculate_updated_performance(project_performance_required, student_performa
     else:
         mapping_student_performance = linear_mapping(5, student_performance)
         mapping_project_performance_required = linear_mapping(5, project_performance_required)
-    K = 1
+    a = 1.0
+    b = 0.05
+    n = student_profile.studentproject_set.count()
+    K = a/(1.0 + b*n)
+    print(K)
     p = 1 / (1 + math.exp(-(mapping_student_performance - mapping_project_performance_required))) * 100
     updated_performance = max(0, min(100, student_performance + K * (student_performance_in_current_project - p)))
     updated_project_performance_required = max(0, min(100, project_performance_required + 0.05 * (
@@ -286,6 +290,7 @@ class AddProjectSolve(APIView):
             student=student_profile,
             project=project
         )
+
         # currently const
         problem_xp = 40
 
@@ -296,11 +301,12 @@ class AddProjectSolve(APIView):
         student_project.solve_date = timezone.now()
         student_project.save()
         recommend = Recommend.objects.filter(student=student_profile).last()
-        if (student_project.project.id == recommend.project.id and recommend.solved is None):
+
+        if recommend is not None and student_project.project.id == recommend.project.id and recommend.solved is None:
             recommend.solved = True
             recommend.solve_date = datetime.datetime.now()
             recommend.save()
-        elif (student_project.project.id != recommend.project.id and recommend.solved is None):
+        elif recommend is not None and student_project.project.id != recommend.project.id and recommend.solved is None:
             recommend.solved = False
             recommend.solve_date = datetime.datetime.now()
             recommend.save()
@@ -334,6 +340,7 @@ class AddProjectSolve(APIView):
         # difficulty
         student_current_difficulty = student_concepts_difficulty(request.data['solutionCode'])
         new_performance_difficulty, new_required_difficulty, dp_difficulty = calculate_updated_performance(
+            student_profile,
             float(difficulty_required.difficulty),
             student_current_difficulty,
             float(difficulty_performances.performance))
@@ -353,7 +360,8 @@ class AddProjectSolve(APIView):
         # time
         student_current_time = min(100., (student_total_time / 30) * 100)
         student_current_time = min(100., (float(time_required.time) / float(student_current_time)) * 100)
-        new_performance_time, new_required_time, dp_time = calculate_updated_performance(float(time_required.time),
+        new_performance_time, new_required_time, dp_time = calculate_updated_performance(student_profile,
+                                                                                         float(time_required.time),
                                                                                          float(student_current_time),
                                                                                          float(
                                                                                              time_performances.performance))
@@ -374,7 +382,8 @@ class AddProjectSolve(APIView):
         new_required_list = []
 
         for concept_hint, student_hint in zip(project_hint_list, hint_performance_list):
-            new_performance, new_required, dp = calculate_updated_performance(float(concept_hint),
+            new_performance, new_required, dp = calculate_updated_performance(student_profile,
+                                                                              float(concept_hint),
                                                                               student_hint / concept_hint * 100,
                                                                               float(student_hint))
             new_performance_list.append(new_performance)
