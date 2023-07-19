@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from .serializers import *
 from django.db.models import Count, F, Sum, Q, Value, CharField
-from .models import Operator, Keyword, GeneralConcept
+from .models import GeneralConcept
 
 required_concepts = {'الأساسيات': [],
                      'أنواع البيانات': ['الأساسيات'],
@@ -259,6 +259,33 @@ def map_skill(skill):
     else:
         return 3.
 
+class GetAllConceptProjects(APIView):
+    def post(self, request):
+        student_profile = get_profile(request)
+        general_concept = GeneralConcept.objects.get(name=request.data['generalConcept'])
+        available_projects = get_available_projects(student_profile, general_concept)
+        solved_projects = available_projects.filter(
+            studentproject__student=student_profile,
+            studentproject__solve_date__isnull=False,
+        ).annotate(state=Value("solved", output_field=CharField())).values('id', 'state')
+
+        tried_solving_projects = available_projects.filter(
+            studentproject__student=student_profile,
+            studentproject__solve_date__isnull=True,
+        ).annotate(state=Value("tried_solving", output_field=CharField())).values('id', 'state')
+
+        rest_projects = available_projects.filter(
+            studentproject__isnull=True,
+        ).annotate(state=Value("recommended", output_field=CharField())).values('id', 'state')
+        projects = solved_projects.union(tried_solving_projects)
+        projects = projects.union(rest_projects)
+        response = {
+            'message': 'SUCCESS',
+            'data':
+                projects
+
+        }
+        return Response(response, content_type='application/json; charset=utf-8')
 
 class GetRecommendedProjects(APIView):
     def post(self, request):

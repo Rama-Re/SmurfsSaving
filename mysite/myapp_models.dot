@@ -1,7 +1,7 @@
 digraph model_graph {
   // Dotfile by Django-Extensions graph_models
-  // Created: 2023-06-01 01:47
-  // Cli Options: -a --dot -o myapp_models.dot
+  // Created: 2023-07-19 14:48
+  // Cli Options: domainModel studentModel gamificationModel --dot -o myapp_models.dot
 
   fontname = "Roboto"
   fontsize = 8
@@ -20,509 +20,6 @@ digraph model_graph {
   ]
 
   // Labels
-
-
-  django_contrib_admin_models_LogEntry [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    LogEntry
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>id</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>AutoField</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><B>content_type</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><B>ForeignKey (id)</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>user</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">action_flag</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">PositiveSmallIntegerField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">action_time</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DateTimeField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">change_message</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">TextField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">object_id</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">TextField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">object_repr</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
-
-
-
-  django_contrib_auth_models_Permission [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    Permission
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>id</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>AutoField</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>content_type</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">codename</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">name</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
-  django_contrib_auth_models_Group [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    Group
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>id</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>AutoField</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">name</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
-
-
-
-  django_contrib_contenttypes_models_ContentType [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    ContentType
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>id</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>AutoField</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">app_label</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">model</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
-
-
-
-  django_contrib_sessions_base_session_AbstractBaseSession [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    AbstractBaseSession
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">expire_date</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DateTimeField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">session_data</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">TextField</FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
-  django_contrib_sessions_models_Session [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    Session<BR/>&lt;<FONT FACE="Roboto"><I>AbstractBaseSession</I></FONT>&gt;
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><I><B>session_key</B></I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><I><B>CharField</B></I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><I>expire_date</I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><I>DateTimeField</I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><I>session_data</I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><I>TextField</I></FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
-
-
-
-  django_contrib_auth_models_AbstractUser [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    AbstractUser<BR/>&lt;<FONT FACE="Roboto"><I>AbstractBaseUser,PermissionsMixin</I></FONT>&gt;
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">date_joined</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DateTimeField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">email</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">EmailField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">first_name</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">is_active</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">BooleanField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">is_staff</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">BooleanField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><I>is_superuser</I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><I>BooleanField</I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><I>last_login</I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><I>DateTimeField</I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">last_name</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><I>password</I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><I>CharField</I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">username</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
-  users_models_User [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    User<BR/>&lt;<FONT FACE="Roboto"><I>AbstractUser</I></FONT>&gt;
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>id</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">birthday</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DateField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><I>date_joined</I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><I>DateTimeField</I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">email</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">EmailField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><I>first_name</I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><I>CharField</I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">gender</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><I>is_active</I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><I>BooleanField</I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><I>is_staff</I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><I>BooleanField</I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><I>is_superuser</I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><I>BooleanField</I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">is_verified</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">BooleanField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><I>last_login</I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><I>DateTimeField</I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><I>last_name</I></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><I>CharField</I></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">name</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">nickname</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">password</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">register_year</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DateField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">shown_name</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">username</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">verification_code</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
-
 
 
   domainModel_models_GeneralConcept [label=<
@@ -903,42 +400,6 @@ digraph model_graph {
     </TABLE>
     >]
 
-  domainModel_models_Operator [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    Operator
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>name</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>CharField</B></FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
-  domainModel_models_Keyword [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    Keyword
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>name</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>CharField</B></FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
   domainModel_models_ProjectDifficulty [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
@@ -959,6 +420,14 @@ digraph model_graph {
     <FONT FACE="Roboto"><B>project</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">date</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DateTimeField</FONT>
     </TD></TR>
   
   
@@ -998,6 +467,14 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">date</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DateTimeField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">time</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">DecimalField</FONT>
@@ -1032,6 +509,14 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">date</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DateTimeField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">required_concept_hint</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">CharField</FONT>
@@ -1043,6 +528,24 @@ digraph model_graph {
 
 
 
+
+  studentModel_models_Personality [label=<
+    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+    Personality
+    </B></FONT></TD></TR>
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>name</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>CharField</B></FONT>
+    </TD></TR>
+  
+  
+    </TABLE>
+    >]
 
   studentModel_models_StudentProfile [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
@@ -1069,6 +572,14 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">learning_path</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">CharField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">xp</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">IntegerField</FONT>
@@ -1078,29 +589,11 @@ digraph model_graph {
     </TABLE>
     >]
 
-  studentModel_models_PersonalitiesNames [label=<
+  studentModel_models_StudentPersonality [label=<
     <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
     <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
     <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    PersonalitiesNames
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>personalityName</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>CharField</B></FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
-  studentModel_models_PersonalitiesLetters [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    PersonalitiesLetters
+    StudentPersonality
     </B></FONT></TD></TR>
   
   
@@ -1113,9 +606,9 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>personalityName</B></FONT>
+    <FONT FACE="Roboto"><B>personality</B></FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>ForeignKey (personalityName)</B></FONT>
+    <FONT FACE="Roboto"><B>ForeignKey (name)</B></FONT>
     </TD></TR>
   
   
@@ -1123,69 +616,21 @@ digraph model_graph {
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><B>studentProfile</B></FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>OneToOneField (id)</B></FONT>
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
   
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">e</FONT>
+    <FONT FACE="Roboto">edit_date</FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DecimalField</FONT>
+    <FONT FACE="Roboto">DateTimeField</FONT>
     </TD></TR>
   
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">f</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DecimalField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">i</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DecimalField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">j</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DecimalField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">n</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DecimalField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">p</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DecimalField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">s</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DecimalField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">t</FONT>
+    <FONT FACE="Roboto">pp</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">DecimalField</FONT>
     </TD></TR>
@@ -1301,6 +746,14 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">edit_date</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DateTimeField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">self_rate</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">IntegerField</FONT>
@@ -1385,6 +838,14 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">date</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DateTimeField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">performance</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">DecimalField</FONT>
@@ -1419,6 +880,14 @@ digraph model_graph {
   
   
     <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">date</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DateTimeField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">performance</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">DecimalField</FONT>
@@ -1448,6 +917,14 @@ digraph model_graph {
     <FONT FACE="Roboto"><B>student</B></FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">date</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DateTimeField</FONT>
     </TD></TR>
   
   
@@ -1496,57 +973,415 @@ digraph model_graph {
     </TABLE>
     >]
 
+  studentModel_models_Streak [label=<
+    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+    Streak
+    </B></FONT></TD></TR>
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>id</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>student</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">interactions</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">IntegerField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">streak_date</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DateField</FONT>
+    </TD></TR>
+  
+  
+    </TABLE>
+    >]
+
+  studentModel_models_Recommend [label=<
+    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+    Recommend
+    </B></FONT></TD></TR>
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>id</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>project</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>student</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">good_recommend</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">BooleanField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">recommend_date</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DateTimeField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">solve_date</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DateTimeField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">solved</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">BooleanField</FONT>
+    </TD></TR>
+  
+  
+    </TABLE>
+    >]
+
+
+
+
+  gamificationModel_models_GamificationFeature [label=<
+    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+    GamificationFeature
+    </B></FONT></TD></TR>
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>id</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">feature_name</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">TextField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">threshold</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DecimalField</FONT>
+    </TD></TR>
+  
+  
+    </TABLE>
+    >]
+
+  gamificationModel_models_FeaturePersonalityRelationship [label=<
+    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+    FeaturePersonalityRelationship
+    </B></FONT></TD></TR>
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>id</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>gamificationFeature</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>personality</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (name)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">rr</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DecimalField</FONT>
+    </TD></TR>
+  
+  
+    </TABLE>
+    >]
+
+  gamificationModel_models_ToReview [label=<
+    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+    ToReview
+    </B></FONT></TD></TR>
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>id</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>owner</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>shared_project</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">description</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">TextField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">shared_date</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DateTimeField</FONT>
+    </TD></TR>
+  
+  
+    </TABLE>
+    >]
+
+  gamificationModel_models_Reviewed [label=<
+    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+    Reviewed
+    </B></FONT></TD></TR>
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>id</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>review</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>reviewer</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">edited_code</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">TextField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">reviewed_date</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DateTimeField</FONT>
+    </TD></TR>
+  
+  
+    </TABLE>
+    >]
+
+  gamificationModel_models_Challenge [label=<
+    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+    Challenge
+    </B></FONT></TD></TR>
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>id</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>challenger</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">challenge_date</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">DateField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">challenge_state</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">BooleanField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">challenge_target</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">CharField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">challenge_type</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">CharField</FONT>
+    </TD></TR>
+  
+  
+    </TABLE>
+    >]
+
+  gamificationModel_models_MbtiQuestions [label=<
+    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+    MbtiQuestions
+    </B></FONT></TD></TR>
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>id</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">question_text</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">CharField</FONT>
+    </TD></TR>
+  
+  
+    </TABLE>
+    >]
+
+  gamificationModel_models_MbtiAnswers [label=<
+    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
+    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
+    MbtiAnswers
+    </B></FONT></TD></TR>
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>id</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto"><B>question</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">answer</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">CharField</FONT>
+    </TD></TR>
+  
+  
+    </TABLE>
+    >]
+
 
 
 
   // Relations
-
-  django_contrib_admin_models_LogEntry -> users_models_User
-  [label=" user (logentry)"] [arrowhead=none, arrowtail=dot, dir=both];
-
-  django_contrib_admin_models_LogEntry -> django_contrib_contenttypes_models_ContentType
-  [label=" content_type (logentry)"] [arrowhead=none, arrowtail=dot, dir=both];
-
-
-  django_contrib_auth_models_Permission -> django_contrib_contenttypes_models_ContentType
-  [label=" content_type (permission)"] [arrowhead=none, arrowtail=dot, dir=both];
-
-  django_contrib_auth_models_Group -> django_contrib_auth_models_Permission
-  [label=" permissions (group)"] [arrowhead=dot arrowtail=dot, dir=both];
-
-
-
-  django_contrib_sessions_models_Session -> django_contrib_sessions_base_session_AbstractBaseSession
-  [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
-
-  django_contrib_auth_base_user_AbstractBaseUser [label=<
-  <TABLE BGCOLOR="white" BORDER="0" CELLBORDER="0" CELLSPACING="0">
-  <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="#1b563f">
-  <FONT FACE="Roboto" POINT-SIZE="12" COLOR="white">AbstractBaseUser</FONT>
-  </TD></TR>
-  </TABLE>
-  >]
-  django_contrib_auth_models_AbstractUser -> django_contrib_auth_base_user_AbstractBaseUser
-  [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
-  django_contrib_auth_models_PermissionsMixin [label=<
-  <TABLE BGCOLOR="white" BORDER="0" CELLBORDER="0" CELLSPACING="0">
-  <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="#1b563f">
-  <FONT FACE="Roboto" POINT-SIZE="12" COLOR="white">PermissionsMixin</FONT>
-  </TD></TR>
-  </TABLE>
-  >]
-  django_contrib_auth_models_AbstractUser -> django_contrib_auth_models_PermissionsMixin
-  [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
-
-  users_models_User -> django_contrib_auth_models_Group
-  [label=" groups (user)"] [arrowhead=dot arrowtail=dot, dir=both];
-
-  users_models_User -> django_contrib_auth_models_Permission
-  [label=" user_permissions (user)"] [arrowhead=dot arrowtail=dot, dir=both];
-
-  users_models_User -> django_contrib_auth_models_AbstractUser
-  [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
-
 
   domainModel_models_SubConcept -> domainModel_models_GeneralConcept
   [label=" generalConcept (subconcept)"] [arrowhead=none, arrowtail=dot, dir=both];
@@ -1572,12 +1407,6 @@ digraph model_graph {
   domainModel_models_Project -> domainModel_models_GeneralConcept
   [label=" generalConcepts (projects)"] [arrowhead=dot arrowtail=dot, dir=both];
 
-  domainModel_models_Operator -> domainModel_models_GeneralConcept
-  [label=" generalConcepts (operators)"] [arrowhead=dot arrowtail=dot, dir=both];
-
-  domainModel_models_Keyword -> domainModel_models_GeneralConcept
-  [label=" generalConcepts (keywords)"] [arrowhead=dot arrowtail=dot, dir=both];
-
   domainModel_models_ProjectDifficulty -> domainModel_models_Project
   [label=" project (projectdifficulty)"] [arrowhead=none, arrowtail=dot, dir=both];
 
@@ -1587,18 +1416,24 @@ digraph model_graph {
   domainModel_models_ProjectHint -> domainModel_models_Project
   [label=" project (projecthint)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-
+  users_models_User [label=<
+  <TABLE BGCOLOR="white" BORDER="0" CELLBORDER="0" CELLSPACING="0">
+  <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="#1b563f">
+  <FONT FACE="Roboto" POINT-SIZE="12" COLOR="white">User</FONT>
+  </TD></TR>
+  </TABLE>
+  >]
   studentModel_models_StudentProfile -> users_models_User
   [label=" user (studentprofile)"] [arrowhead=none, arrowtail=none, dir=both];
 
-  studentModel_models_StudentProfile -> domainModel_models_ParagraphData
+  studentModel_models_StudentProfile -> domainModel_models_SubConcept
   [label=" studentKnowledge (studentprofile)"] [arrowhead=dot arrowtail=dot, dir=both];
 
-  studentModel_models_PersonalitiesLetters -> studentModel_models_PersonalitiesNames
-  [label=" personalityName (personalitiesletters)"] [arrowhead=none, arrowtail=dot, dir=both];
+  studentModel_models_StudentPersonality -> studentModel_models_StudentProfile
+  [label=" studentProfile (studentpersonality)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  studentModel_models_PersonalitiesLetters -> studentModel_models_StudentProfile
-  [label=" studentProfile (personalitiesletters)"] [arrowhead=none, arrowtail=none, dir=both];
+  studentModel_models_StudentPersonality -> studentModel_models_Personality
+  [label=" personality (studentpersonality)"] [arrowhead=none, arrowtail=dot, dir=both];
 
   studentModel_models_StudentProject -> studentModel_models_StudentProfile
   [label=" student (studentproject)"] [arrowhead=none, arrowtail=dot, dir=both];
@@ -1629,6 +1464,40 @@ digraph model_graph {
 
   studentModel_models_SolveTrying -> studentModel_models_StudentProject
   [label=" student_project (solvetrying)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  studentModel_models_Streak -> studentModel_models_StudentProfile
+  [label=" student (streak)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  studentModel_models_Recommend -> studentModel_models_StudentProfile
+  [label=" student (recommend)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  studentModel_models_Recommend -> domainModel_models_Project
+  [label=" project (recommend)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+
+  gamificationModel_models_FeaturePersonalityRelationship -> studentModel_models_Personality
+  [label=" personality (featurepersonalityrelationship)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  gamificationModel_models_FeaturePersonalityRelationship -> gamificationModel_models_GamificationFeature
+  [label=" gamificationFeature (featurepersonalityrelationship)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  gamificationModel_models_ToReview -> studentModel_models_StudentProfile
+  [label=" owner (toreview)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  gamificationModel_models_ToReview -> studentModel_models_StudentProject
+  [label=" shared_project (toreview)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  gamificationModel_models_Reviewed -> studentModel_models_StudentProfile
+  [label=" reviewer (reviewed)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  gamificationModel_models_Reviewed -> gamificationModel_models_ToReview
+  [label=" review (reviewed)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  gamificationModel_models_Challenge -> studentModel_models_StudentProfile
+  [label=" challenger (challenge)"] [arrowhead=none, arrowtail=dot, dir=both];
+
+  gamificationModel_models_MbtiAnswers -> gamificationModel_models_MbtiQuestions
+  [label=" question (mbtianswers)"] [arrowhead=none, arrowtail=dot, dir=both];
 
 
 }

@@ -83,12 +83,6 @@ class ProjectSerializer(serializers.ModelSerializer):
         # }
 
 
-class KeywordSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Keyword
-        fields = ['name', 'generalConcepts']
-
-
 class ProjectDifficultySerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectDifficulty

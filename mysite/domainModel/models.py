@@ -62,16 +62,6 @@ class Project(models.Model):
     generalConcepts = models.ManyToManyField(GeneralConcept, related_name='projects')
 
 
-class Operator(models.Model):
-    name = models.CharField(primary_key=True, max_length=6)  # this is "required"
-    generalConcepts = models.ManyToManyField(GeneralConcept, related_name='operators')
-
-
-class Keyword(models.Model):
-    name = models.CharField(primary_key=True, max_length=50)  # this is "required"
-    generalConcepts = models.ManyToManyField(GeneralConcept, related_name='keywords')
-
-
 class ProjectDifficulty(models.Model):
     difficulty = models.DecimalField(max_digits=6, decimal_places=3)
     date = models.DateTimeField(default=datetime.datetime.now())
@@ -89,9 +79,3 @@ class ProjectHint(models.Model):
     date = models.DateTimeField(default=datetime.datetime.now())
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
-
-#
-# class SubConceptFeatures(models.Model):
-#     subConcept = models.ForeignKey(SubConcept, on_delete=models.CASCADE)
-#     keyword = models.ForeignKey(Keyword, on_delete=models.CASCADE)
-#     operator = models.ForeignKey(Operator, on_delete=models.CASCADE)
