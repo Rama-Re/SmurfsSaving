@@ -446,26 +446,36 @@ class CheckQuizSolve(APIView):
         else:
             success_rate = 0
 
+        max_xp = 60
+
         # Determine the result
         if success_rate >= 60:
             result = 'pass'
+            dxp = max_xp * success_rate / 100
+            student_profile.xp += round(dxp)
+            student_profile.save()
         else:
+            dxp = 0
             result = 'fail'
 
         # Prepare the response
         response = {
             'message': 'SUCCESS',
             'result': result,
+            'xp': {
+                'added_xp': round(dxp),
+                'new_xp': student_profile.xp
+            }
         }
 
         student_profile.theoreticalskill_set.filter(generalConcept=generalConcept).update(skill=success_rate)
 
-        # Add question results if the success rate is available
-        if success_rate > 60:
-            question_results = {}
-            for question_id in true_solve_ids + wrong_solve_ids:
-                question_results[question_id] = question_id in true_solve_ids
-            response['question_results'] = question_results
+        # # Add question results if the success rate is available
+        # if success_rate > 60:
+        #     question_results = {}
+        #     for question_id in true_solve_ids + wrong_solve_ids:
+        #         question_results[question_id] = question_id in true_solve_ids
+        #     response['question_results'] = question_results
 
         return Response(response, content_type='application/json; charset=utf-8')
 
