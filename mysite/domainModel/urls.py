@@ -14,5 +14,4 @@ urlpatterns = [
     path('public/getQuiz', GetQuiz.as_view()),
     path('private/getRecommendedProjects', GetRecommendedProjects.as_view()),
     path('private/getAllConceptProjects', GetAllConceptProjects.as_view()),
-    path('private/checkQuizSolve', CheckQuizSolve.as_view()),
 ]
