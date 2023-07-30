@@ -95,12 +95,10 @@ class GeneralConcepts(APIView):
 class SubConcepts(APIView):
     def post(self, request):
         student_profile = get_profile(request)
-        subConcepts = SubConcept.objects.filter(generalConcept_id=request.data['generalConcept'])
+        subConcepts = SubConcept.objects.filter(generalConcept_id=request.data['generalConcept']).order_by('order')
         serializer = SubConceptSerializer(subConcepts, many=True)
         studentKnowledge = student_profile.studentKnowledge.all()
         knowledges = [x.name for x in studentKnowledge]
-        # completed = [data for data in serializer.data if data['name'] in knowledges]
-        # uncompleted = [data for data in serializer.data if data['name'] not in knowledges]
         for data in serializer.data:
             if data['name'] in knowledges:
                 data['state'] = 'completed'
@@ -125,8 +123,7 @@ class SubConcepts(APIView):
 class GetTheoreticalData(APIView):
     def post(self, request):
         titles = Lesson.objects.filter(subConcept_id=request.data['subConcept'])
-        paragraph_data_list = ParagraphData.objects.filter(title_id__in=titles).prefetch_related('code_data',
-                                                                                                 'example_data')
+        paragraph_data_list = ParagraphData.objects.filter(title_id__in=titles).order_by('order')
         serialized_data = TheoreticalDataSerializer(paragraph_data_list, many=True).data
         response = {
             'message': 'SUCCESS',

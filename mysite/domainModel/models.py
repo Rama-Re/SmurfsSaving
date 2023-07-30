@@ -10,11 +10,13 @@ class GeneralConcept(models.Model):
 
 class SubConcept(models.Model):
     name = models.CharField(primary_key=True, max_length=255)
+    order = models.IntegerField(default=0)
     generalConcept = models.ForeignKey(GeneralConcept, on_delete=models.CASCADE)
 
 
 class Lesson(models.Model):
     name = models.CharField(primary_key=True, max_length=255)
+    order = models.IntegerField(default=0)
     subConcept = models.ForeignKey(SubConcept, on_delete=models.CASCADE)
 
 

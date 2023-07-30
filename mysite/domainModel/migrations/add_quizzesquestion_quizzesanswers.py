@@ -6,7 +6,6 @@ from django.db import migrations, models
 import django.db.models.deletion
 
 
-
 class Migration(migrations.Migration):
     def load_data(apps, schema_editor):
         GeneralConcept = apps.get_model('domainModel', 'GeneralConcept')

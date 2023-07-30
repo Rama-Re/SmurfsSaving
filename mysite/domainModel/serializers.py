@@ -42,8 +42,8 @@ class ExampleDataSerializer(serializers.ModelSerializer):
 
 
 class TheoreticalDataSerializer(serializers.ModelSerializer):
-    code_data = CodeDataSerializer(many=True, read_only=True)
-    example_data = ExampleDataSerializer(many=True, read_only=True)
+    code_data = CodeDataSerializer(many=True)
+    example_data = ExampleDataSerializer(many=True)
 
     class Meta:
         model = ParagraphData

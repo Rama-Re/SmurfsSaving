@@ -93,10 +93,18 @@ class AddStudentKnowledge(APIView):
     def post(self, request):
         student_profile = get_profile(request)
         subConcept = SubConcept.objects.get(name=request.data['subConcept'])
-        student_profile.studentKnowledge.add(subConcept)
-        dxp = 5
-        student_profile.xp += dxp
-        student_profile.save()
+        # student_profile.studentKnowledge.add(subConcept)
+        # dxp = 5
+        # student_profile.xp += dxp
+        # student_profile.save()
+        if subConcept in student_profile.studentKnowledge.all():
+            dxp = 0
+        else:
+            student_profile.studentKnowledge.add(subConcept)
+            dxp = 5
+            student_profile.xp += dxp
+            student_profile.save()
+
         response = {
             'message': 'success',
             'added_xp': dxp,
@@ -119,19 +127,26 @@ class AddStudentKnowledge(APIView):
 #         return Response(response)
 
 
-class EditTheoreticalSkill(APIView):
+class AddTheoreticalSkill(APIView):
     def post(self, request):
         student_profile = get_profile(request)
         theoretical_skills = request.data['TheoreticalSkill']
         for data in theoretical_skills:
-            theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile,
-                                                                generalConcept=data['generalConcept']).first()
-            theoretical_skill.skill = data['skill']
-            theoretical_skill.self_rate = data['self_rate']
-            theoretical_skill.availability = data['availability']
-            theoretical_skill.edit_date = datetime.datetime.now()
+            # theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile,
+            #                                                     generalConcept=data['generalConcept']).first()
+            theoretical_skill = TheoreticalSkill.objects.create(generalConcept=data['generalConcept'],
+                                                                student=student_profile,
+                                                                skill=data['skill'],
+                                                                self_rate=data['self_rate'],
+                                                                availability=data['self_rate'],
+                                                                edit_date=datetime.datetime.now())
 
-            theoretical_skill.save()
+            # theoretical_skill.skill = data['skill']
+            # theoretical_skill.self_rate = data['self_rate']
+            # theoretical_skill.availability = data['availability']
+            # theoretical_skill.edit_date = datetime.datetime.now()
+            #
+            # theoretical_skill.save()
         response = {
             'message': 'SUCCESS'
         }
@@ -249,7 +264,7 @@ def calculate_updated_performance(student_profile, project_performance_required,
     a = 1.0
     b = 0.05
     n = student_profile.studentproject_set.count()
-    K = a/(1.0 + b*n)
+    K = a / (1.0 + b * n)
     print(K)
     p = 1 / (1 + math.exp(-(mapping_student_performance - mapping_project_performance_required))) * 100
     updated_performance = max(0, min(100, student_performance + K * (student_performance_in_current_project - p)))
@@ -460,9 +475,15 @@ class CheckQuizSolve(APIView):
         # Determine the result
         if success_rate >= 60:
             result = 'pass'
-            dxp = max_xp * success_rate / 100
-            student_profile.xp += round(dxp)
-            student_profile.save()
+            if student_profile.theoreticalskill_set.filter(generalConcept=generalConcept, skill__gt=0).exists():
+                # If the student has already solved the quiz, don't add XP or update the skill
+                dxp = 0
+            else:
+                dxp = max_xp * success_rate / 100
+                student_profile.xp += round(dxp)
+                student_profile.save()
+                student_profile.theoreticalskill_set.filter(generalConcept=generalConcept).update(skill=success_rate)
+
         else:
             dxp = 0
             result = 'fail'
@@ -471,14 +492,12 @@ class CheckQuizSolve(APIView):
         response = {
             'message': 'SUCCESS',
             'result': result,
+            'success_rate': success_rate,
             'xp': {
                 'added_xp': round(dxp),
                 'new_xp': student_profile.xp
             }
         }
-
-        student_profile.theoreticalskill_set.filter(generalConcept=generalConcept).update(skill=success_rate)
-
         # # Add question results if the success rate is available
         # if success_rate > 60:
         #     question_results = {}

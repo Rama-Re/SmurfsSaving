@@ -7,7 +7,7 @@ urlpatterns = [
     path('private/addPersonality', AddPersonality.as_view()),
     path('private/getPersonality', GetPersonality.as_view()),
     # path('private/editPersonality', EditPersonality.as_view()),
-    path('private/editTheoreticalSkill', EditTheoreticalSkill.as_view()),
+    path('private/addTheoreticalSkill', AddTheoreticalSkill.as_view()),
     # path('private/editPracticalSkill', EditPracticalSkill.as_view()),
     path('private/addSolveTrying', AddSolveTrying.as_view()),
     path('private/addProjectSolve', AddProjectSolve.as_view()),

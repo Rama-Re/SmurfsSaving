@@ -3,7 +3,6 @@ import django.db.models.deletion
 import csv
 
 
-
 class Migration(migrations.Migration):
     def load_data(apps, schema_editor):
         GeneralConcept = apps.get_model('domainModel', 'GeneralConcept')
@@ -29,11 +28,13 @@ class Migration(migrations.Migration):
             for row in reader:
                 i += 1
                 # Create or get the GeneralConcept object
-                generalconcept, created = GeneralConcept.objects.get_or_create(name=row[0], concept_level=concepts_level[row[0]])
+                generalconcept, created = GeneralConcept.objects.get_or_create(name=row[0],
+                                                                               concept_level=concepts_level[row[0]])
                 # Create the SubConcept object with foreign key to GeneralConcept
-                subconcept, created = SubConcept.objects.get_or_create(name=row[1], generalConcept=generalconcept)
+                subconcept, created = SubConcept.objects.get_or_create(name=row[1], order=row[14],
+                                                                       generalConcept=generalconcept)
                 # Create the Lesson object with foreign key to SubConcept
-                lesson, created = Lesson.objects.get_or_create(name=row[2], subConcept=subconcept)
+                lesson, created = Lesson.objects.get_or_create(name=row[2], order=row[13], subConcept=subconcept)
                 # Create the ParagraphData object with foreign key to Lesson
                 paragraphData = ParagraphData.objects.create(title=lesson, subheading=row[3],
                                                              explanation=row[4], nb=row[5], img_src=row[6])

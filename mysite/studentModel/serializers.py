@@ -51,14 +51,14 @@ class StudentProfileSerializer(serializers.ModelSerializer):
         hintPerformance.save()
 
         ### maybe deletehttps://github.com/Rama-Re/gradProject.git
-        generalconcepts = GeneralConcept.objects.all()
-        for generalconcept in generalconcepts:
-            theoretical_skill = TheoreticalSkill.objects.create(generalConcept=generalconcept, student=student,
-                                                                skill=0,
-                                                                self_rate=0,
-                                                                availability=False,
-                                                                edit_date=datetime.datetime.now())
-            practical_skill = PracticalSkill.objects.create(generalConcept=generalconcept, student=student, skill=0)
+        # generalconcepts = GeneralConcept.objects.all()
+        # for generalconcept in generalconcepts:
+        #     theoretical_skill = TheoreticalSkill.objects.create(generalConcept=generalconcept, student=student,
+        #                                                         skill=0,
+        #                                                         self_rate=0,
+        #                                                         availability=False,
+        #                                                         edit_date=datetime.datetime.now())
+        #     practical_skill = PracticalSkill.objects.create(generalConcept=generalconcept, student=student, skill=0)
 
         return student
 

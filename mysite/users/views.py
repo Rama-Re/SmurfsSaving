@@ -52,6 +52,8 @@ class LoginView(APIView):
         serializer = UserSerializer(user)
         response.data = {
             'jwt': token,
+            'theoretical_skill': user.studentprofile.theoreticalskill_set.first() is not None,
+            'personality': user.studentprofile.studentpersonality_set.first() is not None,
             'user': serializer.data
         }
         return response
