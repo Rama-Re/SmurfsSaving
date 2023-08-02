@@ -134,11 +134,12 @@ class AddTheoreticalSkill(APIView):
         for data in theoretical_skills:
             # theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile,
             #                                                     generalConcept=data['generalConcept']).first()
-            theoretical_skill = TheoreticalSkill.objects.create(generalConcept=data['generalConcept'],
+            generalConcept = GeneralConcept.objects.filter(name=data['generalConcept']).first()
+            theoretical_skill = TheoreticalSkill.objects.create(generalConcept=generalConcept,
                                                                 student=student_profile,
                                                                 skill=data['skill'],
                                                                 self_rate=data['self_rate'],
-                                                                availability=data['self_rate'],
+                                                                availability=data['availability'],
                                                                 edit_date=datetime.datetime.now())
 
             # theoretical_skill.skill = data['skill']
