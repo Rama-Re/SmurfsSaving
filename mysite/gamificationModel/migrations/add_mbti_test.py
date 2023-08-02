@@ -16,19 +16,24 @@ class Migration(migrations.Migration):
             i = 0
             for row in reader:
                 i += 1
-
+                print(row, i)
                 question = MbtiQuestions.objects.create(
                     question_text=row[0],
                 )
-                answers_list = row[1]
-                if re.match(r'^\s*\[.*\]\s*$', answers_list):
-                    # Field value is a list
-                    list_value = eval(answers_list)  # Use eval() to parse the list
-                    for item in list_value:
-                        answer = MbtiAnswers.objects.create(
-                            question=question,
-                            answer=item,
-                        )
+                # answers_list = row[1]
+                # if re.match(r'^\s*\[.*\]\s*$', answers_list):
+                #     # Field value is a list
+                #     list_value = eval(answers_list)  # Use eval() to parse the list
+                #     for item in list_value:
+                answer = MbtiAnswers.objects.create(
+                    question=question,
+                    answer=row[1],
+                )
+                answer = MbtiAnswers.objects.create(
+                    question=question,
+                    answer=row[2],
+                )
+
                         # print(f"answer {i} loaded!")
                 # print(f"question {i} loaded!")
 
