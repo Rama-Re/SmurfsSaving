@@ -41,7 +41,7 @@ class GeneralConcepts(APIView):
         # available = []
         # closed = []
         for concept in generalConcepts:
-            theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile, generalConcept=concept).first()
+            theoretical_skill = TheoreticalSkill.objects.filter(student=student_profile, generalConcept=concept).last()
             availability_data.append(theoretical_skill.availability if theoretical_skill else False)
 
         for data, availability in zip(serializer.data, availability_data):
