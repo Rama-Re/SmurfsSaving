@@ -476,15 +476,22 @@ class CheckQuizSolve(APIView):
         # Determine the result
         if success_rate >= 60:
             result = 'pass'
-            if student_profile.theoreticalskill_set.filter(generalConcept=generalConcept, skill__gt=0).exists():
+            if TheoreticalSkill.objects.filter(student=student_profile, generalConcept=generalConcept,
+                                               skill__gt=0).exists():
                 # If the student has already solved the quiz, don't add XP or update the skill
                 dxp = 0
             else:
                 dxp = max_xp * success_rate / 100
                 student_profile.xp += round(dxp)
                 student_profile.save()
-                student_profile.theoreticalskill_set.filter(generalConcept=generalConcept).\
-                    update(skill=success_rate,availability=True, edit_date=datetime.datetime.now())
+                theoreticalSkill = TheoreticalSkill.objects.filter(student=student_profile,
+                                                                   generalConcept=generalConcept).first()
+                theoreticalSkill.edit_date = datetime.datetime.now()
+                theoreticalSkill.skill = round(success_rate)
+                theoreticalSkill.availability = True
+                theoreticalSkill.save()
+
+
 
         else:
             dxp = 0
