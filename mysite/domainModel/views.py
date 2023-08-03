@@ -256,6 +256,7 @@ def map_skill(skill):
     else:
         return 3.
 
+
 class GetAllConceptProjects(APIView):
     def post(self, request):
         student_profile = get_profile(request)
@@ -283,6 +284,7 @@ class GetAllConceptProjects(APIView):
 
         }
         return Response(response, content_type='application/json; charset=utf-8')
+
 
 class GetRecommendedProjects(APIView):
     def post(self, request):
@@ -345,7 +347,8 @@ class GetRecommendedProjects(APIView):
             dist_max = [100] * 2 + [4] * (len(project_features) - 2)
             distance_max = euclidean_distance(dist_min, dist_max)
             S = 100 * (1 - (distance / distance_max))
-            if float(project_difficulty) >= float(difficulty_performance) or float(project_time) >= float(time_performance):
+            if float(project_difficulty) >= float(difficulty_performance) or float(project_time) >= float(
+                    time_performance):
                 harder_projects.append({"project_id": project.id, "similarity": S, "state": 'recommended'})
             else:
                 if any(hint > p_hint for hint, p_hint in zip(hint_list, project_hint_list)):
@@ -451,6 +454,7 @@ def remove_comments(code):
     code = re.sub(r'^\s*\n', '', code, flags=re.MULTILINE)
     return code
 
+
 def remove_main_function(code):
     lines = code.split('\n')
     new_lines = []
@@ -470,6 +474,7 @@ def remove_main_function(code):
 
     new_code = '\n'.join(new_lines)
     return new_code
+
 
 def detect_concept(code):
     # Regular expressions for different declarations
@@ -632,5 +637,15 @@ class CodeComplete(APIView):
                 "code": code,
                 "result": updated_code
             }
+        }
+        return Response(response, content_type='application/json; charset=utf-8')
+
+
+class GetAllProjects(APIView):
+    def get(self, request):
+        projects = Project.objects.all()
+        serializer = ProjectAllDataSerializer(projects, many=True)
+        response = {
+            'data': serializer.data
         }
         return Response(response, content_type='application/json; charset=utf-8')

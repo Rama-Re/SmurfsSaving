@@ -1,3 +1,5 @@
+import string
+
 from rest_framework import serializers
 from .models import User
 from studentModel.models import *
@@ -45,6 +47,11 @@ class UserSerializer(serializers.ModelSerializer):
         recipient_list = [email]
         send_mail(subject, message, from_email, recipient_list)
 
+    def generate_numeric_token(self, length):
+        characters = string.digits
+        token = ''.join(secrets.choice(characters) for _ in range(length))
+        return token
+
     def create(self, validated_data):
         password = validated_data.pop('password', None)
 
@@ -55,7 +62,7 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
         instance.gender = gender.to_internal_value(validated_data.pop('gender'))
         instance.shown_name = shown_name.to_internal_value(validated_data.pop('shown_name'))
-        code = secrets.token_urlsafe(6)
+        code = self.generate_numeric_token(6)
         self.send_verification_code_email(validated_data['email'], code)
         instance.verification_code = code
         instance.is_verified = False  # temp just not to need verification every time

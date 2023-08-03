@@ -75,7 +75,8 @@ class QuizzesQuestionSerializer(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ['id', 'question', 'correctAnswerSample', 'output', 'explanation', 'hint', 'img_src', 'generalConcepts']
+        fields = ['id', 'question', 'correctAnswerSample', 'output', 'explanation', 'hint', 'img_src',
+                  'generalConcepts']
         # extra_kwargs = {
         #     'correctAnswerSample': {
         #         'write_only': True
@@ -99,3 +100,14 @@ class ProjectHintSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectHint
         fields = ['required_concept_hint', 'project']
+
+
+class ProjectAllDataSerializer(serializers.ModelSerializer):
+    difficulties = ProjectDifficultySerializer(many=True, source='projectdifficulty_set')
+    times = ProjectTimeSerializer(many=True, source='projecttime_set')
+    hints = ProjectHintSerializer(many=True, source='projecthint_set')
+
+    class Meta:
+        model = Project
+        fields = ['id', 'question', 'correctAnswerSample', 'output', 'explanation', 'hint', 'img_src', 'difficulties',
+                  'times', 'hints']
