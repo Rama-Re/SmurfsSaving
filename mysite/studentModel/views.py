@@ -493,7 +493,7 @@ class CheckQuizSolve(APIView):
         response = {
             'message': 'SUCCESS',
             'result': result,
-            'success_rate': success_rate,
+            'success_rate': round(success_rate),
             'xp': {
                 'added_xp': round(dxp),
                 'new_xp': student_profile.xp
