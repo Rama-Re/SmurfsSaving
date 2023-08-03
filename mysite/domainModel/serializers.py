@@ -113,7 +113,7 @@ class ProjectAllDataSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Project
-        fields = ['id', 'difficulties', 'times', 'hints', 'solved_count', 'tried_count']
+        fields = ['id', 'generalConcepts', 'difficulties', 'times', 'hints', 'solved_count', 'tried_count']
 
     def get_solved_count(self, obj):
         return StudentProject.objects.filter(project=obj, solve_date__isnull=False).count()
