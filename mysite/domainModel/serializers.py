@@ -116,7 +116,11 @@ class ProjectAllDataSerializer(serializers.ModelSerializer):
         fields = ['id', 'generalConcepts', 'difficulties', 'times', 'hints', 'solved_count', 'tried_count']
 
     def get_solved_count(self, obj):
-        return StudentProject.objects.filter(project=obj, solve_date__isnull=False).count()
+        solved_projects = StudentProject.objects.filter(project=obj, solve_date__isnull=False)
+        solved_data = []
+        for project in solved_projects:
+            solved_data.append({'solve_date': project.solve_date})
+        return solved_data
 
     def get_tried_count(self, obj):
         return StudentProject.objects.filter(project=obj, solve_date__isnull=True).count()
