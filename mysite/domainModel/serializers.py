@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from django.conf import settings
+
+from studentModel.models import StudentProject
 from .models import *
 import secrets
 from django.core.mail import send_mail
@@ -106,8 +108,15 @@ class ProjectAllDataSerializer(serializers.ModelSerializer):
     difficulties = ProjectDifficultySerializer(many=True, source='projectdifficulty_set')
     times = ProjectTimeSerializer(many=True, source='projecttime_set')
     hints = ProjectHintSerializer(many=True, source='projecthint_set')
+    solved_count = serializers.SerializerMethodField()
+    tried_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
-        fields = ['id', 'question', 'correctAnswerSample', 'output', 'explanation', 'hint', 'img_src', 'difficulties',
-                  'times', 'hints']
+        fields = ['id', 'difficulties', 'times', 'hints', 'solved_count', 'tried_count']
+
+    def get_solved_count(self, obj):
+        return StudentProject.objects.filter(project=obj, solve_date__isnull=False).count()
+
+    def get_tried_count(self, obj):
+        return StudentProject.objects.filter(project=obj, solve_date__isnull=True).count()
