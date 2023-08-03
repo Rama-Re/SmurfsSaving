@@ -4,7 +4,6 @@
 الأساسيات,What punctuation ends most lines of C++ code?,"['.', ';', ':', '\'']",;
 الأساسيات,أي مما يلي يستخدم لعمل سطر جديد في C ++؟,"['\\n', 'nc', '/nc']",\n
 الأساسيات,ما هو الرمز المسموح به في الـ identifier name ؟,"['$', '@', '_', '-']",_
-الأساسيات,What punctuation is used to signal the beginning and end of code blocks?,"['{ }', '-> and <-', 'BEGIN and END', '( and )']",{ }
 الأساسيات,What punctuation is used to signal the beginning and end of code blocks?,"['{ }', '-> and <-',  'BEGIN and END', '( and )']",{ }
 الأساسيات,Which of the following is used for comments in C++?,"['// comment', '/* comment */', 'both // comment or /* comment */', '// comment */']",both // comment or /* comment */
 الأساسيات,C++ is _____________,"['Both procedural & object oriented programming language', 'Procedural programming language', 'Functional programming language']",Both procedural & object oriented programming language
@@ -18,9 +17,9 @@ Roll No is 25 and Percent are 78.9","['cout<<""Roll No is ""<<""rollno""<<"" and
 الأساسيات,iostream,"['Displays output from the screen and input from the keyboard', 'Has all the math equations', 'Counts the time', 'Checks if the code has a function']",Displays output from the screen and input from the keyboard
 الأساسيات,Which statement is used to go on newline in C++?,"['endline', 'endl', 'lend', 'lineend']",endl
 الأساسيات,C++ is a,"['high-level language', 'low-level language']",high-level language
-الأساسيات,في C ++ ، الـ cout موجود في أي مكتبة؟,"['ctype.h', 'stdlib.h', 'math.h', 'iostream.h']",iostream.h
+الأساسيات,"في C ++ ، الـ cout موجود في أي مكتبة؟","['ctype.h', 'stdlib.h', 'math.h', 'iostream.h']",iostream.h
 الأساسيات,What is the only function that all C++ programs must contain?,"['main ()', 'void ()', 'system ()', 'start ()']",main ()
-الأساسيات,في C ++ ، يتم استخدام الرمز // من أجل:,"['تقسيم الارقام', 'التعليقات', 'ربط نص بنص', 'exponentiation']",التعليقات
+الأساسيات,"في C ++ ، يتم استخدام الرمز // من أجل:","['تقسيم الارقام', 'التعليقات', 'ربط نص بنص', 'exponentiation']",التعليقات
 التعامل مع الأعداد,"What is the output of the following code snippet?
 #include<bits/stdc++.h>
 using namespace std;
@@ -498,7 +497,7 @@ int main()
     return 0;
 }","['QuizOrbit', 'QuizOrbit QuizOrbit', 'Compilation Error', 'Runtime Error']",QuizOrbit QuizOrbit
 الدوال,تنهي تنفيذ الـ function و يمكنها ارجاع قيمة اذا تم استدعاء هذه الـ function :,"['break', 'return', 'getch', 'main']",return
-الدوال,إذا كانت الـ function في C ++ لا تُرجع قيمة ، فسيتم الإشارة إلى نوع الإرجاع الخاص بها بـ ؟,"['Int', 'Float', 'Void', 'لا شئ مما سبق']",Void
+الدوال,"إذا كانت الـ function في C ++ لا تُرجع قيمة ، فسيتم الإشارة إلى نوع الإرجاع الخاص بها بـ ؟","['Int', 'Float', 'Void', 'لا شئ مما سبق']",Void
 الدوال,إنه نوع return يعني عدم إرجاع أي قيمة :,"['int', 'double', 'void', 'char']",void
 الشروط,"What is the output of the following program?
 #include <iostream>
@@ -823,7 +822,7 @@ cout << c;
 return 0;
 }","['value1 is greater than value2 40', 'Compiler Error', 'value2 is greater than value1 50', 'None of these']",value2 is greater than value1 50
 المصفوفات,يبدأ اول index في الـ array من,"['0', '1', '2', 'لا شئ مما سبق']",0
-المصفوفات,في العبارة التالية a [3] = 5 ، أي مما يلي قيمة الـ index؟,"['a', '3', '5']",3
+المصفوفات,"في العبارة التالية a [3] = 5 ، أي مما يلي قيمة الـ index؟","['a', '3', '5']",3
 المصفوفات,"What is the value of the element at arr[0][1][1] in the following program?
 #include<iostream>
 using namespace std;
@@ -949,7 +948,7 @@ using namespace std;
         cout << str[2]<<” “<<str;
         return 0;
     }","['T', 'T DATA', 'A', 'A DATA']",T DATA
-المصفوفات,يمكن للمصفوفة تخزين مجموعة من القيم ، ولكن يجب أن تكون القيم,"['من نفس نوع البيانات', 'من اي نوع البيانات', 'constants', 'integers']",من نفس نوع البيانات
+المصفوفات,"يمكن للمصفوفة تخزين مجموعة من القيم ، ولكن يجب أن تكون القيم","['من نفس نوع البيانات', 'من اي نوع البيانات', 'constants', 'integers']",من نفس نوع البيانات
 المصفوفات,"What is the value of the element at arr[3][0] in the following program?
 #include<iostream>
 using namespace std;

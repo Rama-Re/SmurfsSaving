@@ -16,12 +16,12 @@ class SubConcept(models.Model):
 
 class Lesson(models.Model):
     name = models.CharField(primary_key=True, max_length=255)
-    order = models.IntegerField(default=0)
     subConcept = models.ForeignKey(SubConcept, on_delete=models.CASCADE)
 
 
 class ParagraphData(models.Model):
     title = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    order = models.IntegerField(default=0)
     subheading = models.CharField(max_length=255)  # this is "subLesson" in the csv file
     explanation = models.TextField()
     nb = models.TextField(null=True)

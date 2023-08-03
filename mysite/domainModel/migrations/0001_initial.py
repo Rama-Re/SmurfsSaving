@@ -23,8 +23,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Lesson',
             fields=[
-                ('name', models.CharField(max_length=255, serialize=False)),
-                ('order', models.IntegerField(default=0)),
+                ('name', models.CharField(max_length=255, primary_key=True, serialize=False)),
             ],
         ),
         migrations.CreateModel(
@@ -101,6 +100,7 @@ class Migration(migrations.Migration):
                 ('nb', models.TextField(null=True)),
                 ('img_src', models.TextField(null=True)),
                 ('title', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='domainModel.lesson')),
+                ('order', models.IntegerField(default=0)),
             ],
         ),
         migrations.AddField(

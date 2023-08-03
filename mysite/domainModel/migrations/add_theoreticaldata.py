@@ -34,9 +34,10 @@ class Migration(migrations.Migration):
                 subconcept, created = SubConcept.objects.get_or_create(name=row[1], order=row[14],
                                                                        generalConcept=generalconcept)
                 # Create the Lesson object with foreign key to SubConcept
-                lesson, created = Lesson.objects.get_or_create(name=row[2], order=row[13], subConcept=subconcept)
+                lesson, created = Lesson.objects.get_or_create(name=row[2], subConcept=subconcept)
                 # Create the ParagraphData object with foreign key to Lesson
                 paragraphData = ParagraphData.objects.create(title=lesson, subheading=row[3],
+                                                             order=row[13],
                                                              explanation=row[4], nb=row[5], img_src=row[6])
 
                 codeData = CodeData.objects.create(paragraph=paragraphData, prefix_text=row[9], code=row[10],
