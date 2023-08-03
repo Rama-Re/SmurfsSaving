@@ -483,7 +483,8 @@ class CheckQuizSolve(APIView):
                 dxp = max_xp * success_rate / 100
                 student_profile.xp += round(dxp)
                 student_profile.save()
-                student_profile.theoreticalskill_set.filter(generalConcept=generalConcept).update(skill=success_rate)
+                student_profile.theoreticalskill_set.filter(generalConcept=generalConcept).\
+                    update(skill=success_rate,availability=True, edit_date=datetime.datetime.now())
 
         else:
             dxp = 0
