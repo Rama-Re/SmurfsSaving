@@ -455,6 +455,36 @@ def remove_comments(code):
     return code
 
 
+def extract_main_function(code):
+    lines = code.split('\n')
+    main_lines = {}
+    is_main = False
+    is_return = False
+    for i, line in enumerate(lines):
+        if 'int main(' in line:
+            is_main = True
+            main_lines['main_start'] = line
+            main_lines['main_start_index'] = i
+            continue
+        elif is_main and ('return' in line and '}' in line):
+            main_lines['main_end'] = line
+            main_lines['main_end_index'] = i
+            main_lines['main_return'] = line
+            main_lines['main_return_index'] = i
+            break
+        elif is_main and ('return' in line):
+            main_lines['main_return'] = line
+            main_lines['main_return_index'] = i
+            is_return = True
+
+        elif is_return and ('}' in line):
+            main_lines['main_end'] = line
+            main_lines['main_end_index'] = i
+            break
+
+    return main_lines
+
+
 def remove_main_function(code):
     lines = code.split('\n')
     new_lines = []
@@ -463,16 +493,38 @@ def remove_main_function(code):
     for line in lines:
         if 'int main(' in line:
             is_main_function = True
-            new_lines.append('\n')
+            new_lines.append('')
             continue
         elif 'return' in line and is_main_function:
-            new_lines.append('\n')
+            new_lines.append('')
             is_main_function = False
             continue
 
         new_lines.append(line)
 
     new_code = '\n'.join(new_lines)
+    return new_code
+
+
+def restore_main_function(extracted_main_code, main_lines):
+    lines = extracted_main_code.split('\n')
+    main_start_index = main_lines['main_start_index']
+    main_end_index = main_lines['main_end_index']
+    main_return_index = main_lines['main_return_index']
+    # print(lines)
+    lines = (
+            lines[:main_start_index] +
+            [main_lines['main_start']] +
+            lines[main_start_index + 1:main_return_index] +
+            [main_lines['main_return']] +
+            lines[main_return_index + 1:main_end_index] +
+            [main_lines['main_end']] +
+            lines[main_end_index + 1:]
+    )
+    #
+    # lines = lines[:main_start_index] + main_lines['main_start'] + lines[main_end_index+1:main_return_index] + main_lines['main_return'] + lines[main_return_index+1:main_end_index] + main_lines['main_end'] + lines[main_end_index+1:]
+
+    new_code = '\n'.join(lines)
     return new_code
 
 
@@ -578,7 +630,7 @@ def get_level_re(concept, level):
 
 def code_completion(code, concepts, level):
     # Replace concepts with spaces while preserving keywords and operators
-    print(concepts)
+
     for name, concept in concepts.items():
         keywords_to_preserve, operators_to_preserve = get_level_re(name, level[name])
         for match in concept:
@@ -627,9 +679,24 @@ class CodeComplete(APIView):
         # comments, strings = getCommentsAndStrings(code)
         output_string = replace_characters_with_spaces(code_without_strings)
 
+        include_indices = [match.span() for match in re.finditer(r'#include <iostream>', code_without_strings)]
+
+        # Find the first and end indices of using namespace statements
+        namespace_indices = [match.span() for match in re.finditer(r'using namespace std;', code_without_strings)]
+
+        # Remove main function and get extracted code and main start index
+        main_lines = extract_main_function(code_without_strings)
+
         concepts = detect_concept(code_without_strings)
 
         updated_code = code_completion(output_string, concepts, concept_hint)
+
+        for indices in include_indices:
+            updated_code = updated_code[:indices[0]] + '#include <iostream>' + updated_code[indices[1]:]
+        for indices in namespace_indices:
+            updated_code = updated_code[:indices[0]] + 'using namespace std' + updated_code[indices[1]:]
+
+        updated_code = restore_main_function(updated_code, main_lines)
 
         response = {
             'message': 'SUCCESS',
