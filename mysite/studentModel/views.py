@@ -266,7 +266,6 @@ def calculate_updated_performance(student_profile, project_performance_required,
     b = 0.05
     n = student_profile.studentproject_set.count()
     K = a / (1.0 + b * n)
-    print(K)
     p = 1 / (1 + math.exp(-(mapping_student_performance - mapping_project_performance_required))) * 100
     updated_performance = max(0, min(100, student_performance + K * (student_performance_in_current_project - p)))
     updated_project_performance_required = max(0, min(100, project_performance_required + 0.05 * (
@@ -288,8 +287,8 @@ class EvaluateRecommend(APIView):
     def post(self, request):
         student_profile = get_profile(request)
         project = Project.objects.get(id=request.data['project_id'])
-        recommend = Recommend.objects.filter(student=student_profile).last()
-        if (project.id == recommend.project.id):
+        recommend = Recommend.objects.filter(student=student_profile, project=project).last()
+        if recommend is not None:
             recommend.good_recommend = request.data['good_recommend']
             recommend.save()
         response = {
@@ -316,16 +315,23 @@ class AddProjectSolve(APIView):
         student_project.hint_levels = request.data['hint_levels']
         student_project.solve_date = timezone.now()
         student_project.save()
-        recommend = Recommend.objects.filter(student=student_profile).last()
+        recommends = Recommend.objects.filter(student=student_profile, solved=None)
+        any_recommend = False
+        evaluation_required = False
+        if recommends is not None:
+            for recommend in recommends:
+                if student_project.project.id == recommend.project.id:
+                    recommend.solved = True
+                    recommend.solve_date = datetime.datetime.now()
+                    recommend.save()
+                    any_recommend = True
+                    evaluation_required = True
+        if not any_recommend:
+            for recommend in recommends:
+                recommend.solved = False
+                recommend.solve_date = datetime.datetime.now()
+                recommend.save()
 
-        if recommend is not None and student_project.project.id == recommend.project.id and recommend.solved is None:
-            recommend.solved = True
-            recommend.solve_date = datetime.datetime.now()
-            recommend.save()
-        elif recommend is not None and student_project.project.id != recommend.project.id and recommend.solved is None:
-            recommend.solved = False
-            recommend.solve_date = datetime.datetime.now()
-            recommend.save()
         solve_tryings = SolveTrying.objects.filter(student_project=student_project)
         student_total_time = solve_tryings.aggregate(total_time=Sum('time'))['total_time']
         if student_total_time is None:
@@ -425,7 +431,8 @@ class AddProjectSolve(APIView):
         response = {
             'message': 'SUCCESS',
             'added_xp': round(dxp),
-            'new_xp': student_profile.xp
+            'new_xp': student_profile.xp,
+            'evaluation_required' : evaluation_required
         }
         return Response(response, content_type='application/json; charset=utf-8')
 
@@ -550,7 +557,6 @@ class GetStreak(APIView):
             next_date = latest_streak_date + timedelta(days=1)
             if days_diff <= 1:
                 for streak in streaks:
-                    print(streak.streak_date)
                     if streak.streak_date == next_date - timedelta(days=1):
                         current_streak.append(streak)
                     else:

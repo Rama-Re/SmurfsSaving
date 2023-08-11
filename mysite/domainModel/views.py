@@ -196,7 +196,7 @@ def getCommentsAndStrings(input_string):
         "end": [],
         "string": []
     }
-    # Find all comments and strings in the input string and print their start and end positions
+    # Find all comments and strings in the input string
     for match in re.finditer(comment_pattern + '|' + string_pattern, input_string, re.MULTILINE):
         if match.group().startswith('//') or match.group().startswith('/*'):
             comments["start"].append(match.start())
@@ -511,7 +511,7 @@ def restore_main_function(extracted_main_code, main_lines):
     main_start_index = main_lines['main_start_index']
     main_end_index = main_lines['main_end_index']
     main_return_index = main_lines['main_return_index']
-    # print(lines)
+
     lines = (
             lines[:main_start_index] +
             [main_lines['main_start']] +
