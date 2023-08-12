@@ -451,7 +451,9 @@ def remove_comments(code):
     code = re.sub(r'\/\/.*', '', code)
     code = re.sub(r'\/\*.*?\*\/', '', code, flags=re.DOTALL)
     code = code.strip()
-    code = re.sub(r'^\s*\n', '', code, flags=re.MULTILINE)
+    # print(code)
+    # code = re.sub(r'^\s*\n', '', code, flags=re.MULTILINE)
+    # print(code)
     return code
 
 
@@ -493,15 +495,15 @@ def remove_main_function(code):
     for line in lines:
         if 'int main(' in line:
             is_main_function = True
-            new_lines.append('')
+            new_lines.append(' '*(len(line)))
+
             continue
         elif 'return' in line and is_main_function:
-            new_lines.append('')
+            new_lines.append(' '*(len(line)))
             is_main_function = False
             continue
 
         new_lines.append(line)
-
     new_code = '\n'.join(new_lines)
     return new_code
 
@@ -521,9 +523,6 @@ def restore_main_function(extracted_main_code, main_lines):
             [main_lines['main_end']] +
             lines[main_end_index + 1:]
     )
-    #
-    # lines = lines[:main_start_index] + main_lines['main_start'] + lines[main_end_index+1:main_return_index] + main_lines['main_return'] + lines[main_return_index+1:main_end_index] + main_lines['main_end'] + lines[main_end_index+1:]
-
     new_code = '\n'.join(lines)
     return new_code
 
@@ -535,7 +534,7 @@ def detect_concept(code):
         'الشروط': r'((?:if\s*\([^)]+\)(?:\s*\{[^}]*\})*)|else\s*if\s*\([^)]+\)(?:\s*\{[^}]*\})*|else(?:\s*\{[^}]*\})*|switch\s*\([^)]+\)(?:\s*\{[^}]*\})*)',
         # 'المتغيرات': r'( (?:float|char|int|double|bool)\s+([a-zA-Z_]\w*)\s*(?:\[[^\]]+\])?(?:\s*=\s*(?:[^,;{}()]+|{.*}))?\s*(?:,|\[|\)|;|\{))',
         'أنواع البيانات': r'(\b(?:unsigned|signed|const|static|extern|volatile|register|auto|bool|char|short|int|long|float|double|string)[^;\)\(\[\]]*;)',
-        'الأساسيات': r'((cin\s*>>.*|cout\s*<<.*|//.* ?|\/\*(.|\n)+?\*\/))',
+        'الأساسيات': r'((std::cin\s*>>.*|cin\s*>>.*|std::cout\s*<<.*|cout\s*<<.*|//.* ?|\/\*(.|\n)+?\*\/))',
         'التعامل مع الأعداد': r'(\b(?:acos|asin|atan|atan2|ceil|cos|cosh|exp|fabs|floor|fmod|frexp|ldexp|log|log10|modf|pow|sin|sinh|sqrt|tan|tanh)\b)',
         'التعامل مع النصوص': r'(\b(?:string|"?\.(append|substr|length|empty|insert|replace|find)\([^)]*\)))',
         'المصفوفات': r'(\b((?:unsigned|signed|const|static|extern|volatile|register|auto|bool|char|short|int|long|float|double|string)\s+)?\w+\[\d*\w*\][^;]*;)',
@@ -560,6 +559,7 @@ def detect_concept(code):
 
 def replace_characters_with_spaces(input_string):
     # Define the regular expression pattern to match characters that should be replaced with spaces
+
     pattern = r'[^ \n\t]'
 
     # Replace matched characters with spaces
@@ -574,7 +574,7 @@ def get_level_re(concept, level):
 
     if level == 2:
         if concept == 'الأساسيات' or concept == 'أنواع البيانات':
-            keywords_to_preserve = ['cout', 'cin', 'endl', 'unsigned', 'signed', 'const', 'static', 'bool', 'char',
+            keywords_to_preserve = ['std','cout', 'cin', 'endl', 'unsigned', 'signed', 'const', 'static', 'bool', 'char',
                                     'short', 'int', 'long',
                                     'float', 'double', 'long long', 'string']
 
@@ -598,10 +598,10 @@ def get_level_re(concept, level):
 
     elif level == 1:
         if concept == 'الأساسيات' or concept == 'أنواع البيانات':
-            keywords_to_preserve = ['cout', 'cin', 'endl', 'unsigned', 'signed', 'const', 'static', 'bool', 'char',
+            keywords_to_preserve = ['cout', 'cin', 'std', 'endl', 'unsigned', 'signed', 'const', 'static', 'bool', 'char',
                                     'short', 'int', 'long',
                                     'float', 'double', 'long long', 'string']
-            operators_to_preserve = ['>>', '<<', '=', ';']
+            operators_to_preserve = ['::','>>', '<<', '=', ';']
 
         if concept == 'التعامل مع الأعداد' or concept == 'التعامل مع النصوص':
             keywords_to_preserve = ['acos', 'asin', 'atan', 'atan2', 'ceil', 'cos', 'cosh', 'exp', 'fabs',
@@ -630,7 +630,6 @@ def get_level_re(concept, level):
 
 def code_completion(code, concepts, level):
     # Replace concepts with spaces while preserving keywords and operators
-
     for name, concept in concepts.items():
         keywords_to_preserve, operators_to_preserve = get_level_re(name, level[name])
         for match in concept:
@@ -642,24 +641,23 @@ def code_completion(code, concepts, level):
                 keyword_pattern = re.compile(r'\b' + keyword + r'\b')
                 preserved_keywords = keyword_pattern.finditer(declaration)
                 for preserved_keyword in preserved_keywords:
-                    keyword_start = start + preserved_keyword.start()
-                    keyword_end = start + preserved_keyword.end()
+                    keyword_start = preserved_keyword.start()
+                    keyword_end = preserved_keyword.end()
                     preserved_keyword_text = preserved_keyword.group()
-                    subcode = subcode[:keyword_start - start] + preserved_keyword_text + subcode[keyword_end - start:]
+                    subcode = subcode[:keyword_start] + preserved_keyword_text + subcode[keyword_end:]
+
 
             # Find and preserve operators
             for operator in operators_to_preserve:
                 operator_pattern = re.compile(operator)
                 preserved_operators = operator_pattern.finditer(declaration)
                 for preserved_operator in preserved_operators:
-                    operator_start = start + preserved_operator.start()
-                    operator_end = start + preserved_operator.end()
+                    operator_start = preserved_operator.start()
+                    operator_end = preserved_operator.end()
                     preserved_operator_text = preserved_operator.group()
-                    subcode = subcode[:operator_start - start] + preserved_operator_text + subcode[
-                                                                                           operator_end - start:]
-
+                    subcode = subcode[:operator_start] + preserved_operator_text + subcode[
+                                                                                           operator_end:]
             code = code[:start] + subcode + code[end:]
-
     return code
 
 
@@ -674,8 +672,11 @@ class CodeComplete(APIView):
 
         concept_hint = eval(concept_hint)
         code = project.correctAnswerSample
+
         code_without_comments = remove_comments(code)
+
         code_without_strings = re.sub(r'\".*?\"', '', code_without_comments)
+
         # comments, strings = getCommentsAndStrings(code)
         output_string = replace_characters_with_spaces(code_without_strings)
 
@@ -697,7 +698,6 @@ class CodeComplete(APIView):
             updated_code = updated_code[:indices[0]] + 'using namespace std' + updated_code[indices[1]:]
 
         updated_code = restore_main_function(updated_code, main_lines)
-
         response = {
             'message': 'SUCCESS',
             'data': {
