@@ -410,7 +410,7 @@ class AddProjectSolve(APIView):
         for concept_hint, student_hint, hint_performance_current in zip(project_hint_list, hint_performance_list, hint_performance_current_list):
             new_performance, new_required, dp = calculate_updated_performance(student_profile,
                                                                               float(concept_hint),
-                                                                              max(hint_performance_current / map_skill(concept_hint), 1) * 100,
+                                                                              min(hint_performance_current / map_skill(concept_hint), 1) * 100,
                                                                               float(student_hint), 1)
             new_performance_list.append(new_performance)
             new_required_list.append(new_required)
