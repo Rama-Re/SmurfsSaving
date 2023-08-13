@@ -711,7 +711,8 @@ class CodeComplete(APIView):
 class GetAllProjects(APIView):
     def get(self, request):
         projects = Project.objects.all()
-        serializer = ProjectAllDataSerializer(projects, many=True)
+
+        serializer = ProjectDataSerializer(projects, many=True)
         response = {
             'data': serializer.data
         }

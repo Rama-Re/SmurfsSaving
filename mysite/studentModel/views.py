@@ -342,6 +342,8 @@ class AddProjectSolve(APIView):
         hint_performance = HintPerformance.objects.filter(student=student_profile).last()
         hint_performance_dic = eval(hint_performance.performance)
         hint_performance_dic = {k: hint_performance_dic[k] for k in sorted(hint_performance_dic.keys())}
+        hint_performance_current_dic = eval(request.data['hint_levels'])
+        hint_performance_current_dic = {k: hint_performance_current_dic[k] for k in sorted(hint_performance_current_dic.keys())}
         time_performances = TimePerformance.objects.filter(student=student_profile).last()
         difficulty_performances = DifficultyPerformance.objects.filter(student=student_profile).last()
 
@@ -354,9 +356,11 @@ class AddProjectSolve(APIView):
         project_hint_list = list(project_hint_required.values())
         # project_hint_list = [map_skill(value) for value in project_hint_list]
         hint_performance_list = []
+        hint_performance_current_list = []
         dp_list = []
         for concept in project_hint_required.keys():
             hint_performance_list.append(hint_performance_dic[concept])
+            hint_performance_current_list.append(hint_performance_current_dic[concept])
 
         # Evaluating performance and calculating skills.
         # difficulty
@@ -403,11 +407,11 @@ class AddProjectSolve(APIView):
         new_performance_list = []
         new_required_list = []
 
-        for concept_hint, student_hint in zip(project_hint_list, hint_performance_list):
+        for concept_hint, student_hint, hint_performance_current in zip(project_hint_list, hint_performance_list, hint_performance_current_list):
             new_performance, new_required, dp = calculate_updated_performance(student_profile,
                                                                               float(concept_hint),
-                                                                              student_hint / concept_hint * 100,
-                                                                              float(student_hint))
+                                                                              max(hint_performance_current / map_skill(concept_hint), 1) * 100,
+                                                                              float(student_hint), 1)
             new_performance_list.append(new_performance)
             new_required_list.append(new_required)
             dp_list.append(dp)
@@ -587,5 +591,15 @@ class GetProfile(APIView):
         response = {
             'message': 'SUCCESS',
             'data': profile_data,
+        }
+        return Response(response, content_type='application/json; charset=utf-8')
+
+
+class GetAllStudents(APIView):
+    def get(self, request):
+        students = StudentProfile.objects.all()
+        serializer = StudentsDataSerializer(students, many=True)
+        response = {
+            'data': serializer.data
         }
         return Response(response, content_type='application/json; charset=utf-8')
