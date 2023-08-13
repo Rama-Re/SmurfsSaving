@@ -17,4 +17,5 @@ urlpatterns = [
     path('private/getStreak', GetStreak.as_view()),
     path('private/getProfile', GetProfile.as_view()),
     path('private/evaluateRecommend', EvaluateRecommend.as_view()),
+    path('public/students', GetAllStudents.as_view()),
 ]

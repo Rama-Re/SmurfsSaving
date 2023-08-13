@@ -75,22 +75,27 @@ class StudentPersonalitySerializer(serializers.ModelSerializer):
         fields = ['id', 'studentProfile', 'personality', 'pp']
 
 
+class StudentPersonalityDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentPersonality
+        fields = ['personality', 'pp']
+
+
 class StudentProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentProject
-        fields = ['used_concept_difficulty', 'hint_levels', 'solutionCode', 'projectCodeCompletionLevel', 'project_id',
-                  'student_id']
+        fields = ['used_concept_difficulty', 'hint_levels', 'solutionCode', 'project_id', 'student_id']
+
+
+class StudentProjectDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudentProject
+        fields = ['project_id']
 
 
 class TheoreticalSkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = TheoreticalSkill
-        fields = ['student', 'generalConcept', 'skill']
-
-
-class PracticalSkillSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PracticalSkill
         fields = ['student', 'generalConcept', 'skill']
 
 
@@ -100,16 +105,34 @@ class DifficultyPerformanceSerializer(serializers.ModelSerializer):
         fields = ['student', 'performance']
 
 
+class DifficultyPerformanceDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DifficultyPerformance
+        fields = ['performance', 'date']
+
+
 class TimePerformanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = TimePerformance
         fields = ['student', 'performance']
 
 
+class TimePerformanceDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TimePerformance
+        fields = ['performance', 'date']
+
+
 class HintPerformanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = HintPerformance
         fields = ['student', 'performance']
+
+
+class HintPerformanceDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HintPerformance
+        fields = ['performance', 'date']
 
 
 class SolveTryingSerializer(serializers.ModelSerializer):
@@ -122,3 +145,33 @@ class StreakSerializer(serializers.ModelSerializer):
     class Meta:
         model = Streak
         fields = ['student', 'interactions', 'streak_date']
+
+
+class StreakDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Streak
+        fields = ['interactions', 'streak_date']
+
+
+class RecommendDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recommend
+        fields = ['recommend_date', 'project', 'solved', 'solve_date', 'good_recommend']
+
+
+class StudentsDataSerializer(serializers.ModelSerializer):
+    difficulty_performance = DifficultyPerformanceDataSerializer(many=True, source='difficultyperformance_set')
+    time_performance = TimePerformanceDataSerializer(many=True, source='timeperformance_set')
+    hint_performance = HintPerformanceDataSerializer(many=True, source='hintperformance_set')
+    student_projects = StudentProjectDataSerializer(many=True, source='studentproject_set')
+    recommends = RecommendDataSerializer(many=True, source='recommend_set')
+    streak = StreakDataSerializer(many=True, source='streak_set')
+    personality = StudentPersonalityDataSerializer(many=True, source='studentpersonality_set')
+
+    # solved_count = serializers.SerializerMethodField()
+    # tried_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = StudentProfile
+        fields = ['id', 'xp', 'learning_path', 'difficulty_performance', 'time_performance', 'hint_performance',
+                  'student_projects', 'recommends', 'streak', 'personality']

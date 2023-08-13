@@ -92,10 +92,22 @@ class ProjectDifficultySerializer(serializers.ModelSerializer):
         fields = ['difficulty', 'project']
 
 
+class ProjectDifficultyDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectDifficulty
+        fields = ['difficulty', 'date']
+
+
 class ProjectTimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectTime
         fields = ['time', 'project']
+
+
+class ProjectTimeDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectTime
+        fields = ['time', 'date']
 
 
 class ProjectHintSerializer(serializers.ModelSerializer):
@@ -104,16 +116,22 @@ class ProjectHintSerializer(serializers.ModelSerializer):
         fields = ['required_concept_hint', 'project']
 
 
-class ProjectAllDataSerializer(serializers.ModelSerializer):
-    difficulties = ProjectDifficultySerializer(many=True, source='projectdifficulty_set')
-    times = ProjectTimeSerializer(many=True, source='projecttime_set')
-    hints = ProjectHintSerializer(many=True, source='projecthint_set')
+class ProjectHintDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectHint
+        fields = ['required_concept_hint', 'date']
+
+
+class ProjectDataSerializer(serializers.ModelSerializer):
+    difficulties = ProjectDifficultyDataSerializer(many=True, source='projectdifficulty_set')
+    times = ProjectTimeDataSerializer(many=True, source='projecttime_set')
+    hints = ProjectHintDataSerializer(many=True, source='projecthint_set')
     solved_count = serializers.SerializerMethodField()
     tried_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
-        fields = ['id', 'generalConcepts', 'difficulties', 'times', 'hints', 'solved_count', 'tried_count']
+        fields = ['id', 'difficulties', 'times', 'hints', 'solved_count', 'tried_count']
 
     def get_solved_count(self, obj):
         solved_projects = StudentProject.objects.filter(project=obj, solve_date__isnull=False)
