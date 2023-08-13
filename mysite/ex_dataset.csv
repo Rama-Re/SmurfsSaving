@@ -86,32 +86,30 @@ Enter second number: 5
 14 * 5 = 70
 14 / 5 = 2
 		",سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الرقمين 14 و 5 عند التشغيل.,,"['أنواع البيانات', 'الأساسيات']",2.4723152201905827,7.486157610095291,5.0,"[2.6190476190476186, 2.6190476190476186]"
-2,إجراء عمليات حسابية,"أكتب برنامج يطلب من المستخدم إدخال ثلاث أرقام و خزنها في ثلاث متغيرات (a - b - c ), ثم يعرض له أصغر رقم تم إدخاله.",,"
-#include <iostream>
+2,إجراء عمليات حسابية,"أكتب برنامج يطلب من المستخدم إدخال ثلاث أرقام و خزنها في ثلاث متغيرات (a - b - c ), ثم يعرض له أصغر رقم تم إدخاله.",,"#include <iostream>
 
 int main() {
 
-	int a, b, c, maximum;
+    int a, b, c, minimum;
 
-	std::cout << ""Enter a: "";
-	std::cin >> a;
+    std::cout << ""Enter a: "";
+    std::cin >> a;
 
-	std::cout << ""Enter b: "";
-	std::cin >> b;
+    std::cout << ""Enter b: "";
+    std::cin >> b;
 
-	std::cout << ""Enter c: "";
-	std::cin >> c;
+    std::cout << ""Enter c: "";
+    std::cin >> c;
 
-	maximum = (a > b) ? a : b;
-	maximum = (maximum > c) ? maximum : c;
+    minimum = (a < b) ? a : b;
+    minimum = (minimum < c) ? minimum : c;
 
-	std::cout << ""The max number is: "" << maximum;
+    std::cout << ""The min number is: "" << minimum;
 
-	char end; std::cin >> end;
-	return 0;
+    char end; std::cin >> end;
+    return 0;
 
-}
-		","Enter a: 2
+}","Enter a: 2
 Enter b: 7
 Enter c: 5
 The min number is: 2","سنحصل على النتيجة التالية إذا قام المستخدم بإدخال الأرقام 2, 7 و 5 عند التشغيل.","مثال: إذا قام المستخدم بإدخال الأرقام 2, 7 و 5 فستكون النتيجة كالتالي.
