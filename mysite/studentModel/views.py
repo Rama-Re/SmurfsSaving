@@ -343,7 +343,8 @@ class AddProjectSolve(APIView):
         hint_performance_dic = eval(hint_performance.performance)
         hint_performance_dic = {k: hint_performance_dic[k] for k in sorted(hint_performance_dic.keys())}
         hint_performance_current_dic = eval(request.data['hint_levels'])
-        hint_performance_current_dic = {k: hint_performance_current_dic[k] for k in sorted(hint_performance_current_dic.keys())}
+        hint_performance_current_dic = {k: hint_performance_current_dic[k] for k in
+                                        sorted(hint_performance_current_dic.keys())}
         time_performances = TimePerformance.objects.filter(student=student_profile).last()
         difficulty_performances = DifficultyPerformance.objects.filter(student=student_profile).last()
 
@@ -407,10 +408,12 @@ class AddProjectSolve(APIView):
         new_performance_list = []
         new_required_list = []
 
-        for concept_hint, student_hint, hint_performance_current in zip(project_hint_list, hint_performance_list, hint_performance_current_list):
+        for concept_hint, student_hint, hint_performance_current in zip(project_hint_list, hint_performance_list,
+                                                                        hint_performance_current_list):
             new_performance, new_required, dp = calculate_updated_performance(student_profile,
                                                                               float(concept_hint),
-                                                                              min(hint_performance_current / map_skill(concept_hint), 1) * 100,
+                                                                              min(hint_performance_current / map_skill(
+                                                                                  concept_hint), 1) * 100,
                                                                               float(student_hint), 1)
             new_performance_list.append(new_performance)
             new_required_list.append(new_required)
@@ -436,7 +439,7 @@ class AddProjectSolve(APIView):
             'message': 'SUCCESS',
             'added_xp': round(dxp),
             'new_xp': student_profile.xp,
-            'evaluation_required' : evaluation_required
+            'evaluation_required': evaluation_required
         }
         return Response(response, content_type='application/json; charset=utf-8')
 
@@ -602,4 +605,25 @@ class GetAllStudents(APIView):
         response = {
             'data': serializer.data
         }
+        return Response(response, content_type='application/json; charset=utf-8')
+
+
+class AddPerformance(APIView):
+    def post(self, request):
+        student_profile = get_profile(request)
+        DifficultyPerformance.objects.create(student=student_profile,
+                                             performance=request.data['performance_difficulty'],
+                                             date=datetime.datetime.now())
+
+        TimePerformance.objects.create(student=student_profile,
+                                       performance=request.data['performance_time'],
+                                       date=datetime.datetime.now())
+
+        HintPerformance.objects.create(student=student_profile,
+                                       performance=request.data['performance_hint'],
+                                       date=datetime.datetime.now())
+        response = {
+            'message': 'SUCCESS',
+        }
+
         return Response(response, content_type='application/json; charset=utf-8')
