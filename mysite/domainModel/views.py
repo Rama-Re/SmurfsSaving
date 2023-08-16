@@ -347,6 +347,7 @@ class GetRecommendedProjects(APIView):
             dist_max = [100] * 2 + [4] * (len(project_features) - 2)
             distance_max = euclidean_distance(dist_min, dist_max)
             S = 100 * (1 - (distance / distance_max))
+
             if float(project_difficulty) >= float(difficulty_performance) or float(project_time) >= float(
                     time_performance):
                 harder_projects.append({"project_id": project.id, "similarity": S, "state": 'recommended'})
@@ -359,6 +360,7 @@ class GetRecommendedProjects(APIView):
         harder_projects = sorted(harder_projects, key=lambda x: x['similarity'], reverse=True)
         easier_projects = sorted(easier_projects, key=lambda x: x['similarity'], reverse=True)
         recommended_projects = harder_projects + easier_projects
+        recommended_projects = sorted(recommended_projects, key=lambda x: (x['similarity'], x in harder_projects), reverse=True)
 
         if len(recommended_projects) > 0:
             project = Project.objects.get(id=recommended_projects[0]['project_id'])

@@ -167,11 +167,27 @@ class StudentsDataSerializer(serializers.ModelSerializer):
     recommends = RecommendDataSerializer(many=True, source='recommend_set')
     streak = StreakDataSerializer(many=True, source='streak_set')
     personality = StudentPersonalityDataSerializer(many=True, source='studentpersonality_set')
+    registering_date = serializers.SerializerMethodField()
+    username = serializers.SerializerMethodField()
 
     # solved_count = serializers.SerializerMethodField()
     # tried_count = serializers.SerializerMethodField()
 
     class Meta:
         model = StudentProfile
-        fields = ['id', 'xp', 'learning_path', 'difficulty_performance', 'time_performance', 'hint_performance',
+        fields = ['id', 'xp', 'username', 'registering_date', 'learning_path', 'difficulty_performance',
+                  'time_performance', 'hint_performance',
                   'student_projects', 'recommends', 'streak', 'personality']
+
+    def get_registering_date(self, obj):
+        user = User.objects.filter(studentprofile=obj).last()
+        return user.date_joined
+
+    def get_username(self, obj):
+        user = User.objects.filter(studentprofile=obj).last()
+        displayed_name = 'user'
+        if user.shown_name == 'username':
+            displayed_name = user.username
+        elif user.shown_name == 'nickname':
+            displayed_name = user.nickname
+        return displayed_name
