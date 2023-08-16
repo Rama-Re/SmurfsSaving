@@ -610,7 +610,7 @@ class GetAllStudents(APIView):
 
 class AddPerformance(APIView):
     def post(self, request):
-        student_profile = get_profile(request)
+        student_profile = StudentProfile.objects.get(user__email=request.data['email'])
         DifficultyPerformance.objects.create(student=student_profile,
                                              performance=request.data['performance_difficulty'],
                                              date=datetime.datetime.now())
