@@ -391,7 +391,7 @@ class GetProject(APIView):
                             eval(hint_performance.performance).items()}
         result = {key: map_skill(value) for key, value in
                   eval(hint_serializer.data['required_concept_hint']).items()}
-        sorted_result = sorted(result.items(), key=lambda item: hint_performance.get(item[0], 0), reverse=True)
+        sorted_result = sorted(result.items(), key=lambda item: hint_performance.get(item[0], 0), reverse=False)
         sorted_result = dict(sorted_result)
         hint_serializer.data['required_concept_hint'] = str(result)
         response = {
