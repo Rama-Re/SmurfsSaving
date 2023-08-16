@@ -360,7 +360,8 @@ class GetRecommendedProjects(APIView):
         harder_projects = sorted(harder_projects, key=lambda x: x['similarity'], reverse=True)
         easier_projects = sorted(easier_projects, key=lambda x: x['similarity'], reverse=True)
         recommended_projects = harder_projects + easier_projects
-        recommended_projects = sorted(recommended_projects, key=lambda x: (x['similarity'], x in harder_projects), reverse=True)
+        recommended_projects = sorted(recommended_projects, key=lambda x: (x['similarity'], x in harder_projects),
+                                      reverse=True)
 
         if len(recommended_projects) > 0:
             project = Project.objects.get(id=recommended_projects[0]['project_id'])
@@ -377,6 +378,7 @@ class GetRecommendedProjects(APIView):
 
 class GetProject(APIView):
     def post(self, request):
+        student_profile = get_profile(request)
         project = Project.objects.get(id=request.data['project_id'])
         serializer = ProjectSerializer(project)
         hints = ProjectHint.objects.filter(project=project).last()
@@ -384,14 +386,19 @@ class GetProject(APIView):
         serializer_data = serializer.data
         serializer_data['time'] = ProjectTimeSerializer(time).data['time']
         hint_serializer = ProjectHintSerializer(hints)
+        hint_performance = HintPerformance.objects.filter(student=student_profile).last()
+        hint_performance = {key: map_skill(value) for key, value in
+                            eval(hint_performance.performance).items()}
         result = {key: map_skill(value) for key, value in
                   eval(hint_serializer.data['required_concept_hint']).items()}
+        sorted_result = sorted(result.items(), key=lambda item: hint_performance.get(item[0], 0), reverse=True)
+        sorted_result = dict(sorted_result)
         hint_serializer.data['required_concept_hint'] = str(result)
         response = {
             'message': 'SUCCESS',
             'data': {
                 "project": serializer_data,
-                "required_concept_hint": str(result)
+                "required_concept_hint": str(sorted_result)
             }
         }
         return Response(response, content_type='application/json; charset=utf-8')
@@ -497,11 +504,11 @@ def remove_main_function(code):
     for line in lines:
         if 'int main(' in line:
             is_main_function = True
-            new_lines.append(' '*(len(line)))
+            new_lines.append(' ' * (len(line)))
 
             continue
         elif 'return' in line and is_main_function:
-            new_lines.append(' '*(len(line)))
+            new_lines.append(' ' * (len(line)))
             is_main_function = False
             continue
 
@@ -576,7 +583,8 @@ def get_level_re(concept, level):
 
     if level == 2:
         if concept == 'الأساسيات' or concept == 'أنواع البيانات':
-            keywords_to_preserve = ['std','cout', 'cin', 'endl', 'unsigned', 'signed', 'const', 'static', 'bool', 'char',
+            keywords_to_preserve = ['std', 'cout', 'cin', 'endl', 'unsigned', 'signed', 'const', 'static', 'bool',
+                                    'char',
                                     'short', 'int', 'long',
                                     'float', 'double', 'long long', 'string']
 
@@ -600,10 +608,11 @@ def get_level_re(concept, level):
 
     elif level == 1:
         if concept == 'الأساسيات' or concept == 'أنواع البيانات':
-            keywords_to_preserve = ['cout', 'cin', 'std', 'endl', 'unsigned', 'signed', 'const', 'static', 'bool', 'char',
+            keywords_to_preserve = ['cout', 'cin', 'std', 'endl', 'unsigned', 'signed', 'const', 'static', 'bool',
+                                    'char',
                                     'short', 'int', 'long',
                                     'float', 'double', 'long long', 'string']
-            operators_to_preserve = ['::','>>', '<<', '=', ';']
+            operators_to_preserve = ['::', '>>', '<<', '=', ';']
 
         if concept == 'التعامل مع الأعداد' or concept == 'التعامل مع النصوص':
             keywords_to_preserve = ['acos', 'asin', 'atan', 'atan2', 'ceil', 'cos', 'cosh', 'exp', 'fabs',
@@ -648,7 +657,6 @@ def code_completion(code, concepts, level):
                     preserved_keyword_text = preserved_keyword.group()
                     subcode = subcode[:keyword_start] + preserved_keyword_text + subcode[keyword_end:]
 
-
             # Find and preserve operators
             for operator in operators_to_preserve:
                 operator_pattern = re.compile(operator)
@@ -658,7 +666,7 @@ def code_completion(code, concepts, level):
                     operator_end = preserved_operator.end()
                     preserved_operator_text = preserved_operator.group()
                     subcode = subcode[:operator_start] + preserved_operator_text + subcode[
-                                                                                           operator_end:]
+                                                                                   operator_end:]
             code = code[:start] + subcode + code[end:]
     return code
 
