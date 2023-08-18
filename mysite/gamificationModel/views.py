@@ -416,7 +416,7 @@ class CheckingChallenges(APIView):
 
         # Retrieve theoretical skills count for the current day
         theoretical_skills = TheoreticalSkill.objects.filter(edit_date__date=current_date,
-                                                             student=student_profile, skill__gt=0).count()
+                                                             student=student_profile, skill__gt=60).count()
         remaining_theoretical_challenge = 0 if theoretical_skills > 0 else 1
         if remaining_theoretical_challenge == 0:
             theoretical_challenge.challenge_state = True
